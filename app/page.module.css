@@ -1,0 +1,26 @@
+.name {
+    font-family: system-ui, "Segoe UI";
+}
+
+#searchbar {
+    border-radius: 10px;
+    width: 30%;
+    height: 30px;
+    border: none;
+    outline: none;
+}
+
+.container {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(rgba(114, 107, 176, 0.22),rgba(0,0,77,0.6)), url(../public/rift.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+
+}
+
+
+
