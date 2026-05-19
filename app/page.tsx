@@ -1,23 +1,35 @@
+'use client';
+
 import styles from "./page.module.css"
+import Image from 'next/image'
+import { useState } from "react";
 
 
-export default async function Page() {
+export default function Home() {
 
-  let api_key = process.env.RIOT_API_KEY;
-  if(!api_key)
-    throw new Error("missing api key");
+  const [userInput, setUserInput] = useState("");
 
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const gameName = userInput.substring(0,userInput.indexOf("#"));
+    const tagLine = userInput.substring(userInput.indexOf("#")+1, userInput.length);
 
-  let link = `https://americas.api.riotgames.com/riot/account/v1/accounts/by-riot-id/MagicTurtle/KAKA?api_key=${api_key}`
+    const response = await fetch(`/api/riot?gameName=${gameName}&tagLine=${tagLine}`);
+    const data = await response.json();
+    console.log(data);
+
+  }
 
 
 
   return (
     <div className = {styles.container}>
       <div>
-          <h1 className = {styles.name}>summoner.gg</h1>
-          <input type = "search" id = {styles.searchbar}></input>
-          <p>
+          <h1 className = {styles.text}>summoner.gg</h1>
+          <form onSubmit = {handleSubmit}>
+            <input type = "search" id = {styles.searchbar} autoComplete = "off" onChange ={(e)=>setUserInput(e.target.value)}></input>
+          </form>
+          <p className = {styles.text}>
             League of Legends analytics platform
           </p>
       </div>
