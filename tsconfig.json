@@ -29,6 +29,6 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-  ],
+, "app/layout.jsx", "app/profile/[summoner]/page.jsx", "app/api/riot/route.js"  ],
   "exclude": ["node_modules"]
 }

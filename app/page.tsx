@@ -2,25 +2,19 @@
 
 import styles from "./page.module.css"
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import { useState } from "react";
 
 
 export default function Home() {
-
+  const router = useRouter()
   const [userInput, setUserInput] = useState("");
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.ChangeEvent<HTMLFormElement>) {
     e.preventDefault();
-    const gameName = userInput.substring(0,userInput.indexOf("#"));
-    const tagLine = userInput.substring(userInput.indexOf("#")+1, userInput.length);
-
-    const response = await fetch(`/api/riot?gameName=${gameName}&tagLine=${tagLine}`);
-    const data = await response.json();
-    console.log(data);
-
-  }
-
-
+    const [gameName, tagLine] = userInput.split("#");
+    router.push(`/profile/${gameName}-${tagLine}`);
+  } 
 
   return (
     <div className = {styles.container}>
