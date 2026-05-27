@@ -1,4 +1,5 @@
-
+import MatchCard from "@/components/profile/MatchCard/MatchCard";
+import styles from "./page.module.css";
 
 export default async function Profile({ params }: {params: Promise<{summoner: string}>}) {
 //search -> profile -> api call -> display
@@ -8,12 +9,35 @@ export default async function Profile({ params }: {params: Promise<{summoner: st
     const response = await fetch(`http://localhost:3000/api/riot?gameName=${gameName}&tagLine=${tagLine}`);
     const data = await response.json(); //convert response stream into usable JavaScript object
     const iconId = data.profileIconId;
+    const lvl = data.summonerLevel;
     const link = `https://ddragon.leagueoflegends.com/cdn/16.10.1/img/profileicon/${iconId}.png`;
     
     return(
         <>
-            
-            <img src = {link}></img>
+            <img src = {link} className={styles.icon}></img>
+            <p>{lvl}</p>
+
+            <div className = {styles.container}>
+
+                <div className = {styles.statsCol}> 
+                    <p className = {styles.statsBox}> Ranked Solo/Duo </p>
+                    <p className = {styles.statsBox}> Ranked Flex </p>
+
+                    
+                </div>
+                <div className = {styles.matchCol}>
+                    <p className = {styles.matchHeader}> Match History</p>
+                    <div className = {styles.historyHolder}> 
+                        <MatchCard/>
+                    </div>
+                </div>
+
+
+                
+
+
+            </div>
+
         </>
     )
 }
