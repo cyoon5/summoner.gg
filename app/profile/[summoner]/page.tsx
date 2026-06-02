@@ -1,5 +1,6 @@
 import MatchCard from "@/components/profile/MatchCard/MatchCard";
 import styles from "./page.module.css";
+import Image from 'next/image'
 
 export default async function Profile({ params }: {params: Promise<{summoner: string}>}) {
 //search -> profile -> api call -> display
@@ -11,10 +12,19 @@ export default async function Profile({ params }: {params: Promise<{summoner: st
     const iconId = data.profileIconId;
     const lvl = data.summonerLevel;
     const link = `https://ddragon.leagueoflegends.com/cdn/16.10.1/img/profileicon/${iconId}.png`;
+
+    //TODO: retrieve current patch and update link
     
     return(
         <>
-            <img src = {link} className={styles.icon}></img>
+                <Image
+                    src={link}
+                    width={500}
+                    height={500}
+                    alt="Summoner Icon"
+                    className={styles.icon}
+                    loading = "eager"
+                />            
             <p>{lvl}</p>
 
             <div className = {styles.container}>
@@ -22,22 +32,17 @@ export default async function Profile({ params }: {params: Promise<{summoner: st
                 <div className = {styles.statsCol}> 
                     <p className = {styles.statsBox}> Ranked Solo/Duo </p>
                     <p className = {styles.statsBox}> Ranked Flex </p>
-
-                    
                 </div>
+
                 <div className = {styles.matchCol}>
                     <p className = {styles.matchHeader}> Match History</p>
-                    <div className = {styles.historyHolder}> 
+                    <div className = {styles.matchHolder}> 
+                        <MatchCard/>
                         <MatchCard/>
                     </div>
                 </div>
 
-
-                
-
-
             </div>
-
         </>
     )
 }
