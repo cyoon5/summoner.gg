@@ -24,7 +24,7 @@ export async function GET(request: Request) {
     const sres = await fetch(`https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/${puuid}?api_key=${api_key}`);
     const summonerObj = await sres.json();
 
-    console.log(summonerObj);
+    console.log("Data: " + summonerObj);
 
     return NextResponse.json(summonerObj);
 }

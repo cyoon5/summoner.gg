@@ -17,16 +17,33 @@ export default async function Profile({ params }: {params: Promise<{summoner: st
     
     return(
         <>
-                <Image
-                    src={link}
-                    width={500}
-                    height={500}
-                    alt="Summoner Icon"
-                    className={styles.icon}
-                    loading = "eager"
-                />            
-            <p>{lvl}</p>
 
+            <div className = {styles.summonerInfo}>
+
+                <div className = {styles.iconLvl}>
+
+                    <Image
+                        src={link}
+                        width={500}
+                        height={500}
+                        alt="Summoner Icon"
+                        className={styles.icon}
+                        loading = "eager"
+                    />
+
+                    <p className = {styles.lvl}>{lvl}</p>
+
+                </div>
+
+                <div className = {styles.nameTag}>
+                    <h1>{gameName} 
+                        <div className = {styles.tag}> #{tagLine}</div>
+                    </h1>
+                </div>
+
+
+            </div>
+    
             <div className = {styles.container}>
 
                 <div className = {styles.statsCol}> 
@@ -37,6 +54,11 @@ export default async function Profile({ params }: {params: Promise<{summoner: st
                 <div className = {styles.matchCol}>
                     <p className = {styles.matchHeader}> Match History</p>
                     <div className = {styles.matchHolder}> 
+                        <MatchCard/>
+                        <MatchCard/>
+                        <MatchCard/>
+                        <MatchCard/>
+                        <MatchCard/>
                         <MatchCard/>
                         <MatchCard/>
                     </div>
