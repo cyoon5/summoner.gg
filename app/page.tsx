@@ -4,15 +4,36 @@ import styles from "./page.module.css"
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useState } from "react";
+import parseSummoner from "../lib/parseSummoner";
+import { SearchInput, SummonerData } from "./types/summoner";
+
+
+/*Refactors to do
+ - Authenticate API key via header instead of query param
+*/
 
 export default function Home() {
   const router = useRouter()
   const [userInput, setUserInput] = useState("");
+  const [region, setRegion] = useState("na1"); //Support other regions in future
 
   async function handleSubmit(e: React.ChangeEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const [gameName, tagLine] = userInput.split("#");
-    router.push(`/profile/${gameName}-${tagLine}`);
+
+      e.preventDefault();
+      const parsed = parseSummoner(userInput);
+
+      if(!parsed){
+        console.log("Enter valid format gameName#tagLine");
+        return;
+      }
+
+      const search: SummonerData = {
+        region: region,
+        gameName: parsed.gameName,
+        tagLine: parsed.tagLine
+      };
+       
+      router.push(`/profile/${search.region}/${search.gameName}/${search.tagLine}`);
   } 
 
   return (
@@ -21,6 +42,10 @@ export default function Home() {
           <h1 className = {styles.text}>summoner.gg</h1>
           <form onSubmit = {handleSubmit}>
             <input type = "search" id = {styles.searchbar} autoComplete = "off" onChange ={(e)=>setUserInput(e.target.value)}></input>
+              <select>
+                <option> na1</option>
+                <option> na1</option>
+              </select>
           </form>
           <p className = {styles.text}>
             League of Legends analytics platform

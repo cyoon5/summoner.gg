@@ -1,26 +1,25 @@
 import MatchCard from "@/components/profile/MatchCard/MatchCard";
 import styles from "./page.module.css";
 import Image from 'next/image'
+import { SummonerData } from "@/app/types/summoner";
 
-export default async function Profile({ params }: {params: Promise<{summoner: string}>}) {
+export default async function Profile({ params }: {params: Promise<SummonerData>}) {
 //search -> profile -> api call -> display
 //add LP graph at top next to icon
     
     const userInfo = await params;
-    const [gameName, tagLine] = userInfo.summoner.split("-");
+    const { region, gameName, tagLine } = await params;
+    
     const response = await fetch(`http://localhost:3000/api/riot?gameName=${gameName}&tagLine=${tagLine}`);
     const data = await response.json(); //convert response stream into usable JavaScript object
     const iconId = data.profileIconId;
     const lvl = data.summonerLevel;
-    const link = `https://ddragon.leagueoflegends.com/cdn/16.10.1/img/profileicon/${iconId}.png`;
+    const iconLink = `https://ddragon.leagueoflegends.com/cdn/16.10.1/img/profileicon/${iconId}.png`;
 
     //TODO: retrieve current patch and update link
     
     return(
         <>
-
-
-    
             <div className = {styles.container}>
 
                 <div className = {styles.statsCol}> 
@@ -29,7 +28,7 @@ export default async function Profile({ params }: {params: Promise<{summoner: st
                         <div className = {styles.iconLvl}>
 
                             <Image
-                                src={link}
+                                src={iconLink}
                                 width={500}
                                 height={500}
                                 alt="Summoner Icon"
