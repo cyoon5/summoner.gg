@@ -34,10 +34,10 @@ body{
     display: flex;
     flex-direction: column;
     font-family: monospace;
-
 }
 
 .matchHeader{
+    margin-top: 185px;
     background-color: #0f0f0f;
     padding: 1em;
     border-radius: 5px;
@@ -50,6 +50,7 @@ body{
     position: relative;
     background-color: #0f0f0f;
     border-radius: 5px;
+    padding-top: 1em;
 }
 
 

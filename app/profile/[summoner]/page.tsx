@@ -4,6 +4,7 @@ import Image from 'next/image'
 
 export default async function Profile({ params }: {params: Promise<{summoner: string}>}) {
 //search -> profile -> api call -> display
+//add LP graph at top next to icon
     
     const userInfo = await params;
     const [gameName, tagLine] = userInfo.summoner.split("-");
@@ -18,37 +19,39 @@ export default async function Profile({ params }: {params: Promise<{summoner: st
     return(
         <>
 
-            <div className = {styles.summonerInfo}>
 
-                <div className = {styles.iconLvl}>
-
-                    <Image
-                        src={link}
-                        width={500}
-                        height={500}
-                        alt="Summoner Icon"
-                        className={styles.icon}
-                        loading = "eager"
-                    />
-
-                    <p className = {styles.lvl}>{lvl}</p>
-
-                </div>
-
-                <div className = {styles.nameTag}>
-                    <h1>{gameName} 
-                        <div className = {styles.tag}> #{tagLine}</div>
-                    </h1>
-                </div>
-
-
-            </div>
     
             <div className = {styles.container}>
 
                 <div className = {styles.statsCol}> 
+                    <div className = {styles.summonerInfo}>
+
+                        <div className = {styles.iconLvl}>
+
+                            <Image
+                                src={link}
+                                width={500}
+                                height={500}
+                                alt="Summoner Icon"
+                                className={styles.icon}
+                                loading = "eager"
+                            />
+
+                            <p className = {styles.lvl}>{lvl}</p>
+
+                        </div>
+
+                        <div className = {styles.nameTag}>
+                            <h1>{gameName} 
+                                <div className = {styles.tag}> #{tagLine}</div>
+                            </h1>
+                        </div>
+
+                    </div>
+
                     <p className = {styles.statsBox}> Ranked Solo/Duo </p>
                     <p className = {styles.statsBox}> Ranked Flex </p>
+                    <p className = {styles.statsBox}>Champion Stats</p>
                 </div>
 
                 <div className = {styles.matchCol}>
