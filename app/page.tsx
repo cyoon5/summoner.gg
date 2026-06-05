@@ -15,7 +15,7 @@ import { SearchInput, SummonerData } from "./types/summoner";
 export default function Home() {
   const router = useRouter()
   const [userInput, setUserInput] = useState("");
-  const [region, setRegion] = useState("na1"); //Support other regions in future
+  const [region, setRegion] = useState("na1");
 
   async function handleSubmit(e: React.ChangeEvent<HTMLFormElement>) {
 
@@ -42,9 +42,9 @@ export default function Home() {
           <h1 className = {styles.text}>summoner.gg</h1>
           <form onSubmit = {handleSubmit}>
             <input type = "search" id = {styles.searchbar} autoComplete = "off" onChange ={(e)=>setUserInput(e.target.value)}></input>
-              <select>
-                <option> na1</option>
-                <option> na1</option>
+              <select onChange={(e)=>{setRegion(e.target.value)}}>
+                <option value = "na1"> NA</option>
+                <option value = "euw1"> EUW</option>
               </select>
           </form>
           <p className = {styles.text}>

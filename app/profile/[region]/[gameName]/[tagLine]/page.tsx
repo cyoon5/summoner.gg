@@ -2,16 +2,21 @@ import MatchCard from "@/components/profile/MatchCard/MatchCard";
 import styles from "./page.module.css";
 import Image from 'next/image'
 import { SummonerData } from "@/app/types/summoner";
+import { getSummoner } from "@/app/services/summonerService";
 
 export default async function Profile({ params }: {params: Promise<SummonerData>}) {
 //search -> profile -> api call -> display
-//add LP graph at top next to icon
-    
-    const userInfo = await params;
+//add LP graph at top next to icon, Champ stats, live, player Tier
+
     const { region, gameName, tagLine } = await params;
-    
-    const response = await fetch(`http://localhost:3000/api/riot?gameName=${gameName}&tagLine=${tagLine}`);
-    const data = await response.json(); //convert response stream into usable JavaScript object
+
+    const query: SummonerData = {
+        region: region,
+        gameName: gameName,
+        tagLine: tagLine
+    }
+
+    const data =  await getSummoner(query);
     const iconId = data.profileIconId;
     const lvl = data.summonerLevel;
     const iconLink = `https://ddragon.leagueoflegends.com/cdn/16.10.1/img/profileicon/${iconId}.png`;
@@ -51,6 +56,7 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
                     <p className = {styles.statsBox}> Ranked Solo/Duo </p>
                     <p className = {styles.statsBox}> Ranked Flex </p>
                     <p className = {styles.statsBox}>Champion Stats</p>
+
                 </div>
 
                 <div className = {styles.matchCol}>
