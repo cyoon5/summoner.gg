@@ -23,7 +23,7 @@ Summoner.gg is a web-based dashboard for viewing League of Legends player profil
 
 ## Tech Stack
 
-- Next.js (App Router)
+- Next.js
 - React
 - TypeScript
 - CSS Modules
@@ -32,7 +32,7 @@ Summoner.gg is a web-based dashboard for viewing League of Legends player profil
 
 ## Current State
 
-This project is currently in active development.
+This project is currently a work in progress
 
 At this stage:
 - Frontend layout and UI structure are implemented
