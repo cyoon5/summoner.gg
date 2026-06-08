@@ -8,10 +8,6 @@ import parseSummoner from "../lib/parseSummoner";
 import { SearchInput, SummonerData } from "./types/summoner";
 
 
-/*Refactors to do
- - Authenticate API key via header instead of query param
-*/
-
 export default function Home() {
   const router = useRouter()
   const [userInput, setUserInput] = useState("");
@@ -27,7 +23,8 @@ export default function Home() {
         return;
       }
 
-      const search: SummonerData = {
+      const search: SummonerData = 
+      {
         region: region,
         gameName: parsed.gameName,
         tagLine: parsed.tagLine

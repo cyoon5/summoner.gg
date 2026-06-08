@@ -5,7 +5,6 @@ import { SummonerData } from "@/app/types/summoner";
 import { getSummoner } from "@/app/services/summonerService";
 
 export default async function Profile({ params }: {params: Promise<SummonerData>}) {
-//search -> profile -> api call -> display
 //add LP graph at top next to icon, Champ stats, live, player Tier
 
     const { region, gameName, tagLine } = await params;
@@ -16,12 +15,7 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
         tagLine: tagLine
     }
 
-    const data =  await getSummoner(query);
-    const iconId = data.profileIconId;
-    const lvl = data.summonerLevel;
-    const iconLink = `https://ddragon.leagueoflegends.com/cdn/16.10.1/img/profileicon/${iconId}.png`;
-
-    //TODO: retrieve current patch and update link
+    const data = await getSummoner(query);
     
     return(
         <>
@@ -33,7 +27,7 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
                         <div className = {styles.iconLvl}>
 
                             <Image
-                                src={iconLink}
+                                src={data.iconURL}
                                 width={500}
                                 height={500}
                                 alt="Summoner Icon"
@@ -41,13 +35,13 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
                                 loading = "eager"
                             />
 
-                            <p className = {styles.lvl}>{lvl}</p>
+                            <p className = {styles.lvl}>{data.accountLvl}</p>
 
                         </div>
 
                         <div className = {styles.nameTag}>
-                            <h1>{gameName} 
-                                <div className = {styles.tag}> #{tagLine}</div>
+                            <h1>{data.gameName} 
+                                <div className = {styles.tag}> #{data.tagLine}</div>
                             </h1>
                         </div>
 

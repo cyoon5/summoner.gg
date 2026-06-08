@@ -10,3 +10,5 @@ async function getProfileIconUrl(iconId : number){
     const patch = await getCurrentPatch();
     return `https://ddragon.leagueoflegends.com/cdn/${patch}/img/profileicon/${iconId}.png`;
 }
+
+export { getCurrentPatch, getProfileIconUrl };

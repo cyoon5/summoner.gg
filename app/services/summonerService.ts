@@ -1,8 +1,9 @@
-import { SummonerData } from "../types/summoner";
+import { SummonerData, SummonerProfile } from "../types/summoner";
+import {getProfileIconUrl} from "../services/dragonService";
 
 const api_key = process.env.RIOT_API_KEY;
 
-export async function getSummoner(input: SummonerData) {
+export async function getSummoner(input: SummonerData): Promise<SummonerProfile> {
     //If multiple services require it, would be better to make a new file constants.ts for example, import from 1 place
 
     if(!api_key)
@@ -24,11 +25,19 @@ export async function getSummoner(input: SummonerData) {
 
     const riotAcc = `https://${platform}.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/${puuid}`;
     const profile = await fetch(riotAcc, {headers: {"X-Riot-Token": api_key}});
-    const profileData = await profile.json(); //Contain profileIconId, summonerLevel
+    const profileData = await profile.json(); //Contain profileIconId, summonerLevel, revisionDate
     
+    const completeProfileData: SummonerProfile = {
+        puuid: puuid,
+        gameName: gameName,
+        tagLine: tagLine,
+        platform: platform,
+        routing: routing,
+        accountLvl: profileData.summonerLevel,
+        iconURL: await getProfileIconUrl(profileData.profileIconId),
+    };
 
-
-    return profileData;
+    return completeProfileData
 
 
 
