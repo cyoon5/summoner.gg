@@ -1,14 +1,12 @@
 'use client'
+
 import Image from 'next/image'
 import styles from "./MatchCard.module.css"
 
 
-export default function MatchCard(){
+export default function MatchCard(props: any){
 
     const mock = "https://ddragon.leagueoflegends.com/cdn/16.11.1/img/champion/Riven.png"
-
-    //Matchcard should contain Win/Loss
-    //Participants, Champion Icon, Items, Lvl, CS, KDA, Gamemode, MatchLength, Spells, Rune
 
     return(
         <>

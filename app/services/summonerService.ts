@@ -1,5 +1,5 @@
 import { SummonerData, SummonerProfile } from "../types/summoner";
-import {getProfileIconUrl} from "../services/dragonService";
+import {getCurrentPatch, getProfileIconUrl} from "../services/dragonService";
 
 const api_key = process.env.RIOT_API_KEY;
 
@@ -26,6 +26,7 @@ export async function getSummoner(input: SummonerData): Promise<SummonerProfile>
     const riotAcc = `https://${platform}.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/${puuid}`;
     const profile = await fetch(riotAcc, {headers: {"X-Riot-Token": api_key}});
     const profileData = await profile.json(); //Contain profileIconId, summonerLevel, revisionDate
+    const currentPatch = await getCurrentPatch();
     
     const completeProfileData: SummonerProfile = {
         puuid: puuid,
@@ -34,7 +35,7 @@ export async function getSummoner(input: SummonerData): Promise<SummonerProfile>
         platform: platform,
         routing: routing,
         accountLvl: profileData.summonerLevel,
-        iconURL: await getProfileIconUrl(profileData.profileIconId),
+        iconURL: await getProfileIconUrl(profileData.profileIconId, currentPatch),
     };
 
     return completeProfileData

@@ -6,9 +6,22 @@ async function getCurrentPatch(){
     const patchList = await patch.json();
     return patchList[0];
 }
-async function getProfileIconUrl(iconId : number){
-    const patch = await getCurrentPatch();
+
+
+
+
+
+function getProfileIconUrl(iconId: number, patch: string){
     return `https://ddragon.leagueoflegends.com/cdn/${patch}/img/profileicon/${iconId}.png`;
 }
 
-export { getCurrentPatch, getProfileIconUrl };
+function getChampionIconUrl(champion: string, patch: string){
+    return `https://ddragon.leagueoflegends.com/cdn/${patch}/img/champion/${champion}.png`;
+}
+
+
+
+
+
+
+export { getCurrentPatch, getProfileIconUrl, getChampionIconUrl };
