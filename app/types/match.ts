@@ -37,7 +37,7 @@ export type ParticipantInfo = {
     kda: number;
     champLevel: number;
     totalGoldEarned: number;
-    items: [number, number, number, number, number, number, number]
+    items: [number, number, number, number, number, number, number];
     team: 'red' | 'blue';
 }
 

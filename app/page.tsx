@@ -23,8 +23,7 @@ export default function Home() {
         return;
       }
 
-      const search: SummonerData = 
-      {
+      const search: SummonerData = {
         region: region,
         gameName: parsed.gameName,
         tagLine: parsed.tagLine

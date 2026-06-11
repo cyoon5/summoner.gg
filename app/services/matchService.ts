@@ -8,42 +8,24 @@ async function getMatchList(summoner: SummonerProfile): Promise<string[]>{
     if(!api_key) 
         throw new Error("Missing api key")
 
-    const matchListURL = `https://${summoner.routing}.api.riotgames.com/lol/match/v5/matches/by-puuid/${summoner.puuid}/ids?start=0&count=20`
+    const matchListURL = `https://${summoner.routing}.api.riotgames.com/lol/match/v5/matches/by-puuid/${summoner.puuid}/ids?start=0&count=10`
     const response = await fetch(matchListURL, {headers: {"X-Riot-Token": api_key}});
 
-    return response.json(); //List[string] of Match Ids, currently 20
+    return response.json(); //List[string] of Match Ids, currently 10
 }
 
-async function getMatch(matchId: string, routing: string){  
-    //Promise.all(), so it doesn't make 20 seperate requests
-    //Returns too much metadata, chunk into smaller functions
+async function getRawMatches(matchIds: string[], routing: string){  
 
     if(!api_key) 
         throw new Error("Missing api key")
 
-    const matchURL = `https://${routing}.api.riotgames.com/lol/match/v5/matches/${matchId}`;
-    const response =  await fetch(matchURL, {headers: {"X-Riot-Token": api_key}});
+    const promises = matchIds.map((m:any) => {
+        fetch(`https://${routing}.api.riotgames.com/lol/match/v5/matches/${m}`, {headers: {"X-Riot-Token": api_key}});
+    })
 
-    return response.json(); 
-}
-async function getMatchInfo(rawMatchData: any): Promise<MatchInfo>{
+    const response = await Promise.all(promises); // All or nothing
 
-     // https://static.developer.riotgames.com/docs/lol/queues.json
-
-    let matchMap = new Map<number, string>();
-    matchMap.set(400, "Normal Draft");
-    matchMap.set(420, "Ranked Solo/Duo");
-    matchMap.set(430, "Normal Blind");
-    matchMap.set(440, "Ranked Flex");
-    matchMap.set(450, "ARAM");
-
-    const matchInfo: MatchInfo = {
-        gameMode: matchMap.get(rawMatchData.info.queueId),
-        gameDuration: rawMatchData.info.gameDuration,
-        date: rawMatchData.info.gameCreation
-    }
-
-    return matchInfo;
+    return response;
 }
 
 async function getMatchParticipantsInfo(rawMatchData: any): Promise<ParticipantInfo[]>{
@@ -81,12 +63,30 @@ async function getMatchParticipantsInfo(rawMatchData: any): Promise<ParticipantI
             team: p.teamId == 100? 'blue' : 'red'
     }));
 
-
-
-
-        
-
     return participantInfoList;
 }
 
-export {getMatchList, getMatch, getMatchInfo, getMatchParticipantsInfo}
+
+
+
+async function getMatchInfo(rawMatchData: any): Promise<MatchInfo>{
+
+     // https://static.developer.riotgames.com/docs/lol/queues.json
+
+    let matchMap = new Map<number, string>();
+    matchMap.set(400, "Normal Draft");
+    matchMap.set(420, "Ranked Solo/Duo");
+    matchMap.set(430, "Normal Blind");
+    matchMap.set(440, "Ranked Flex");
+    matchMap.set(450, "ARAM");
+
+    const matchInfo: MatchInfo = {
+        gameMode: matchMap.get(rawMatchData.info.queueId),
+        gameDuration: rawMatchData.info.gameDuration,
+        date: rawMatchData.info.gameCreation
+    }
+
+    return matchInfo;
+}
+
+export {getMatchList, getRawMatches, getMatchInfo, getMatchParticipantsInfo}

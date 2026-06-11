@@ -3,6 +3,7 @@ import styles from "./page.module.css";
 import Image from 'next/image'
 import { SummonerData } from "@/app/types/summoner";
 import { getSummoner } from "@/app/services/summonerService";
+import { getMatchList } from "@/app/services/matchService";
 
 export default async function Profile({ params }: {params: Promise<SummonerData>}) {
 //add LP graph at top next to icon, Champ stats, live, player Tier
@@ -16,6 +17,10 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
     }
 
     const data = await getSummoner(query);
+    const matchList = await getMatchList(data);
+
+
+    
     
     return(
         <>
