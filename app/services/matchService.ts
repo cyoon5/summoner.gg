@@ -14,24 +14,27 @@ async function getMatchList(summoner: SummonerProfile): Promise<string[]>{
     return response.json(); //List[string] of Match Ids, currently 10
 }
 
-async function getRawMatches(matchIds: string[], routing: string){  
+async function getRawMatches(summoner: SummonerProfile){  
 
     if(!api_key) 
         throw new Error("Missing api key");
 
+    const matchIds = await getMatchList(summoner);
+
     const promises = matchIds.map((matchId:any) => {
         return fetch(
-            `https://${routing}.api.riotgames.com/lol/match/v5/matches/${matchId}`,  //MatchDTO
+            `https://${summoner.routing}.api.riotgames.com/lol/match/v5/matches/${matchId}`,  //MatchDTO
             {headers: {"X-Riot-Token": api_key}}
         );  
     })
 
     const responses = await Promise.all(promises); //This returns an array of Response Objects
-    const data = responses.map(r => {r.json()});
+    const data = await Promise.all(responses.map(r => {return r.json()}));
     return data; 
 }
 
 //Return an 10 arrays, each array holding 10 participants
+//TODO: Refactor and Optimize this page, as it can use a map instead of for loop
  function getMatchParticipantsInfo(rawMatchData: any): ParticipantInfo[][]{
 
     const participantArray = [];
