@@ -6,7 +6,7 @@ const api_key = process.env.RIOT_API_KEY;
 async function getMatchList(summoner: SummonerProfile): Promise<string[]>{
 
     if(!api_key) 
-        throw new Error("Missing api key")
+        throw new Error("Missing api key");
 
     const matchListURL = `https://${summoner.routing}.api.riotgames.com/lol/match/v5/matches/by-puuid/${summoner.puuid}/ids?start=0&count=10`
     const response = await fetch(matchListURL, {headers: {"X-Riot-Token": api_key}});
@@ -17,23 +17,32 @@ async function getMatchList(summoner: SummonerProfile): Promise<string[]>{
 async function getRawMatches(matchIds: string[], routing: string){  
 
     if(!api_key) 
-        throw new Error("Missing api key")
+        throw new Error("Missing api key");
 
-    const promises = matchIds.map((m:any) => {
-        fetch(`https://${routing}.api.riotgames.com/lol/match/v5/matches/${m}`, {headers: {"X-Riot-Token": api_key}});
+    const promises = matchIds.map((matchId:any) => {
+        return fetch(
+            `https://${routing}.api.riotgames.com/lol/match/v5/matches/${matchId}`,  //MatchDTO
+            {headers: {"X-Riot-Token": api_key}}
+        );  
     })
 
-    const response = await Promise.all(promises); // All or nothing
-
-    return response;
+    const responses = await Promise.all(promises); //This returns an array of Response Objects
+    const data = responses.map(r => {r.json()});
+    return data; 
 }
 
-async function getMatchParticipantsInfo(rawMatchData: any): Promise<ParticipantInfo[]>{
+//Return an 10 arrays, each array holding 10 participants
+ function getMatchParticipantsInfo(rawMatchData: any): ParticipantInfo[][]{
 
-    const participantListRiot = rawMatchData.info.participants;
+    const participantArray = [];
 
-    const participantInfoList = participantListRiot.map((p:any) => ({
 
+    for(let i = 0; i < rawMatchData.length; i++){
+
+        let currentMatch = rawMatchData[i];
+        const participantListRiot = currentMatch.info.participants;
+
+        const participantInfoList = participantListRiot.map((p:any) => ({
             puuid: p.puuid,
             gameName: p.riotIdGameName,
             tagLine: p.riotIdTagline,
@@ -47,7 +56,7 @@ async function getMatchParticipantsInfo(rawMatchData: any): Promise<ParticipantI
             kills: p.kills,
             deaths: p.deaths,
             assists: p.assists,
-            kda: (p.kills + p.assists)/p.deaths,
+            kda: (p.kills + p.assists)/(p.deaths || 1), //0 is falsy in JS
             champLevel: p.championLevel,
             totalGoldEarned: p.goldEarned,
             items: 
@@ -61,9 +70,15 @@ async function getMatchParticipantsInfo(rawMatchData: any): Promise<ParticipantI
                     p.item6,
                 ],
             team: p.teamId == 100? 'blue' : 'red'
-    }));
+        }));
 
-    return participantInfoList;
+        participantArray.push(participantInfoList);
+    }
+        
+
+
+
+    return participantArray;
 }
 
 

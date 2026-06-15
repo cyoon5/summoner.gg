@@ -19,7 +19,7 @@ export default function Home() {
       const parsed = parseSummoner(userInput);
 
       if(!parsed){
-        console.log("Enter valid format gameName#tagLine");
+        alert("Enter valid format gameName#tagLine");
         return;
       }
 
