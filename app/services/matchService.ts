@@ -1,6 +1,5 @@
 import { SummonerProfile } from "../types/summoner";
 import { ParticipantInfo, MatchInfo} from "../types/match";
-import { metadata } from "../layout";
 import { getChampionIconUrl, getCurrentPatch, getItemIconUrl } from "./dragonService";
 
 const api_key = process.env.RIOT_API_KEY;
@@ -80,11 +79,10 @@ async function getRawMatches(summoner: SummonerProfile){
                     getItemIconUrl(p.item0,patch),
                     getItemIconUrl(p.item1,patch),
                     getItemIconUrl(p.item2,patch),
-                    getItemIconUrl(p.item3,patch),
+                    getItemIconUrl(p.item6,patch),
                     getItemIconUrl(p.item4,patch),
                     getItemIconUrl(p.item5,patch),
-                    getItemIconUrl(p.item6,patch),
-
+                    getItemIconUrl(p.item3,patch),
                 ],
             visionScore: p.visionScore,
             team: p.teamId == 100? 'blue' : 'red',

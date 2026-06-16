@@ -55,7 +55,6 @@
     color: #d0d0d0;
 
 }
-
 .box5{
     gap: 2em;
 }
@@ -64,12 +63,10 @@
     display: flex;
     flex-direction: row;
 }
-
 .teamList{
     display: grid;
     grid-template-columns: 1fr;
 }
-
 
 .champIcon{
     border-radius: 3px;

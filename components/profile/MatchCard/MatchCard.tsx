@@ -8,8 +8,6 @@ import { getChampionIconUrl, getItemIconUrl } from '@/app/services/dragonService
 
 export default function MatchCard(props: MatchCardProp){
 
-    const mock = "https://ddragon.leagueoflegends.com/cdn/16.11.1/img/champion/Riven.png"
-
     return(
         <>
             <div className ={styles.matchBox}>
@@ -39,16 +37,24 @@ export default function MatchCard(props: MatchCardProp){
                         </div>
 
                         <div className = {styles.box3}> 
-                            <p className = {styles.kdaTotal}> {props.participant.kills} / {props.participant?.deaths} / {props.participant?.assists} </p>
-                            <p className = {styles.kdaRatio}>{props.participant?.kda} KDA</p>
-                            <p className = {styles.cs}>{props.participant?.creepScore} CS</p>
-                            <p className = {styles.vision}>{props.participant?.visionScore} Vision</p>
+                            <p className = {styles.kdaTotal}> {props.participant.kills}/{props.participant.deaths}/{props.participant.assists} </p>
+                            <p className = {styles.kdaRatio}>{props.participant.kda} KDA</p>
+                            <p className = {styles.cs}>{props.participant.creepScore} CS</p>
+                            <p className = {styles.vision}>{props.participant.visionScore} Vision</p>
                         </div>
 
                         <div className = {styles.box4}> 
                                 {
-                                    props.participant.itemUrls.map((p) => (
-                                        <img className = {styles.rune} src = {(p)}></img>
+                                    props.participant.itemUrls.map((p,i) => (
+                                        p && <Image
+                                            key = {i}
+                                            className = {styles.rune}
+                                            src = {p}
+                                            width={500}
+                                            height={500}
+                                            alt= "Item Image"
+                                            loading= "eager"
+                                        />
                                     ))
                                 }
                         </div>
@@ -57,39 +63,40 @@ export default function MatchCard(props: MatchCardProp){
 
                             <div className = {styles.teamList}>
 
-                                <div className = {styles.summonerEntry}>
 
                                     {
                                         props.participants.filter(p => p.team == 'blue').map((p) => (  
 
-                                            <div className = {styles.summonerName}>
-                                                <img className = {styles.champIcon} src = {(p.championUrl)}></img>
-                                                {p.gameName}
+                                            <div className = {styles.summonerEntry}>
+                                                <div className = {styles.summonerName}>
+                                                    <img className = {styles.champIcon} src = {p.championUrl}></img>
+                                                    {p.gameName}
+                                                </div>
                                             </div>
+
 
                                         ))
                                     }
                 
-                                </div>
 
                             </div>
 
                             <div className = {styles.teamList}>
 
-                                <div className = {styles.summonerEntry}>
 
                                     {
                                         props.participants.filter(p => p.team == 'red').map((p) => (  
 
-                                            <div className = {styles.summonerName}>
-                                                <img className = {styles.champIcon} src = {(p.championUrl)}></img>
-                                                {p.gameName}
+                                            <div className = {styles.summonerEntry}>
+                                                <div className = {styles.summonerName}>
+                                                    <img className = {styles.champIcon} src = {p.championUrl}></img>
+                                                    {p.gameName}
+                                                </div>
                                             </div>
 
                                         ))
                                     }
                 
-                                </div>
 
                             </div>
                         </div>
