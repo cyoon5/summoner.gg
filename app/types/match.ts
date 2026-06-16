@@ -20,12 +20,14 @@ export type MatchSummary =  { //add LP gain/loss once postgres implemented
 }
 
 export type ParticipantInfo = {
+    matchId: string;
     puuid: string;
     gameName: string;
     tagLine: string;
     role: 'TOP' | 'JUNGLE' | 'MID' | 'ADC' | 'UTILITY';
     championId: number;
     championName: string;
+    championUrl: string;
     creepScore: number;
     damageDealt : number;
     summonerSpell1: number;
@@ -35,10 +37,13 @@ export type ParticipantInfo = {
     deaths: number;
     assists: number;
     kda: number;
-    champLevel: number;
+    championLevel: number;
     totalGoldEarned: number;
     items: [number, number, number, number, number, number, number];
+    itemUrls: [string, string, string, string, string, string, string];
+    visionScore: number;
     team: 'red' | 'blue';
+    win: boolean;
 }
 
     // totalMinionsKilled: number;
@@ -49,4 +54,11 @@ export type MatchInfo = {
     gameMode: string | undefined;
     gameDuration: number;
     date: number;
+    matchId: string;
+}
+
+export type MatchCardProp = {
+    participant: ParticipantInfo;
+    participants: ParticipantInfo[];
+    matchInfo: MatchInfo;
 }

@@ -27,7 +27,7 @@ export async function getSummoner(input: SummonerData): Promise<SummonerProfile>
     const profile = await fetch(riotAcc, {headers: {"X-Riot-Token": api_key}});
     const profileData = await profile.json(); //Contain profileIconId, summonerLevel, revisionDate
     const currentPatch = await getCurrentPatch();
-    
+
     const completeProfileData: SummonerProfile = {
         puuid: puuid,
         gameName: gameName,
@@ -38,7 +38,7 @@ export async function getSummoner(input: SummonerData): Promise<SummonerProfile>
         iconURL: await getProfileIconUrl(profileData.profileIconId, currentPatch),
     };
 
-    return completeProfileData
+    return completeProfileData;
 
 
 

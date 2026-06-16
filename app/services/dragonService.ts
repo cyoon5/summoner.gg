@@ -7,21 +7,24 @@ async function getCurrentPatch(){
     return patchList[0];
 }
 
-
-
-
-
-function getProfileIconUrl(iconId: number, patch: string){
+function getProfileIconUrl(iconId: number, patch: number){
     return `https://ddragon.leagueoflegends.com/cdn/${patch}/img/profileicon/${iconId}.png`;
 }
 
-function getChampionIconUrl(champion: string, patch: string){
+function getChampionIconUrl(champion: string, patch: number){
     return `https://ddragon.leagueoflegends.com/cdn/${patch}/img/champion/${champion}.png`;
+}
+
+function getSummonerIconUrl(spellName: string, patch: number){
+    return `https://ddragon.leagueoflegends.com/cdn/${patch}/img/spell/${spellName}.png`;
+
+}
+
+function getItemIconUrl(iconId: number, patch: number){
+    return `https://ddragon.leagueoflegends.com/cdn/${patch}/img/item/${iconId}.png`
 }
 
 
 
 
-
-
-export { getCurrentPatch, getProfileIconUrl, getChampionIconUrl };
+export { getCurrentPatch, getProfileIconUrl, getChampionIconUrl, getItemIconUrl, getSummonerIconUrl };

@@ -1,7 +1,10 @@
 import { SummonerProfile } from "../types/summoner";
 import { ParticipantInfo, MatchInfo} from "../types/match";
+import { metadata } from "../layout";
+import { getChampionIconUrl, getCurrentPatch, getItemIconUrl } from "./dragonService";
 
 const api_key = process.env.RIOT_API_KEY;
+const patch = await getCurrentPatch();
 
 async function getMatchList(summoner: SummonerProfile): Promise<string[]>{
 
@@ -21,7 +24,7 @@ async function getRawMatches(summoner: SummonerProfile){
 
     const matchIds = await getMatchList(summoner);
 
-    const promises = matchIds.map((matchId:any) => {
+    const promises = matchIds.map((matchId:string) => {
         return fetch(
             `https://${summoner.routing}.api.riotgames.com/lol/match/v5/matches/${matchId}`,  //MatchDTO
             {headers: {"X-Riot-Token": api_key}}
@@ -33,25 +36,25 @@ async function getRawMatches(summoner: SummonerProfile){
     return data; 
 }
 
-//Return an 10 arrays, each array holding 10 participants
 //TODO: Refactor and Optimize this page, as it can use a map instead of for loop
  function getMatchParticipantsInfo(rawMatchData: any): ParticipantInfo[][]{
 
     const participantArray = [];
-
 
     for(let i = 0; i < rawMatchData.length; i++){
 
         let currentMatch = rawMatchData[i];
         const participantListRiot = currentMatch.info.participants;
 
-        const participantInfoList = participantListRiot.map((p:any) => ({
+        const participantInfoList = participantListRiot.map((p: any) => ({
+            matchId: currentMatch.metadata.matchId,
             puuid: p.puuid,
             gameName: p.riotIdGameName,
             tagLine: p.riotIdTagline,
             role: p.teamPosition,
             championId: p.championId,
             championName: p.championName,
+            championUrl: getChampionIconUrl(p.championName, patch),
             creepScore: p.neutralMinionsKilled + p.totalMinionsKilled,
             damageDealt: p.totalDamageDealtToChampions,
             summonerSpell1: p.summoner1Id,
@@ -59,8 +62,8 @@ async function getRawMatches(summoner: SummonerProfile){
             kills: p.kills,
             deaths: p.deaths,
             assists: p.assists,
-            kda: (p.kills + p.assists)/(p.deaths || 1), //0 is falsy in JS
-            champLevel: p.championLevel,
+            kda: ((p.kills + p.assists)/(p.deaths || 1)).toFixed(2),
+            championLevel: p.champLevel,
             totalGoldEarned: p.goldEarned,
             items: 
                 [
@@ -72,7 +75,20 @@ async function getRawMatches(summoner: SummonerProfile){
                     p.item5,
                     p.item6,
                 ],
-            team: p.teamId == 100? 'blue' : 'red'
+            itemUrls: 
+                [
+                    getItemIconUrl(p.item0,patch),
+                    getItemIconUrl(p.item1,patch),
+                    getItemIconUrl(p.item2,patch),
+                    getItemIconUrl(p.item3,patch),
+                    getItemIconUrl(p.item4,patch),
+                    getItemIconUrl(p.item5,patch),
+                    getItemIconUrl(p.item6,patch),
+
+                ],
+            visionScore: p.visionScore,
+            team: p.teamId == 100? 'blue' : 'red',
+            win: p.win
         }));
 
         participantArray.push(participantInfoList);
@@ -87,7 +103,7 @@ async function getRawMatches(summoner: SummonerProfile){
 
 
 
-async function getMatchInfo(rawMatchData: any): Promise<MatchInfo>{
+function getMatchInfo(rawMatchData: any): MatchInfo{
 
      // https://static.developer.riotgames.com/docs/lol/queues.json
 
@@ -101,7 +117,8 @@ async function getMatchInfo(rawMatchData: any): Promise<MatchInfo>{
     const matchInfo: MatchInfo = {
         gameMode: matchMap.get(rawMatchData.info.queueId),
         gameDuration: rawMatchData.info.gameDuration,
-        date: rawMatchData.info.gameCreation
+        date: rawMatchData.info.gameCreation,
+        matchId: rawMatchData.metadata.matchId
     }
 
     return matchInfo;
