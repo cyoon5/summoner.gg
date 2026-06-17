@@ -1,23 +1,23 @@
 
-export type MatchSummary =  { //add LP gain/loss once postgres implemented
-    matchId: string;
-    participants: Array<string>;
-    kills: number;
-    deaths: number;
-    assists: number;
-    gameMode: string;
-    matchDuration: number;
-    matchOutcome: 'win' | 'loss' | 'remake';
-    championId: number;
-    championName: string;
-    items: [number, number, number, number, number, number, number]
-    role: 'TOP' | 'JUNGLE' | 'MID' | 'ADC' | 'UTILITY';
-    visionScore: number;
-    creepScore: number
-    championLevel: number   
-    summonerSpell1: number;
-    summonerSpell2: number;
-}
+// export type MatchSummary =  { //add LP gain/loss once postgres implemented
+//     matchId: string;
+//     participants: Array<string>;
+//     kills: number;
+//     deaths: number;
+//     assists: number;
+//     gameMode: string;
+//     matchDuration: number;
+//     matchOutcome: 'win' | 'loss' | 'remake';
+//     championId: number;
+//     championName: string;
+//     items: [number, number, number, number, number, number, number]
+//     role: 'TOP' | 'JUNGLE' | 'MID' | 'ADC' | 'UTILITY';
+//     visionScore: number;
+//     creepScore: number
+//     championLevel: number   
+//     summonerSpell1: number;
+//     summonerSpell2: number;
+// }
 
 export type ParticipantInfo = {
     matchId: string;

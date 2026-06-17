@@ -3,13 +3,11 @@ import styles from "./page.module.css";
 import Image from 'next/image'
 import { SummonerData } from "@/app/types/summoner";
 import { getSummoner } from "@/app/services/summonerService";
-import { MatchCardProp, MatchInfo, ParticipantInfo } from "@/app/types/match";
 import { getMatchInfo, getMatchParticipantsInfo, getRawMatches } from "@/app/services/matchService";
 import { getCurrentPatch } from "@/app/services/dragonService";
 
 
 export default async function Profile({ params }: {params: Promise<SummonerData>}) {
-//add LP graph at top next to icon, Champ stats, live, player Tier
 
     const { region, gameName, tagLine } = await params;
 
@@ -25,11 +23,8 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
 
     const searchedSummonerId = data.puuid;  
 
-    //console.log(participantsInMatches[0]);
-
     const searchedSummoner = participantsInMatches.map(m => m.find(p => p.puuid === searchedSummonerId));
     const matchInfoList = rawMatches.map(m => (getMatchInfo(m)));
-    const patch = await getCurrentPatch();
 
     
 
@@ -77,13 +72,13 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
                         {
 
                             searchedSummoner.map((m, i) => 
-                    
-                                    m && <MatchCard
+                
+                                m && <MatchCard
                                     key = {m.matchId}
                                     participant = {m}
                                     participants = {participantsInMatches[i]}
                                     matchInfo = {matchInfoList[i]}
-                                 />
+                                />
                             )
                      
                         }

@@ -86,4 +86,11 @@
     color: #d6ecff;
 }
 
+.summonerName, .summonerEntry{
+  overflow: hidden;         
+  text-overflow: ellipsis;  
+  white-space: nowrap;         
+  width: 15ch;            
+}
+
 

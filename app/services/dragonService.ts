@@ -1,4 +1,4 @@
-//Sole job of this file is to construct image URL to ddragon for profile icons, champions, spells, etc
+//Sole job of this file is to construct image URL/patch to ddragon for profile icons, champions, spells, etc
 
 
 async function getCurrentPatch(){

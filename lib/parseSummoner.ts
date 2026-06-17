@@ -1,7 +1,5 @@
 import { SearchInput } from "@/app/types/summoner";
 
-
-
 //Parses input and validates format of search inpuut of summoner.
 export default function parseSummoner(input: string) : null | SearchInput {
 

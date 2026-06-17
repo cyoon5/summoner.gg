@@ -66,8 +66,8 @@ export default function MatchCard(props: MatchCardProp){
 
                                     {
                                         props.participants.filter(p => p.team == 'blue').map((p) => (  
-
-                                            <div className = {styles.summonerEntry}>
+                                            
+                                            <div className = {styles.summonerEntry} key = {p.puuid}>
                                                 <div className = {styles.summonerName}>
                                                     <img className = {styles.champIcon} src = {p.championUrl}></img>
                                                     {p.gameName}
@@ -87,9 +87,16 @@ export default function MatchCard(props: MatchCardProp){
                                     {
                                         props.participants.filter(p => p.team == 'red').map((p) => (  
 
-                                            <div className = {styles.summonerEntry}>
+                                            <div className = {styles.summonerEntry} key = {p.puuid}>
                                                 <div className = {styles.summonerName}>
-                                                    <img className = {styles.champIcon} src = {p.championUrl}></img>
+                                                        <Image 
+                                                            width = "500"
+                                                            height = "500"
+                                                            alt = "champIcon"
+                                                            className = {styles.champIcon} 
+                                                            src = {p.championUrl}
+                                                            loading = "eager"
+                                                        />
                                                     {p.gameName}
                                                 </div>
                                             </div>

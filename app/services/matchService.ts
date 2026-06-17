@@ -35,7 +35,6 @@ async function getRawMatches(summoner: SummonerProfile){
     return data; 
 }
 
-//TODO: Refactor and Optimize this page, as it can use a map instead of for loop
  function getMatchParticipantsInfo(rawMatchData: any): ParticipantInfo[][]{
 
     const participantArray = [];
