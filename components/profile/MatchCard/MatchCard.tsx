@@ -4,19 +4,19 @@ import Image from 'next/image'
 import styles from "./MatchCard.module.css"
 import { MatchCardProp, ParticipantInfo } from '@/app/types/match'
 import { getChampionIconUrl, getItemIconUrl } from '@/app/services/dragonService'
+import Link from 'next/link'
 
 
 export default function MatchCard(props: MatchCardProp){
 
     return(
         <>
-            <div className ={styles.matchBox}>
                 <div className = {styles.contentBox}>
 
                         <div className = {styles.box1}> 
-                            <b> {props.matchInfo.gameMode} </b>
-                            <p> {props.matchInfo.gameDuration} </p>
-                            <p className = {styles.gameResult}>{props.participant.win? 'WIN' : 'LOSS'}</p>
+                            <b className = {styles.box1Text}> {props.matchInfo.gameMode} </b>
+                            <p > {props.matchInfo.gameDuration} </p>
+                            <p className = {styles.gameLoss}>{props.participant.win? 'WIN' : 'LOSS'}</p>
                         </div>
 
                         <div className = {styles.box2}>
@@ -32,7 +32,6 @@ export default function MatchCard(props: MatchCardProp){
                             <div className  = {styles.runeBox}>
                                 <img className = {styles.rune} src = "https://pbs.twimg.com/media/Ggt9Pf4XkAAmPNw.jpg"></img>
                                 <img className = {styles.rune} src = "https://pbs.twimg.com/media/Ggt9Pf4XkAAmPNw.jpg"></img>
-
                             </div>
                         </div>
 
@@ -48,7 +47,7 @@ export default function MatchCard(props: MatchCardProp){
                                     props.participant.itemUrls.map((p,i) => (
                                         p && <Image
                                             key = {i}
-                                            className = {styles.rune}
+                                            className = {styles.item}
                                             src = {p}
                                             width={500}
                                             height={500}
@@ -61,17 +60,24 @@ export default function MatchCard(props: MatchCardProp){
 
                         <div className = {styles.box5}>
 
-                            <div className = {styles.teamList}>
+                            <div className = {styles.teamList1}>
 
 
                                     {
                                         props.participants.filter(p => p.team == 'blue').map((p) => (  
                                             
                                             <div className = {styles.summonerEntry} key = {p.puuid}>
-                                                <div className = {styles.summonerName}>
-                                                    <img className = {styles.champIcon} src = {p.championUrl}></img>
-                                                    {p.gameName}
-                                                </div>
+                                                    <Image 
+                                                        width = "500"
+                                                        height = "500"
+                                                        alt = "champIcon"
+                                                        className = {styles.champIconMini} 
+                                                        src = {p.championUrl}
+                                                        loading = "eager"
+                                                    />
+                                                    <div className = {styles.summonerName} title = {p.gameName + "#" + p.tagLine}>
+                                                        <Link href = {`/profile/na1/${p.gameName}/${p.tagLine}`} className = {styles.summonerName}>{p.gameName}</Link>
+                                                    </div>
                                             </div>
 
 
@@ -81,24 +87,24 @@ export default function MatchCard(props: MatchCardProp){
 
                             </div>
 
-                            <div className = {styles.teamList}>
+                            <div className = {styles.teamList2}>
 
 
                                     {
                                         props.participants.filter(p => p.team == 'red').map((p) => (  
 
                                             <div className = {styles.summonerEntry} key = {p.puuid}>
-                                                <div className = {styles.summonerName}>
-                                                        <Image 
-                                                            width = "500"
-                                                            height = "500"
-                                                            alt = "champIcon"
-                                                            className = {styles.champIcon} 
-                                                            src = {p.championUrl}
-                                                            loading = "eager"
-                                                        />
-                                                    {p.gameName}
-                                                </div>
+                                                    <Image 
+                                                        width = "500"
+                                                        height = "500"
+                                                        alt = "champIcon"
+                                                        className = {styles.champIconMini} 
+                                                        src = {p.championUrl}
+                                                        loading = "eager"
+                                                    />
+                                                    <div className = {styles.summonerName} title = {p.gameName + "#" + p.tagLine}>
+                                                        <Link href = {`/profile/na1/${p.gameName}/${p.tagLine}`} className = {styles.summonerName}>{p.gameName}</Link>
+                                                    </div>
                                             </div>
 
                                         ))
@@ -108,10 +114,11 @@ export default function MatchCard(props: MatchCardProp){
                             </div>
                         </div>
 
+       
+
     
                
                 </div>
-            </div>      
         </>
     )
 }
