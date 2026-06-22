@@ -106,9 +106,12 @@
   white-space: nowrap;         
   width: 12ch;     
   text-decoration: none;
-  color: inherit;
-}      
+  color: #d0d0d0;
+}
 
+.summonerName:hover{
+    text-decoration: underline;
+}
 
 
 

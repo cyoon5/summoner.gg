@@ -104,6 +104,8 @@ export default function MatchCard(props: MatchCardProp){
                                                     />
                                                     <div className = {styles.summonerName} title = {p.gameName + "#" + p.tagLine}>
                                                         <Link href = {`/profile/na1/${p.gameName}/${p.tagLine}`} className = {styles.summonerName}>{p.gameName}</Link>
+
+                                                        {/*TODO: DYNAMIC REGION ROUTE, PROB CHANGE ParticipantInfo type to carry region*/}
                                                     </div>
                                             </div>
 
