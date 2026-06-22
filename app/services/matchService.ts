@@ -1,6 +1,7 @@
 import { SummonerProfile } from "../types/summoner";
 import { ParticipantInfo, MatchInfo} from "../types/match";
-import { getChampionIconUrl, getCurrentPatch, getItemIconUrl } from "./dragonService";
+import { getChampionIconUrl, getCurrentPatch, getItemIconUrl, getSummonerSpellIconUrl } from "./dragonService";
+import {getRelativeTime} from "../../lib/unixConverter";
 
 const api_key = process.env.RIOT_API_KEY;
 const patch = await getCurrentPatch();
@@ -55,8 +56,8 @@ async function getRawMatches(summoner: SummonerProfile){
             championUrl: getChampionIconUrl(p.championName, patch),
             creepScore: p.neutralMinionsKilled + p.totalMinionsKilled,
             damageDealt: p.totalDamageDealtToChampions,
-            summonerSpell1: p.summoner1Id,
-            summonerSpell2: p.summoner2Id,
+            summonerSpell1Url: getSummonerSpellIconUrl(p.summoner1Id, patch),
+            summonerSpell2Url: getSummonerSpellIconUrl(p.summoner2Id, patch),
             kills: p.kills,
             deaths: p.deaths,
             assists: p.assists,
@@ -113,8 +114,8 @@ function getMatchInfo(rawMatchData: any): MatchInfo{
 
     const matchInfo: MatchInfo = {
         gameMode: matchMap.get(rawMatchData.info.queueId),
-        gameDuration: rawMatchData.info.gameDuration,
-        date: rawMatchData.info.gameCreation,
+        gameDuration: (rawMatchData.info.gameDuration/60).toFixed(2),
+        date: getRelativeTime(rawMatchData.info.gameCreation),
         matchId: rawMatchData.metadata.matchId
     }
 

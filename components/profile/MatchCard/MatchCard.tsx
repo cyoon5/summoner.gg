@@ -15,8 +15,8 @@ export default function MatchCard(props: MatchCardProp){
 
                         <div className = {styles.box1}> 
                             <b className = {styles.box1Text}> {props.matchInfo.gameMode} </b>
-                            <p > {props.matchInfo.gameDuration} </p>
-                            <p className = {styles.gameLoss}>{props.participant.win? 'WIN' : 'LOSS'}</p>
+                            <p > {props.matchInfo.date} </p>
+                            <p className = {`${props.participant.win ? styles.gameWin : styles.gameLoss}`}>{props.participant.win? 'WIN: ' + props.matchInfo.gameDuration : 'LOSS: ' + props.matchInfo.gameDuration}</p>
                         </div>
 
                         <div className = {styles.box2}>
@@ -25,8 +25,22 @@ export default function MatchCard(props: MatchCardProp){
                             </div>
 
                             <div className = {styles.summonerBox}>
-                                <img className = {styles.summonerSpell} src = "https://i.pinimg.com/564x/58/12/00/5812006cb941167209f1301920dc18e4.jpg"></img>
-                                <img className = {styles.summonerSpell} src = "https://i.pinimg.com/564x/58/12/00/5812006cb941167209f1301920dc18e4.jpg"></img>
+                                <Image
+                                    src = {props.participant.summonerSpell1Url}
+                                    className = {styles.summonerSpell}
+                                    width={500}
+                                    height={500}
+                                    alt= "Spell Image"
+                                    loading= "eager"
+                                />
+                                <Image
+                                    src = {props.participant.summonerSpell2Url}
+                                    className = {styles.summonerSpell}
+                                    width={500}
+                                    height={500}
+                                    alt= "Spell Image"
+                                    loading= "eager"
+                                />
                             </div>
 
                             <div className  = {styles.runeBox}>
