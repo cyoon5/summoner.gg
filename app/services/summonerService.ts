@@ -1,5 +1,6 @@
 import { SummonerData, SummonerProfile } from "../types/summoner";
 import {getCurrentPatch, getProfileIconUrl} from "../services/dragonService";
+import { REGION_MAPPING } from "./constants";
 
 const api_key = process.env.RIOT_API_KEY;
 
@@ -8,18 +9,22 @@ export async function getSummoner(input: SummonerData): Promise<SummonerProfile>
 
     if(!api_key)
         throw new Error("Missing api key");
-    
-    const regionMapping = new Map<string, string>();
-    regionMapping.set('na1', 'americas'); //(platform, routing)
-    regionMapping.set('euw1', 'europe');
 
     const platform = input.region;
-    const routing = regionMapping.get(platform);
+    const routing = REGION_MAPPING.get(platform);
     const gameName = input.gameName;
     const tagLine = input.tagLine;
 
+
+    if (!routing) 
+        throw new Error(`Invalid platform: ${platform}`);
+
     const riotId = `https://${routing}.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${gameName}/${tagLine}`;
     const response = await fetch(riotId, {headers: {"X-Riot-Token": api_key}});
+
+    if (!response.ok) 
+        throw new Error("Failed to fetch account data");
+
     const accountData = await response.json();
     const puuid = accountData.puuid;
 

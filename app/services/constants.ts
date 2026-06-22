@@ -1,5 +1,22 @@
+export const REGION_MAPPING = new Map<string, string>([
+
+  ["na1", "americas"],
+  ["br1", "americas"],
+  ["la1", "americas"],
+  ["la2", "americas"],
+
+  ["euw1", "europe"],
+  ["eun1", "europe"],
+
+  ["kr", "asia"],
+  ["jp1", "asia"],
+
+  ["oc1", "sea"],
+
+]);
+
 export const SUMMONER_SPELL_MAP = new Map<number, string>([
-    
+
   [1, "SummonerBoost"], // Cleanse
   [3, "SummonerExhaust"],
   [4, "SummonerFlash"],
@@ -28,5 +45,6 @@ export const SUMMONER_SPELL_MAP = new Map<number, string>([
   [2202, "SummonerCherryFlash"],
 
   [2201, "SummonerCherryHold"]
+
 ]);
 
