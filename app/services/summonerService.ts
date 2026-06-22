@@ -40,7 +40,7 @@ export async function getSummoner(input: SummonerData): Promise<SummonerProfile>
         platform: platform,
         routing: routing,
         accountLvl: profileData.summonerLevel,
-        iconURL: await getProfileIconUrl(profileData.profileIconId, currentPatch),
+        iconURL: getProfileIconUrl(profileData.profileIconId, currentPatch),
     };
 
     return completeProfileData;

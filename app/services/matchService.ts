@@ -2,6 +2,7 @@ import { SummonerProfile } from "../types/summoner";
 import { ParticipantInfo, MatchInfo} from "../types/match";
 import { getChampionIconUrl, getCurrentPatch, getItemIconUrl, getSummonerSpellIconUrl } from "./dragonService";
 import {getRelativeTime} from "../../lib/unixConverter";
+import { QUEUE_MAP } from "./constants";
 
 const api_key = process.env.RIOT_API_KEY;
 const patch = await getCurrentPatch();
@@ -58,6 +59,10 @@ async function getRawMatches(summoner: SummonerProfile){
             damageDealt: p.totalDamageDealtToChampions,
             summonerSpell1Url: getSummonerSpellIconUrl(p.summoner1Id, patch),
             summonerSpell2Url: getSummonerSpellIconUrl(p.summoner2Id, patch),
+            primaryRuneTree: p.perks.styles[0].style,
+            primaryRunes: p.perks.styles[0].selections,
+            secondaryRuneTree: p.perks.styles[1].style,
+            secondaryRunes: p.perks.styles[0].selections,
             kills: p.kills,
             deaths: p.deaths,
             assists: p.assists,
@@ -103,17 +108,8 @@ async function getRawMatches(summoner: SummonerProfile){
 
 function getMatchInfo(rawMatchData: any): MatchInfo{
 
-     // https://static.developer.riotgames.com/docs/lol/queues.json
-
-    let matchMap = new Map<number, string>();
-    matchMap.set(400, "Normal Draft");
-    matchMap.set(420, "Ranked Solo/Duo");
-    matchMap.set(430, "Normal Blind");
-    matchMap.set(440, "Ranked Flex");
-    matchMap.set(450, "ARAM");
-
     const matchInfo: MatchInfo = {
-        gameMode: matchMap.get(rawMatchData.info.queueId),
+        gameMode: QUEUE_MAP.get(rawMatchData.info.queueId),
         gameDuration: (rawMatchData.info.gameDuration/60).toFixed(2),
         date: getRelativeTime(rawMatchData.info.gameCreation),
         matchId: rawMatchData.metadata.matchId

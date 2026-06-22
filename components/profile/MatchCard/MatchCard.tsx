@@ -9,6 +9,8 @@ import Link from 'next/link'
 
 export default function MatchCard(props: MatchCardProp){
 
+    console.log("hello" + props.participant.secondaryRuneTree);
+
     return(
         <>
                 <div className = {styles.contentBox}>
