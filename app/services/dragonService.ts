@@ -22,11 +22,6 @@ function getChampionIconUrl(champion: string){
 
     return `https://ddragon.leagueoflegends.com/cdn/${patch}/img/champion/${champion}.png`;
 }
-
-function getSummonerIconUrl(spellName: string){
-    return `https://ddragon.leagueoflegends.com/cdn/${patch}/img/spell/${spellName}.png`;
-}
-
 function getItemIconUrl(iconId: number){
     return `https://ddragon.leagueoflegends.com/cdn/${patch}/img/item/${iconId}.png`
 }
@@ -47,18 +42,16 @@ async function getRuneMap(): Promise<Map<number, string>>{ //Key value pair of i
     const response = await fetch(`https://ddragon.leagueoflegends.com/cdn/${patch}/data/en_US/runesReforged.json`);
     const data = await response.json();
 
-    data.map((path:any) => 
+    data.forEach((path:any) => 
         {
             runeMap.set(path.id, path.icon);
-            path.slots.map((r:any) => r.runes
-            .map((rune:any) => runeMap.set(rune.id, rune.icon)));
+            path.slots.forEach((r:any) => r.runes
+            .forEach((rune:any) => runeMap.set(rune.id, rune.icon)));
         }
     )
-
-
     return runeMap;
 }
 
 
 
-export { getCurrentPatch, getProfileIconUrl, getChampionIconUrl, getItemIconUrl, getSummonerIconUrl , getSummonerSpellIconUrl, getRuneIconUrl};
+export { getCurrentPatch, getProfileIconUrl, getChampionIconUrl, getItemIconUrl, getSummonerSpellIconUrl, getRuneIconUrl};
