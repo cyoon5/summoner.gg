@@ -31,34 +31,37 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
     
     return(
         <>
+            <div className = {styles.summonerInfo}>
+
+                    <div className = {styles.iconLvl}>
+
+                        <Image
+                            src={data.iconURL}
+                            width={500}
+                            height={500}
+                            alt="Summoner Icon"
+                            className={styles.icon}
+                            loading = "eager"
+                        />
+
+                        <p className = {styles.lvl}>{data.accountLvl}</p>
+
+                    </div>
+
+                    <div className = {styles.nameTag}>
+                        <h1 className = {styles.gameName}>
+                            {data.gameName} 
+                        </h1>
+                        <h1 className = {styles.tag}> 
+                            #{data.tagLine}
+                        </h1>
+                    </div>
+
+            </div>
             <div className = {styles.container}>
 
                 <div className = {styles.statsCol}> 
                     
-                    <div className = {styles.summonerInfo}>
-
-                        <div className = {styles.iconLvl}>
-
-                            <Image
-                                src={data.iconURL}
-                                width={500}
-                                height={500}
-                                alt="Summoner Icon"
-                                className={styles.icon}
-                                loading = "eager"
-                            />
-
-                            <p className = {styles.lvl}>{data.accountLvl}</p>
-
-                        </div>
-
-                        <div className = {styles.nameTag}>
-                            <h1>{data.gameName} 
-                                <div className = {styles.tag}> #{data.tagLine}</div>
-                            </h1>
-                        </div>
-
-                    </div>
 
                     <div className = {styles.statsBox}> 
                         <p>Ranked Solo/Duo</p>
