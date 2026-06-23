@@ -21,8 +21,16 @@ export default function MatchCard(props: MatchCardProp){
                         </div>
 
                         <div className = {styles.box2}>
+                            
                             <div className = {styles.champion}>
-                                <img src = {props.participant.championUrl} className={styles.championIcon}></img>
+                                <Image
+                                    src = {props.participant.championUrl}
+                                    className={styles.championIcon}
+                                    width={500}
+                                    height={500}
+                                    alt= "Champ Icon"
+                                    loading= "eager"
+                                />
                             </div>
 
                             <div className = {styles.summonerBox}>
@@ -62,6 +70,7 @@ export default function MatchCard(props: MatchCardProp){
                                     loading= "eager"
                                 />
                             </div>
+                            
                         </div>
 
                         <div className = {styles.box3}> 

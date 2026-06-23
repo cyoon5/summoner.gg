@@ -83,10 +83,10 @@ async function getRawMatches(summoner: SummonerProfile){
                     getItemIconUrl(p.item0),
                     getItemIconUrl(p.item1),
                     getItemIconUrl(p.item2),
-                    getItemIconUrl(p.item6),
+                    getItemIconUrl(p.item6), //trinket
+                    getItemIconUrl(p.item3),
                     getItemIconUrl(p.item4),
                     getItemIconUrl(p.item5),
-                    getItemIconUrl(p.item3),
                 ],
             visionScore: p.visionScore,
             team: p.teamId == 100? 'blue' : 'red',

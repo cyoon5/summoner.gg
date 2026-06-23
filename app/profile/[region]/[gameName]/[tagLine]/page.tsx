@@ -4,7 +4,6 @@ import Image from 'next/image'
 import { SummonerData } from "@/app/types/summoner";
 import { getSummoner } from "@/app/services/summonerService";
 import { getMatchInfo, getMatchParticipantsInfo, getRawMatches } from "@/app/services/matchService";
-import { getCurrentPatch } from "@/app/services/dragonService";
 
 
 export default async function Profile({ params }: {params: Promise<SummonerData>}) {
@@ -35,6 +34,7 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
             <div className = {styles.container}>
 
                 <div className = {styles.statsCol}> 
+                    
                     <div className = {styles.summonerInfo}>
 
                         <div className = {styles.iconLvl}>
@@ -60,14 +60,21 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
 
                     </div>
 
-                    <p className = {styles.statsBox}> Ranked Solo/Duo </p>
-                    <p className = {styles.statsBox}> Ranked Flex </p>
-                    <p className = {styles.statsBox}> Champion Stats </p>
+                    <div className = {styles.statsBox}> 
+                        <p>Ranked Solo/Duo</p>
+                        <img className = {styles.rankEmblem}src = 'https://static.bigbrain.gg/assets/lol/ranks/s13/challenger.png'></img>
+                    </div>
+
+                    <div className = {styles.statsBox}> Ranked Flex </div>
+                    
+                    <div className = {styles.statsBox}> Champion Stats </div>
 
                 </div>
 
                 <div className = {styles.matchCol}>
+
                     <p className = {styles.matchHeader}> Match History</p>
+
                     <div className = {styles.matchHolder}> 
                         {
 
@@ -83,6 +90,7 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
                      
                         }
                     </div>
+                    
                 </div>
 
             </div>

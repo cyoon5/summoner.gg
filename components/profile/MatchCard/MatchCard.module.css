@@ -1,5 +1,3 @@
-
-
 .contentBox{
     font-family: monospace;
     display: flex;
@@ -8,11 +6,15 @@
     color: #d9d4d4;
     border: 1px solid rgba(233, 225, 225, 0.5);
     border-radius: 5px;
+    margin-left: 20px;
+    margin-right: 20px;
+
 }
 
 .box1Text, .gameLoss, .gameWin{
     margin: 0px;
 }
+
 .box1{
     display: flex;
     flex-direction: column;
@@ -33,6 +35,7 @@
 .summonerBox, .runeBox{ /*These are column as we want them stacked vertically on top of each other*/
     display: flex;
     flex-direction: column;
+    width: 25px;
 }
 
 .box4{
@@ -46,10 +49,16 @@
     height: 25px;
     border: 1px solid #2a2a2a;
 }
-.box3, .box1{
+.box1{
     text-align: center;
     color: #d0d0d0;
-    width: 100px;
+    width: 100px
+}
+
+.box3{
+    text-align: center;
+    color: #d0d0d0;
+    width: 85px;
 }
 
 .box5, .summonerEntry{
@@ -57,9 +66,11 @@
     flex-direction: row;
 
 }
+
 .box5{
     gap: 2em;
 }
+
 .teamList1, .teamList2{
     display: flex;
     margin-top: 1em;
