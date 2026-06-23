@@ -1,14 +1,12 @@
 import { SummonerProfile } from "../types/summoner";
 import { ParticipantInfo, MatchInfo} from "../types/match";
-import { getChampionIconUrl, getCurrentPatch, getItemIconUrl, getSummonerSpellIconUrl } from "./dragonService";
+import { getChampionIconUrl, getItemIconUrl, getSummonerSpellIconUrl } from "./dragonService";
 import {getRelativeTime} from "../../lib/unixConverter";
 import { QUEUE_MAP } from "./constants";
 
 const api_key = process.env.RIOT_API_KEY;
-const patch = await getCurrentPatch();
 
 async function getMatchList(summoner: SummonerProfile): Promise<string[]>{
-
     if(!api_key) 
         throw new Error("Missing api key");
 
@@ -54,11 +52,11 @@ async function getRawMatches(summoner: SummonerProfile){
             role: p.teamPosition,
             championId: p.championId,
             championName: p.championName,
-            championUrl: getChampionIconUrl(p.championName, patch),
+            championUrl: getChampionIconUrl(p.championName),
             creepScore: p.neutralMinionsKilled + p.totalMinionsKilled,
             damageDealt: p.totalDamageDealtToChampions,
-            summonerSpell1Url: getSummonerSpellIconUrl(p.summoner1Id, patch),
-            summonerSpell2Url: getSummonerSpellIconUrl(p.summoner2Id, patch),
+            summonerSpell1Url: getSummonerSpellIconUrl(p.summoner1Id),
+            summonerSpell2Url: getSummonerSpellIconUrl(p.summoner2Id),
             primaryRuneTree: p.perks.styles[0].style,
             primaryRunes: p.perks.styles[0].selections,
             secondaryRuneTree: p.perks.styles[1].style,
@@ -81,13 +79,13 @@ async function getRawMatches(summoner: SummonerProfile){
                 ],
             itemUrls: 
                 [
-                    getItemIconUrl(p.item0,patch),
-                    getItemIconUrl(p.item1,patch),
-                    getItemIconUrl(p.item2,patch),
-                    getItemIconUrl(p.item6,patch),
-                    getItemIconUrl(p.item4,patch),
-                    getItemIconUrl(p.item5,patch),
-                    getItemIconUrl(p.item3,patch),
+                    getItemIconUrl(p.item0),
+                    getItemIconUrl(p.item1),
+                    getItemIconUrl(p.item2),
+                    getItemIconUrl(p.item6),
+                    getItemIconUrl(p.item4),
+                    getItemIconUrl(p.item5),
+                    getItemIconUrl(p.item3),
                 ],
             visionScore: p.visionScore,
             team: p.teamId == 100? 'blue' : 'red',
@@ -96,10 +94,7 @@ async function getRawMatches(summoner: SummonerProfile){
 
         participantArray.push(participantInfoList);
     }
-        
-
-
-
+    
     return participantArray;
 }
 

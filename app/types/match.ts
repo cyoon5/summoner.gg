@@ -13,14 +13,14 @@ export type ParticipantInfo = {
     damageDealt : number;
     summonerSpell1Url: string;
     summonerSpell2Url: string;
-    primaryRuneTree: number, //https://ddragon.leagueoflegends.com/cdn/16.12.1/data/en_US/runesReforged.json
-    primaryRunes: number[],
-    secondaryRuneTree: number,
-    secondaryRunes: number[],
+    primaryRuneTree: number;
+    primaryRunes: [number, number, number, number];
+    secondaryRuneTree: number;
+    secondaryRunes: [number, number];
     kills: number;
     deaths: number;
     assists: number;
-    kda: number;
+    kda: string;
     championLevel: number;
     totalGoldEarned: number;
     items: [number, number, number, number, number, number, number];
