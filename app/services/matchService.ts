@@ -1,6 +1,6 @@
 import { SummonerProfile } from "../types/summoner";
 import { ParticipantInfo, MatchInfo} from "../types/match";
-import { getChampionIconUrl, getItemIconUrl, getSummonerSpellIconUrl } from "./dragonService";
+import { getChampionIconUrl, getItemIconUrl, getSummonerSpellIconUrl, getRuneIconUrl } from "./dragonService";
 import {getRelativeTime} from "../../lib/unixConverter";
 import { QUEUE_MAP } from "./constants";
 
@@ -58,8 +58,9 @@ async function getRawMatches(summoner: SummonerProfile){
             summonerSpell1Url: getSummonerSpellIconUrl(p.summoner1Id),
             summonerSpell2Url: getSummonerSpellIconUrl(p.summoner2Id),
             primaryRuneTree: p.perks.styles[0].style,
+            keystoneUrl: getRuneIconUrl(p.perks.styles[0].selections[0].perk),
             primaryRunes: p.perks.styles[0].selections,
-            secondaryRuneTree: p.perks.styles[1].style,
+            secondaryRuneTreeUrl: getRuneIconUrl(p.perks.styles[1].style),
             secondaryRunes: p.perks.styles[0].selections,
             kills: p.kills,
             deaths: p.deaths,

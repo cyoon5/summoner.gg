@@ -1,5 +1,3 @@
-
-
 export type ParticipantInfo = {
     matchId: string;
     puuid: string;
@@ -14,8 +12,9 @@ export type ParticipantInfo = {
     summonerSpell1Url: string;
     summonerSpell2Url: string;
     primaryRuneTree: number;
+    keystoneUrl: string;
     primaryRunes: [number, number, number, number];
-    secondaryRuneTree: number;
+    secondaryRuneTreeUrl: string;
     secondaryRunes: [number, number];
     kills: number;
     deaths: number;
@@ -29,10 +28,6 @@ export type ParticipantInfo = {
     team: 'red' | 'blue';
     win: boolean;
 }
-
-    // totalMinionsKilled: number;
-    // neutralMinionsKilled: number; CS is totalMinionsKilled + neutralMinionsKilled i.e JUNGLE
-
 
 export type MatchInfo = {
     gameMode: string | undefined;

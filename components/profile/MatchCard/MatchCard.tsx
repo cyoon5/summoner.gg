@@ -9,7 +9,6 @@ import Link from 'next/link'
 
 export default function MatchCard(props: MatchCardProp){
 
-    console.log("hello" + props.participant.secondaryRuneTree);
 
     return(
         <>
@@ -46,8 +45,22 @@ export default function MatchCard(props: MatchCardProp){
                             </div>
 
                             <div className  = {styles.runeBox}>
-                                <img className = {styles.rune} src = "https://pbs.twimg.com/media/Ggt9Pf4XkAAmPNw.jpg"></img>
-                                <img className = {styles.rune} src = "https://pbs.twimg.com/media/Ggt9Pf4XkAAmPNw.jpg"></img>
+                                <Image
+                                    src = {props.participant.keystoneUrl}
+                                    className = {styles.rune}
+                                    width={500}
+                                    height={500}
+                                    alt= "Rune Image"
+                                    loading= "eager"
+                                />
+                                <Image
+                                    src = {props.participant.secondaryRuneTreeUrl}
+                                    className = {styles.secondaryRuneTree}
+                                    width={500}
+                                    height={500}
+                                    alt= "Rune Image"
+                                    loading= "eager"
+                                />
                             </div>
                         </div>
 

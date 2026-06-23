@@ -1,10 +1,8 @@
 import { SUMMONER_SPELL_MAP } from "./constants";
 
 //Module level call, s.t. it does not run on every function call.
-const runeMap = getRuneMap(); 
 const patch = await getCurrentPatch();
-
-
+const runeMap = await getRuneMap(); 
 
 
 async function getCurrentPatch(){
@@ -40,15 +38,27 @@ function getItemIconUrl(iconId: number){
 //Can construct a map, should cache for reduced API calls, only fetch on new patch
 //Use map to construct URL s.t. its non-async
 function getRuneIconUrl(runeId: number){
-
+    let path = runeMap.get(runeId);
+    return `https://ddragon.leagueoflegends.com/cdn/img/${path}`;
 }
 
-async function getRuneMap(){
-    let runeData = await fetch(`https://ddragon.leagueoflegends.com/cdn/${patch}/data/en_US/runesReforged.json`);
-    
+async function getRuneMap(): Promise<Map<number, string>>{ //Key value pair of id: iconPath
+    const runeMap = new Map<number, string>();
+    const response = await fetch(`https://ddragon.leagueoflegends.com/cdn/${patch}/data/en_US/runesReforged.json`);
+    const data = await response.json();
 
+    data.map((path:any) => 
+        {
+            runeMap.set(path.id, path.icon);
+            path.slots.map((r:any) => r.runes
+            .map((rune:any) => runeMap.set(rune.id, rune.icon)));
+        }
+    )
+
+
+    return runeMap;
 }
 
 
 
-export { getCurrentPatch, getProfileIconUrl, getChampionIconUrl, getItemIconUrl, getSummonerIconUrl , getSummonerSpellIconUrl};
+export { getCurrentPatch, getProfileIconUrl, getChampionIconUrl, getItemIconUrl, getSummonerIconUrl , getSummonerSpellIconUrl, getRuneIconUrl};
