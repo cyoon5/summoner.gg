@@ -52,7 +52,7 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
                         <h1 className = {styles.gameName}>
                             {data.gameName} 
                         </h1>
-                        <h1 className = {styles.tag}> 
+                        <h1 className = {styles.tag}>  
                             #{data.tagLine}
                         </h1>
                     </div>

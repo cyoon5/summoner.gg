@@ -1,11 +1,10 @@
 import { SummonerData, SummonerProfile } from "../types/summoner";
-import {getCurrentPatch, getProfileIconUrl} from "../services/dragonService";
+import {getProfileIconUrl} from "../services/dragonService";
 import { REGION_MAPPING } from "./constants";
 
 const api_key = process.env.RIOT_API_KEY;
 
 export async function getSummoner(input: SummonerData): Promise<SummonerProfile> {
-    //If multiple services require it, would be better to make a new file constants.ts for example, import from 1 place
 
     if(!api_key)
         throw new Error("Missing api key");
@@ -31,16 +30,15 @@ export async function getSummoner(input: SummonerData): Promise<SummonerProfile>
     const riotAcc = `https://${platform}.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/${puuid}`;
     const profile = await fetch(riotAcc, {headers: {"X-Riot-Token": api_key}});
     const profileData = await profile.json(); //Contain profileIconId, summonerLevel, revisionDate
-    const currentPatch = await getCurrentPatch();
 
     const completeProfileData: SummonerProfile = {
         puuid: puuid,
-        gameName: gameName,
-        tagLine: tagLine,
+        gameName: accountData.gameName,
+        tagLine: accountData.tagLine,
         platform: platform,
         routing: routing,
         accountLvl: profileData.summonerLevel,
-        iconURL: getProfileIconUrl(profileData.profileIconId, currentPatch),
+        iconURL: getProfileIconUrl(profileData.profileIconId),
     };
 
     return completeProfileData;
