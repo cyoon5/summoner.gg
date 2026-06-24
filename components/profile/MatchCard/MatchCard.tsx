@@ -17,7 +17,7 @@ export default function MatchCard(props: MatchCardProp){
                         <div className = {styles.box1}> 
                             <b className = {styles.box1Text}> {props.matchInfo.gameMode} </b>
                             <p > {props.matchInfo.date} </p>
-                            <p className = {`${props.participant.win ? styles.gameWin : styles.gameLoss}`}>{props.participant.win? 'WIN: ' + props.matchInfo.gameDuration : 'LOSS: ' + props.matchInfo.gameDuration}</p>
+                            <p className = {`${props.participant.win ? styles.gameWin : styles.gameLoss}`}>{props.participant.win? 'WIN ' + props.matchInfo.gameDuration : 'LOSS ' + props.matchInfo.gameDuration}</p>
                         </div>
 
                         <div className = {styles.box2}>

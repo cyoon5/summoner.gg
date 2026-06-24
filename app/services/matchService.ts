@@ -106,8 +106,12 @@ function getMatchInfo(rawMatchData: any): MatchInfo{
 
     const matchInfo: MatchInfo = {
         gameMode: QUEUE_MAP.get(rawMatchData.info.queueId),
-        gameDuration: (rawMatchData.info.gameDuration/60).toFixed(2),
-        date: getRelativeTime(rawMatchData.info.gameCreation),
+        gameDuration: (() => {
+            const mins = Math.floor(rawMatchData.info.gameDuration / 60);
+            const secs = rawMatchData.info.gameDuration % 60;
+            return `${mins}:${secs}`
+        })(),
+        date: getRelativeTime(rawMatchData.info.gameEndTimestamp),
         matchId: rawMatchData.metadata.matchId
     }
 
