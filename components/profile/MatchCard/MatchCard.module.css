@@ -119,6 +119,16 @@
     text-decoration: underline;
 }
 
+.searchedSummonerName{
+  overflow: hidden;         
+  text-overflow: ellipsis;  
+  white-space: nowrap;         
+  width: 12ch;     
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
 .summonerSpell{
     box-sizing: border-box;
     border-radius: 3px;

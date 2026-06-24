@@ -105,6 +105,7 @@ export default function MatchCard(props: MatchCardProp){
                                         props.participants.filter(p => p.team == 'blue').map((p) => (  
                                             
                                             <div className = {styles.summonerEntry} key = {p.puuid}>
+
                                                     <Image 
                                                         width = "500"
                                                         height = "500"
@@ -113,9 +114,15 @@ export default function MatchCard(props: MatchCardProp){
                                                         src = {p.championUrl}
                                                         loading = "eager"
                                                     />
+
                                                     <div className = {styles.summonerName} title = {p.gameName + "#" + p.tagLine}>
-                                                        <Link href = {`/profile/na1/${p.gameName}/${p.tagLine}`} className = {styles.summonerName}>{p.gameName}</Link>
+                                                        <Link 
+                                                            href = {`/profile/na1/${p.gameName}/${p.tagLine}`} 
+                                                            className = {`${p.puuid == props.participant.puuid? styles.searchedSummonerName : styles.summonerName}`}>
+                                                                {p.gameName}
+                                                        </Link>
                                                     </div>
+
                                             </div>
 
 
@@ -132,6 +139,7 @@ export default function MatchCard(props: MatchCardProp){
                                         props.participants.filter(p => p.team == 'red').map((p) => (  
 
                                             <div className = {styles.summonerEntry} key = {p.puuid}>
+
                                                     <Image 
                                                         width = "500"
                                                         height = "500"
@@ -140,11 +148,17 @@ export default function MatchCard(props: MatchCardProp){
                                                         src = {p.championUrl}
                                                         loading = "eager"
                                                     />
+
                                                     <div className = {styles.summonerName} title = {p.gameName + "#" + p.tagLine}>
-                                                        <Link href = {`/profile/na1/${p.gameName}/${p.tagLine}`} className = {styles.summonerName}>{p.gameName}</Link>
+                                                        <Link 
+                                                            href = {`/profile/na1/${p.gameName}/${p.tagLine}`} 
+                                                            className = {`${p.puuid == props.participant.puuid? styles.searchedSummonerName : styles.summonerName}`}>
+                                                                {p.gameName}
+                                                        </Link>
 
                                                         {/*TODO: DYNAMIC REGION ROUTE, PROB CHANGE ParticipantInfo type to carry region*/}
                                                     </div>
+
                                             </div>
 
                                         ))
