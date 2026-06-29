@@ -82,15 +82,18 @@ export default function MatchCard(props: MatchCardProp){
                         <div className = {styles.box4}> 
                                 {
                                     props.participant.itemUrls.map((p,i) => (
-                                        p && <Image
-                                            key = {i}
-                                            className = {styles.item}
-                                            src = {p}
-                                            width={500}
-                                            height={500}
-                                            alt= "Item Image"
-                                            loading= "eager"
-                                        />
+                                        <div className = {styles.itemSlot} key = {i}>
+                                            {
+                                                p && <Image
+                                                className = {styles.item}
+                                                src = {p}
+                                                width={500}
+                                                height={500}
+                                                alt= "Item Image"
+                                                loading= "eager"
+                                                />
+                                            }
+                                        </div>
                                     ))
                                 }
                         </div>

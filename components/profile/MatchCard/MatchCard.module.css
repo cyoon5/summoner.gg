@@ -47,7 +47,6 @@
     border-radius: 3px;
     width: 25px;
     height: 25px;
-    border: 1px solid #2a2a2a;
 }
 .box1{
     text-align: center;
@@ -155,6 +154,17 @@
     height: 25px;
     border: 1px solid #2a2a2a;
     border-radius: 3px;
+}
+
+.itemSlot{
+
+
+    display: flex;
+    align-items: center;
+    border: 1px solid #2a2a2a;
+    border-radius: 3px;
+    min-height: 25px;
+    min-width: 25px;
 }
 
 
