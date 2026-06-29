@@ -83,7 +83,7 @@ async function getRawMatches(summoner: SummonerProfile){
                     getItemIconUrl(p.item0),
                     getItemIconUrl(p.item1),
                     getItemIconUrl(p.item2),
-                    getItemIconUrl(p.item6), //trinket
+                    getItemIconUrl(p.item6), //Trinket
                     getItemIconUrl(p.item3),
                     getItemIconUrl(p.item4),
                     getItemIconUrl(p.item5),
@@ -109,7 +109,7 @@ function getMatchInfo(rawMatchData: any): MatchInfo{
         gameDuration: (() => {
             const mins = Math.floor(rawMatchData.info.gameDuration / 60);
             const secs = rawMatchData.info.gameDuration % 60;
-            return `${mins}:${secs}`
+            return `${mins}:${secs.toString().padStart(2,'0')}`;
         })(),
         date: getRelativeTime(rawMatchData.info.gameEndTimestamp),
         matchId: rawMatchData.metadata.matchId

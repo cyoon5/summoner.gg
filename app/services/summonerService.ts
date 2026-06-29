@@ -42,7 +42,4 @@ export async function getSummoner(input: SummonerData): Promise<SummonerProfile>
     };
 
     return completeProfileData;
-
-
-
 }

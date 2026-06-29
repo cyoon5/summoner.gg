@@ -2,8 +2,7 @@
 
 import Image from 'next/image'
 import styles from "./MatchCard.module.css"
-import { MatchCardProp, ParticipantInfo } from '@/app/types/match'
-import { getChampionIconUrl, getItemIconUrl } from '@/app/services/dragonService'
+import { MatchCardProp} from '@/app/types/match'
 import Link from 'next/link'
 
 

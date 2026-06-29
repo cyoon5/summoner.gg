@@ -96,6 +96,7 @@
     color: #d6ecff;
     max-width: 7em;
     min-width: 3em;
+    padding: 2px 3px;
 }
 .gameLoss{
     border-radius: 3px;
@@ -104,6 +105,7 @@
     color: #d6ecff;
     max-width: 7em;
     min-width: 3em;
+    padding: 2px 3px;
 }
 
 .summonerName, .summonerEntry{

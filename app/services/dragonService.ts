@@ -23,6 +23,10 @@ function getChampionIconUrl(champion: string){
     return `https://ddragon.leagueoflegends.com/cdn/${patch}/img/champion/${champion}.png`;
 }
 function getItemIconUrl(iconId: number){
+
+    if(!iconId)
+        return
+    
     return `https://ddragon.leagueoflegends.com/cdn/${patch}/img/item/${iconId}.png`
 }
 
