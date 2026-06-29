@@ -1,51 +1,54 @@
 # Summoner.gg
 
-A League of Legends analytics platform inspired by tools such as OP.GG and U.GG.  
-Built with Next.js and React, this project focuses on frontend system design, UI architecture, and preparing for API-driven gameplay data visualization.
+A League of Legends analytics platform inspired by OP.GG and U.GG, built with Next.js, React, and TypeScript.
 
 ---
 
 ## Overview
 
-Summoner.gg is a web-based dashboard for viewing League of Legends player profiles and match history in an analytics-style interface.
+Summoner.gg is a full-stack web dashboard for viewing League of Legends player profiles, match history, and in-game statistics. The project emphasizes clean architecture, separation of concerns, and efficient data fetching patterns.
 
 ---
 
-## Features (Current)
+## Features
 
-- Player profile lookup interface
-- Summoner information display (name, level, profile icon)
-- Match history UI layout
-- Structured multi-column dashboard design
-- Component-based frontend architecture using React
+- Player profile lookup by summoner name, tag, and region
+- Summoner profile display — icon, level, game name
+- Full match history with real Riot Games API data
+- Per-match stats — KDA, CS, vision score, gold earned, items, runes, summoner spells
+- Champion and item icons served dynamically from Data Dragon CDN
+- Team composition display for all 10 participants per match
+- Relative timestamps for match dates
+- Multi-region support (NA, EUW, and more via region mapping)
+
+---
+
+## Architecture
+
+- **Service layer** separating data fetching, transformation, and rendering concerns
+- **Server components** call Riot's API directly, avoiding unnecessary internal HTTP round trips
+- **Client components** isolated only where interactivity is required
+- **Parallel API fetching** with `Promise.all` for match history, reducing load time to the duration of the slowest single request rather than the sum of all requests
+- **Data Dragon service** (`dragonService.ts`) centralizes all CDN asset URL construction with module-level caching for patch version and rune data — fetched once on server start, reused across all requests
+- **Type-safe data pipeline** — raw Riot API responses are mapped to internal TypeScript types at the service layer, decoupling the rest of the app from Riot's API shape
 
 ---
 
 ## Tech Stack
 
-- Next.js
+- Next.js 15 (App Router)
 - React
 - TypeScript
 - CSS Modules
+- Riot Games API
+- Data Dragon CDN
 
 ---
 
-## Current State
+## Planned
 
-This project is currently a work in progress
-
-At this stage:
-- Frontend layout and UI structure are implemented
-- Match history and profile sections are built using static rendering and placeholder structure for layout validation
-- API integration and data aggregation layers are planned for future implementation
-
----
-
-## Planned Backend & Data Layer
-
-- Integration with Riot Games API for real match data 
-- PostgreSQL database for storing and aggregating match history and player statistics
-- Redis caching layer to handle rate limiting and improve API performance
-- Backend service for preprocessing and serving structured analytics data to the frontend
-- Plan to analyze thousands of matches to get realistic and accurate statistics per champion
-
+- **PostgreSQL** for persisting match history and summoner data, enabling aggregated statistics without repeated Riot API calls
+- **Redis** caching layer (cache-aside pattern) — check Redis first, fall back to Postgres, then Riot API. Short TTLs for match data, longer for patch assets
+- **Champion analytics** — win rates, KDA trends, best items and runes per champion based on stored match data
+- **Live game tracking** — polling client component showing current in-game data
+- **Ranked statistics** — LP history, rank display, win/loss streaks
