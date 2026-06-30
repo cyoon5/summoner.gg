@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { SummonerData } from "@/app/types/summoner";
 import { getSummoner } from "@/app/services/summonerService";
 import { getMatchInfo, getMatchParticipantsInfo, getRawMatches } from "@/app/services/matchService";
+import { getSummonerRankedInfo } from "@/app/services/rankedService";
 
 
 export default async function Profile({ params }: {params: Promise<SummonerData>}) {
@@ -24,6 +25,9 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
 
     const searchedSummoner = participantsInMatches.map(m => m.find(p => p.puuid === searchedSummonerId));
     const matchInfoList = rawMatches.map(m => (getMatchInfo(m)));
+
+    const rankedInfo = await getSummonerRankedInfo(data);
+    
 
     
 
@@ -65,7 +69,7 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
 
                     <div className = {styles.statsBox}> 
                         <p>Ranked Solo/Duo</p>
-                        <img className = {styles.rankEmblem}src = 'https://static.bigbrain.gg/assets/lol/ranks/s13/challenger.png'></img>
+                        {rankedInfo[0].tier + " " + rankedInfo[0].rank + " " + rankedInfo[0].leaguePoints + "LP"} 
                     </div>
 
                     <div className = {styles.statsBox}> Ranked Flex </div>
