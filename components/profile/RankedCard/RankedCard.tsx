@@ -1,16 +1,24 @@
-import { RankedData } from "@/app/types/ranked"
+import { RankedProp } from "@/app/types/ranked"
 import styles from "./RankedCard.module.css";
 
 
 
 
-export default function RankedCard(props: RankedData){
+export default function RankedCard(prop: RankedProp){
 
-
+    if(!prop.data)
+        return (
+            <>
+                {prop.queueType}
+                <p> Unranked </p>
+            </>
+        )
+    
     return(
         <div className = {styles.rankInfoHolder}>
-            <p>{props.tier + " " + props.division}</p>
-            <p>{props.leaguePoints + " LP"}</p>
+            {prop.queueType}
+            <p>{prop.data.tier + " " + prop.data.division}</p>
+            <p>{prop.data.leaguePoints + " LP"}</p>
         </div>
     )
 }
