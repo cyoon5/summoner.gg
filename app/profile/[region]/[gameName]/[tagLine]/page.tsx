@@ -5,6 +5,7 @@ import { SummonerData } from "@/app/types/summoner";
 import { getSummoner } from "@/app/services/summonerService";
 import { getMatchInfo, getMatchParticipantsInfo, getRawMatches } from "@/app/services/matchService";
 import { getSummonerRankedInfo } from "@/app/services/rankedService";
+import RankedCard from "@/components/profile/RankedCard/RankedCard";
 
 
 export default async function Profile({ params }: {params: Promise<SummonerData>}) {
@@ -20,14 +21,16 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
     const data = await getSummoner(query);
     const rawMatches = await getRawMatches(data);
     const participantsInMatches = getMatchParticipantsInfo(rawMatches); 
-
     const searchedSummonerId = data.puuid;  
-
     const searchedSummoner = participantsInMatches.map(m => m.find(p => p.puuid === searchedSummonerId));
     const matchInfoList = rawMatches.map(m => (getMatchInfo(m)));
-
     const rankedInfo = await getSummonerRankedInfo(data);
-    
+
+    const soloQueue = rankedInfo.find((r:any) => r.queueType=="RANKED_SOLO_5x5")
+    const flexQueue = rankedInfo.find((r:any) => r.queueType=="RANKED_FLEX_SR")
+
+
+    console.log(rankedInfo);
 
     
 
@@ -62,19 +65,35 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
                     </div>
 
             </div>
+
             <div className = {styles.container}>
 
                 <div className = {styles.statsCol}> 
-                    
 
-                    <div className = {styles.statsBox}> 
-                        <p>Ranked Solo/Duo</p>
-                        {rankedInfo[0].tier + " " + rankedInfo[0].rank + " " + rankedInfo[0].leaguePoints + "LP"} 
+
+                    <div className = {styles.rankedBox}>
+                        <div className = {styles.statsBox}> 
+
+                            <RankedCard 
+                                queueType = {soloQueue.queueType}
+                                tier = {soloQueue.tier}
+                                division={soloQueue.rank}
+                                leaguePoints={soloQueue.leaguePoints}
+                                wins={soloQueue.wins}
+                                losses={soloQueue.losses}
+                                winRate={soloQueue.wins/rankedInfo.losses}
+                            />
+                            
+                        </div>
+
+                        <div className = {styles.statsBox}> 
+                            Ranked Flex 
+                        </div>
                     </div>
-
-                    <div className = {styles.statsBox}> Ranked Flex </div>
                     
-                    <div className = {styles.statsBox}> Champion Stats </div>
+                    <div className = {styles.statsBox}> 
+                        Champion Stats 
+                    </div>
 
                 </div>
 
@@ -86,7 +105,6 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
                         {
 
                             searchedSummoner.map((m, i) => 
-                
                                 m && <MatchCard
                                     key = {m.matchId}
                                     participant = {m}

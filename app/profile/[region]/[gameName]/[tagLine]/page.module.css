@@ -14,7 +14,7 @@ body{
     gap: 2em;
     
 }
-.statsCol{
+.statsCol, .rankedBox{
     display: flex;
     flex-direction: column;
     gap: 1em;
