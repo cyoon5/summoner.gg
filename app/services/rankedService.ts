@@ -19,7 +19,7 @@ async function getSummonerRankedInfo(summoner: SummonerProfile): Promise<RankedD
         leaguePoints: p.leaguePoints,
         wins: p.wins,
         losses: p.losses,
-        winRate: (p.wins / (p.wins + p.losses)).toFixed(2).slice(2,4) + "%",
+        winRate: ((p.wins / (p.wins + p.losses)) * 100).toFixed(0) + "%",
     }));
 }
 

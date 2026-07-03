@@ -98,9 +98,4 @@ export const QUEUE_MAP = new Map<number, string>([
   [2400, "ARAM Mayhem"],
 ]);
 
-export const RANKED_MAP = new Map<string, string>([
 
-  ["RANKED_SOLO_5x5", "Ranked Solo/Duo"],
-  ["RANKED_FLEX_SR", "Ranked Flex"]
-  
-]);
