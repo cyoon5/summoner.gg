@@ -26,8 +26,8 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
     const matchInfoList = rawMatches.map(m => (getMatchInfo(m)));
     const rankedInfo = await getSummonerRankedInfo(data);
 
-    const soloQueue = rankedInfo.find((r:any) => r.queueType=="RANKED_SOLO_5x5")
-    const flexQueue = rankedInfo.find((r:any) => r.queueType=="RANKED_FLEX_SR")
+    const soloQueue = rankedInfo.find((r:any) => r.queueType=="RANKED_SOLO_5x5");
+    const flexQueue = rankedInfo.find((r:any) => r.queueType=="RANKED_FLEX_SR");
 
 
     console.log(rankedInfo);
@@ -73,22 +73,39 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
 
                     <div className = {styles.rankedBox}>
                         <div className = {styles.statsBox}> 
+                            Ranked Solo/Duo
 
-                            <RankedCard 
-                                queueType = {soloQueue.queueType}
-                                tier = {soloQueue.tier}
-                                division={soloQueue.rank}
-                                leaguePoints={soloQueue.leaguePoints}
-                                wins={soloQueue.wins}
-                                losses={soloQueue.losses}
-                                winRate={soloQueue.wins/rankedInfo.losses}
-                            />
-                            
+                            {
+                                soloQueue ? <RankedCard 
+                                    queueType = {soloQueue.queueType}
+                                    tier = {soloQueue.tier}
+                                    division={soloQueue.rank}
+                                    leaguePoints={soloQueue.leaguePoints}
+                                    wins={soloQueue.wins}
+                                    losses={soloQueue.losses}
+                                    winRate={soloQueue.wins/soloQueue.losses}
+                                /> : <p> Unranked </p>
+                            }
+                    
                         </div>
-
+                     
                         <div className = {styles.statsBox}> 
-                            Ranked Flex 
+                            Ranked Flex
+                            {
+
+                                flexQueue ? <RankedCard 
+                                    queueType = {flexQueue.queueType}
+                                    tier = {flexQueue.tier}
+                                    division={flexQueue.rank}
+                                    leaguePoints={flexQueue.leaguePoints}
+                                    wins={flexQueue.wins}
+                                    losses={flexQueue.losses}
+                                    winRate={flexQueue.wins/flexQueue.losses}
+                                />  : <p> Unranked </p>
+                            }  
+                                             
                         </div>
+
                     </div>
                     
                     <div className = {styles.statsBox}> 
