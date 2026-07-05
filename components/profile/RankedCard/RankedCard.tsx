@@ -18,30 +18,31 @@ export default function RankedCard(prop: RankedProp){
     return(
         <div className = {styles.rankedContainer}>
 
-        
             <p className = {styles.queueHeader}>{prop.queueType}</p>
 
+
             <div className = {styles.rankedStatsHolder}>
+                
                 <Image
                     src = {`/emblems/${prop.data.tier}.png`}
-                    alt = "challenger"
+                    alt = "emblem"
                     width = {54}
                     height = {54}
+                    priority
                 />
-
+                
                 <div className = {styles.rankedStats}>
-
-                    <span className = {styles.rankPoints}>
-                          <span className = {styles.rank}>{prop.data.tier + " " + prop.data.division}</span>
-                          <span>{prop.data.leaguePoints + " LP "  }</span>
+                    <span className = {styles.rankText}>
+                            <span className = {styles.rank}>{prop.data.tier + " " + prop.data.division}</span>
+                            <span>{prop.data.leaguePoints + " LP "  }</span>
                     </span>
-                    <span className = {styles.winRatio}>
+
+                    <span className = {styles.rankWins}>
                         <span>{prop.data.wins + "W " + prop.data.losses + "L " }</span>
                         <span>{prop.data.winRate + " Win Rate"}</span>
                     </span>
                 </div>
-
-        
+          
             </div>
         
 

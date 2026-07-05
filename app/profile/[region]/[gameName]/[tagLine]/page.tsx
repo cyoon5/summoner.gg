@@ -27,15 +27,9 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
     const matchInfoList = rawMatches.map(m => (getMatchInfo(m)));
     const rankedInfo = await getSummonerRankedInfo(data);
 
-     const soloQueue = rankedInfo.find((r:RankedData) => r.queueType=="RANKED_SOLO_5x5");
-     const flexQueue = rankedInfo.find((r:RankedData) => r.queueType=="RANKED_FLEX_SR");
+    const soloQueue = rankedInfo.find((r:RankedData) => r.queueType=="RANKED_SOLO_5x5");
+    const flexQueue = rankedInfo.find((r:RankedData) => r.queueType=="RANKED_FLEX_SR");
 
-
-    console.log(rankedInfo);
-
-    
-
-    
     
     return(
         <>
@@ -49,7 +43,7 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
                             height={500}
                             alt="Summoner Icon"
                             className={styles.icon}
-                            loading = "eager"
+                            priority
                         />
 
                         <p className = {styles.lvl}>{data.accountLvl}</p>
