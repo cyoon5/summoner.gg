@@ -20,7 +20,6 @@ export default function RankedCard(prop: RankedProp){
 
             <p className = {styles.queueHeader}>{prop.queueType}</p>
 
-
             <div className = {styles.rankedStatsHolder}>
                 
                 <Image
@@ -30,7 +29,7 @@ export default function RankedCard(prop: RankedProp){
                     height = {54}
                     priority
                 />
-                
+
                 <div className = {styles.rankedStats}>
                     <span className = {styles.rankText}>
                             <span className = {styles.rank}>{prop.data.tier + " " + prop.data.division}</span>

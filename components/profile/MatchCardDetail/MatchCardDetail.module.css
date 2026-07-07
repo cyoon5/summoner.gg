@@ -1,0 +1,19 @@
+.detailsContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+.detailsNavBar{
+    display: flex;
+    flex-direction: row;
+}
+
+.teamRedDetails{
+    display: flex;
+    flex-direction: column;
+}
+
+.teamBlueDetails{
+    display: flex;
+    flex-direction: column;
+}

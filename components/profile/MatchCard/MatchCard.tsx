@@ -3,10 +3,15 @@
 import Image from 'next/image'
 import styles from "./MatchCard.module.css"
 import { MatchCardProp} from '@/app/types/match'
+import { useState } from 'react'
 import Link from 'next/link'
 
 
+//INCLUDE PLYAER LEVEL
+
 export default function MatchCard(props: MatchCardProp){
+
+    const [isDetailsOpen, setDetailsOpen] = useState(false);
 
 
     return(
@@ -173,6 +178,11 @@ export default function MatchCard(props: MatchCardProp){
                 
 
                             </div>
+                        </div>
+
+                        <div className = {styles.matchDetails}>
+                                    
+                            
                         </div>
 
        
