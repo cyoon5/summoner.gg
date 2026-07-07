@@ -1,8 +1,9 @@
 'use client'
+import { SummonerRowProp, ParticipantInfo } from "@/app/types/match"
 import styles from "./SummonerRow.module.css"
 import Image from "next/image"
 
-export default function SummonerRow(){
+export default function SummonerRow(prop: SummonerRowProp){
 
 
 
@@ -12,23 +13,23 @@ export default function SummonerRow(){
             <div className = {styles.summoner}>
 
                 <Image
-                    src = "https://ddragon.leagueoflegends.com/cdn/16.13.1/img/champion/Aatrox.png"
+                    src = {prop.participant.championUrl}
                     width = "60"
                     height = "60"
                     className = {styles.championIcon}
-                    alt = "mockImg"
+                    alt = "Champion Icon"
                 />
 
                 <div className = {styles.spellContainer}>
                     <Image
-                        src = "https://ddragon.leagueoflegends.com/cdn/16.13.1/img/champion/Aatrox.png"
+                        src = {prop.participant.summonerSpell1Url}
                         className = {styles.summonerSpell}
                         width={500}
                         height={500}
                         alt= "Spell Image"
                     />
                     <Image
-                        src = "https://ddragon.leagueoflegends.com/cdn/16.13.1/img/champion/Aatrox.png"
+                        src = {prop.participant.summonerSpell2Url}
                         className = {styles.summonerSpell}
                         width={500}
                         height={500}
@@ -39,22 +40,20 @@ export default function SummonerRow(){
                 <div className = {styles.runeContainer}>
                     <div className = {styles.runeSlot}>
                         <Image
-                            src = "https://ddragon.leagueoflegends.com/cdn/16.13.1/img/champion/Aatrox.png"
+                            src = {prop.participant.keystoneUrl}
                             className = {styles.rune}
                             width={500}
                             height={500}
                             alt= "Rune Image"
-                            loading= "eager"
                         />
                     </div>
                     <div className = {styles.runeSlot}>
                         <Image
-                            src = "https://ddragon.leagueoflegends.com/cdn/16.13.1/img/champion/Aatrox.png"
+                            src = {prop.participant.secondaryRuneTreeUrl}
                             className = {styles.secondaryRuneTree}
                             width={500}
                             height={500}
                             alt= "Rune Image"
-                            loading= "eager"
                         />
                     </div>
 
@@ -62,12 +61,12 @@ export default function SummonerRow(){
 
                 <div className = {styles.nameAndRank}>
 
-                    <span>lorem ipsum</span>
+                    <span>{prop.participant.gameName}</span>
 
                     <div className = {styles.rank}>
                            <Image
                             src = "https://ddragon.leagueoflegends.com/cdn/16.13.1/img/champion/Aatrox.png"
-                            className = {styles.secondaryRuneTree}
+                            className = {styles.miniRankedEmblem}
                             width={500}
                             height={500}
                             alt= "Rune Image"
@@ -81,23 +80,23 @@ export default function SummonerRow(){
             </div>
 
             <div className = {styles.kda}>
-                <span>1 / 1 / 1</span>
+                <span> {prop.participant.kda} </span>
             </div>
 
             <div className = {styles.damage}>
-                21.2k
+                {prop.participant.damageDealt}
             </div>
 
             <div className = {styles.gold}>
-                13k
+                {prop.participant.totalGoldEarned}
             </div>
 
             <div className = {styles.creepScore}> 
-                230
+                {prop.participant.creepScore}
             </div>  
         
             <div className = {styles.wards}>
-                13
+                {prop.participant.visionScore}
             </div>
 
             <div className = {styles.itemContainer}>

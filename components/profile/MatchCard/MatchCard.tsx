@@ -5,7 +5,7 @@ import styles from "./MatchCard.module.css"
 import { MatchCardProp} from '@/app/types/match'
 import { useState } from 'react'
 import Link from 'next/link'
-import SummonerRow from '../MatchCardDetail/SummonerRow'
+import MatchCardDetail from '../MatchCardDetail/MatchCardDetail'
 
 
 //INCLUDE PLAYER LEVEL
@@ -17,7 +17,7 @@ export default function MatchCard(props: MatchCardProp){
 
     return(
         <>
-                <SummonerRow/>
+                <MatchCardDetail participants = {props.participants}/>
 
                 <div className = {styles.contentBox}>
 
@@ -148,7 +148,6 @@ export default function MatchCard(props: MatchCardProp){
                             </div>
 
                             <div className = {styles.teamList2}>
-
 
                                     {
                                         props.participants.filter(p => p.team == 'red').map((p) => (  

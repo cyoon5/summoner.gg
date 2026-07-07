@@ -41,3 +41,11 @@ export type MatchCardProp = {
     participants: ParticipantInfo[];
     matchInfo: MatchInfo;
 }
+
+export type SummonerRowProp = {
+    participant: ParticipantInfo;
+}
+
+export type MatchCardDetailProp = {
+    participants: ParticipantInfo[];
+}
