@@ -100,7 +100,23 @@ export default function SummonerRow(prop: SummonerRowProp){
             </div>
 
             <div className = {styles.itemContainer}>
+                {
+                    prop.participant.itemUrls.map((item:string, i) => (
+                        
+                        <div className = {styles.itemSlot} key = {i}>
 
+                        {
+                            item && <Image
+                            className = {styles.item}
+                            src = {item}
+                            width={500}
+                            height={500}
+                            alt= "Item Image"
+                            />
+                        }
+                    </div>
+                    ))
+                }
             </div>
         
         </div>

@@ -20,7 +20,7 @@ export default function MatchCardDetail(prop: MatchCardDetailProp){
 
             <div className = {styles.teamRedDetails}>
 
-                <div className = {styles.detailsHeader}>
+                <div className = {styles.detailsHeaderRed}>
                     <p> Red Team</p>
                     <p> KDA </p>
                     <p> Damage </p>
@@ -32,7 +32,7 @@ export default function MatchCardDetail(prop: MatchCardDetailProp){
 
                 {
                     prop.participants.filter((p:ParticipantInfo) => p.team == "red").map((p:ParticipantInfo) => (
-                        <SummonerRow participant = {p}/>
+                        <SummonerRow participant = {p} key = {p.puuid}/>
                     ))
                 }
             </div>
@@ -41,7 +41,7 @@ export default function MatchCardDetail(prop: MatchCardDetailProp){
        
 
             <div className = {styles.teamBlueDetails}>
-                <div className = {styles.detailsHeader}>
+                <div className = {styles.detailsHeaderBlue}>
                     <p> Blue Team</p>
                     <p> KDA </p>
                     <p> Damage </p>
@@ -53,7 +53,7 @@ export default function MatchCardDetail(prop: MatchCardDetailProp){
 
                 {
                     prop.participants.filter((p:ParticipantInfo) => p.team == "blue").map((p:ParticipantInfo) => (
-                        <SummonerRow participant = {p}/>
+                        <SummonerRow participant = {p} key = {p.puuid}/>
                     ))
                 }
 

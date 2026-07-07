@@ -17,9 +17,8 @@ export default function MatchCard(props: MatchCardProp){
 
     return(
         <>
-                <MatchCardDetail participants = {props.participants}/>
 
-                <div className = {styles.contentBox}>
+                <div className = {styles.contentBox} onClick = {() => setDetailsOpen(previous => !previous)}>
 
                         <div className = {styles.box1}> 
                             <b className = {styles.box1Text}> {props.matchInfo.gameMode} </b>
@@ -192,6 +191,9 @@ export default function MatchCard(props: MatchCardProp){
     
                
                 </div>
+
+                {isDetailsOpen && <MatchCardDetail participants = {props.participants}/> }
+
         </>
     )
 }
