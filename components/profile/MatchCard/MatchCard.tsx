@@ -5,9 +5,10 @@ import styles from "./MatchCard.module.css"
 import { MatchCardProp} from '@/app/types/match'
 import { useState } from 'react'
 import Link from 'next/link'
+import SummonerRow from '../MatchCardDetail/SummonerRow'
 
 
-//INCLUDE PLYAER LEVEL
+//INCLUDE PLAYER LEVEL
 
 export default function MatchCard(props: MatchCardProp){
 
@@ -16,6 +17,8 @@ export default function MatchCard(props: MatchCardProp){
 
     return(
         <>
+                <SummonerRow/>
+
                 <div className = {styles.contentBox}>
 
                         <div className = {styles.box1}> 

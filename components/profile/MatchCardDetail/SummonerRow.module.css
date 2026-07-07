@@ -1,0 +1,69 @@
+.summonerContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1em;
+}
+
+.summoner{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.spellContainer, .runeContainer{
+    display: flex;
+    flex-direction: column;
+}
+.summonerSpell{
+     box-sizing: border-box;
+    border-radius: 3px;
+    width: 25px;
+    height: 25px;
+    border: 1px solid #2a2a2a;
+    min-width: 27px;
+    min-height: 27px;
+}
+
+.nameAndRank{
+    display: flex;
+    flex-direction: column;
+    margin-left: 1em;
+}
+
+.championIcon{
+    border-radius: 8px;
+    width: 55px;
+    height: 55px;
+    border: 1px solid #2a2a2a;
+}
+
+.runeSlot{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #2a2a2a;
+    border-radius: 3px;
+    min-height: 25px;
+    min-width: 25px;
+}
+
+.rune{
+    width: 25px;
+    height: 25px;
+}
+
+.secondaryRuneTree{ 
+    width: 18px;
+    height: 18px;
+}
+
+.kda{
+    display: flex;
+    flex-direction: column;
+}
+
+.damage{
+    display: flex;
+    flex-direction: column;
+}
