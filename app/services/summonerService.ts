@@ -21,6 +21,9 @@ export async function getSummoner(input: SummonerData): Promise<SummonerProfile>
     const riotId = `https://${routing}.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${gameName}/${tagLine}`;
     const response = await fetch(riotId, {headers: {"X-Riot-Token": api_key}});
 
+    if(response.status == 429)
+        throw new Error("API Limit Reached");
+
     if (!response.ok) 
         throw new Error("Failed to fetch account data");
 

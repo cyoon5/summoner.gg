@@ -2,6 +2,7 @@
 import { MatchCardDetailProp, ParticipantInfo } from "@/app/types/match";
 import styles from "./MatchCardDetail.module.css"
 import SummonerRow from "./SummonerRow";
+import { Fragment } from "react/jsx-runtime";
 
 
 export default function MatchCardDetail(prop: MatchCardDetailProp){
@@ -15,7 +16,7 @@ export default function MatchCardDetail(prop: MatchCardDetailProp){
         <div className = {styles.detailsContainer}>
 
             <div className = {styles.detailsNavBar}>
-                <div>
+                <div className = {styles.navBarTab}>
                     Post Game
                 </div>
 
@@ -32,10 +33,9 @@ export default function MatchCardDetail(prop: MatchCardDetailProp){
                 </div>
             </div>
 
-            <div className = {styles.teamRedDetails}>
-
-                <div className = {styles.detailsHeaderRed}>
-                    <p> Red Team</p>
+            <div className = {styles.summonerTeamDetails}>
+                <div className = {prop.participant.win? styles.detailsHeaderVictory : styles.detailsHeaderDefeat}>
+                    <p> {prop.participant.win? "Victory": "Defeat"} ({prop.participant.team == "red"? "Red" : "Blue"} Team) </p>
                     <p> KDA </p>
                     <p> Damage </p>
                     <p> Gold </p>
@@ -45,8 +45,8 @@ export default function MatchCardDetail(prop: MatchCardDetailProp){
                 </div>
 
                 {
-                    prop.participants.filter((p:ParticipantInfo) => p.team == "red").map((p:ParticipantInfo) => (
-                        <SummonerRow participant = {p} key = {p.puuid}/>
+                    prop.participants.filter((p:ParticipantInfo) => p.team == prop.participant.team).map((p:ParticipantInfo) => (
+                            <SummonerRow participant = {p} searchedParticipant = {prop.participant} key = {p.puuid}/>
                     ))
                 }
             </div>
@@ -54,9 +54,9 @@ export default function MatchCardDetail(prop: MatchCardDetailProp){
 
        
 
-            <div className = {styles.teamBlueDetails}>
-                <div className = {styles.detailsHeaderBlue}>
-                    <p> Blue Team</p>
+            <div className = {styles.enemyTeamDetails}>
+                <div className = {prop.participant.win? styles.detailsHeaderDefeat : styles.detailsHeaderVictory}>
+                    <p> {prop.participant.win? "Defeat" : "Victory"}  ({prop.participant.team == "red"? "Blue" : "Red"} Team) </p>
                     <p> KDA </p>
                     <p> Damage </p>
                     <p> Gold </p>
@@ -66,8 +66,8 @@ export default function MatchCardDetail(prop: MatchCardDetailProp){
                 </div>
 
                 {
-                    prop.participants.filter((p:ParticipantInfo) => p.team == "blue").map((p:ParticipantInfo) => (
-                        <SummonerRow participant = {p} key = {p.puuid}/>
+                    prop.participants.filter((p:ParticipantInfo) => p.team != prop.participant.team).map((p:ParticipantInfo) => (
+                        <SummonerRow participant = {p} searchedParticipant = {prop.participant} key = {p.puuid}/>
                     ))
                 }
 

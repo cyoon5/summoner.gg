@@ -130,7 +130,7 @@ export default function MatchCard(props: MatchCardProp){
                                                         loading = "eager"
                                                     />
 
-                                                    <div className = {styles.summonerName} title = {p.gameName + "#" + p.tagLine}>
+                                                    <div className = {styles.summonerName} title = {p.gameName + "#" + p.tagLine} onClick = {e => e.stopPropagation()}>
                                                         <Link 
                                                             href = {`/profile/na1/${p.gameName}/${p.tagLine}`} 
                                                             className = {`${p.puuid == props.participant.puuid? styles.searchedSummonerName : styles.summonerName}`}>
@@ -163,7 +163,7 @@ export default function MatchCard(props: MatchCardProp){
                                                         loading = "eager"
                                                     />
 
-                                                    <div className = {styles.summonerName} title = {p.gameName + "#" + p.tagLine}>
+                                                    <div className = {styles.summonerName} title = {p.gameName + "#" + p.tagLine} onClick = {e => e.stopPropagation()}>
                                                         <Link 
                                                             href = {`/profile/na1/${p.gameName}/${p.tagLine}`} 
                                                             className = {`${p.puuid == props.participant.puuid? styles.searchedSummonerName : styles.summonerName}`}>
@@ -193,7 +193,7 @@ export default function MatchCard(props: MatchCardProp){
                
                 </div>
 
-                {isDetailsOpen && <MatchCardDetail participants = {props.participants}/> }
+                {isDetailsOpen && <MatchCardDetail participants = {props.participants} participant = {props.participant}/> }
 
         </div>
     )

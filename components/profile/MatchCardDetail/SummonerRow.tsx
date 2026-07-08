@@ -9,6 +9,7 @@ export default function SummonerRow(prop: SummonerRowProp){
 
 
     return(
+        
         <div className = {styles.summonerContainer}>
             
             <div className = {styles.summoner}>
@@ -62,11 +63,11 @@ export default function SummonerRow(prop: SummonerRowProp){
 
                 <div className = {styles.nameAndRank}>
 
-                    <span>{prop.participant.gameName}</span>
+                    <span className = {prop.participant.puuid == prop.searchedParticipant.puuid ? styles.searchedParticipant : styles.participant}>{prop.participant.gameName}</span>
 
                     <div className = {styles.rank}>
-                           <Image
-                            src = "https://ddragon.leagueoflegends.com/cdn/16.13.1/img/champion/Aatrox.png"
+                        <Image
+                            src = {`/mini-emblems/diamond.png`}
                             className = {styles.miniRankedEmblem}
                             width={500}
                             height={500}
@@ -85,11 +86,11 @@ export default function SummonerRow(prop: SummonerRowProp){
             </div>
 
             <div className = {styles.damage}>
-                {prop.participant.damageDealt}
+                {prop.participant.damageDealt.toLocaleString()}
             </div>
 
             <div className = {styles.gold}>
-                {prop.participant.totalGoldEarned}
+                {prop.participant.totalGoldEarned.toLocaleString()}
             </div>
 
             <div className = {styles.creepScore}> 
