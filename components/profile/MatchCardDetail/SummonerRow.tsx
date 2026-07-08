@@ -1,5 +1,6 @@
 'use client'
-import { SummonerRowProp, ParticipantInfo } from "@/app/types/match"
+
+import { SummonerRowProp} from "@/app/types/match"
 import styles from "./SummonerRow.module.css"
 import Image from "next/image"
 
@@ -14,8 +15,8 @@ export default function SummonerRow(prop: SummonerRowProp){
 
                 <Image
                     src = {prop.participant.championUrl}
-                    width = "60"
-                    height = "60"
+                    width = {500}
+                    height = {500}
                     className = {styles.championIcon}
                     alt = "Champion Icon"
                 />
@@ -69,8 +70,7 @@ export default function SummonerRow(prop: SummonerRowProp){
                             className = {styles.miniRankedEmblem}
                             width={500}
                             height={500}
-                            alt= "Rune Image"
-                            loading= "eager"
+                            alt= "Rank Mini Crest"
                         />
                         <span> D4 </span>
                     </div>
@@ -80,7 +80,8 @@ export default function SummonerRow(prop: SummonerRowProp){
             </div>
 
             <div className = {styles.kda}>
-                <span> {prop.participant.kda} </span>
+                <span className = {styles.kdaTotal}> {prop.participant.kills}/{prop.participant.deaths}/{prop.participant.assists} </span>
+                <span> {prop.participant.kda + " KDA"} </span>
             </div>
 
             <div className = {styles.damage}>
@@ -105,16 +106,18 @@ export default function SummonerRow(prop: SummonerRowProp){
                         
                         <div className = {styles.itemSlot} key = {i}>
 
-                        {
-                            item && <Image
-                            className = {styles.item}
-                            src = {item}
-                            width={500}
-                            height={500}
-                            alt= "Item Image"
-                            />
-                        }
-                    </div>
+                            {
+                                item && <Image
+                                className = {styles.item}
+                                src = {item}
+                                width={500}
+                                height={500}
+                                alt= "Item Image"
+                                />
+                            }
+
+                        </div>
+
                     ))
                 }
             </div>

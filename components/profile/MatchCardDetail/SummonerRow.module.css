@@ -1,11 +1,11 @@
 .summonerContainer{
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 30% 16% 12% 12% 11% 9% 7% ;    
     align-items: center;
-    gap: 1em;
+    margin: 0.5em;
 }
 
-.summoner{
+.summoner{ 
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -85,8 +85,8 @@
 
 .item{
     border-radius: 3px;
-    width: 25px;
-    height: 25px;
+    width: 18px;
+    height: 18px;
 }
 
 .itemSlot{
@@ -94,7 +94,7 @@
     align-items: center;
     border: 1px solid #2a2a2a;
     border-radius: 3px;
-    min-height: 25px;
-    min-width: 25px;
+    min-height: 15px;
+    min-width: 15px;
     background-color: rgb(30, 27, 27);
 }

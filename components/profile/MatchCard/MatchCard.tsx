@@ -16,7 +16,8 @@ export default function MatchCard(props: MatchCardProp){
 
 
     return(
-        <>
+        
+        <div className = {styles.container}>
 
                 <div className = {styles.contentBox} onClick = {() => setDetailsOpen(previous => !previous)}>
 
@@ -194,6 +195,6 @@ export default function MatchCard(props: MatchCardProp){
 
                 {isDetailsOpen && <MatchCardDetail participants = {props.participants}/> }
 
-        </>
+        </div>
     )
 }

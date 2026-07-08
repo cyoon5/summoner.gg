@@ -15,7 +15,21 @@ export default function MatchCardDetail(prop: MatchCardDetailProp){
         <div className = {styles.detailsContainer}>
 
             <div className = {styles.detailsNavBar}>
+                <div>
+                    Post Game
+                </div>
 
+                <div>
+                    Performance
+                </div>
+
+                <div>
+                    Item Build
+                </div>
+
+                <div>
+                    Metrics 
+                </div>
             </div>
 
             <div className = {styles.teamRedDetails}>

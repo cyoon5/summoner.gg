@@ -1,14 +1,18 @@
-.contentBox{
-    font-family: monospace;
+.container{
     display: flex;
-    align-items: center;
-    gap: 3em;
-    color: #d9d4d4;
+    flex-direction: column;
     border: 1px solid rgba(233, 225, 225, 0.5);
     border-radius: 5px;
     margin-left: 20px;
     margin-right: 20px;
+}
 
+.contentBox{
+    display: flex;
+    font-family: monospace;
+    align-items: center;
+    gap: 2em;
+    color: #d9d4d4;
 }
 
 .box1Text, .gameLoss, .gameWin{
