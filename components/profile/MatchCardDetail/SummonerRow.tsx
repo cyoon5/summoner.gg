@@ -3,6 +3,7 @@
 import { SummonerRowProp} from "@/app/types/match"
 import styles from "./SummonerRow.module.css"
 import Image from "next/image"
+import Link from "next/link"
 
 export default function SummonerRow(prop: SummonerRowProp){
 
@@ -63,7 +64,11 @@ export default function SummonerRow(prop: SummonerRowProp){
 
                 <div className = {styles.nameAndRank}>
 
-                    <span className = {prop.participant.puuid == prop.searchedParticipant.puuid ? styles.searchedParticipant : styles.participant}>{prop.participant.gameName}</span>
+                    <Link  
+                        title = {prop.participant.gameName + "#" + prop.participant.tagLine} 
+                        href = {`/profile/na1/${prop.participant.gameName}/${prop.participant.tagLine}`} 
+                        className = {prop.participant.puuid == prop.searchedParticipant.puuid ? styles.searchedParticipant : styles.participant}>{prop.participant.gameName}
+                    </Link>
 
                     <div className = {styles.rank}>
                         <Image
