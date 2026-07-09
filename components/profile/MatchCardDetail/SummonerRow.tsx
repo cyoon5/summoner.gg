@@ -7,6 +7,7 @@ import Link from "next/link"
 
 export default function SummonerRow(prop: SummonerRowProp){
 
+    const damageWidth = (prop.participant.damageDealt / prop.maxDamage) * 100;
 
 
     return(
@@ -91,7 +92,11 @@ export default function SummonerRow(prop: SummonerRowProp){
             </div>
 
             <div className = {styles.damage}>
-                {prop.participant.damageDealt.toLocaleString()}
+                <span>{prop.participant.damageDealt.toLocaleString()}</span>
+
+                <div className = {styles.damageBarContainer}>
+                    <div className = {styles.damageBar} style={{ width: `${damageWidth}%` }}></div>
+                </div>
             </div>
 
             <div className = {styles.gold}>

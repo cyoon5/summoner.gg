@@ -60,7 +60,7 @@ export const QUEUE_MAP = new Map<number, string>([
 
   [420, "Ranked Solo/Duo"],
   [440, "Ranked Flex"],
-  [710, "Ranked 5S"],
+  [710, "Ranked 5s"],
 
   [450, "ARAM"],
 

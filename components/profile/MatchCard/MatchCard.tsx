@@ -2,17 +2,18 @@
 
 import Image from 'next/image'
 import styles from "./MatchCard.module.css"
-import { MatchCardProp} from '@/app/types/match'
+import { MatchCardProp, ParticipantInfo} from '@/app/types/match'
 import { useState } from 'react'
 import Link from 'next/link'
 import MatchCardDetail from '../MatchCardDetail/MatchCardDetail'
 
 
-//INCLUDE PLAYER LEVEL
+//TODO: Include champion level
 
 export default function MatchCard(props: MatchCardProp){
 
     const [isDetailsOpen, setDetailsOpen] = useState(false);
+    const maxDamage = Math.max(...props.participants.map((p:ParticipantInfo) => p.damageDealt));
 
 
     return(
@@ -60,27 +61,32 @@ export default function MatchCard(props: MatchCardProp){
                             </div>
 
                             <div className  = {styles.runeBox}>
-
-                                <div className = {styles.runeSlot}>
-                                    <Image
-                                    src = {props.participant.keystoneUrl}
-                                    className = {styles.rune}
-                                    width={500}
-                                    height={500}
-                                    alt= "Rune Image"
-                                    loading= "eager"
-                                    />
-                                </div>
-                                <div className = {styles.runeSlot}>
-                                    <Image
-                                        src = {props.participant.secondaryRuneTreeUrl}
-                                        className = {styles.secondaryRuneTree}
-                                        width={500}
-                                        height={500}
-                                        alt= "Rune Image"
-                                        loading= "eager"
-                                    />
-                                </div>
+                                {
+                                    props.participant.keystoneUrl && (<div className = {styles.runeSlot}>
+                                            {
+                                                <Image
+                                                    src = {props.participant.keystoneUrl}
+                                                    className = {styles.rune}
+                                                    width={500}
+                                                    height={500}
+                                                    alt= "Rune Image"
+                                                    loading= "eager"
+                                                />
+                                            }                                   
+                                        </div>)
+                                }
+                                {
+                                        props.participant.secondaryRuneTreeUrl && (<div className = {styles.runeSlot}>
+                                        <Image
+                                            src = {props.participant.secondaryRuneTreeUrl}
+                                            className = {styles.secondaryRuneTree}
+                                            width={500}
+                                            height={500}
+                                            alt= "Rune Image"
+                                            loading= "eager"
+                                        />
+                                    </div>)
+                                }
                             </div>
                             
                         </div>
@@ -119,6 +125,7 @@ export default function MatchCard(props: MatchCardProp){
                                     {
                                         props.participants.filter(p => p.team == 'blue').map((p) => (  
                                             
+                                            //TODO: puuid, is not unique across Co-op vs AI
                                             <div className = {styles.summonerEntry} key = {p.puuid}>
 
                                                     <Image 
@@ -170,7 +177,7 @@ export default function MatchCard(props: MatchCardProp){
                                                                 {p.gameName}
                                                         </Link>
 
-                                                        {/*TODO: DYNAMIC REGION ROUTE, PROB CHANGE ParticipantInfo type to carry region*/}
+                                                        {/*TODO: DYNAMIC REGION ROUTE, CHANGE ParticipantInfo type to carry region*/}
                                                     </div>
 
                                             </div>
@@ -193,7 +200,7 @@ export default function MatchCard(props: MatchCardProp){
                
                 </div>
 
-                {isDetailsOpen && <MatchCardDetail participants = {props.participants} participant = {props.participant}/> }
+                {isDetailsOpen && <MatchCardDetail participants = {props.participants} participant = {props.participant} maxDamage = {maxDamage}/> }
 
         </div>
     )

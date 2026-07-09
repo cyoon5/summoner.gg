@@ -45,9 +45,11 @@ export type MatchCardProp = {
 export type SummonerRowProp = {
     searchedParticipant: ParticipantInfo;
     participant: ParticipantInfo;
+    maxDamage: number;
 }
 
 export type MatchCardDetailProp = {
     participant: ParticipantInfo;
     participants: ParticipantInfo[];
+    maxDamage: number;
 }

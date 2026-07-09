@@ -25,8 +25,8 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
     const searchedSummonerId = data.puuid;  
     const searchedSummoner = participantsInMatches.map(m => m.find(p => p.puuid === searchedSummonerId));
     const matchInfoList = rawMatches.map(m => (getMatchInfo(m)));
+    
     const rankedInfo = await getSummonerRankedInfo(data);
-
     const soloQueue = rankedInfo.find((r:RankedData) => r.queueType=="RANKED_SOLO_5x5");
     const flexQueue = rankedInfo.find((r:RankedData) => r.queueType=="RANKED_FLEX_SR");
 

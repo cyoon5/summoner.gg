@@ -37,6 +37,10 @@ function getItemIconUrl(iconId: number){
 //Can construct a map, should cache for reduced API calls, only fetch on new patch
 //Use map to construct URL s.t. its non-async
 function getRuneIconUrl(runeId: number){
+    
+    if(!runeId)
+        return;
+    
     let path = runeMap.get(runeId);
     return `https://ddragon.leagueoflegends.com/cdn/img/${path}`;
 }
