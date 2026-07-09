@@ -189,4 +189,6 @@
     padding: 1px;
     font-size: small;
     color: white;
+    min-width: 14px;
+    text-align: center;
 }

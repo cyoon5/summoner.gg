@@ -65,7 +65,7 @@ async function getRawMatches(summoner: SummonerProfile){
             kills: p.kills,
             deaths: p.deaths,
             assists: p.assists,
-            kda: p.deaths == 0? "Perfect" :((p.kills + p.assists)/(p.deaths || 1)).toFixed(2),
+            kda: p.deaths == 0? "Perfect" :((p.kills + p.assists)/(p.deaths || 1)).toFixed(2) + " KDA",
             championLevel: p.champLevel,
             totalGoldEarned: p.goldEarned,
             items: 

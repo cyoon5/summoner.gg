@@ -98,7 +98,7 @@ export default function MatchCard(props: MatchCardProp){
 
                         <div className = {styles.box3}> 
                             <p className = {styles.kdaTotal}> {props.participant.kills}/{props.participant.deaths}/{props.participant.assists} </p>
-                            <p className = {styles.kdaRatio}>{props.participant.kda} KDA</p>
+                            <p className = {styles.kdaRatio}>{props.participant.kda} </p>
                             <p className = {styles.cs}>{props.participant.creepScore} CS</p>
                             <p className = {styles.vision}>{props.participant.visionScore} Vision</p>
                         </div>

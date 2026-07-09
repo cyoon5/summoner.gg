@@ -17,7 +17,7 @@
 
 .detailsHeaderDefeat {
     display: grid;
-    grid-template-columns: 33% 12.5% 12.5% 11.5% 9.5% 13% 8%;    
+    grid-template-columns: 34% 11% 13.5% 10.8% 9.2% 12.5% 10%;    
     background-color: #5c2a1c;
     padding: 0px 10px;
     border-top: 1px solid #e14040;
@@ -26,7 +26,7 @@
 
 .detailsHeaderVictory{
     display: grid;
-    grid-template-columns: 33% 12.5% 12.5% 11.5% 9.5% 13% 8%;    
+    grid-template-columns: 34% 11% 13.5% 10.8% 9.2% 12.5% 10%;    
     background-color: #1e3a5f;
     padding: 0px 10px;
     border-top: 1px solid #3b6ea5;

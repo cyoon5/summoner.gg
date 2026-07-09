@@ -4,11 +4,12 @@ import { SummonerRowProp} from "@/app/types/match"
 import styles from "./SummonerRow.module.css"
 import Image from "next/image"
 import Link from "next/link"
+import { formatGold } from "@/lib/formatGold"
+
 
 export default function SummonerRow(prop: SummonerRowProp){
 
     const damageWidth = (prop.participant.damageDealt / prop.maxDamage) * 100;
-
 
     return(
         
@@ -94,7 +95,7 @@ export default function SummonerRow(prop: SummonerRowProp){
 
                 <div className = {styles.kda}>
                     <span className = {styles.kdaTotal}> {prop.participant.kills}/{prop.participant.deaths}/{prop.participant.assists} </span>
-                    <span> {prop.participant.kda + " KDA"} </span>
+                    <span> {prop.participant.kda + ""} </span>
                 </div>
 
                 <div className = {styles.damage}>
@@ -106,7 +107,7 @@ export default function SummonerRow(prop: SummonerRowProp){
                 </div>
 
                 <div className = {styles.gold}>
-                    {prop.participant.totalGoldEarned.toLocaleString()}
+                    {formatGold(prop.participant.totalGoldEarned)}
                 </div>
 
                 <div className = {styles.creepScore}> 
