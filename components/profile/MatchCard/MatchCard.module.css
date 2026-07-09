@@ -27,7 +27,7 @@
 }
 
 .championIcon{
-    border-radius: 8px;
+    border-radius: 5px;
     width: 55px;
     height: 55px;
     border: 1px solid #2a2a2a;
@@ -177,6 +177,16 @@
     min-width: 25px;
 }
 
-.matchDetails{
-    
+.champLvlContainer{
+    position: relative;
+}
+
+.champLvl{
+    position: absolute;
+    bottom: 13px;
+    background-color:#484848;
+    border-radius: 2px;
+    padding: 1px;
+    font-size: small;
+    color: white;
 }

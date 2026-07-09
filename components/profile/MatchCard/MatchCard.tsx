@@ -20,6 +20,7 @@ export default function MatchCard(props: MatchCardProp){
         
         <div className = {styles.container}>
 
+
                 <div className = {styles.contentBox} onClick = {() => setDetailsOpen(previous => !previous)}>
 
                         <div className = {styles.box1}> 
@@ -29,6 +30,10 @@ export default function MatchCard(props: MatchCardProp){
                         </div>
 
                         <div className = {styles.box2}>
+
+                            <span className = {styles.champLvlContainer}>
+                                <span className = {styles.champLvl}>{props.participant.championLevel}</span>
+                            </span>
                             
                             <div className = {styles.champion}>
                                 <Image

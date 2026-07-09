@@ -14,8 +14,13 @@ export default function SummonerRow(prop: SummonerRowProp){
         
         <div className = {styles.summonerContainer}>
             
+            
             <div className = {styles.summoner}>
-
+                
+                <span className = {styles.champLvlContainer}>
+                    <span className = {styles.champLvl}>{prop.participant.championLevel}</span>
+                </span>
+              
                 <Image
                     src = {prop.participant.championUrl}
                     width = {500}
