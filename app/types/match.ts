@@ -53,3 +53,9 @@ export type MatchCardDetailProp = {
     participants: ParticipantInfo[];
     maxDamage: number;
 }
+
+export type MatchHistoryProp = {
+    participantsInMatches: ParticipantInfo[][]
+    searchedSummoner: (ParticipantInfo | undefined)[]
+    matchInfoList: MatchInfo[]
+}

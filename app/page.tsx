@@ -1,11 +1,13 @@
 'use client';
 
 import styles from "./page.module.css"
-import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useState } from "react";
 import parseSummoner from "../lib/parseSummoner";
-import { SearchInput, SummonerData } from "./types/summoner";
+import { SummonerData } from "./types/summoner";
+
+
+//Future Features: Leaderboard, Champion Analytics, LP Graph, Winrate over X period of time, Past ranked data
 
 
 export default function Home() {

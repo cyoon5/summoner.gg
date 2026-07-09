@@ -1,4 +1,3 @@
-import MatchCard from "@/components/profile/MatchCard/MatchCard";
 import styles from "./page.module.css";
 import Image from 'next/image'
 import { SummonerData } from "@/app/types/summoner";
@@ -6,7 +5,8 @@ import { getSummoner } from "@/app/services/summonerService";
 import { getMatchInfo, getMatchParticipantsInfo, getRawMatches } from "@/app/services/matchService";
 import { getSummonerRankedInfo } from "@/app/services/rankedService";
 import RankedCard from "@/components/profile/RankedCard/RankedCard";
-import { RankedData, RiotRankedResponse } from "@/app/types/ranked";
+import { RankedData } from "@/app/types/ranked";
+import  MatchHistory  from "@/components/profile/MatchHistory/MatchHistory";
 
 
 export default async function Profile({ params }: {params: Promise<SummonerData>}) {
@@ -25,7 +25,7 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
     const searchedSummonerId = data.puuid;  
     const searchedSummoner = participantsInMatches.map(m => m.find(p => p.puuid === searchedSummonerId));
     const matchInfoList = rawMatches.map(m => (getMatchInfo(m)));
-    
+
     const rankedInfo = await getSummonerRankedInfo(data);
     const soloQueue = rankedInfo.find((r:RankedData) => r.queueType=="RANKED_SOLO_5x5");
     const flexQueue = rankedInfo.find((r:RankedData) => r.queueType=="RANKED_FLEX_SR");
@@ -90,26 +90,13 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
 
                 </div>
 
-                <div className = {styles.matchCol}>
 
-                    <p className = {styles.matchHeader}> Match History</p>
+                <MatchHistory 
+                    participantsInMatches = {participantsInMatches}
+                    searchedSummoner = {searchedSummoner}
+                    matchInfoList = {matchInfoList}
+                />
 
-                    <div className = {styles.matchHolder}> 
-                        {
-
-                            searchedSummoner.map((m, i) => 
-                                m && <MatchCard
-                                    key = {m.matchId}
-                                    participant = {m}
-                                    participants = {participantsInMatches[i]}
-                                    matchInfo = {matchInfoList[i]}
-                                />
-                            )
-                     
-                        }
-                    </div>
-                    
-                </div>
 
             </div>
         </>

@@ -49,25 +49,32 @@ export default function SummonerRow(prop: SummonerRowProp){
                     </div>
 
                     <div className = {styles.runeContainer}>
-                        <div className = {styles.runeSlot}>
-                            <Image
-                                src = {prop.participant.keystoneUrl}
-                                className = {styles.rune}
-                                width={500}
-                                height={500}
-                                alt= "Rune Image"
-                            />
-                        </div>
-                        <div className = {styles.runeSlot}>
-                            <Image
-                                src = {prop.participant.secondaryRuneTreeUrl}
-                                className = {styles.secondaryRuneTree}
-                                width={500}
-                                height={500}
-                                alt= "Rune Image"
-                            />
-                        </div>
 
+                        {
+                           prop.participant.keystoneUrl && <div className = {styles.runeSlot}>
+                                <Image
+                                    src = {prop.participant.keystoneUrl}
+                                    className = {styles.rune}
+                                    width={500}
+                                    height={500}
+                                    alt= "Rune Image"
+                                />
+                            </div>
+                        }
+                        
+                        {                                    
+                            prop.participant.secondaryRuneTreeUrl && <div className = {styles.runeSlot}>
+                                <Image
+                                    src = {prop.participant.secondaryRuneTreeUrl}
+                                    className = {styles.secondaryRuneTree}
+                                    width={500}
+                                    height={500}
+                                    alt= "Rune Image"
+                                />
+
+                            </div>
+                        }
+            
                     </div>
 
                     <div className = {styles.nameAndRank}>
@@ -86,8 +93,11 @@ export default function SummonerRow(prop: SummonerRowProp){
                                 height={500}
                                 alt= "Rank Mini Crest"
                             />
-                            <span> D4 </span>
+
+                            <span> D3 </span>
+
                         </div>
+
                     </div>
 
 
