@@ -15,7 +15,7 @@ export type SummonerProfile = {
   gameName: string;
   tagLine: string;
   platform: string;
-  routing: string | undefined;
+  routing: string;
   accountLvl: number;
   iconURL: string;
 }

@@ -55,7 +55,9 @@ export type MatchCardDetailProp = {
 }
 
 export type MatchHistoryProp = {
-    participantsInMatches: ParticipantInfo[][]
-    searchedSummoner: (ParticipantInfo | undefined)[]
-    matchInfoList: MatchInfo[]
+    puuid: string
+    routing: string
+    initialParticipantsInMatches: ParticipantInfo[][]
+    initialSearchedSummoner: (ParticipantInfo | undefined)[]
+    initialMatchInfoList: MatchInfo[]
 }

@@ -20,7 +20,7 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
     }
 
     const data = await getSummoner(query);
-    const rawMatches = await getRawMatches(data);
+    const rawMatches = await getRawMatches(data.puuid, data.routing, 0, 10);
     const participantsInMatches = getMatchParticipantsInfo(rawMatches); 
     const searchedSummonerId = data.puuid;  
     const searchedSummoner = participantsInMatches.map(m => m.find(p => p.puuid === searchedSummonerId));
@@ -92,9 +92,11 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
 
 
                 <MatchHistory 
-                    participantsInMatches = {participantsInMatches}
-                    searchedSummoner = {searchedSummoner}
-                    matchInfoList = {matchInfoList}
+                    puuid = {searchedSummonerId}
+                    routing = {data.routing}
+                    initialParticipantsInMatches = {participantsInMatches}
+                    initialSearchedSummoner = {searchedSummoner}
+                    initialMatchInfoList = {matchInfoList}
                 />
 
 
