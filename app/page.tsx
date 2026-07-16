@@ -5,12 +5,13 @@ import { useRouter } from 'next/navigation'
 import { useState } from "react";
 import parseSummoner from "../lib/parseSummoner";
 import { SummonerData } from "./types/summoner";
+import { regions } from "./services/constants";
 
-
-export default function Home() {
+export default function SearchSummoner() {
   const router = useRouter()
   const [userInput, setUserInput] = useState("");
   const [region, setRegion] = useState("na1");
+  const [open, setOpen] = useState(false);
 
   async function handleSubmit(e: React.ChangeEvent<HTMLFormElement>) {
 
@@ -32,20 +33,63 @@ export default function Home() {
   } 
 
   return (
-    <div className = {styles.container}>
-      <div>
+
+    <div className = {styles.container} onClick={() => setOpen(false)}>
+
+      <div className = {styles.mainContainer}>
+
           <h1 className = {styles.text}>summoner.gg</h1>
+
           <form onSubmit = {handleSubmit}>
-            <input type = "search" id = {styles.searchbar} autoComplete = "off" onChange ={(e)=>setUserInput(e.target.value)}></input>
-              <select onChange={(e)=>{setRegion(e.target.value)}}>
-                <option value = "na1"> NA</option>
-                <option value = "euw1"> EUW</option>
-              </select>
+
+            <div className = {styles.inputContainer}>
+
+              <input type = "search" 
+                className = {styles.searchbar} 
+                placeholder = "Search a summoner"
+                autoComplete = "off" 
+                onChange = {(e)=>setUserInput(e.target.value)}>
+              </input>
+
+              <div className={styles.dropdownButton} onClick={(e)=> {setOpen(o => !o); e.stopPropagation()}}>
+
+                <div className = {styles.regionText}>
+                  {regions.find(r => r.value === region)?.label}
+                </div>  
+                
+                {
+                  open && (<div className = {styles.options}>
+                    {
+                      regions.map(r => (
+                        <div 
+                          key = {r.value} 
+                          className = {styles.option}
+                          onClick={(e) => { setOpen(false); setRegion(r.value); e.stopPropagation();}}
+                        > 
+                          {r.label}
+                        </div>
+                      ))
+                    }
+                  </div>)
+                }
+           
+                
+                
+              </div>
+              
+
+            </div>
+
+
           </form>
+
           <p className = {styles.text}>
             League of Legends analytics platform
           </p>
+
       </div>
+
     </div>
-  );
+
+  )
 }

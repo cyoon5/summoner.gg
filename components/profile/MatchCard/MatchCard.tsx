@@ -8,8 +8,6 @@ import Link from 'next/link'
 import MatchCardDetail from '../MatchCardDetail/MatchCardDetail'
 
 
-//TODO: Include champion level
-
 export default function MatchCard(props: MatchCardProp){
 
     const [isDetailsOpen, setDetailsOpen] = useState(false);
