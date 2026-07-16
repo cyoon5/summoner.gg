@@ -9,7 +9,12 @@ A League of Legends analytics platform inspired by OP.GG and U.GG, built with Ne
 Summoner.gg is a full-stack web dashboard for viewing League of Legends player profiles, match history, and in-game statistics. The project emphasizes clean architecture, separation of concerns, and efficient data fetching patterns.
 
 ---
+## Screenshots
+<img width="1330" height="910" alt="summoner gg profile page" src="https://github.com/user-attachments/assets/2b5b5c75-6bd4-410b-9d2d-794b4d71c38f" />
 
+<img width="767" height="774" alt="summoner gg match details" src="https://github.com/user-attachments/assets/d8f920e2-6a00-4b6b-89a4-5946aa698a85" />
+
+---
 ## Features
 
 - Player profile lookup by summoner name, tag, and region
