@@ -1,6 +1,8 @@
 import { SummonerData, SummonerProfile } from "../types/summoner";
 import {getProfileIconUrl} from "../services/dragonService";
 import { REGION_MAPPING } from "./constants";
+import { notFound } from 'next/navigation';
+
 
 const api_key = process.env.RIOT_API_KEY;
 
@@ -20,6 +22,10 @@ export async function getSummoner(input: SummonerData): Promise<SummonerProfile>
 
     const riotId = `https://${routing}.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${gameName}/${tagLine}`;
     const response = await fetch(riotId, {headers: {"X-Riot-Token": api_key}});
+
+
+    if(response.status === 404)
+        notFound();
 
     if(response.status == 429)
         throw new Error("API Limit Reached");
@@ -46,3 +52,5 @@ export async function getSummoner(input: SummonerData): Promise<SummonerProfile>
 
     return completeProfileData;
 }
+
+

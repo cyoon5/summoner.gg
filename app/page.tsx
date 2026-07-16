@@ -7,9 +7,6 @@ import parseSummoner from "../lib/parseSummoner";
 import { SummonerData } from "./types/summoner";
 
 
-//Future Features: Leaderboard, Champion Analytics, LP Graph, Winrate over X period of time, Past ranked data
-
-
 export default function Home() {
   const router = useRouter()
   const [userInput, setUserInput] = useState("");

@@ -17,7 +17,7 @@ export default function MatchHistory(props: MatchHistoryProp){
     const bottomRef = useRef(null);
     const loadingRef = useRef(false);
 
-    const loadMoreMatches = useCallback(async() =>{  //without usecallback, this is created every render(inefficeint)
+    const loadMoreMatches = useCallback( async() =>{
 
         if(loadingRef.current || !hasMore)
             return;
