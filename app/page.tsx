@@ -6,6 +6,10 @@ import { useState } from "react";
 import parseSummoner from "../lib/parseSummoner";
 import { SummonerData } from "./types/summoner";
 import { regions } from "./services/constants";
+import Image from 'next/image'
+
+//https://reactbits.dev/ landing page animation with champion icon
+
 
 export default function SearchSummoner() {
   const router = useRouter()
@@ -76,8 +80,18 @@ export default function SearchSummoner() {
                 
                 
               </div>
-              
 
+              <button className = {styles.searchButton}>
+                <Image
+                  className = {styles.searchIcon}
+                  src = "/searchIcon.png"
+                  width = {100}
+                  height = {100}
+                  alt = ""
+                  onClick={()=>handleSubmit}
+                />
+              </button>
+             
             </div>
 
 
