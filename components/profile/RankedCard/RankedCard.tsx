@@ -23,7 +23,7 @@ export default function RankedCard(prop: RankedProp){
             <div className = {styles.rankedStatsHolder}>
                 
                 <Image
-                    src = {`/emblems/${prop.data.tier}.png`}
+                    src = {`/emblems/${prop.data.tier.toLowerCase()}.png`}
                     alt = "emblem"
                     width = {54}
                     height = {54}
