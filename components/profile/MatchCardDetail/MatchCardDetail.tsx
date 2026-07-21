@@ -45,7 +45,7 @@ export default function MatchCardDetail(prop: MatchCardDetailProp){
 
                 {
                     prop.participants.filter((p:ParticipantInfo) => p.team == prop.participant.team).map((p:ParticipantInfo) => (
-                            <SummonerRow participant = {p} searchedParticipant = {prop.participant} maxDamage = {prop.maxDamage} key = {p.puuid}/>
+                            <SummonerRow participant = {p} searchedParticipant = {prop.participant} maxDamage = {prop.maxDamage} platform = {prop.platform} key = {p.puuid}/>
                     ))
                 }
             </div>
@@ -66,7 +66,7 @@ export default function MatchCardDetail(prop: MatchCardDetailProp){
 
                 {
                     prop.participants.filter((p:ParticipantInfo) => p.team != prop.participant.team).map((p:ParticipantInfo) => (
-                        <SummonerRow participant = {p} searchedParticipant = {prop.participant} maxDamage = {prop.maxDamage} key = {p.puuid}/>
+                        <SummonerRow participant = {p} searchedParticipant = {prop.participant} maxDamage = {prop.maxDamage} key = {p.puuid} platform = {prop.platform}/>
                     ))
                 }
 

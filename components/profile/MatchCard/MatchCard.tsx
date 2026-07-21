@@ -203,7 +203,7 @@ export default function MatchCard(props: MatchCardProp){
                
                 </div>
 
-                {isDetailsOpen && <MatchCardDetail participants = {props.participants} participant = {props.participant} maxDamage = {maxDamage}/> }
+                {isDetailsOpen && <MatchCardDetail participants = {props.participants} participant = {props.participant} maxDamage = {maxDamage} platform = {props.platform}/> }
 
         </div>
     )

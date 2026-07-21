@@ -17,7 +17,7 @@ export default function MatchHistory(props: MatchHistoryProp){
     const bottomRef = useRef(null);
     const loadingRef = useRef(false);
 
-    const loadMoreMatches = useCallback( async() =>{
+    const loadMoreMatches = useCallback(async() =>{
 
         if(loadingRef.current || !hasMore)
             return;
@@ -72,6 +72,7 @@ export default function MatchHistory(props: MatchHistoryProp){
                         participant = {m}
                         participants = {participantsInMatches[i]}
                         matchInfo = {matchInfoList[i]}
+                        platform = {props.platform}
                     />
                 )
             

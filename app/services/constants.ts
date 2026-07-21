@@ -1,3 +1,4 @@
+
 export const REGION_MAPPING = new Map<string, string>([
 
   ["na1", "americas"],

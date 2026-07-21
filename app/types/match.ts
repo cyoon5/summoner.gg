@@ -1,4 +1,5 @@
 export type ParticipantInfo = {
+
     matchId: string;
     puuid: string;
     gameName: string;
@@ -40,23 +41,27 @@ export type MatchCardProp = {
     participant: ParticipantInfo;
     participants: ParticipantInfo[];
     matchInfo: MatchInfo;
+    platform: string;
 }
 
 export type SummonerRowProp = {
     searchedParticipant: ParticipantInfo;
     participant: ParticipantInfo;
     maxDamage: number;
+    platform: string;
 }
 
 export type MatchCardDetailProp = {
     participant: ParticipantInfo;
     participants: ParticipantInfo[];
     maxDamage: number;
+    platform: string;
 }
 
 export type MatchHistoryProp = {
     puuid: string
     routing: string
+    platform: string
     initialParticipantsInMatches: ParticipantInfo[][]
     initialSearchedSummoner: (ParticipantInfo | undefined)[]
     initialMatchInfoList: MatchInfo[]

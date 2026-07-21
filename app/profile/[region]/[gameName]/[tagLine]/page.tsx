@@ -19,14 +19,14 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
         tagLine: tagLine
     }
 
-    const data = await getSummoner(query);
-    const rawMatches = await getRawMatches(data.puuid, data.routing, 0, 10);
+    const summonerProfile = await getSummoner(query);
+    const rawMatches = await getRawMatches(summonerProfile.puuid, summonerProfile.routing, 0, 10);
     const participantsInMatches = getMatchParticipantsInfo(rawMatches); 
-    const searchedSummonerId = data.puuid;  
+    const searchedSummonerId = summonerProfile.puuid;  
     const searchedSummoner = participantsInMatches.map(m => m.find(p => p.puuid === searchedSummonerId));
     const matchInfoList = rawMatches.map(m => (getMatchInfo(m)));
 
-    const rankedInfo = await getSummonerRankedInfo(data);
+    const rankedInfo = await getSummonerRankedInfo(summonerProfile);
     const soloQueue = rankedInfo.find((r:RankedData) => r.queueType=="RANKED_SOLO_5x5");
     const flexQueue = rankedInfo.find((r:RankedData) => r.queueType=="RANKED_FLEX_SR");
 
@@ -38,7 +38,7 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
                     <div className = {styles.iconLvl}>
 
                         <Image
-                            src={data.iconURL}
+                            src={summonerProfile.iconURL}
                             width={500}
                             height={500}
                             alt="Summoner Icon"
@@ -46,16 +46,16 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
                             priority
                         />
 
-                        <p className = {styles.lvl}>{data.accountLvl}</p>
+                        <p className = {styles.lvl}>{summonerProfile.accountLvl}</p>
 
                     </div>
 
                     <div className = {styles.nameTag}>
                         <h1 className = {styles.gameName}>
-                            {data.gameName} 
+                            {summonerProfile.gameName} 
                         </h1>
                         <h1 className = {styles.tag}>  
-                            #{data.tagLine}
+                            #{summonerProfile.tagLine}
                         </h1>
                     </div>
 
@@ -93,7 +93,8 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
 
                 <MatchHistory 
                     puuid = {searchedSummonerId}
-                    routing = {data.routing}
+                    routing = {summonerProfile.routing}
+                    platform = {summonerProfile.platform}
                     initialParticipantsInMatches = {participantsInMatches}
                     initialSearchedSummoner = {searchedSummoner}
                     initialMatchInfoList = {matchInfoList}

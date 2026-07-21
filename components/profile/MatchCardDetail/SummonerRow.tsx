@@ -5,11 +5,29 @@ import styles from "./SummonerRow.module.css"
 import Image from "next/image"
 import Link from "next/link"
 import { formatGold } from "@/lib/formatGold"
+import { useEffect, useState} from "react"
+import { RankedDataMini } from "@/app/types/ranked"
 
 
 export default function SummonerRow(prop: SummonerRowProp){
 
     const damageWidth = (prop.participant.damageDealt / prop.maxDamage) * 100;
+    const [summonerRank, setSummonerRank] = useState<RankedDataMini | undefined>(undefined);
+
+
+
+    useEffect(() => {
+
+        const fetchRankPreview = async() =>{
+            const res = await fetch(`/api/ranked/?puuid=${prop.participant.puuid}&platform=${prop.platform}`);
+            const data =  await res.json();
+            setSummonerRank(data.rankInfoPreview);
+        }
+
+        fetchRankPreview();
+    }, [])
+
+
 
     return(
         
@@ -94,8 +112,8 @@ export default function SummonerRow(prop: SummonerRowProp){
                                 alt= "Rank Mini Crest"
                             />
 
-                            <span> D3 </span>
-
+                            <span>{summonerRank ? `${summonerRank.tier} ${summonerRank.division}` : 'Unranked'}</span>
+                            
                         </div>
 
                     </div>

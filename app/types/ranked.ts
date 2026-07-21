@@ -28,3 +28,8 @@ export type RiotRankedResponse = {
     freshBlood: boolean;
     hotStreak: boolean;
 }
+
+export type RankedDataMini = {
+    tier: string;
+    division: string;
+}
