@@ -1,4 +1,4 @@
-export default function formatRank(tier: string, rank: string): string {
+export default function formatRank(tier: string, rank: string, leaguePoints: number): string {
     const tierMap: Record<string, string> = {
         IRON: "I",
         BRONZE: "B",
@@ -20,7 +20,7 @@ export default function formatRank(tier: string, rank: string): string {
     };
 
     if (["MASTER", "GRANDMASTER", "CHALLENGER"].includes(tier)) {
-        return tierMap[tier];
+        return `${tierMap[tier]}•${leaguePoints}LP`;
     }
 
     return `${tierMap[tier]}${rankMap[rank]}`;

@@ -113,7 +113,7 @@ export default function SummonerRow(prop: SummonerRowProp){
                                 alt= "Rank Mini Crest"
                             />
 
-                            <span>{summonerRank ? `${formatRank(summonerRank.tier, summonerRank.division)}` : 'Unranked'}</span>
+                            <span>{summonerRank ? `${formatRank(summonerRank.tier, summonerRank.division, summonerRank.leaguePoints)}` : '-'}</span>
 
                         </div>
 

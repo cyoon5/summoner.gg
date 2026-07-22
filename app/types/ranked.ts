@@ -32,4 +32,5 @@ export type RiotRankedResponse = {
 export type RankedDataMini = {
     tier: string;
     division: string;
+    leaguePoints: number;
 }

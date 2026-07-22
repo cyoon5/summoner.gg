@@ -39,7 +39,8 @@ async function getSummonerRankPreview(platform: string, puuid: string): Promise<
 
     return {
         tier: soloQueue.tier,
-        division: soloQueue.rank
+        division: soloQueue.rank,
+        leaguePoints: soloQueue.leaguePoints
     }
 }
 
