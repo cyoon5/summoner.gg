@@ -23,7 +23,7 @@ async function getSummonerRankedInfo(summoner: SummonerProfile): Promise<RankedD
     }));
 }
 
-async function getSummonerRankedInfoMini(platform: string, puuid: string): Promise<RankedDataMini | undefined> {
+async function getSummonerRankPreview(platform: string, puuid: string): Promise<RankedDataMini | undefined> {
 
     if(!api_key) 
         throw new Error("Missing api key");
@@ -31,7 +31,7 @@ async function getSummonerRankedInfoMini(platform: string, puuid: string): Promi
     const rankedInfoUrl = `https://${platform}.api.riotgames.com/lol/league/v4/entries/by-puuid/${puuid}`
     const response = await fetch(rankedInfoUrl, {headers: {"X-Riot-Token": api_key}});
     const data = await response.json();
-
+    
     const soloQueue = data.find((p: RiotRankedResponse) => p.queueType === "RANKED_SOLO_5x5");
     
     if(!soloQueue) 
@@ -43,4 +43,4 @@ async function getSummonerRankedInfoMini(platform: string, puuid: string): Promi
     }
 }
 
-export {getSummonerRankedInfo, getSummonerRankedInfoMini};
+export {getSummonerRankedInfo, getSummonerRankPreview};

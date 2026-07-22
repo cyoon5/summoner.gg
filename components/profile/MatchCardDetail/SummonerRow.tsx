@@ -7,6 +7,7 @@ import Link from "next/link"
 import { formatGold } from "@/lib/formatGold"
 import { useEffect, useState} from "react"
 import { RankedDataMini } from "@/app/types/ranked"
+import formatRank from "@/lib/formatRankPreview"
 
 
 export default function SummonerRow(prop: SummonerRowProp){
@@ -16,7 +17,7 @@ export default function SummonerRow(prop: SummonerRowProp){
 
 
 
-    useEffect(() => {
+    useEffect(() => { //Currently, collapsing and re-expanding will re-fetch
 
         const fetchRankPreview = async() =>{
             const res = await fetch(`/api/ranked/?puuid=${prop.participant.puuid}&platform=${prop.platform}`);
@@ -105,15 +106,15 @@ export default function SummonerRow(prop: SummonerRowProp){
 
                         <div className = {styles.rank}>
                             <Image
-                                src = {`/mini-emblems/diamond.png`}
+                                src = {`/mini-emblems/${summonerRank? summonerRank.tier.toLowerCase() : "unranked"}.svg`}
                                 className = {styles.miniRankedEmblem}
                                 width={500}
                                 height={500}
                                 alt= "Rank Mini Crest"
                             />
 
-                            <span>{summonerRank ? `${summonerRank.tier} ${summonerRank.division}` : 'Unranked'}</span>
-                            
+                            <span>{summonerRank ? `${formatRank(summonerRank.tier, summonerRank.division)}` : 'Unranked'}</span>
+
                         </div>
 
                     </div>

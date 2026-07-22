@@ -1,4 +1,4 @@
-import { getSummonerRankedInfoMini } from '@/app/services/rankedService';
+import { getSummonerRankPreview } from '@/app/services/rankedService';
 import { NextResponse } from 'next/server';
 
 export async function GET(request: Request){
@@ -15,7 +15,7 @@ export async function GET(request: Request){
         );
     }
     
-    const rankInfoPreview = await getSummonerRankedInfoMini(platform, puuid);
+    const rankInfoPreview = await getSummonerRankPreview(platform, puuid);
 
 
     return NextResponse.json({
