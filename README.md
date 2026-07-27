@@ -2,58 +2,126 @@
 
 A League of Legends analytics platform inspired by OP.GG and U.GG, built with Next.js, React, and TypeScript.
 
+🔗 **Live Demo:** https://summoner-gg.vercel.app/
+
 ---
 
 ## Overview
 
-Summoner.gg is a full-stack web dashboard for viewing League of Legends player profiles, match history, and in-game statistics. The project emphasizes clean architecture, separation of concerns, and efficient data fetching patterns.
+Summoner.gg is a web application that allows users to search League of Legends players and explore detailed profiles, ranked information, match history, and individual game statistics.
+
+The application integrates with the Riot Games API to fetch real-time player and match data, while focusing on scalable architecture, efficient data fetching, and clean separation between data processing and UI components.
 
 ---
+
 ## Screenshots
-<img width="1330" height="910" alt="summoner gg profile page" src="https://github.com/user-attachments/assets/2b5b5c75-6bd4-410b-9d2d-794b4d71c38f" />
 
-<img width="767" height="774" alt="summoner gg match details" src="https://github.com/user-attachments/assets/d8f920e2-6a00-4b6b-89a4-5946aa698a85" />
+![Summoner.gg Profile](https://github.com/user-attachments/assets/2b5b5c75-6bd4-410b-9d2d-794b4d71c38f)
+
+![Summoner.gg Match Details](https://github.com/user-attachments/assets/d8f920e2-6a00-4b6b-89a4-5946aa698a85)
 
 ---
+
 ## Features
 
-- Player profile lookup by summoner name, tag, and region
-- Summoner profile display — icon, level, game name
-- Full match history with real Riot Games API data
-- Per-match stats — KDA, CS, vision score, gold earned, items, runes, summoner spells
-- Champion and item icons served dynamically from Data Dragon CDN
-- Team composition display for all 10 participants per match
-- Relative timestamps for match dates
-- Multi-region support (NA, EUW, and more via region mapping)
+### Player Profiles
+- Search players by Riot ID, tag line, and region
+- Display summoner icon, level, ranked information, and account details
+- Support multiple regions through region mapping
+
+### Match History
+- Retrieve and display recent matches using Riot Games API data
+- Show detailed match statistics:
+  - KDA
+  - CS and CS/min
+  - Gold earned
+  - Vision score
+  - Items
+  - Runes
+  - Summoner spells
+  - Champion performance
+
+### Match Details
+- Display all 10 participants with:
+  - Champion selections
+  - Team compositions
+  - Individual statistics
+  - Item builds
+
+### Data Integration
+- Dynamic champion, item, rune, and summoner spell assets using Riot Data Dragon CDN
+- Automatic timestamp formatting for match dates
 
 ---
 
 ## Architecture
 
-- **Service layer** separating data fetching, transformation, and rendering concerns
-- **Server components** call Riot's API directly, avoiding unnecessary internal HTTP round trips
-- **Client components** isolated only where interactivity is required
-- **Parallel API fetching** with `Promise.all` for match history, reducing load time to the duration of the slowest single request rather than the sum of all requests
-- **Data Dragon service** (`dragonService.ts`) centralizes all CDN asset URL construction with module-level caching for patch version and rune data — fetched once on server start, reused across all requests
-- **Type-safe data pipeline** — raw Riot API responses are mapped to internal TypeScript types at the service layer, decoupling the rest of the app from Riot's API shape
+### Data Fetching
+- Uses Next.js App Router server components to fetch Riot API data directly without unnecessary client-side requests
+- Client components are isolated to interactive UI elements only
+- Parallelized API requests with `Promise.all` to reduce match loading time
+
+### Service Layer
+- Dedicated service modules handle:
+  - Riot API communication
+  - Data transformation
+  - Data Dragon asset management
+- Riot API responses are mapped into internal TypeScript types, preventing API-specific structures from leaking into UI components
+
+### Performance
+- Module-level caching for Data Dragon patch information and static game assets
+- Reusable typed components for displaying player and match information
 
 ---
 
 ## Tech Stack
 
+### Frontend
 - Next.js 15 (App Router)
 - React
 - TypeScript
 - CSS Modules
+
+### APIs & Data
 - Riot Games API
-- Data Dragon CDN
+- Riot Data Dragon CDN
+
+### Deployment
+- Vercel
 
 ---
 
-## Planned
+## Future Improvements
 
-- **PostgreSQL** for persisting match history and summoner data, enabling aggregated statistics without repeated Riot API calls
-- **Redis** caching layer (cache-aside pattern) — check Redis first, fall back to Postgres, then Riot API. Short TTLs for match data, longer for patch assets
-- **Champion analytics** — win rates, KDA trends, best items and runes per champion based on stored match data
-- **Live game tracking** — polling client component showing current in-game data
-- **Ranked statistics** — LP history, rank display, win/loss streaks
+### Data Storage
+- PostgreSQL database for storing match history and player data
+- Reduce repeated Riot API requests by persisting previously retrieved information
+
+### Caching
+- Redis cache layer using a cache-aside strategy:
+  1. Check Redis
+  2. Query PostgreSQL
+  3. Fall back to Riot API
+
+### Analytics
+- Champion performance analytics:
+  - Win rates
+  - KDA trends
+  - Item and rune effectiveness
+- Ranked progression tracking
+- LP history and win/loss streaks
+
+### Additional Features
+- Live game tracking
+- More detailed player statistics
+- Historical performance analysis
+
+---
+
+## Development
+
+This project was built to explore:
+- Modern React and Next.js architecture
+- API integration and data transformation
+- Type-safe application design
+- Performance optimization strategies

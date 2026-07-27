@@ -13,10 +13,12 @@
 }
 
 .navBarTab{
-    box-sizing: border-box;
+    display: flex;
     background-color: rgb(37, 36, 36);
     padding: 10px;
     border-radius: 5px;
+    justify-content: center;
+    width: 100px;
 }
 .summonerTeamDetails, .enemyTeamDetails{
     display: flex;

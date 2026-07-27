@@ -8,8 +8,6 @@ import { SummonerData } from "./types/summoner";
 import { regions } from "./services/constants";
 import Image from 'next/image'
 
-//https://reactbits.dev/ landing page animation with champion icon
-
 
 export default function SearchSummoner() {
   const router = useRouter()
@@ -23,7 +21,6 @@ export default function SearchSummoner() {
       const parsed = parseSummoner(userInput);
 
       if(!parsed){
-        alert("Enter valid format gameName#tagLine");
         return;
       }
 
