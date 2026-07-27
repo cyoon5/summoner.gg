@@ -17,7 +17,6 @@ Summoner.gg is a web application that allows users to search League of Legends p
 
 The application integrates with the Riot Games API to fetch real-time player and match data, while focusing on scalable architecture, efficient data fetching, and clean separation between data processing and UI components.
 
----
 
 ## How to Use
 
