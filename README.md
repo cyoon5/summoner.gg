@@ -2,14 +2,14 @@
 
 A League of Legends analytics platform inspired by OP.GG and U.GG, built with Next.js, React, and TypeScript.
 
-🔗 **Live Demo:** https://summoner-gg.vercel.app/
+🌐 **Live Demo:** https://summoner-gg.vercel.app/
 
 
 <div align="center">
   <img src="app/assets/ProfileScreenshot.webp" width="45%" alt="Summoner.gg Profile">
   <img src="app/assets/DetailsScreenshot.webp" width="45%" alt="Summoner.gg Match Details">
 </div>
----
+
 
 ## Overview
 
@@ -23,9 +23,9 @@ The application integrates with the Riot Games API to fetch real-time player and
 
 1. Enter a player's Riot ID in the search bar.
 
-Use the format: GameName#TagLine
+      Use the format: GameName#TagLine
 
-Example: lorem#vvv
+      Example: lorem#vvv
 
 2. Select the player's region.
 
@@ -64,7 +64,6 @@ Example: lorem#vvv
 - Dynamic champion, item, rune, and summoner spell assets using Riot Data Dragon CDN
 - Automatic timestamp formatting for match dates
 
----
 
 ## Architecture
 
@@ -84,7 +83,6 @@ Example: lorem#vvv
 - Module-level caching for Data Dragon patch information and static game assets
 - Reusable typed components for displaying player and match information
 
----
 
 ## Tech Stack
 
@@ -101,7 +99,6 @@ Example: lorem#vvv
 ### Deployment
 - Vercel
 
----
 
 ## Future Improvements
 
@@ -110,10 +107,8 @@ Example: lorem#vvv
 - Reduce repeated Riot API requests by persisting previously retrieved information
 
 ### Caching
-- Redis cache layer using a cache-aside strategy:
-  1. Check Redis
-  2. Query PostgreSQL
-  3. Fall back to Riot API
+- Planning to use Redis for frequently requested player profiles and match data
+
 
 ### Analytics
 - Champion performance analytics:
@@ -128,12 +123,4 @@ Example: lorem#vvv
 - More detailed player statistics
 - Historical performance analysis
 
----
 
-## Development
-
-This project was built to explore:
-- Modern React and Next.js architecture
-- API integration and data transformation
-- Type-safe application design
-- Performance optimization strategies
