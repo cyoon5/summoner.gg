@@ -4,6 +4,17 @@ A League of Legends analytics platform inspired by OP.GG and U.GG, built with Ne
 
 🔗 **Live Demo:** https://summoner-gg.vercel.app/
 
+
+
+<p align="center">
+  <img src="app/assets/ProfileScreenshot.webp" width="900" alt="Summoner.gg Profile">
+</p>
+
+<p align="center">
+  <img src="app/assets/DetailsScreenshot.webp" width="900" alt="Summoner.gg Profile">
+</p>
+
+
 ---
 
 ## Overview
@@ -22,11 +33,12 @@ Use the format: GameName#TagLine
 
 Example: lorem#vvv
 
-## Screenshots
+2. Select the player's region.
 
+3. View their profile, ranked information, and recent match history.
 
+> The Riot ID must belong to an existing League of Legends account in the selected region.
 
----
 
 ## Features
 
