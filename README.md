@@ -5,16 +5,10 @@ A League of Legends analytics platform inspired by OP.GG and U.GG, built with Ne
 🔗 **Live Demo:** https://summoner-gg.vercel.app/
 
 
-
-<p align="center">
-  <img src="app/assets/ProfileScreenshot.webp" width="900" alt="Summoner.gg Profile">
-</p>
-
-<p align="center">
-  <img src="app/assets/DetailsScreenshot.webp" width="900" alt="Summoner.gg Profile">
-</p>
-
-
+<div align="center">
+  <img src="app/assets/ProfileScreenshot.webp" width="45%" alt="Summoner.gg Profile">
+  <img src="app/assets/DetailsScreenshot.webp" width="45%" alt="Summoner.gg Match Details">
+</div>
 ---
 
 ## Overview
