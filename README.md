@@ -14,11 +14,17 @@ The application integrates with the Riot Games API to fetch real-time player and
 
 ---
 
+## How to Use
+
+1. Enter a player's Riot ID in the search bar.
+
+Use the format: GameName#TagLine
+
+Example: lorem#vvv
+
 ## Screenshots
 
-![Summoner.gg Profile](https://github.com/user-attachments/assets/2b5b5c75-6bd4-410b-9d2d-794b4d71c38f)
 
-![Summoner.gg Match Details](https://github.com/user-attachments/assets/d8f920e2-6a00-4b6b-89a4-5946aa698a85)
 
 ---
 
