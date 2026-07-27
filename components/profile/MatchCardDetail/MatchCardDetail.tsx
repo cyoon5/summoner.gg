@@ -2,6 +2,7 @@
 import { MatchCardDetailProp, ParticipantInfo } from "@/app/types/match";
 import styles from "./MatchCardDetail.module.css"
 import SummonerRow from "./SummonerRow";
+import { useState } from "react";
 
 
 export default function MatchCardDetail(prop: MatchCardDetailProp){
@@ -12,6 +13,7 @@ export default function MatchCardDetail(prop: MatchCardDetailProp){
 
     return(
 
+        
         <div className = {styles.detailsContainer}>
 
             <div className = {styles.detailsNavBar}>
@@ -51,8 +53,6 @@ export default function MatchCardDetail(prop: MatchCardDetailProp){
             </div>
 
 
-       
-
             <div className = {styles.enemyTeamDetails}>
                 <div className = {prop.participant.win? styles.detailsHeaderDefeat : styles.detailsHeaderVictory}>
                     <p className = {styles.gameOutcome}> {prop.participant.win? "Defeat" : "Victory"}  ({prop.participant.team == "red"? "Blue" : "Red"} Side) </p>
@@ -71,7 +71,8 @@ export default function MatchCardDetail(prop: MatchCardDetailProp){
                 }
 
             </div>
-        
+
         </div>
+        
     )
 }

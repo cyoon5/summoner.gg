@@ -20,7 +20,7 @@ export default function formatRank(tier: string, rank: string, leaguePoints: num
     };
 
     if (["MASTER", "GRANDMASTER", "CHALLENGER"].includes(tier)) {
-        return `${tierMap[tier]}•${leaguePoints}LP`;
+        return `${tierMap[tier]}(${leaguePoints}LP)`;
     }
 
     return `${tierMap[tier]}${rankMap[rank]}`;
