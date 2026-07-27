@@ -11,7 +11,7 @@
     display: flex;
     font-family: monospace;
     align-items: center;
-    gap: 2em;
+    gap: 1.2em;
     color: #d9d4d4;
     cursor: pointer;
 }
@@ -191,4 +191,13 @@
     color: white;
     min-width: 14px;
     text-align: center;
+}
+
+.dropdownArrow{
+    display: flex;
+    background-color: #222;
+    border-radius: 4px;
+    padding: 5px 10px;
+    align-self: stretch;
+    align-items: center;
 }

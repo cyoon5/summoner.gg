@@ -142,7 +142,7 @@ export default function MatchCard(props: MatchCardProp){
 
                                                     <div className = {styles.summonerName} title = {p.gameName + "#" + p.tagLine} onClick = {e => e.stopPropagation()}>
                                                         <Link 
-                                                            href = {`/profile/na1/${p.gameName}/${p.tagLine}`} 
+                                                            href = {`/profile/${props.platform}/${p.gameName}/${p.tagLine}`} 
                                                             className = {`${p.puuid == props.participant.puuid? styles.searchedSummonerName : styles.summonerName}`}>
                                                                 {p.gameName}
                                                         </Link>
@@ -175,12 +175,11 @@ export default function MatchCard(props: MatchCardProp){
 
                                                     <div className = {styles.summonerName} title = {p.gameName + "#" + p.tagLine} onClick = {e => e.stopPropagation()}>
                                                         <Link 
-                                                            href = {`/profile/na1/${p.gameName}/${p.tagLine}`} 
+                                                            href = {`/profile/${props.platform}/${p.gameName}/${p.tagLine}`} 
                                                             className = {`${p.puuid == props.participant.puuid? styles.searchedSummonerName : styles.summonerName}`}>
                                                                 {p.gameName}
                                                         </Link>
 
-                                                        {/*TODO: DYNAMIC REGION ROUTE, CHANGE ParticipantInfo type to carry region*/}
                                                     </div>
 
                                             </div>
@@ -192,9 +191,8 @@ export default function MatchCard(props: MatchCardProp){
                             </div>
                         </div>
 
-                        <div className = {styles.matchDetails}>
-                                    
-                            
+                        <div className = {styles.dropdownArrow}>
+                            {isDetailsOpen? "˄" : "˅"}
                         </div>
 
        

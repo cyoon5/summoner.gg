@@ -21,15 +21,15 @@ export default function MatchCardDetail(prop: MatchCardDetailProp){
                     Post Game
                 </div>
 
-                <div>
+                <div className = {styles.navBarTab}>
                     Performance
                 </div>
 
-                <div>
+                <div className = {styles.navBarTab}>
                     Item Build
                 </div>
 
-                <div>
+                <div className = {styles.navBarTab}>
                     Metrics 
                 </div>
             </div>
