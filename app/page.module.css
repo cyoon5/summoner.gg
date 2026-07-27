@@ -52,7 +52,7 @@ input::placeholder {
     position: absolute;
     left: 10px;
     top: 10px;
-    background-color: rgb(69, 92, 138);
+    background-color: rgb(142, 180, 96);
     border-radius: 3px;
     width: 45px;
     height: 35px;
@@ -68,7 +68,7 @@ input::placeholder {
     left: 0px;
     max-height: 160px;
     overflow-y: auto;
-    background-color: rgb(69, 92, 138);
+    background-color: rgb(142, 180, 96);
     border-radius: 4px;
     scrollbar-width: none; 
     -ms-overflow-style: none; 
@@ -86,7 +86,7 @@ input::placeholder {
 }
 
 .option:hover {
-    background-color: rgb(73, 108, 146);
+    background-color: rgb(115, 144, 79);
 }
 
 .regionText{
@@ -106,4 +106,13 @@ input::placeholder {
     background: none;
     cursor: pointer;
     padding: 0;
+}
+
+.hint {
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+}
+
+.hint span {
+    color: rgba(255,255,255,0.7);
 }

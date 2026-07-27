@@ -70,6 +70,8 @@ The application integrates with the Riot Games API to fetch real-time player and
 - Uses Next.js App Router server components to fetch Riot API data directly without unnecessary client-side requests
 - Client components are isolated to interactive UI elements only
 - Parallelized API requests with `Promise.all` to reduce match loading time
+- Lazy loads detailed match information only when requested, reducing unnecessary API calls and improving initial page performance
+- Implemented infinite scrolling for match history, loading additional matches incrementally as users browse
 
 ### Service Layer
 - Dedicated service modules handle:

@@ -94,9 +94,11 @@ export default function SearchSummoner() {
 
           </form>
 
-          <p className = {styles.text}>
-            League of Legends analytics platform
+          <p className={styles.hint}>
+            Enter Riot ID: <span>GameName#TagLine (e.g. dun#na1)</span>
           </p>
+
+ 
 
       </div>
 
