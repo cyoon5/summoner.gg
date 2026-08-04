@@ -17,7 +17,6 @@ export async function GET(request: Request){
     
     const rankInfoPreview = await getSummonerRankPreview(platform, puuid);
 
-
     return NextResponse.json({
         rankInfoPreview
     })

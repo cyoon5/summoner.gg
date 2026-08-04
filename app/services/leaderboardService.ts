@@ -1,4 +1,4 @@
-import { ApexLeague, ApexLeagueEntry, leaderboardEntry } from "../types/leaderboard";
+import { AccountInfo, ApexLeague, ApexLeagueEntry, leaderboardEntry } from "../types/leaderboard";
 import { REGION_MAPPING } from "./constants";
 const api_key = process.env.RIOT_API_KEY;
 
@@ -15,7 +15,6 @@ async function getChallengerLeagues(region: string, queue: string): Promise<Apex
 
     return await response.json();    
 }
-
 
 async function getGrandmasterLeagues(region: string, queue: string): Promise<ApexLeague>{
 
@@ -45,11 +44,7 @@ async function getMasterLeagues(region: string, queue: string): Promise<ApexLeag
     return await response.json();    
 }
 
-
-
 async function getLeaderboard(region: string, queue: string, start: number, count: number): Promise<leaderboardEntry[]>{
-
-
 
     const [
             challengerLeagues, 
@@ -71,19 +66,18 @@ async function getLeaderboard(region: string, queue: string, start: number, coun
         return await getAccountInfo(entry.puuid, region)
     })
 
-    const leaderboardAccounts = await Promise.all(promises);
+    const leaderboardAccounts: AccountInfo[] = await Promise.all(promises);
 
-    //currently only works on first page 
     const leaderboardEntries = leaderboardAccounts.map((p,i) => {
         const entry: leaderboardEntry = {
             puuid: p.puuid,
             gameName: p.gameName,
             tagLine: p.tagLine,
-            tier: apexLeagues[i].tier,
-            division: apexLeagues[i].division,
-            leaguePoints: apexLeagues[i].leaguePoints,
-            wins: apexLeagues[i].wins,
-            losses: apexLeagues[i].losses,
+            tier: apexLeagues[i + start].tier,
+            division: apexLeagues[i + start].division,
+            leaguePoints: apexLeagues[i + start].leaguePoints,
+            wins: apexLeagues[i + start].wins,
+            losses: apexLeagues[i + start].losses,
             region: region
         }
         return entry;
@@ -93,7 +87,7 @@ async function getLeaderboard(region: string, queue: string, start: number, coun
     
 }
 
-async function getAccountInfo(puuid: string, region: string){
+async function getAccountInfo(puuid: string, region: string): Promise<AccountInfo>{
 
     if(!api_key)
         throw new Error("Missing api key");

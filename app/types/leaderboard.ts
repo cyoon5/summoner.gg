@@ -28,3 +28,9 @@ export type ApexLeague={
     queue: string;
     entries: ApexLeagueEntry[];
 }
+
+export type AccountInfo={
+    puuid: string;
+    gameName: string;
+    tagLine: string;
+}
