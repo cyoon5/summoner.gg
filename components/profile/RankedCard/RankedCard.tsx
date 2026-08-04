@@ -2,9 +2,6 @@ import { RankedProp } from "@/app/types/ranked"
 import styles from "./RankedCard.module.css";
 import Image from "next/image";
 
-
-
-
 export default function RankedCard(prop: RankedProp){
 
     if(!prop.data)

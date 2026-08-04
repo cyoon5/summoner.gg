@@ -7,10 +7,6 @@ import { useState } from "react";
 
 export default function MatchCardDetail(prop: MatchCardDetailProp){
 
-
-
-
-
     return(
 
         

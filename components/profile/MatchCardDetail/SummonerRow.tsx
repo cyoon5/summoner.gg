@@ -17,9 +17,9 @@ export default function SummonerRow(prop: SummonerRowProp){
 
 
 
-    useEffect(() => { //Currently, collapsing and re-expanding will re-fetch
+    useEffect(() => {
 
-        const fetchRankPreview = async() =>{
+        const fetchRankPreview = async() => {
             const res = await fetch(`/api/ranked/?puuid=${prop.participant.puuid}&platform=${prop.platform}`);
             const data =  await res.json();
             setSummonerRank(data.rankInfoPreview);
