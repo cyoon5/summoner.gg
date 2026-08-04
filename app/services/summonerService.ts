@@ -20,8 +20,8 @@ export async function getSummoner(input: SummonerData): Promise<SummonerProfile>
     if (!routing) 
         throw new Error(`Invalid platform: ${platform}`);
 
-    const riotId = `https://${routing}.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${gameName}/${tagLine}`;
-    const response = await fetch(riotId, {headers: {"X-Riot-Token": api_key}});
+    const accountDataLink = `https://${routing}.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${gameName}/${tagLine}`;
+    const response = await fetch(accountDataLink, {headers: {"X-Riot-Token": api_key}});
 
 
     if(response.status === 404)

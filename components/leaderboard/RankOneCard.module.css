@@ -1,0 +1,16 @@
+.container{
+    display: flex;
+}
+
+.leaderboardRank{
+    color: gold;
+}
+
+.accountInfoContainer{
+    display: flex;
+}
+
+.accountInfo{
+    display: flex;
+    flex-direction: column;
+}

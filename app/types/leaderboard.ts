@@ -8,6 +8,7 @@ export type leaderboardEntry={
     wins: number;
     losses: number;
     region: string;
+    leaderboardRanking: number;
 }
 
 export type ApexLeagueEntry={
@@ -34,3 +35,9 @@ export type AccountInfo={
     gameName: string;
     tagLine: string;
 }
+
+export type PodiumPlayers = leaderboardEntry & {
+    profileIconUrl: string;
+    summonerLevel: number;
+}
+

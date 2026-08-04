@@ -78,7 +78,8 @@ async function getLeaderboard(region: string, queue: string, start: number, coun
             leaguePoints: apexLeagues[i + start].leaguePoints,
             wins: apexLeagues[i + start].wins,
             losses: apexLeagues[i + start].losses,
-            region: region
+            region: region,
+            leaderboardRanking: i
         }
         return entry;
     })
@@ -86,6 +87,7 @@ async function getLeaderboard(region: string, queue: string, start: number, coun
     return leaderboardEntries;
     
 }
+
 
 async function getAccountInfo(puuid: string, region: string): Promise<AccountInfo>{
 
@@ -98,6 +100,4 @@ async function getAccountInfo(puuid: string, region: string): Promise<AccountInf
     return await response.json();
 }
 
-
-
-export {getChallengerLeagues, getLeaderboard}
+export {getLeaderboard}

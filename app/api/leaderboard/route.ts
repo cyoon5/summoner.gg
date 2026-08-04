@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getLeaderboard } from '@/app/services/leaderboardService';
 
-export default async function GET(request: Request){
+export async function GET(request: Request){
 
     const url =  new URL(request.url);
     const searchParams = url.searchParams;

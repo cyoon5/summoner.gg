@@ -1,0 +1,7 @@
+body{
+    background-color: #111111;
+}
+.leaderboardContainer{
+    display: flex;
+    flex-direction: column;
+}
