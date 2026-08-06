@@ -5,6 +5,7 @@ import styles from "./page.module.css"
 import { useEffect, useState } from "react"
 import { leaderboardEntry } from "../types/leaderboard";
 import RankOneCard from "@/components/leaderboard/RankOneCard";
+import PodiumCard from "@/components/leaderboard/PodiumCard";
 
 export default function Leaderboard(){
 
@@ -25,31 +26,61 @@ export default function Leaderboard(){
         
     }, [page, region, queue]);
 
+    const rankOne = summoners[0];
+    const rankTwo = summoners[1];
+    const rankThree = summoners[2];
 
 
     return(
+        
         <div className = {styles.leaderboardContainer}>
-            <h1> Leaderboards </h1>
-            {
-                summoners.map((p,i) => 
-                    <RankOneCard 
-                        key = {p.puuid}
-                        puuid = {p.puuid} 
-                        gameName = {p.gameName}
-                        tagLine= {p.tagLine}
-                        tier={p.tier}
-                        division={p.division}
-                        leaguePoints={p.leaguePoints}
-                        wins={p.wins}
-                        losses={p.losses}
-                        region={p.region}
-                        profileIconUrl={"https://ddragon.leagueoflegends.com/cdn/16.15.1/img/profileicon/1430.png"}
-                        summonerLevel={555}
-                        leaderboardRanking={i}
-                    />
 
+            <div className = {styles.content}>
+
+            </div>
+
+            <h1> Leaderboards </h1>
+            { 
+                rankOne && (
+                    <RankOneCard 
+                        {...rankOne}
+                        summonerLevel={555}
+                        profileIconUrl="https://ddragon.leagueoflegends.com/cdn/16.15.1/img/profileicon/1555.png"
+                    />
                 )
             }
+
+            <div className = {styles.podium}>
+                {
+                    rankTwo && (
+                        <PodiumCard 
+                            {...rankTwo}
+                            summonerLevel={555}
+                            profileIconUrl="https://ddragon.leagueoflegends.com/cdn/16.15.1/img/profileicon/1555.png"
+                        />
+                    )
+                }
+
+                {
+                    rankThree && (
+                        <PodiumCard 
+                            {...rankThree}
+                            summonerLevel={555}
+                            profileIconUrl="https://ddragon.leagueoflegends.com/cdn/16.15.1/img/profileicon/1555.png"
+                        />
+                    )
+                }
+                
+            </div>
+
+            <div className = {styles.leaderboardRows}>
+                {
+                    
+                }
+
+            </div>
+                
+          
             
 
         </div>

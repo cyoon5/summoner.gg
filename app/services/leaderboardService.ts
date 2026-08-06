@@ -79,7 +79,7 @@ async function getLeaderboard(region: string, queue: string, start: number, coun
             wins: apexLeagues[i + start].wins,
             losses: apexLeagues[i + start].losses,
             region: region,
-            leaderboardRanking: i
+            leaderboardRanking: (i + start) + 1
         }
         return entry;
     })

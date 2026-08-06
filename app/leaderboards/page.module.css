@@ -4,4 +4,17 @@ body{
 .leaderboardContainer{
     display: flex;
     flex-direction: column;
+    align-items: center;
+}
+
+.podium{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    justify-content: center;
+}
+
+.leaderboardRows{
+    display: flex;
+    flex-direction: column;
 }

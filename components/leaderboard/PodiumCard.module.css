@@ -1,0 +1,95 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    font-family: 'Barlow', monospace;
+    align-items: start;
+    background-color: rgb(33, 34, 33);
+    border-radius: 5px;
+    padding: 20px;
+    min-width: 60px;
+    gap: 10px;
+}
+
+.accountInfoContainer{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rankInfoContainer{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.leaderboardRank{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ff9b00;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-right: 30px;
+    margin-left: 15px;
+}
+
+.gameName{
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0px;
+}
+.tagLine{
+    font-weight: bold;
+    color: grey;
+    margin: 0px;
+}
+
+.tier{
+    margin: 0px;
+    font-weight: bold;
+}
+
+.lp{
+    color: grey;
+}
+
+.rankContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+.playerRecord{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.accountInfo{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.winRate, .winlossCount{
+    margin: 0px;
+}
+
+.winRate{
+    font-weight: bold;
+}
+
+.winlossCount{
+        color: grey;
+}
+
+.emblem{
+    height: 50px;
+    width: 50px;
+}
+
+.profileIcon{
+    width: 50px;
+    height: 50px;
+    border-radius: 3px;
+    border: 2px #ff9b00 solid;
+}
