@@ -7,6 +7,12 @@ body{
     align-items: center;
 }
 
+.summoners{
+    display:flex;
+    flex-direction: column;
+    min-width: 70%;
+}
+
 .podium{
     display: grid;
     grid-template-columns: 1fr 1fr;

@@ -35,50 +35,52 @@ export default function Leaderboard(){
         
         <div className = {styles.leaderboardContainer}>
 
-            <div className = {styles.content}>
-
-            </div>
-
             <h1> Leaderboards </h1>
-            { 
-                rankOne && (
-                    <RankOneCard 
-                        {...rankOne}
-                        summonerLevel={555}
-                        profileIconUrl="https://ddragon.leagueoflegends.com/cdn/16.15.1/img/profileicon/1555.png"
-                    />
-                )
-            }
 
-            <div className = {styles.podium}>
-                {
-                    rankTwo && (
-                        <PodiumCard 
-                            {...rankTwo}
+            <div className = {styles.summoners}>
+                { 
+                    rankOne && (
+                        <RankOneCard 
+                            {...rankOne}
                             summonerLevel={555}
-                            profileIconUrl="https://ddragon.leagueoflegends.com/cdn/16.15.1/img/profileicon/1555.png"
+                            profileIconUrl="https://ddragon.leagueoflegends.com/cdn/16.15.1/img/profileicon/1113.png"
                         />
                     )
                 }
 
-                {
-                    rankThree && (
-                        <PodiumCard 
-                            {...rankThree}
-                            summonerLevel={555}
-                            profileIconUrl="https://ddragon.leagueoflegends.com/cdn/16.15.1/img/profileicon/1555.png"
-                        />
-                    )
-                }
-                
-            </div>
+                <div className = {styles.podium}>
+                    {
+                        rankTwo && (
+                            <PodiumCard 
+                                {...rankTwo}
+                                summonerLevel={555}
+                                profileIconUrl="https://ddragon.leagueoflegends.com/cdn/16.15.1/img/profileicon/1225.png"
+                            />
+                        )
+                    }
 
-            <div className = {styles.leaderboardRows}>
+                    {
+                        rankThree && (
+                            <PodiumCard 
+                                {...rankThree}
+                                summonerLevel={555}
+                                profileIconUrl="https://ddragon.leagueoflegends.com/cdn/16.15.1/img/profileicon/1241.png"
+                            />
+                        )
+                    }
+
+                 </div>
+
+                <div className = {styles.leaderboardRows}>
                 {
                     
                 }
+                </div>
+                
 
+    
             </div>
+
                 
           
             
