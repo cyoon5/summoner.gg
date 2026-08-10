@@ -17,24 +17,31 @@ export default function PodiumCard(props: PodiumPlayers){
             
             <div className = {styles.accountInfoContainer}>
 
-                <div className = {styles.leaderboardRank}> 
+                <div className = {props.leaderboardRanking == 2? styles.leaderboardRankTwo : styles.leaderboardRankThree}> 
                     {props.leaderboardRanking}
                 </div>
 
-                <Image
-                    className = {styles.profileIcon}
-                    src = {props.profileIconUrl}
-                    alt = "Profile Icon"
-                    width = {50}
-                    height = {50}
-                />
 
                 <div className = {styles.accountInfo}>
-                    <span 
-                        onClick={()=> router.push(`/profile/${props.region}/${props.gameName}/${props.tagLine}`)}
-                        className = {styles.gameName}>{props.gameName}
-                    </span>
-                    <span className = {styles.tagLine}>#{props.tagLine}</span>
+
+                    <Image
+                        className = {styles.profileIcon}
+                        src = {props.profileIconUrl}
+                        alt = "Profile Icon"
+                        width = {50}
+                        height = {50}
+                    />
+
+                    <div className = {styles.nameTag}>
+                        <span 
+                            onClick={()=> router.push(`/profile/${props.region}/${props.gameName}/${props.tagLine}`)}
+                            className = {styles.gameName}>{props.gameName}
+                        </span>
+
+                        <span className = {styles.tagLine}>#{props.tagLine}</span>
+
+                    </div>
+     
                 </div>
 
             </div>

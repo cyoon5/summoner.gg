@@ -1,6 +1,5 @@
 'use client'
 
-import { getLeaderboard } from "@/app/services/leaderboardService"
 import styles from "./page.module.css"
 import { useEffect, useState } from "react"
 import { leaderboardEntry } from "../types/leaderboard";
@@ -37,18 +36,19 @@ export default function Leaderboard(){
 
             <h1> Leaderboards </h1>
 
-            <div className = {styles.summoners}>
-                { 
-                    rankOne && (
-                        <RankOneCard 
-                            {...rankOne}
-                            summonerLevel={555}
-                            profileIconUrl="https://ddragon.leagueoflegends.com/cdn/16.15.1/img/profileicon/1113.png"
-                        />
-                    )
-                }
+            <div className = {styles.leaderboardPlayers}>
 
                 <div className = {styles.podium}>
+                    
+                    { 
+                        rankOne && (
+                            <RankOneCard 
+                                {...rankOne}
+                                summonerLevel={555}
+                                profileIconUrl="https://ddragon.leagueoflegends.com/cdn/16.15.1/img/profileicon/1113.png"
+                            />
+                        )
+                    }
                     {
                         rankTwo && (
                             <PodiumCard 
@@ -71,10 +71,10 @@ export default function Leaderboard(){
 
                  </div>
 
-                <div className = {styles.leaderboardRows}>
-                {
-                    
-                }
+                <div className = {styles.leaderboardRowContainer}>
+                    {
+
+                    }
                 </div>
                 
 

@@ -2,19 +2,19 @@
     display: flex;
     flex-direction: column;
     font-family: 'Barlow', monospace;
-    align-items: start;
+    align-items: center;
     background-color: rgb(33, 34, 33);
     border-radius: 5px;
+    box-sizing: border-box;
+    width: 100%;
     padding: 20px;
-    min-width: 60px;
-    max-width: 500px;
     gap: 10px;
 }
 
 .accountInfoContainer{
-    display: flex;
+    display: grid;
+    grid-template-columns: 50px 200px;
     align-items: center;
-    gap: 10px;
 }
 
 .rankInfoContainer{
@@ -23,15 +23,16 @@
     gap: 20px;
 }
 
-.leaderboardRank{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #ff9b00;
+.leaderboardRankTwo{
+    color: #cfc8c8;
     font-size: 2em;
     font-weight: bold;
-    margin-right: 30px;
-    margin-left: 15px;
+}
+
+.leaderboardRankThree{
+    color: rgb(159, 96, 3);
+    font-size: 2em;
+    font-weight: bold;
 }
 
 .gameName{
@@ -67,9 +68,8 @@
 
 .accountInfo{
     display: flex;
-    flex-direction: column;
+    gap: 10px;
 }
-
 
 .winRate, .winlossCount{
     margin: 0px;
@@ -93,4 +93,14 @@
     height: 50px;
     border-radius: 3px;
     border: 2px #ff9b00 solid;
+}
+
+.nameTag{
+    display: flex;
+    flex-direction: column;
+}
+
+.gameName:hover{
+    text-decoration: underline;
+    cursor: pointer
 }

@@ -7,20 +7,25 @@ body{
     align-items: center;
 }
 
-.summoners{
+.leaderboardPlayers{
     display:flex;
     flex-direction: column;
-    min-width: 70%;
+    width: 60%;
+    max-width: 900px;
 }
 
 .podium{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 10px;
-    justify-content: center;
 }
 
-.leaderboardRows{
+.podium > :first-child {
+    grid-column: 1 / -1;
+}
+
+.leaderboardRowContainer{
     display: flex;
     flex-direction: column;
+    background-color: red;
 }
