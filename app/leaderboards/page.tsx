@@ -36,12 +36,19 @@ export default function Leaderboard(){
         
         <div className = {styles.leaderboardContainer}>
 
+
             <h1> Leaderboards </h1>
+
+
+            
 
             <div className = {styles.leaderboardPlayers}>
 
+                {summoners.length == 0 && <div className={styles.loadingSpinner}></div>}
+
                 <div className = {styles.podium}>
                     
+
                     { 
                         rankOne && (
                             <RankOneCard 
@@ -73,42 +80,43 @@ export default function Leaderboard(){
 
                  </div>
 
-                <div className = {styles.leaderboardRowContainer}>
-
                 {
+                     summoners.length != 0 && <div className = {styles.leaderboardRowContainer}>
 
-                    rankOne && <div className = {styles.leaderboardHeader}>
+                        {
 
-                        <div className = {styles.leaderboardRank}> Rank </div>
-                        <div className = {styles.summoner}> Summoner </div>
-                        <div className = {styles.region}> Region </div>
-                        <div className = {styles.tier}> Tier </div>
-                        <div className = {styles.lp}> LP </div>
-                        <div className = {styles.winrate}> Win Rate </div>  
+                        <div className = {styles.leaderboardHeader}>
+
+                                <div className = {styles.leaderboardRank}> Rank </div>
+                                <div className = {styles.summoner}> Summoner </div>
+                                <div className = {styles.region}> Region </div>
+                                <div className = {styles.tier}> Tier </div>
+                                <div className = {styles.lp}> LP </div>
+                                <div className = {styles.winrate}> Win Rate </div>  
+
+                            </div>
+                        }    
+
+                        {   
+                            regularSummoners.map(p => 
+                                <LeaderboardCard 
+                                    key = {p.puuid}
+                                    puuid={p.puuid} 
+                                    gameName={p.gameName} 
+                                    tagLine={p.tagLine} 
+                                    tier={p.tier} 
+                                    division={p.division} 
+                                    leaguePoints={p.leaguePoints} 
+                                    wins={p.wins} 
+                                    losses={p.losses} 
+                                    region={p.region} 
+                                    leaderboardRanking={p.leaderboardRanking}                                            
+                                />
+                            )
+                        }
 
                     </div>
-                }    
-
-                    {   
-                        regularSummoners.map(p => 
-                            <LeaderboardCard 
-                                key = {p.puuid}
-                                puuid={p.puuid} 
-                                gameName={p.gameName} 
-                                tagLine={p.tagLine} 
-                                tier={p.tier} 
-                                division={p.division} 
-                                leaguePoints={p.leaguePoints} 
-                                wins={p.wins} 
-                                losses={p.losses} 
-                                region={p.region} 
-                                leaderboardRanking={p.leaderboardRanking}                                            
-                            />
-                        )
-                    }
-
-                </div>
-                
+                } 
 
     
             </div>
