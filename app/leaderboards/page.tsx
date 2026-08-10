@@ -7,6 +7,7 @@ import RankOneCard from "@/components/leaderboard/RankOneCard";
 import PodiumCard from "@/components/leaderboard/PodiumCard";
 import LeaderboardCard from "@/components/leaderboard/LeaderboardCard";
 
+
 export default function Leaderboard(){
 
     const [page, setPage] = useState(1);
@@ -74,7 +75,9 @@ export default function Leaderboard(){
 
                 <div className = {styles.leaderboardRowContainer}>
 
-                    <div className = {styles.leaderboardHeader}>
+                {
+
+                    rankOne && <div className = {styles.leaderboardHeader}>
 
                         <div className = {styles.leaderboardRank}> Rank </div>
                         <div className = {styles.summoner}> Summoner </div>
@@ -84,6 +87,7 @@ export default function Leaderboard(){
                         <div className = {styles.winrate}> Win Rate </div>  
 
                     </div>
+                }    
 
                     {   
                         regularSummoners.map(p => 
@@ -110,7 +114,9 @@ export default function Leaderboard(){
             </div>
 
                 
-          
+            <div className = {styles.page}>
+                
+            </div>
             
 
         </div>

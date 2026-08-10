@@ -13,7 +13,7 @@ export default function LeaderboardCard(props: leaderboardEntry){
 
     return(
 
-        <div className = {props.leaderboardRanking%2 == 0? styles.container1 : styles.container2}>
+        <div className = {props.leaderboardRanking%2 == 0? styles.container2 : styles.container1}>
 
             <div className = {styles.leaderboardRank}>
                 {props.leaderboardRanking}

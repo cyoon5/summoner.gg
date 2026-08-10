@@ -23,7 +23,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #ff9b00;
+    color: gold;
     font-size: 3rem;
     font-weight: bold;
     padding: 0px 20px; 
@@ -44,6 +44,7 @@
     display: flex;
     align-items: center;
     gap: 20px;
+    color: rgb(255, 128, 0);
 }
 
 .accountInfo{
