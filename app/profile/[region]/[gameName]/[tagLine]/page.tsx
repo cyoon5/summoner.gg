@@ -32,7 +32,7 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
 
     
     return(
-        <>
+        <div className = {styles.profileContainer}>
             <div className = {styles.summonerInfo}>
 
                     <div className = {styles.iconLvl}>
@@ -102,6 +102,6 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
 
 
             </div>
-        </>
+        </div>
     )
 }

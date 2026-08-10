@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 import { leaderboardEntry } from "../types/leaderboard";
 import RankOneCard from "@/components/leaderboard/RankOneCard";
 import PodiumCard from "@/components/leaderboard/PodiumCard";
+import LeaderboardCard from "@/components/leaderboard/LeaderboardCard";
 
 export default function Leaderboard(){
 
@@ -28,7 +29,7 @@ export default function Leaderboard(){
     const rankOne = summoners[0];
     const rankTwo = summoners[1];
     const rankThree = summoners[2];
-
+    const regularSummoners = page == 1? summoners.slice(3) : summoners;
 
     return(
         
@@ -72,9 +73,36 @@ export default function Leaderboard(){
                  </div>
 
                 <div className = {styles.leaderboardRowContainer}>
-                    {
 
+                    <div className = {styles.leaderboardHeader}>
+
+                        <div className = {styles.leaderboardRank}> Rank </div>
+                        <div className = {styles.summoner}> Summoner </div>
+                        <div className = {styles.region}> Region </div>
+                        <div className = {styles.tier}> Tier </div>
+                        <div className = {styles.lp}> LP </div>
+                        <div className = {styles.winrate}> Win Rate </div>  
+
+                    </div>
+
+                    {   
+                        regularSummoners.map(p => 
+                            <LeaderboardCard 
+                                key = {p.puuid}
+                                puuid={p.puuid} 
+                                gameName={p.gameName} 
+                                tagLine={p.tagLine} 
+                                tier={p.tier} 
+                                division={p.division} 
+                                leaguePoints={p.leaguePoints} 
+                                wins={p.wins} 
+                                losses={p.losses} 
+                                region={p.region} 
+                                leaderboardRanking={p.leaderboardRanking}                                            
+                            />
+                        )
                     }
+
                 </div>
                 
 

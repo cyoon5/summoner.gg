@@ -1,19 +1,20 @@
+body{
+    background-color: #111111;
+}
+
 .icon{
     border-radius: 8px;
     width: 100px;
     height: 100px;
     border: 1px solid gray;
 }
-body{
-    background-color: rgb(0, 0, 0);
-}
 
 .container{
     display: flex;
     flex-direction: row;
     gap: 2em;
-    
 }
+
 .statsCol, .rankedBox{
     display: flex;
     flex-direction: column;
@@ -22,7 +23,7 @@ body{
 }
 
 .statsBox{
-    background-color: #0f0f0f;
+    background-color: rgb(33, 34, 33);
     padding: 1em;
     border-radius: 5px;
     text-align: start;
@@ -38,6 +39,7 @@ body{
     align-items: flex-start;
     gap: 30px;
     margin: 50px 50px 0px 120px;
+    font-family: 'Barlow', monospace;
 }
 
 .iconLvl{

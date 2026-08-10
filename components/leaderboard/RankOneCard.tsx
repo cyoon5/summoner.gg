@@ -7,10 +7,7 @@ import { useRouter } from 'next/navigation'
 
 export default function RankOneCard(props: PodiumPlayers){
   const router = useRouter()
-
-
-
-
+  
     return(
 
         <div className = {styles.container}>

@@ -1,0 +1,25 @@
+.container1{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    padding: 20px 0px;
+    align-items: center;
+    justify-items: center;
+}
+
+.container2{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    padding: 20px 0px;
+    align-items: center;
+    justify-items: center;
+    background-color: rgb(43, 43, 43)
+}
+
+.leaderboardRank, .tier, .gameName{
+    font-weight: bold;
+}
+
+.gameName:hover{
+    text-decoration: underline;
+    cursor: pointer
+}
