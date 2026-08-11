@@ -22,6 +22,8 @@ export default function Leaderboard(){
     const endPage = Math.min(totalPages, startPage + visiblePages - 1);
 
     useEffect(() => {
+        setLoading(true);
+
         const fetchSummoners = async() => {
             const res = await fetch(`api/leaderboard/?region=${region}&queue=${queue}&page=${page}`);
             const data = await res.json();
@@ -57,7 +59,7 @@ export default function Leaderboard(){
                     
 
                     { 
-                        (page == 1 && rankOne) && (
+                        (!loading && page === 1 && rankOne) && (
                             <RankOneCard 
                                 {...rankOne}
                                 summonerLevel={555}
@@ -66,7 +68,7 @@ export default function Leaderboard(){
                         )
                     }
                     {
-                        (page == 1 && rankTwo) && (
+                        (!loading && page === 1 && rankTwo) && (
                             <PodiumCard 
                                 {...rankTwo}
                                 summonerLevel={555}
@@ -76,7 +78,7 @@ export default function Leaderboard(){
                     }
 
                     {
-                        (page == 1 && rankThree) && (
+                        (!loading && page ===1 && rankThree) && (
                             <PodiumCard 
                                 {...rankThree}
                                 summonerLevel={555}
@@ -128,7 +130,7 @@ export default function Leaderboard(){
                             {
                                 page != 1 && <button 
                                     className = {styles.pageBtn}
-                                    onClick = {()=> {setPage(p => p-1); setLoading(true)}}
+                                    onClick = {()=> setPage(p => p-1)}
                                 >
                                     Prev
                                 </button>
@@ -144,7 +146,7 @@ export default function Leaderboard(){
                                         <button
                                             className = {page === pageNumber? styles.currentPageBtn : styles.pageBtn}
                                             key={pageNumber}
-                                            onClick={() => {setPage(pageNumber); setLoading(true)}}
+                                            onClick={() => setPage(pageNumber)}
                                         >
                                             {pageNumber}
                                         </button>
@@ -155,7 +157,7 @@ export default function Leaderboard(){
                             {
                                 page != totalPages && <button 
                                     className = {styles.pageBtn}
-                                    onClick = {()=> {setPage(p => p+1); setLoading(true)}}
+                                    onClick = {()=> setPage(p => p+1)}
                                 >
                                     Next
                                 </button>
