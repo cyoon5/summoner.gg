@@ -2,7 +2,7 @@
 
 import { leaderboardEntry } from "@/app/types/leaderboard"
 import styles from "./LeaderboardCard.module.css"
-import { regions } from "@/app/services/constants"
+import { regions } from "@/app/constants"
 import { useRouter } from 'next/navigation'
 
 

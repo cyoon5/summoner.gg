@@ -1,4 +1,4 @@
-import { SUMMONER_SPELL_MAP } from "./constants";
+import { SUMMONER_SPELL_MAP } from "../constants";
 
 //Module level call, s.t. it does not run on every function call.
 const patch = await getCurrentPatch();

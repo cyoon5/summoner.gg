@@ -130,7 +130,13 @@ export const QUEUE_MAP = new Map<number, string>([
   [2300, "Brawl"],
   [2400, "ARAM Mayhem"],
 
+]);
+
+export const LEADERBOARD_QUEUE_MAP = new Map<string, string>([
   
+  ["RANKED_SOLO_5x5", "Solo"],
+  ["RANKED_FLEX_SR", "Flex"],
+
 ]);
 
 

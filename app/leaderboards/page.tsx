@@ -6,6 +6,7 @@ import { leaderboardEntry } from "../types/leaderboard";
 import RankOneCard from "@/components/leaderboard/RankOneCard";
 import PodiumCard from "@/components/leaderboard/PodiumCard";
 import LeaderboardCard from "@/components/leaderboard/LeaderboardCard";
+import { LEADERBOARD_QUEUE_MAP, regions } from "../constants"
 
 
 export default function Leaderboard(){
@@ -16,10 +17,16 @@ export default function Leaderboard(){
     const [queue, setQueue] = useState("RANKED_SOLO_5x5");
     const [summoners, setSummoners] = useState<leaderboardEntry[]>([]);
     const [loading, setLoading] = useState(true);
+    const [regionOpen, setRegionOpen] = useState(false);
+    const [queueOpen, setQueueOpen] = useState(false);
+
+
     
     const visiblePages = 9;
     const startPage = Math.max(1, page-4);
     const endPage = Math.min(totalPages, startPage + visiblePages - 1);
+
+    const queues = ["RANKED_SOLO_5x5", "RANKED_FLEX_SR"];
 
     useEffect(() => {
         setLoading(true);
@@ -45,13 +52,66 @@ export default function Leaderboard(){
 
     return(
         
-        <div className = {styles.leaderboardContainer}>
-
+        <div className = {styles.container} onClick = {() => {setRegionOpen(false); setQueueOpen(false)}}>
 
             <h1> Leaderboards </h1>
 
 
-            <div className = {styles.leaderboardPlayers}>
+            <div className = {styles.leaderboardContainer}>
+
+                { !loading && <div className = {styles.filters}>
+
+                    <p>Filters</p>
+
+                    <div className={styles.dropdownButtonRegion} onClick={(e)=> {setRegionOpen(o => !o); setQueueOpen(false); e.stopPropagation()}}>
+
+                        <div>
+                            {regions.find(r => r.value === region)?.label} ▾
+                        </div>  
+                        
+                        {
+                        regionOpen && (<div className = {styles.regionOptions}>
+                            {
+                            regions.map(r => (
+                                <div 
+                                key = {r.value} 
+                                className = {styles.regionOption}
+                                onClick={(e) => { setRegionOpen(false); setRegion(r.value); setPage(1); e.stopPropagation();}}
+                                > 
+                                {r.label}
+                                </div>
+                            ))
+                            }
+                        </div>)
+                        }
+                        
+                    </div>   
+
+                    <div className={styles.dropdownButtonQueue} onClick={(e)=> {setQueueOpen(o => !o); setRegionOpen(false); e.stopPropagation()}}>
+
+                        <div className = {styles.regionText}>
+                            {LEADERBOARD_QUEUE_MAP.get(queue)} ▾
+                        </div>  
+                        
+                        {
+                        queueOpen && (<div className = {styles.queueOptions}>
+                            {
+                            queues.map(r => (
+                                <div 
+                                    key = {r}
+                                    className = {styles.queueOption}
+                                    onClick={(e) => { setQueueOpen(false); setQueue(r); setPage(1); e.stopPropagation();}}
+                                    > 
+                                    {LEADERBOARD_QUEUE_MAP.get(r)}
+                                </div>
+                            ))
+                            }
+                        </div>)
+                        }
+                        
+                    </div> 
+
+                </div>}
 
                 {loading && <div className={styles.loadingSpinner}></div>}
 

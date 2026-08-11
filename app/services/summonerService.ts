@@ -1,6 +1,6 @@
 import { SummonerData, SummonerProfile } from "../types/summoner";
 import {getProfileIconUrl} from "../services/dragonService";
-import { REGION_MAPPING } from "./constants";
+import { REGION_MAPPING } from "../constants";
 import { notFound } from 'next/navigation';
 
 

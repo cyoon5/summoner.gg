@@ -2,7 +2,7 @@ import { SummonerProfile } from "../types/summoner";
 import { ParticipantInfo, MatchInfo} from "../types/match";
 import { getChampionIconUrl, getItemIconUrl, getSummonerSpellIconUrl, getRuneIconUrl } from "./dragonService";
 import { getRelativeTime } from "../../lib/unixConverter";
-import { QUEUE_MAP } from "./constants";
+import { QUEUE_MAP } from "../constants";
 
 const api_key = process.env.RIOT_API_KEY;
 

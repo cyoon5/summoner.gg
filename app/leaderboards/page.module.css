@@ -1,7 +1,7 @@
 body{
     background-color: #111111;
 }
-.leaderboardContainer{
+.container{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -10,7 +10,7 @@ body{
     border-radius: 5px;
 }
 
-.leaderboardPlayers{
+.leaderboardContainer{
     display:flex;
     flex-direction: column;
     width: 60%;
@@ -87,7 +87,95 @@ body{
     text-decoration: underline;
     text-decoration-color: gold;
 }   
+
 .pageBtn:hover{
     cursor: pointer;
     text-decoration: underline;
+}
+
+.filters{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    background-color: rgb(33, 34, 33);
+    border-radius: 5px;
+    gap: 15px;
+    font-weight: bold;
+}
+
+.filters > p {
+    font-weight: normal;
+    margin-left: 20px;
+}
+
+.dropdownButtonRegion{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-color: rgb(72, 72, 71);
+    border-radius: 2px;
+    width: 60px;
+    height: 35px;
+    cursor: pointer;
+}
+
+.dropdownButtonQueue{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-color: rgb(72, 72, 71);
+    border-radius: 2px;
+    width: 90px;
+    height: 35px;
+    cursor: pointer;
+}
+
+.regionOptions {
+    position: absolute;
+    top: 110%;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: rgb(53, 54, 51);
+    border-radius: 2px;
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
+}
+
+.queueOptions {
+    position: absolute;
+    top: 110%;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: rgb(53, 54, 51);
+    border-radius: 2px;
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
+}
+
+.regionOption {
+    width: 60px;
+    height: 35px;
+    color: white;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.queueOption {
+    width: 90px;
+    height: 35px;
+    color: white;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.queueOption:hover, .regionOption:hover {
+    background-color: rgb(63, 63, 62);
 }

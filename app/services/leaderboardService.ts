@@ -1,5 +1,5 @@
 import { AccountInfo, ApexLeague, ApexLeagueEntry, leaderboardEntry, leaderboardResponse } from "../types/leaderboard";
-import { REGION_MAPPING } from "./constants";
+import { REGION_MAPPING } from "../constants";
 const api_key = process.env.RIOT_API_KEY;
 
 async function getChallengerLeagues(region: string, queue: string): Promise<ApexLeague>{

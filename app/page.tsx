@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useState } from "react";
 import parseSummoner from "../lib/parseSummoner";
 import { SummonerData } from "./types/summoner";
-import { regions } from "./services/constants";
+import { regions } from "./constants";
 import Image from 'next/image'
 
 
@@ -73,8 +73,6 @@ export default function SearchSummoner() {
                     }
                   </div>)
                 }
-           
-                
                 
               </div>
 
