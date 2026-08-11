@@ -19,6 +19,7 @@ export default function Leaderboard(){
     const [loading, setLoading] = useState(true);
     const [regionOpen, setRegionOpen] = useState(false);
     const [queueOpen, setQueueOpen] = useState(false);
+    const [searchInput, setSearchInput] = useState("");
 
 
     
@@ -48,6 +49,12 @@ export default function Leaderboard(){
     const rankThree = summoners[2];
     const regularSummoners = page == 1? summoners.slice(3) : summoners;
 
+
+    async function handleSubmit(e: React.SubmitEvent<HTMLFormElement>){
+        
+
+    }
+
     
 
     return(
@@ -59,59 +66,71 @@ export default function Leaderboard(){
 
             <div className = {styles.leaderboardContainer}>
 
-                { !loading && <div className = {styles.filters}>
+                { 
+                    !loading && <div className = {styles.filters}>
 
-                    <p>Filters</p>
+                        <p>Filters</p>
 
-                    <div className={styles.dropdownButtonRegion} onClick={(e)=> {setRegionOpen(o => !o); setQueueOpen(false); e.stopPropagation()}}>
+                        <div className={styles.dropdownButtonRegion} onClick={(e)=> {setRegionOpen(o => !o); setQueueOpen(false); e.stopPropagation()}}>
 
-                        <div>
-                            {regions.find(r => r.value === region)?.label} ▾
-                        </div>  
-                        
-                        {
-                        regionOpen && (<div className = {styles.regionOptions}>
+                            <div>
+                                {regions.find(r => r.value === region)?.label} ▾
+                            </div>  
+                            
                             {
-                            regions.map(r => (
-                                <div 
-                                key = {r.value} 
-                                className = {styles.regionOption}
-                                onClick={(e) => { setRegionOpen(false); setRegion(r.value); setPage(1); e.stopPropagation();}}
-                                > 
-                                {r.label}
-                                </div>
-                            ))
-                            }
-                        </div>)
-                        }
-                        
-                    </div>   
-
-                    <div className={styles.dropdownButtonQueue} onClick={(e)=> {setQueueOpen(o => !o); setRegionOpen(false); e.stopPropagation()}}>
-
-                        <div className = {styles.regionText}>
-                            {LEADERBOARD_QUEUE_MAP.get(queue)} ▾
-                        </div>  
-                        
-                        {
-                        queueOpen && (<div className = {styles.queueOptions}>
-                            {
-                            queues.map(r => (
-                                <div 
-                                    key = {r}
-                                    className = {styles.queueOption}
-                                    onClick={(e) => { setQueueOpen(false); setQueue(r); setPage(1); e.stopPropagation();}}
+                            regionOpen && (<div className = {styles.regionOptions}>
+                                {
+                                regions.map(r => (
+                                    <div 
+                                    key = {r.value} 
+                                    className = {styles.regionOption}
+                                    onClick={(e) => { setRegionOpen(false); setRegion(r.value); setPage(1); e.stopPropagation();}}
                                     > 
-                                    {LEADERBOARD_QUEUE_MAP.get(r)}
-                                </div>
-                            ))
+                                    {r.label}
+                                    </div>
+                                ))
+                                }
+                            </div>)
                             }
-                        </div>)
-                        }
-                        
-                    </div> 
+                            
+                        </div>   
 
-                </div>}
+                        <div className={styles.dropdownButtonQueue} onClick={(e)=> {setQueueOpen(o => !o); setRegionOpen(false); e.stopPropagation()}}>
+
+                            <div className = {styles.regionText}>
+                                {LEADERBOARD_QUEUE_MAP.get(queue)} ▾
+                            </div>  
+                            
+                            {
+                            queueOpen && (<div className = {styles.queueOptions}>
+                                {
+                                queues.map(r => (
+                                    <div 
+                                        key = {r}
+                                        className = {styles.queueOption}
+                                        onClick={(e) => { setQueueOpen(false); setQueue(r); setPage(1); e.stopPropagation();}}
+                                        > 
+                                        {LEADERBOARD_QUEUE_MAP.get(r)}
+                                    </div>
+                                ))
+                                }
+                            </div>)
+                            }
+                            
+                        </div> 
+
+                        <form onSubmit={handleSubmit} className={styles.searchForm}>
+                            <input type = "search" 
+                                className = {styles.searchbar} 
+                                placeholder = "Search Riot Id"
+                                autoComplete = "off" 
+                                onChange = {(e)=>setSearchInput(e.target.value)}>
+                            </input>
+                        </form>
+            
+
+                    </div>
+                }
 
                 {loading && <div className={styles.loadingSpinner}></div>}
 

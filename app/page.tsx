@@ -15,7 +15,7 @@ export default function SearchSummoner() {
   const [region, setRegion] = useState("na1");
   const [open, setOpen] = useState(false);
 
-  async function handleSubmit(e: React.ChangeEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
 
       e.preventDefault();
       const parsed = parseSummoner(userInput);
