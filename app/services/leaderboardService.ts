@@ -1,4 +1,4 @@
-import { AccountInfo, ApexLeague, ApexLeagueEntry, leaderboardEntry } from "../types/leaderboard";
+import { AccountInfo, ApexLeague, ApexLeagueEntry, leaderboardEntry, leaderboardResponse } from "../types/leaderboard";
 import { REGION_MAPPING } from "./constants";
 const api_key = process.env.RIOT_API_KEY;
 
@@ -44,7 +44,7 @@ async function getMasterLeagues(region: string, queue: string): Promise<ApexLeag
     return await response.json();    
 }
 
-async function getLeaderboard(region: string, queue: string, start: number, count: number): Promise<leaderboardEntry[]>{
+async function getLeaderboard(region: string, queue: string, start: number, count: number): Promise<leaderboardResponse>{
 
     const [
             challengerLeagues, 
@@ -61,6 +61,8 @@ async function getLeaderboard(region: string, queue: string, start: number, coun
     const grandmaster = grandmasterLeagues.entries.map(p =>({...p, tier: "grandmaster"}))
     const master = masterLeagues.entries.map(p =>({...p, tier: "master"}))
     const apexLeagues = [...challenger, ...grandmaster, ...master].sort((a,b) => b.leaguePoints - a.leaguePoints);
+    const totalEntries = apexLeagues.length;
+    const totalPages = Math.ceil(totalEntries/count);
 
     const promises = apexLeagues.slice(start,start + count).map(async (entry: ApexLeagueEntry) =>{
         return await getAccountInfo(entry.puuid, region)
@@ -84,7 +86,11 @@ async function getLeaderboard(region: string, queue: string, start: number, coun
         return entry;
     })
 
-    return leaderboardEntries;
+    return {
+        leaderboard: leaderboardEntries,
+        totalEntries: totalEntries,
+        totalPages: totalPages
+    };
     
 }
 

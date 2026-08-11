@@ -11,16 +11,23 @@ import LeaderboardCard from "@/components/leaderboard/LeaderboardCard";
 export default function Leaderboard(){
 
     const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
     const [region, setRegion] = useState("na1");
     const [queue, setQueue] = useState("RANKED_SOLO_5x5");
     const [summoners, setSummoners] = useState<leaderboardEntry[]>([]);
-
+    const [loading, setLoading] = useState(true);
+    
+    const visiblePages = 9;
+    const startPage = Math.max(1, page-4);
+    const endPage = Math.min(totalPages, startPage + visiblePages - 1);
 
     useEffect(() => {
         const fetchSummoners = async() => {
             const res = await fetch(`api/leaderboard/?region=${region}&queue=${queue}&page=${page}`);
             const data = await res.json();
             setSummoners(data.leaderboard);
+            setTotalPages(data.totalPages);
+            setLoading(false);
         }
 
         fetchSummoners();
@@ -32,6 +39,8 @@ export default function Leaderboard(){
     const rankThree = summoners[2];
     const regularSummoners = page == 1? summoners.slice(3) : summoners;
 
+    
+
     return(
         
         <div className = {styles.leaderboardContainer}>
@@ -40,17 +49,15 @@ export default function Leaderboard(){
             <h1> Leaderboards </h1>
 
 
-            
-
             <div className = {styles.leaderboardPlayers}>
 
-                {summoners.length == 0 && <div className={styles.loadingSpinner}></div>}
+                {loading && <div className={styles.loadingSpinner}></div>}
 
                 <div className = {styles.podium}>
                     
 
                     { 
-                        rankOne && (
+                        (page == 1 && rankOne) && (
                             <RankOneCard 
                                 {...rankOne}
                                 summonerLevel={555}
@@ -59,7 +66,7 @@ export default function Leaderboard(){
                         )
                     }
                     {
-                        rankTwo && (
+                        (page == 1 && rankTwo) && (
                             <PodiumCard 
                                 {...rankTwo}
                                 summonerLevel={555}
@@ -69,7 +76,7 @@ export default function Leaderboard(){
                     }
 
                     {
-                        rankThree && (
+                        (page == 1 && rankThree) && (
                             <PodiumCard 
                                 {...rankThree}
                                 summonerLevel={555}
@@ -81,11 +88,11 @@ export default function Leaderboard(){
                  </div>
 
                 {
-                     summoners.length != 0 && <div className = {styles.leaderboardRowContainer}>
+                    !loading &&  <div className = {styles.leaderboardRowContainer}>
 
                         {
 
-                        <div className = {styles.leaderboardHeader}>
+                            <div className = {styles.leaderboardHeader}>
 
                                 <div className = {styles.leaderboardRank}> Rank </div>
                                 <div className = {styles.summoner}> Summoner </div>
@@ -115,18 +122,50 @@ export default function Leaderboard(){
                             )
                         }
 
-                    </div>
-                } 
 
+                        <div className = {styles.pageContainer}>
+
+                            {
+                                page != 1 && <button 
+                                    className = {styles.pageBtn}
+                                    onClick = {()=> {setPage(p => p-1); setLoading(true)}}
+                                >
+                                    Prev
+                                </button>
+                            }
+
+                            {Array.from(
+                                { length: endPage - startPage + 1 },
+                                (_, i) => {
+
+                                    const pageNumber = startPage + i;
+                                    
+                                    return (
+                                        <button
+                                            className = {page === pageNumber? styles.currentPageBtn : styles.pageBtn}
+                                            key={pageNumber}
+                                            onClick={() => {setPage(pageNumber); setLoading(true)}}
+                                        >
+                                            {pageNumber}
+                                        </button>
+                                    );
+                                }
+                            )}
+
+                            {
+                                page != totalPages && <button 
+                                    className = {styles.pageBtn}
+                                    onClick = {()=> {setPage(p => p+1); setLoading(true)}}
+                                >
+                                    Next
+                                </button>
+                            }
+                        </div>
+
+                    </div>
+                }
     
             </div>
-
-                
-            <div className = {styles.page}>
-                
-            </div>
-            
-
         </div>
     )
 }

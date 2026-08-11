@@ -11,6 +11,12 @@ export type leaderboardEntry={
     leaderboardRanking: number;
 }
 
+export type leaderboardResponse={
+    leaderboard: leaderboardEntry[]
+    totalEntries: number,
+    totalPages: number;
+}
+
 export type ApexLeagueEntry={
     puuid: string;
     leaguePoints: number;

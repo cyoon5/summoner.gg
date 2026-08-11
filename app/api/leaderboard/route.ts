@@ -19,10 +19,13 @@ export async function GET(request: Request){
             {status: 400}
         );
     
-    const leaderboard = await getLeaderboard(region, queue, start, pageSize);
+    const result = await getLeaderboard(region, queue, start, pageSize);
 
     return NextResponse.json({
-        leaderboard: leaderboard,
-        page: page
+        leaderboard: result.leaderboard,
+        page: page,
+        pageSize: pageSize,
+        totalEntries: result.totalEntries,
+        totalPages: result.totalPages
     });
 }

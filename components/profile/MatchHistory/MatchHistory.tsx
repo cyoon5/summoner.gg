@@ -66,6 +66,7 @@ export default function MatchHistory(props: MatchHistoryProp){
             <div className = {styles.matchHolder}> 
             {
 
+
                 searchedSummoner.map((m, i) => 
                     m && <MatchCard
                         key = {m.matchId}
