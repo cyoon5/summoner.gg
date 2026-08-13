@@ -9,6 +9,8 @@ export type leaderboardEntry={
     losses: number;
     region: string;
     leaderboardRanking: number;
+    profileIconId?: number;
+    summonerLevel?: number;
 }
 
 export type leaderboardResponse={
@@ -40,6 +42,12 @@ export type AccountInfo={
     puuid: string;
     gameName: string;
     tagLine: string;
+}
+
+export type SummonerInfo={
+    puuid: string;
+    profileIconId: number;
+    summonerLevel: number;
 }
 
 export type PodiumPlayers = leaderboardEntry & {
