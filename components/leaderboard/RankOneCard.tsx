@@ -24,6 +24,7 @@ export default function RankOneCard(props: PodiumPlayers){
                     alt = "Profile Icon"
                     width = {50}
                     height = {50}
+                    priority
                 />
 
                 <div className = {styles.accountInfo}>

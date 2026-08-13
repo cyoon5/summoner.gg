@@ -30,6 +30,7 @@ export default function PodiumCard(props: PodiumPlayers){
                         alt = "Profile Icon"
                         width = {50}
                         height = {50}
+                        priority
                     />
 
                     <div className = {styles.nameTag}>
