@@ -9,6 +9,7 @@ export async function GET(request: Request){
     const region = searchParams.get('region');
     const queue = searchParams.get('queue');
     const page = Number(searchParams.get('page') ?? 1);
+    const searchedSummoner = searchParams.get('riotId');
 
     const pageSize = 10;
     const start = (page - 1) * pageSize;

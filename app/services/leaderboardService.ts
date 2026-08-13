@@ -44,28 +44,35 @@ async function getMasterLeagues(region: string, queue: string): Promise<ApexLeag
     return await response.json();    
 }
 
-async function getLeaderboard(region: string, queue: string, start: number, count: number): Promise<leaderboardResponse>{
+async function getApexLeagues(region: string, queue: string){
 
     const [
-            challengerLeagues, 
-            grandmasterLeagues, 
-            masterLeagues
-          ] = await Promise.all(
-          [
-            getChallengerLeagues(region, queue), 
-            getGrandmasterLeagues(region, queue), 
-            getMasterLeagues(region, queue)
-          ]);
+        challengerLeagues, 
+        grandmasterLeagues, 
+        masterLeagues
+    ] = await Promise.all([
+        getChallengerLeagues(region, queue), 
+        getGrandmasterLeagues(region, queue), 
+        getMasterLeagues(region, queue)
+    ]);
 
     const challenger = challengerLeagues.entries.map(p =>({...p, tier: "challenger"}));
     const grandmaster = grandmasterLeagues.entries.map(p =>({...p, tier: "grandmaster"}))
     const master = masterLeagues.entries.map(p =>({...p, tier: "master"}))
     const apexLeagues = [...challenger, ...grandmaster, ...master].sort((a,b) => b.leaguePoints - a.leaguePoints);
+
+    return apexLeagues;
+}
+
+async function getLeaderboard(region: string, queue: string, start: number, count: number): Promise<leaderboardResponse>{
+
+    const apexLeagues = await getApexLeagues(region, queue);
+
     const totalEntries = apexLeagues.length;
     const totalPages = Math.ceil(totalEntries/count);
 
-    const promises = apexLeagues.slice(start,start + count).map(async (entry: ApexLeagueEntry) =>{
-        return await getAccountInfo(entry.puuid, region)
+    const promises = apexLeagues.slice(start,start + count).map(async (entry: ApexLeagueEntry) => {
+        return await getAccountInfo(entry.puuid, region);
     })
 
     const leaderboardAccounts: AccountInfo[] = await Promise.all(promises);
@@ -94,6 +101,20 @@ async function getLeaderboard(region: string, queue: string, start: number, coun
     
 }
 
+async function findSummonerOnLeaderboard(region: string, queue: string, start: number, count: number, searchedRiotId?: string){
+
+    const apexLeagues = await getApexLeagues(region, queue);
+
+    if(searchedRiotId) {
+        const [gameName, tagLine] = searchedRiotId.split("-");
+        const puuid = await getAccountPuuid(region, gameName, tagLine);
+
+        const ladderRank = apexLeagues.findIndex((s: ApexLeagueEntry) => s.puuid === puuid) + 1;
+        const pageNumber = Math.ceil(ladderRank/count);
+    }
+    
+}
+
 
 async function getAccountInfo(puuid: string, region: string): Promise<AccountInfo>{
 
@@ -105,5 +126,17 @@ async function getAccountInfo(puuid: string, region: string): Promise<AccountInf
 
     return await response.json();
 }
+
+async function getAccountPuuid(region: string, gameName: string, tagLine: string) : Promise<string>{
+    if(!api_key)
+        throw new Error("Missing api key");
+
+    const puuidURL = `https://${REGION_MAPPING.get(region)}.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${gameName}/${tagLine}`;
+    const res = await fetch(puuidURL, {headers: {"X-Riot-Token": api_key}});
+    const data = await res.json();
+
+    return data.puuid;
+}
+
 
 export {getLeaderboard}

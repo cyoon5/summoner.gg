@@ -7,6 +7,7 @@ import RankOneCard from "@/components/leaderboard/RankOneCard";
 import PodiumCard from "@/components/leaderboard/PodiumCard";
 import LeaderboardCard from "@/components/leaderboard/LeaderboardCard";
 import { LEADERBOARD_QUEUE_MAP, regions } from "../constants"
+import parseSummoner from "@/lib/parseSummoner";
 
 
 export default function Leaderboard(){
@@ -51,7 +52,16 @@ export default function Leaderboard(){
 
 
     async function handleSubmit(e: React.SubmitEvent<HTMLFormElement>){
-        
+        e.preventDefault();
+
+        const parsedSummoner = parseSummoner(searchInput);
+        if(!parsedSummoner)
+            throw new Error("Enter in form of name#tag");
+
+        const formattedSummoner = `${parsedSummoner.gameName}-${parsedSummoner.tagLine}`;
+        const res = await fetch(`api/leaderboard/?region=${region}&queue=${queue}&riotId=${formattedSummoner}`);
+
+        //set page state etc and highlight name
 
     }
 

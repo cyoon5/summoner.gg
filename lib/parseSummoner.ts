@@ -16,7 +16,7 @@ export default function parseSummoner(input: string) : null | SearchInput {
         return null;
     
     return {
-            gameName: gameName, 
-            tagLine: tagLine,
-           };
+        gameName: gameName, 
+        tagLine: tagLine,
+    };
 }
