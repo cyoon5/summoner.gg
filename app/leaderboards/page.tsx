@@ -8,6 +8,7 @@ import PodiumCard from "@/components/leaderboard/PodiumCard";
 import LeaderboardCard from "@/components/leaderboard/LeaderboardCard";
 import { LEADERBOARD_QUEUE_MAP, regions } from "../constants"
 import parseSummoner from "@/lib/parseSummoner";
+import { getProfileIconUrl } from "../services/dragonService";
 
 
 export default function Leaderboard(){
@@ -189,7 +190,7 @@ export default function Leaderboard(){
                                 <RankOneCard 
                                     {...rankOne}
                                     summonerLevel={555}
-                                    profileIconUrl="https://ddragon.leagueoflegends.com/cdn/16.15.1/img/profileicon/1113.png"
+                                    profileIconUrl={getProfileIconUrl(rankOne.profileIconId!)}
                                 />
                             )
                         }
@@ -198,7 +199,7 @@ export default function Leaderboard(){
                                 <PodiumCard 
                                     {...rankTwo}
                                     summonerLevel={555}
-                                    profileIconUrl="https://ddragon.leagueoflegends.com/cdn/16.15.1/img/profileicon/1225.png"
+                                    profileIconUrl={getProfileIconUrl(rankTwo.profileIconId!)}
                                 />
                             )
                         }
@@ -208,7 +209,7 @@ export default function Leaderboard(){
                                 <PodiumCard 
                                     {...rankThree}
                                     summonerLevel={555}
-                                    profileIconUrl="https://ddragon.leagueoflegends.com/cdn/16.15.1/img/profileicon/1241.png"
+                                    profileIconUrl={getProfileIconUrl(rankThree.profileIconId!)}
                                 />
                             )
                         }
