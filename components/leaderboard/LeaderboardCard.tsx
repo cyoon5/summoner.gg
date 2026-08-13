@@ -1,25 +1,25 @@
 'use client'
 
-import { leaderboardEntry } from "@/app/types/leaderboard"
+import { leaderboardCardProps} from "@/app/types/leaderboard"
 import styles from "./LeaderboardCard.module.css"
 import { regions } from "@/app/constants"
 import { useRouter } from 'next/navigation'
 
 
 
-export default function LeaderboardCard(props: leaderboardEntry){
+export default function LeaderboardCard(props: leaderboardCardProps){
 
     const router = useRouter();
 
     return(
 
-        <div className = {props.leaderboardRanking%2 == 0? styles.container1 : styles.container2}>
+        <div className = {[props.leaderboardRanking%2 == 0? styles.container1 : styles.container2, props.highlighted ? styles.highlighted : ""].join(" ")}>
 
             <div className = {styles.leaderboardRank}>
                 {props.leaderboardRanking}
             </div>
 
-            <div className = {styles.gameName} onClick={()=> router.push(`/profile/${props.region}/${props.gameName}/${props.tagLine}`)}>
+            <div title = {`${props.gameName}#${props.tagLine}`} className = {styles.gameName} onClick={()=> router.push(`/profile/${props.region}/${props.gameName}/${props.tagLine}`)}>
                 {props.gameName}
             </div>
 

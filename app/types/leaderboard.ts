@@ -47,3 +47,6 @@ export type PodiumPlayers = leaderboardEntry & {
     summonerLevel: number;
 }
 
+export type leaderboardCardProps = leaderboardEntry & {
+    highlighted: boolean;
+}

@@ -21,7 +21,7 @@ export default function Leaderboard(){
     const [regionOpen, setRegionOpen] = useState(false);
     const [queueOpen, setQueueOpen] = useState(false);
     const [searchInput, setSearchInput] = useState("");
-
+    const [searchedPuuid, setSearchedPuuid] = useState("");
 
     
     const visiblePages = 9;
@@ -55,13 +55,29 @@ export default function Leaderboard(){
         e.preventDefault();
 
         const parsedSummoner = parseSummoner(searchInput);
+        
         if(!parsedSummoner)
-            throw new Error("Enter in form of name#tag");
+            return;
 
+        setLoading(true);
         const formattedSummoner = `${parsedSummoner.gameName}-${parsedSummoner.tagLine}`;
         const res = await fetch(`api/leaderboard/?region=${region}&queue=${queue}&riotId=${formattedSummoner}`);
 
-        //set page state etc and highlight name
+        if(!res.ok) 
+        {
+            setLoading(false);
+            return;
+        }
+        
+        const searchedSummonerData = await res.json();
+        const searchedPage = searchedSummonerData.pageNumber;
+
+        if(searchedPage !== page)
+            setPage(searchedPage);
+        else
+            setLoading(false);
+
+        setSearchedPuuid(searchedSummonerData.puuid);
 
     }
 
@@ -94,7 +110,7 @@ export default function Leaderboard(){
                                     <div 
                                     key = {r.value} 
                                     className = {styles.regionOption}
-                                    onClick={(e) => { setRegionOpen(false); setRegion(r.value); setPage(1); e.stopPropagation();}}
+                                    onClick={(e) => { setRegionOpen(false); setRegion(r.value); setPage(1); setSearchedPuuid(""); e.stopPropagation();}}
                                     > 
                                     {r.label}
                                     </div>
@@ -118,7 +134,7 @@ export default function Leaderboard(){
                                     <div 
                                         key = {r}
                                         className = {styles.queueOption}
-                                        onClick={(e) => { setQueueOpen(false); setQueue(r); setPage(1); e.stopPropagation();}}
+                                        onClick={(e) => { setQueueOpen(false); setQueue(r); setPage(1); setSearchedPuuid(""); e.stopPropagation();}}
                                         > 
                                         {LEADERBOARD_QUEUE_MAP.get(r)}
                                     </div>
@@ -198,6 +214,7 @@ export default function Leaderboard(){
                         {   
                             regularSummoners.map(p => 
                                 <LeaderboardCard 
+                                    highlighted = {p.puuid === searchedPuuid}
                                     key = {p.puuid}
                                     puuid={p.puuid} 
                                     gameName={p.gameName} 
@@ -219,7 +236,7 @@ export default function Leaderboard(){
                             {
                                 page != 1 && <button 
                                     className = {styles.pageBtn}
-                                    onClick = {()=> setPage(p => p-1)}
+                                    onClick = {()=> {setPage(p => p-1); setSearchedPuuid("");}}
                                 >
                                     Prev
                                 </button>
@@ -235,7 +252,7 @@ export default function Leaderboard(){
                                         <button
                                             className = {page === pageNumber? styles.currentPageBtn : styles.pageBtn}
                                             key={pageNumber}
-                                            onClick={() => setPage(pageNumber)}
+                                            onClick={() => {setPage(pageNumber); setSearchedPuuid("");}}
                                         >
                                             {pageNumber}
                                         </button>
@@ -246,7 +263,7 @@ export default function Leaderboard(){
                             {
                                 page != totalPages && <button 
                                     className = {styles.pageBtn}
-                                    onClick = {()=> setPage(p => p+1)}
+                                    onClick = {()=> {setPage(p => p+1); setSearchedPuuid("");}}
                                 >
                                     Next
                                 </button>

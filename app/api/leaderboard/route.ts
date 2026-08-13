@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getLeaderboard } from '@/app/services/leaderboardService';
+import { findSummonerOnLeaderboard, getLeaderboard } from '@/app/services/leaderboardService';
 
 export async function GET(request: Request){
 
@@ -19,14 +19,37 @@ export async function GET(request: Request){
             {error: "Missing required params"},
             {status: 400}
         );
-    
-    const result = await getLeaderboard(region, queue, start, pageSize);
 
-    return NextResponse.json({
-        leaderboard: result.leaderboard,
-        page: page,
-        pageSize: pageSize,
-        totalEntries: result.totalEntries,
-        totalPages: result.totalPages
-    });
+    if(searchedSummoner){
+        try{
+            const result = await findSummonerOnLeaderboard(
+                region, 
+                queue,
+                pageSize, 
+                searchedSummoner
+            );
+
+            return NextResponse.json(result);
+        } 
+        catch(error) {
+            return NextResponse.json(
+                { error: "Summoner not found on leaderboard" },
+                { status: 404 }
+            );
+        }
+    
+
+    }
+    else{
+
+        const result = await getLeaderboard(region, queue, start, pageSize);
+
+        return NextResponse.json({
+            leaderboard: result.leaderboard,
+            page: page,
+            pageSize: pageSize,
+            totalEntries: result.totalEntries,
+            totalPages: result.totalPages
+        });
+    }
 }

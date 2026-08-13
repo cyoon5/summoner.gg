@@ -101,16 +101,22 @@ async function getLeaderboard(region: string, queue: string, start: number, coun
     
 }
 
-async function findSummonerOnLeaderboard(region: string, queue: string, start: number, count: number, searchedRiotId?: string){
+async function findSummonerOnLeaderboard(region: string, queue: string, count: number, searchedRiotId: string){
 
     const apexLeagues = await getApexLeagues(region, queue);
 
-    if(searchedRiotId) {
-        const [gameName, tagLine] = searchedRiotId.split("-");
-        const puuid = await getAccountPuuid(region, gameName, tagLine);
+    const [gameName, tagLine] = searchedRiotId.split("-");
+    const puuid = await getAccountPuuid(region, gameName, tagLine);
+    const ladderRank = apexLeagues.findIndex((s: ApexLeagueEntry) => s.puuid === puuid) + 1;
 
-        const ladderRank = apexLeagues.findIndex((s: ApexLeagueEntry) => s.puuid === puuid) + 1;
-        const pageNumber = Math.ceil(ladderRank/count);
+    if(ladderRank === 0)
+        throw new Error("Summoner not found");
+
+    const pageNumber = Math.ceil(ladderRank/count);
+
+    return{
+        pageNumber,
+        puuid
     }
     
 }
@@ -139,4 +145,4 @@ async function getAccountPuuid(region: string, gameName: string, tagLine: string
 }
 
 
-export {getLeaderboard}
+export {getLeaderboard, findSummonerOnLeaderboard}
