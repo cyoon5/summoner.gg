@@ -55,6 +55,9 @@ export default function Leaderboard(){
     async function handleSubmit(e: React.SubmitEvent<HTMLFormElement>){
         e.preventDefault();
 
+        if(!searchInput)
+            return;
+
         setSearchError(false);
         const parsedSummoner = parseSummoner(searchInput);
         
@@ -172,7 +175,7 @@ export default function Leaderboard(){
                 {   
                     searchError && <div className={styles.error}>
                         <h1>Summoner not found</h1>
-                        <p>Please check that the id is in the format <span className ={styles.riotFormatText}>gameName#tagLine</span> and that the player is currently in an Apex rank.</p>
+                        <p>Please ensure that the id is in the format <span className ={styles.riotFormatText}>gameName#tagLine</span> and that the player is currently in an Apex rank.</p>
                     </div>
                 
                 }
@@ -257,7 +260,7 @@ export default function Leaderboard(){
                             {
                                 page != 1 && <button 
                                     className = {styles.pageBtn}
-                                    onClick = {()=> {setPage(p => p-1); setSearchedPuuid("");}}
+                                    onClick = {()=> {setPage(p => p-1); setSearchedPuuid(""); setSearchInput("")}}
                                 >
                                     Prev
                                 </button>
@@ -273,7 +276,7 @@ export default function Leaderboard(){
                                         <button
                                             className = {page === pageNumber? styles.currentPageBtn : styles.pageBtn}
                                             key={pageNumber}
-                                            onClick={() => {setPage(pageNumber); setSearchedPuuid("");}}
+                                            onClick={() => {setPage(pageNumber); setSearchedPuuid("");  setSearchInput("");}}
                                         >
                                             {pageNumber}
                                         </button>
@@ -284,7 +287,7 @@ export default function Leaderboard(){
                             {
                                 page != totalPages && <button 
                                     className = {styles.pageBtn}
-                                    onClick = {()=> {setPage(p => p+1); setSearchedPuuid("");}}
+                                    onClick = {()=> {setPage(p => p+1); setSearchedPuuid("");  setSearchInput("");}}
                                 >
                                     Next
                                 </button>

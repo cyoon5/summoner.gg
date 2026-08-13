@@ -44,7 +44,7 @@ async function getMasterLeagues(region: string, queue: string): Promise<ApexLeag
     return await response.json();    
 }
 
-async function getApexLeagues(region: string, queue: string){
+async function getApexLeagues(region: string, queue: string) {
 
     const [
         challengerLeagues, 
@@ -67,11 +67,10 @@ async function getApexLeagues(region: string, queue: string){
 async function getLeaderboard(region: string, queue: string, start: number, count: number): Promise<leaderboardResponse>{
 
     const apexLeagues = await getApexLeagues(region, queue);
-
     const totalEntries = apexLeagues.length;
     const totalPages = Math.ceil(totalEntries/count);
 
-    const promises = apexLeagues.slice(start,start + count).map(async (entry: ApexLeagueEntry) => {
+    const promises = apexLeagues.slice(start,start + count).map(async(entry: ApexLeagueEntry) => {
         return await getAccountInfo(entry.puuid, region);
     })
 
@@ -114,7 +113,7 @@ async function findSummonerOnLeaderboard(region: string, queue: string, count: n
 
     const pageNumber = Math.ceil(ladderRank/count);
 
-    return{
+    return {
         pageNumber,
         puuid
     }
