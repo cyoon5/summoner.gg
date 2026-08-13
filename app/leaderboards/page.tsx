@@ -22,6 +22,7 @@ export default function Leaderboard(){
     const [queueOpen, setQueueOpen] = useState(false);
     const [searchInput, setSearchInput] = useState("");
     const [searchedPuuid, setSearchedPuuid] = useState("");
+    const [searchError, setSearchError] = useState(false);
 
     
     const visiblePages = 9;
@@ -54,10 +55,14 @@ export default function Leaderboard(){
     async function handleSubmit(e: React.SubmitEvent<HTMLFormElement>){
         e.preventDefault();
 
+        setSearchError(false);
         const parsedSummoner = parseSummoner(searchInput);
         
-        if(!parsedSummoner)
+        if(!parsedSummoner){
+            setSearchError(true);
+            setSearchedPuuid("");
             return;
+        }
 
         setLoading(true);
         const formattedSummoner = `${parsedSummoner.gameName}-${parsedSummoner.tagLine}`;
@@ -66,6 +71,8 @@ export default function Leaderboard(){
         if(!res.ok) 
         {
             setLoading(false);
+            setSearchError(true);
+            setSearchedPuuid("");
             return;
         }
         
@@ -110,7 +117,7 @@ export default function Leaderboard(){
                                     <div 
                                     key = {r.value} 
                                     className = {styles.regionOption}
-                                    onClick={(e) => { setRegionOpen(false); setRegion(r.value); setPage(1); setSearchedPuuid(""); e.stopPropagation();}}
+                                    onClick={(e) => { setRegionOpen(false); setRegion(r.value); setPage(1); setSearchedPuuid(""); setSearchError(false); e.stopPropagation();}}
                                     > 
                                     {r.label}
                                     </div>
@@ -134,7 +141,7 @@ export default function Leaderboard(){
                                     <div 
                                         key = {r}
                                         className = {styles.queueOption}
-                                        onClick={(e) => { setQueueOpen(false); setQueue(r); setPage(1); setSearchedPuuid(""); e.stopPropagation();}}
+                                        onClick={(e) => { setQueueOpen(false); setQueue(r); setPage(1); setSearchedPuuid(""); setSearchError(false); e.stopPropagation();}}
                                         > 
                                         {LEADERBOARD_QUEUE_MAP.get(r)}
                                     </div>
@@ -158,44 +165,56 @@ export default function Leaderboard(){
                     </div>
                 }
 
+
+
                 {loading && <div className={styles.loadingSpinner}></div>}
 
-                <div className = {styles.podium}>
-                    
-
-                    { 
-                        (!loading && page === 1 && rankOne) && (
-                            <RankOneCard 
-                                {...rankOne}
-                                summonerLevel={555}
-                                profileIconUrl="https://ddragon.leagueoflegends.com/cdn/16.15.1/img/profileicon/1113.png"
-                            />
-                        )
-                    }
-                    {
-                        (!loading && page === 1 && rankTwo) && (
-                            <PodiumCard 
-                                {...rankTwo}
-                                summonerLevel={555}
-                                profileIconUrl="https://ddragon.leagueoflegends.com/cdn/16.15.1/img/profileicon/1225.png"
-                            />
-                        )
-                    }
-
-                    {
-                        (!loading && page ===1 && rankThree) && (
-                            <PodiumCard 
-                                {...rankThree}
-                                summonerLevel={555}
-                                profileIconUrl="https://ddragon.leagueoflegends.com/cdn/16.15.1/img/profileicon/1241.png"
-                            />
-                        )
-                    }
-
-                 </div>
+                {   
+                    searchError && <div className={styles.error}>
+                        <h1>Summoner not found</h1>
+                        <p>Please check that the id is in the format <span className ={styles.riotFormatText}>gameName#tagLine</span> and that the player is currently in an Apex rank.</p>
+                    </div>
+                
+                }
 
                 {
-                    !loading &&  <div className = {styles.leaderboardRowContainer}>
+                    !searchError && <div className = {styles.podium}>
+                    
+
+                        { 
+                            (!loading && page === 1 && rankOne) && (
+                                <RankOneCard 
+                                    {...rankOne}
+                                    summonerLevel={555}
+                                    profileIconUrl="https://ddragon.leagueoflegends.com/cdn/16.15.1/img/profileicon/1113.png"
+                                />
+                            )
+                        }
+                        {
+                            (!loading && page === 1 && rankTwo) && (
+                                <PodiumCard 
+                                    {...rankTwo}
+                                    summonerLevel={555}
+                                    profileIconUrl="https://ddragon.leagueoflegends.com/cdn/16.15.1/img/profileicon/1225.png"
+                                />
+                            )
+                        }
+
+                        {
+                            (!loading && page ===1 && rankThree) && (
+                                <PodiumCard 
+                                    {...rankThree}
+                                    summonerLevel={555}
+                                    profileIconUrl="https://ddragon.leagueoflegends.com/cdn/16.15.1/img/profileicon/1241.png"
+                                />
+                            )
+                        }
+
+                    </div>
+                } 
+
+                {
+                    !searchError && !loading && <div className = {styles.leaderboardRowContainer}>
 
                         {
 
@@ -209,7 +228,9 @@ export default function Leaderboard(){
                                 <div className = {styles.winrate}> Win Rate </div>  
 
                             </div>
+                            
                         }    
+
 
                         {   
                             regularSummoners.map(p => 

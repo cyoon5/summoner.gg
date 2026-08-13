@@ -200,3 +200,33 @@ body{
   -webkit-appearance: none;
   appearance: none;
 }
+
+.error{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(33, 34, 33);
+    border-radius: 5px;
+    min-height: 500px;
+    text-align: center;
+}
+
+.riotFormatText{
+    padding: 2px 7px;
+    margin: 0 2px;
+    background-color: rgb(55, 56, 55);
+    border: 1px solid rgb(75, 76, 75);
+    border-radius: 4px;
+    color: rgb(225, 225, 225);
+    font-family: monospace;
+    font-size: 0.9em;
+}
+
+.error > p{
+    text-align: center;
+    margin: 0;
+    max-width: 320px;
+    color: rgb(175, 175, 175);
+    line-height: 1.5;
+}
