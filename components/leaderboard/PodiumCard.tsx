@@ -9,8 +9,6 @@ export default function PodiumCard(props: PodiumPlayers){
   const router = useRouter()
 
 
-
-
     return(
 
         <div className = {styles.container}>

@@ -1,0 +1,130 @@
+.text {
+    font-family: "Barlow", system-ui, "Segoe UI";
+    font-size: 40px;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 25px;
+}
+
+.searchbar {
+    border-radius: 4px;
+    width: min(650px, 90vw);
+    height: 55px;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 17px;
+    padding-left: 65px;
+    background: rgba(20, 20, 25, 0.45);
+    backdrop-filter: blur(10px);
+    transition: 0.2s;
+}
+
+.searchbar:focus {
+    border-color: rgba(255, 255, 255, 0.45);
+    background: rgba(20, 20, 25, 0.6);
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(rgba(161, 167, 191, 0.2),rgba(27, 2, 12, 0.8)), url(../../public/rift.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.mainContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inputContainer{
+    position: relative;
+}
+
+input::placeholder {
+  color: rgb(167, 167, 167);
+}
+
+[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+
+.dropdownButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    background: rgba(255, 255, 255, 0.12);
+    color: white;
+    border-radius: 3px;
+    width: 45px;
+    height: 35px;
+    cursor: pointer;
+}
+
+.options {
+    position: absolute;
+    top: 130%;
+    left: 0px;
+    max-height: 160px;
+    overflow-y: auto;
+    background-color: rgb(51, 52, 49);
+    border-radius: 4px;
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
+}
+
+.option {
+    width: 45px;
+    height: 35px;
+    color: white;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.option:hover {
+    background-color: rgb(73, 74, 72);
+}
+
+.regionText{
+    margin: 0;
+}
+
+.searchIcon{
+    width: 35px;
+    height: 35px;
+}
+
+.searchButton {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+
+.hint {
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+}
+
+.hint span {
+    color: rgba(255,255,255,0.7);
+}
