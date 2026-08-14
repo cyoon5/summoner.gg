@@ -38,14 +38,13 @@ body{
     margin-bottom: 0em;
     font-family: monospace;
     min-width: 300px;
-    margin-left: 7.5em;
 }
 
 .summonerInfo{
     display: flex;
     flex-direction: row;
     gap: 30px;
-    margin: 50px 0px 10px 150px;
+    margin: 50px 0px 10px 50px;
     font-family: 'Barlow', monospace;
 }
 
