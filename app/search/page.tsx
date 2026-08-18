@@ -82,7 +82,7 @@ export default function SearchSummoner() {
                   src = "/searchIcon.png"
                   width = {100}
                   height = {100}
-                  alt = ""
+                  alt = "Search Icon"
                   onClick={()=>handleSubmit}
                 />
               </button>

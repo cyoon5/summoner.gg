@@ -2,11 +2,18 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Barlow } from "next/font/google";
 import "./globals.css";
+import localFont from "next/font/local";
 
 
 const barlow = Barlow({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+});
+
+const satoshi = localFont({
+  src: "./fonts/satoshi/Satoshi-Variable.woff2",
+  variable: "--font-satoshi",
+  weight: "300 900",
 });
 
 const geistSans = Geist({
@@ -33,10 +40,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${satoshi.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        {/*<div> Nav</div>*/}
         {children}
         
         

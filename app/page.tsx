@@ -4,8 +4,10 @@ import Image from "next/image"
 import styles from "./page.module.css"
 import championCardImage from '../public/home-page-cards/championCardImage.jpg'
 import leaderboardCardImage from '../public/home-page-cards/leaderboardCardImage.jpg'
-import searchCardImage from '../public/home-page-cards/searchCardImage.webp'
+import searchCardImage from '../public/home-page-cards/searchCardImage.jpg'
+import landingImage from '../public/home-page-cards/landingImage.webp'
 import { useRouter } from 'next/navigation'
+import Navbar from "@/components/navigation/Navbar"
 
 export default function Home(){
 
@@ -16,8 +18,27 @@ export default function Home(){
     return(
         <div className = {styles.contentContainer}>
 
-            <div className = {styles.homeNav}>
-                <span className = {styles.siteName}> summoner.gg </span>
+            <Navbar/>
+
+            <div className={styles.landingContainer}>
+
+                <Image
+                    className = {styles.landingImage}
+                    src = {landingImage}
+                    alt = "Nav Card Image"
+                    priority
+                />
+
+                <div className = {styles.landingText}>
+                    <p className={styles.tagline}>
+                        League of Legends analytics
+                    </p>
+                    <span className={styles.siteName}>SUMMONER.GG</span>
+                    <p>
+                        Explore your stats, track your performance, and discover the best League of Legends players.
+                    </p>
+             
+                </div>
             </div>
 
             <div className = {styles.cardContainer}>

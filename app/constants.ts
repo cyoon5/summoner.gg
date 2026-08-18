@@ -1,7 +1,7 @@
 export const MATCH_REGION_MAPPING = new Map<string, string>([
 
 
-  //For match-v5 endpoint
+  //match-v5 endpoint
 
   ["na1", "americas"],
   ["euw1", "europe"],
@@ -23,7 +23,7 @@ export const MATCH_REGION_MAPPING = new Map<string, string>([
 
 export const ACCOUNT_REGION_MAPPING  = new Map<string, string>([
 
-  //For account-v1 endpoint
+  //account-v1 endpoint
 
   ["na1", "americas"],
   ["euw1", "europe"],
