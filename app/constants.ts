@@ -46,24 +46,21 @@ export const ACCOUNT_REGION_MAPPING  = new Map<string, string>([
 ]);
 
 export const regions = [
-
-  { value: "na1", label: "NA" },
-  { value: "euw1", label: "EUW" },
-  { value: "kr", label: "KR" },
-  { value: "br1", label: "BR" },
-  { value: "eun1", label: "EUNE" },
-  { value: "la1", label: "LAN" },
-  { value: "la2", label: "LAS" },
-  { value: "tr1", label: "TR" },
-  { value: "jp1", label: "JP" },
-  { value: "ru", label: "RU" },
-  { value: "oc1", label: "OCE" },
-  { value: "ph2", label: "PH" },
-  { value: "sg2", label: "SG" },
-  { value: "th2", label: "TH" },
-  { value: "tw2", label: "TW" },
-  { value: "vn2", label: "VN" },
-
+    { value: "na1", label: "NA" },
+    { value: "euw1", label: "EUW" },
+    { value: "kr", label: "KR" },
+    { value: "eun1", label: "EUNE" },
+    { value: "br1", label: "BR" },
+    { value: "vn2", label: "VN" },
+    { value: "tr1", label: "TR" },
+    { value: "la1", label: "LAN" },
+    { value: "la2", label: "LAS" },
+    { value: "jp1", label: "JP" },
+    { value: "oc1", label: "OCE" },
+    { value: "ru", label: "RU" },
+    { value: "tw2", label: "TW" },
+    { value: "sg2", label: "SG" },
+    { value: "me1", label: "ME" },
 ];
 
 export const SUMMONER_SPELL_MAP = new Map<number, string>([
