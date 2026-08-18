@@ -4,7 +4,7 @@ import Image from "next/image"
 import styles from "./page.module.css"
 import championCardImage from '../public/home-page-cards/championCardImage.jpg'
 import leaderboardCardImage from '../public/home-page-cards/leaderboardCardImage.jpg'
-import test from '../public/home-page-cards/worlds-2024-viego-splash-art-v0-um4wons34tnd1.webp'
+import searchCardImage from '../public/home-page-cards/searchCardImage.webp'
 import { useRouter } from 'next/navigation'
 
 export default function Home(){
@@ -22,15 +22,15 @@ export default function Home(){
 
             <div className = {styles.cardContainer}>
                 
-                <div className = {styles.mainCardWrapper} onClick={() => router.push(`/search`)}>
+                <div className = {styles.searchCardWrapper} onClick={() => router.push(`/search`)}>
                     <Image
                         className = {styles.mainImage}
-                        src = {test}
+                        src = {searchCardImage}
                         alt = "Nav Card Image"
                         priority
                     />
 
-                    <div className = {styles.mainCardText}>
+                    <div className = {styles.searchCardText}>
                         Summoners
                         <p className = {styles.subText}>Search players</p>
                     </div>
@@ -38,28 +38,28 @@ export default function Home(){
 
                 <div className = {styles.subCardContainer}>
 
-                    <div className = {styles.subCardWrapper1} onClick={() => router.push(`/leaderboards`)}>
+                    <div className = {styles.leaderboardCardWrapper} onClick={() => router.push(`/leaderboards`)}>
                         <Image
                             className = {styles.subImage}
                             src = {leaderboardCardImage}
                             alt = "Nav Card Image"
                             priority
                         />
-                        <div className = {styles.subCardText1}>
+                        <div className = {styles.leaderboardCardText}>
                             Leaderboards
                             <p className = {styles.subCardSubText}>View the top summoners</p>
                         </div>
                     </div>
 
 
-                    <div className = {styles.subCardWrapper2}>
+                    <div className = {styles.championCardWrapper}>
                         <Image
                             className = {styles.subImage}
                             src = {championCardImage}
                             alt = "Nav Card Image"
                             priority
                         />
-                        <div className = {styles.subCardText2}>
+                        <div className = {styles.championCardText}>
                             Champions
                             <p className = {styles.comingSoon}> Coming Soon</p>
                         </div>

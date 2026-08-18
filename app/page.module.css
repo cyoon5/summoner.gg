@@ -41,7 +41,7 @@
     transition: filter .25s ease-out, transform .25s ease-out;
 }
 
-.mainCardWrapper {
+.searchCardWrapper {
     position: relative;
     width: 500px;
     border-radius: 5px;
@@ -56,7 +56,7 @@
     gap: 1em;
 }
 
-.subCardWrapper1, .subCardWrapper2{
+.leaderboardCardWrapper, .championCardWrapper{
     width: 500px;
     height: 250px;
     border-radius: 5px;
@@ -64,7 +64,7 @@
     position: relative;
 }
 
-.subCardWrapper1{
+.leaderboardCardWrapper{
     cursor: pointer;
 }
 
@@ -77,23 +77,23 @@
 }
 
 
-.mainCardWrapper:hover .mainImage {
+.searchCardWrapper:hover .mainImage {
     filter: grayscale(0%);
     transform: scale(1.03);
 }
 
-.subCardWrapper1:hover .subImage{
+.leaderboardCardWrapper:hover .subImage{
     filter: grayscale(0%);
     transform: scale(1.03);
 }
 
 
-.subCardWrapper2:hover .subImage{
+.championCardWrapper:hover .subImage{
     transform: scale(1.03);
 }
 
 
-.mainCardText{
+.searchCardText{
     font-size: 35px;
     font-weight: bold;
     position: absolute;
@@ -101,7 +101,7 @@
     left: 25px;
 }
 
-.subCardText1, .subCardText2{
+.leaderboardCardText, .championCardText{
     font-size: 25px;
     font-weight: bold;
     position: absolute;
@@ -131,6 +131,6 @@
     transition: color 0.4s ease;
 }
 
-.subCardWrapper2:hover .comingSoon{
+.championCardWrapper:hover .comingSoon{
     color: rgb(203, 51, 51);
 }
