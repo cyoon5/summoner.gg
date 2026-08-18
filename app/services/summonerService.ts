@@ -1,6 +1,6 @@
 import { SummonerData, SummonerProfile } from "../types/summoner";
 import {getProfileIconUrl} from "../services/dragonService";
-import { REGION_MAPPING } from "../constants";
+import { ACCOUNT_REGION_MAPPING, MATCH_REGION_MAPPING } from "../constants";
 import { notFound } from 'next/navigation';
 
 
@@ -12,15 +12,16 @@ export async function getSummoner(input: SummonerData): Promise<SummonerProfile>
         throw new Error("Missing api key");
 
     const platform = input.region;
-    const routing = REGION_MAPPING.get(platform);
+    const accountRouting = ACCOUNT_REGION_MAPPING.get(platform); //Account-v1
+    const matchRouting = MATCH_REGION_MAPPING.get(platform); //Match-v5
     const gameName = input.gameName;
     const tagLine = input.tagLine;
 
 
-    if (!routing) 
+    if (!accountRouting || !matchRouting) 
         throw new Error(`Invalid platform: ${platform}`);
 
-    const accountDataLink = `https://${routing}.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${gameName}/${tagLine}`;
+    const accountDataLink = `https://${accountRouting}.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${gameName}/${tagLine}`;
     const response = await fetch(accountDataLink, {headers: {"X-Riot-Token": api_key}});
 
 
@@ -45,7 +46,8 @@ export async function getSummoner(input: SummonerData): Promise<SummonerProfile>
         gameName: accountData.gameName,
         tagLine: accountData.tagLine,
         platform: platform,
-        routing: routing,
+        accountRouting: accountRouting,
+        matchRouting: matchRouting,
         accountLvl: profileData.summonerLevel,
         iconURL: getProfileIconUrl(profileData.profileIconId),
     };

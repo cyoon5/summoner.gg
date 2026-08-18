@@ -209,7 +209,6 @@ body{
     background-color: rgb(33, 34, 33);
     border-radius: 5px;
     min-height: 500px;
-    min-width: 500px;
     text-align: center;
 }
 
@@ -239,4 +238,8 @@ body{
     border: 1px solid rgb(75, 76, 75);
     color: rgb(225, 225, 225);
     cursor: pointer;
+}
+
+.errorMessage{
+    margin: 0px 30px;
 }

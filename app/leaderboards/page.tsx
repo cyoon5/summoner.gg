@@ -110,7 +110,7 @@ export default function Leaderboard(){
 
             {
                 error && <div className = {styles.error}> 
-                    <h1> Something went wrong </h1>
+                    <h1 className = {styles.errorMessage}> Something went wrong </h1>
                     <p className = {styles.back} onClick={()=>{setError(false); setRegion("na1")}}> Return</p>
                 </div>
             }

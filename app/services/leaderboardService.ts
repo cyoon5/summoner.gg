@@ -1,5 +1,5 @@
 import { AccountInfo, ApexLeague, ApexLeagueEntry, leaderboardEntry, leaderboardResponse, SummonerInfo } from "../types/leaderboard";
-import { REGION_MAPPING } from "../constants";
+import { ACCOUNT_REGION_MAPPING } from "../constants";
 const api_key = process.env.RIOT_API_KEY;
 
 async function getChallengerLeagues(region: string, queue: string): Promise<ApexLeague>{
@@ -141,7 +141,7 @@ async function getAccountInfo(puuid: string, region: string): Promise<AccountInf
     if(!api_key)
         throw new Error("Missing api key");
 
-    const accountURL = `https://${REGION_MAPPING.get(region)}.api.riotgames.com/riot/account/v1/accounts/by-puuid/${puuid}`;
+    const accountURL = `https://${ACCOUNT_REGION_MAPPING.get(region)}.api.riotgames.com/riot/account/v1/accounts/by-puuid/${puuid}`;
     const res = await fetch(accountURL, {headers: {"X-Riot-Token": api_key}});
 
     if (!res.ok)
@@ -154,7 +154,7 @@ async function getAccountPuuid(region: string, gameName: string, tagLine: string
     if(!api_key)
         throw new Error("Missing api key");
 
-    const puuidURL = `https://${REGION_MAPPING.get(region)}.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${gameName}/${tagLine}`;
+    const puuidURL = `https://${ACCOUNT_REGION_MAPPING.get(region)}.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${gameName}/${tagLine}`;
     const res = await fetch(puuidURL, {headers: {"X-Riot-Token": api_key}});
 
     if (!res.ok)

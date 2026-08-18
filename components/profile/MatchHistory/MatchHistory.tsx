@@ -83,6 +83,7 @@ export default function MatchHistory(props: MatchHistoryProp){
 
 
             {loading && <div className={styles.loadingSpinner}></div>}
+            
             <div ref={bottomRef}></div>
 
         </div>

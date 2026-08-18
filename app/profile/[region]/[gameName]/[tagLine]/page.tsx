@@ -7,6 +7,7 @@ import { getSummonerRankedInfo } from "@/app/services/rankedService";
 import RankedCard from "@/components/profile/RankedCard/RankedCard";
 import { RankedData } from "@/app/types/ranked";
 import  MatchHistory  from "@/components/profile/MatchHistory/MatchHistory";
+import { MATCH_REGION_MAPPING } from "@/app/constants";
 
 
 export default async function Profile({ params }: {params: Promise<SummonerData>}) {
@@ -20,7 +21,7 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
     }
 
     const summonerProfile = await getSummoner(query);
-    const rawMatches = await getRawMatches(summonerProfile.puuid, summonerProfile.routing, 0, 10);
+    const rawMatches = await getRawMatches(summonerProfile.puuid, summonerProfile.matchRouting, 0, 10);
     const participantsInMatches = getMatchParticipantsInfo(rawMatches); 
     const searchedSummonerId = summonerProfile.puuid;  
     const searchedSummoner = participantsInMatches.map(m => m.find(p => p.puuid === searchedSummonerId));
@@ -94,7 +95,7 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
 
                 <MatchHistory 
                     puuid = {searchedSummonerId}
-                    routing = {summonerProfile.routing}
+                    routing = {summonerProfile.matchRouting} //Requires MATCH-V5
                     platform = {summonerProfile.platform}
                     initialParticipantsInMatches = {participantsInMatches}
                     initialSearchedSummoner = {searchedSummoner}

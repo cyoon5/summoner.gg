@@ -1,5 +1,7 @@
+export const MATCH_REGION_MAPPING = new Map<string, string>([
 
-export const REGION_MAPPING = new Map<string, string>([
+
+  //For match-v5 endpoint
 
   ["na1", "americas"],
   ["euw1", "europe"],
@@ -12,11 +14,33 @@ export const REGION_MAPPING = new Map<string, string>([
   ["jp1", "asia"],
   ["ru", "europe"],
   ["oc1", "sea"],
-  ["ph2", "sea"],
   ["sg2", "sea"],
-  ["th2", "sea"],
   ["tw2", "sea"],
   ["vn2", "sea"],
+
+])
+
+
+export const ACCOUNT_REGION_MAPPING  = new Map<string, string>([
+
+  //For account-v1 endpoint
+
+  ["na1", "americas"],
+  ["euw1", "europe"],
+  ["kr", "asia"],
+  ["br1", "americas"],
+  ["eun1", "europe"],
+  ["la1", "americas"],
+  ["la2", "americas"],
+  ["tr1", "europe"],
+  ["jp1", "asia"],
+  ["ru", "europe"],
+  ["oc1", "americas"],
+  ["ph2", "asia"],
+  ["sg2", "asia"],
+  ["th2", "asia"],
+  ["tw2", "asia"],
+  ["vn2", "asia"],
 
   
 ]);

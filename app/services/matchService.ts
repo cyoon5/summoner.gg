@@ -1,4 +1,3 @@
-import { SummonerProfile } from "../types/summoner";
 import { ParticipantInfo, MatchInfo} from "../types/match";
 import { getChampionIconUrl, getItemIconUrl, getSummonerSpellIconUrl, getRuneIconUrl } from "./dragonService";
 import { getRelativeTime } from "../../lib/unixConverter";
