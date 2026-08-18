@@ -10,7 +10,6 @@ import { LEADERBOARD_QUEUE_MAP, regions } from "../constants"
 import parseSummoner from "@/lib/parseSummoner";
 import { getProfileIconUrl } from "../services/dragonService";
 
-
 export default function Leaderboard(){
 
     const [page, setPage] = useState(1);
@@ -176,7 +175,8 @@ export default function Leaderboard(){
                 {   
                     searchError && <div className={styles.error}>
                         <h1>Summoner not found</h1>
-                        <p>Please ensure that the id is in the format <span className ={styles.riotFormatText}>gameName#tagLine</span> and that the player is currently in an Apex rank.</p>
+                        <p className = {styles.hint}>Please ensure that the id is in the format <span className ={styles.riotFormatText}>gameName#tagLine</span> and that the player is currently in an Apex rank.</p>
+                        <p className = {styles.back} onClick={()=>{setSearchError(false);}}> Return</p>
                     </div>
                 
                 }

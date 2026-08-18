@@ -223,10 +223,19 @@ body{
     font-size: 0.9em;
 }
 
-.error > p{
+.hint{
     text-align: center;
     margin: 0;
     max-width: 320px;
     color: rgb(175, 175, 175);
     line-height: 1.5;
+}
+
+.back{
+    padding: 2px 7px;
+    background-color: rgb(55, 56, 55);
+    border-radius: 4px;
+    border: 1px solid rgb(75, 76, 75);
+    color: rgb(225, 225, 225);
+    cursor: pointer;
 }
