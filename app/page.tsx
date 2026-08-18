@@ -32,7 +32,7 @@ export default function Home(){
 
                     <div className = {styles.searchCardText}>
                         Summoners
-                        <p className = {styles.subText}>Search players</p>
+                        <p className = {styles.subText}>Search yourself or other summoners</p>
                     </div>
                 </div>
 
@@ -61,7 +61,7 @@ export default function Home(){
                         />
                         <div className = {styles.championCardText}>
                             Champions
-                            <p className = {styles.comingSoon}> Coming Soon</p>
+                            <p className = {styles.comingSoon}> Coming soon</p>
                         </div>
                     </div>
 

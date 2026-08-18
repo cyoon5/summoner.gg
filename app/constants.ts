@@ -2,18 +2,15 @@
 export const REGION_MAPPING = new Map<string, string>([
 
   ["na1", "americas"],
+  ["euw1", "europe"],
+  ["kr", "asia"],
   ["br1", "americas"],
+  ["eun1", "europe"],
   ["la1", "americas"],
   ["la2", "americas"],
-
-  ["euw1", "europe"],
-  ["eun1", "europe"],
   ["tr1", "europe"],
-  ["ru", "europe"],
-
-  ["kr", "asia"],
   ["jp1", "asia"],
-
+  ["ru", "europe"],
   ["oc1", "sea"],
   ["ph2", "sea"],
   ["sg2", "sea"],
@@ -25,26 +22,24 @@ export const REGION_MAPPING = new Map<string, string>([
 ]);
 
 export const regions = [
+
   { value: "na1", label: "NA" },
+  { value: "euw1", label: "EUW" },
+  { value: "kr", label: "KR" },
   { value: "br1", label: "BR" },
+  { value: "eun1", label: "EUNE" },
   { value: "la1", label: "LAN" },
   { value: "la2", label: "LAS" },
-
-  { value: "euw1", label: "EUW" },
-  { value: "eun1", label: "EUNE" },
   { value: "tr1", label: "TR" },
-  { value: "ru", label: "RU" },
-
-  { value: "kr", label: "KR" },
   { value: "jp1", label: "JP" },
-
+  { value: "ru", label: "RU" },
   { value: "oc1", label: "OCE" },
-
   { value: "ph2", label: "PH" },
   { value: "sg2", label: "SG" },
   { value: "th2", label: "TH" },
   { value: "tw2", label: "TW" },
   { value: "vn2", label: "VN" },
+
 ];
 
 export const SUMMONER_SPELL_MAP = new Map<number, string>([
