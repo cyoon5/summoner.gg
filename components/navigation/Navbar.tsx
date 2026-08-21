@@ -22,12 +22,12 @@ export default function Navbar(){
             <div className = {styles.linkContainer}>
                 <Link className = {styles.link} href = '/leaderboards'>LEADERBOARDS</Link>
                 <Link className = {styles.link} href = '/search'>SUMMONERS</Link>
-                <Link className = {styles.link} href = '/search'>ABOUT</Link>
+                <Link className = {styles.link} href = '/#features'>FEATURES</Link>
+                <Link className = {styles.link} href = '/#about'>ABOUT</Link>
+
             </div>
 
-            <div className = {styles.github}> 
-               <Link className = {styles.link} href = 'https://github.com/cyoon5/summoner.gg' target ='_blank'>GitHub</Link>
-            </div>
+            <Link className = {styles.github} href = 'https://github.com/cyoon5/summoner.gg' target ='_blank'>GitHub</Link>
        </div> 
 
         <div className = {styles.horizontalborder}></div>
