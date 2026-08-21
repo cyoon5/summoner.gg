@@ -204,8 +204,10 @@
     align-items: center;
     gap: 2em;
     padding: 3em 2em;
-    max-width: 60ch;
+    max-width: 55ch;
     text-align: center;
+    font-weight: 500;
+
 }
 
 .aboutIntro{

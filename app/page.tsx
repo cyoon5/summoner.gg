@@ -27,7 +27,7 @@ export default function Home(){
                 <Image
                     className = {styles.landingImage}
                     src = {landingImage}
-                    alt = "Nav Card Image"
+                    alt = "Landing Image"
                     priority
                 />
 
@@ -56,7 +56,6 @@ export default function Home(){
                         className = {styles.mainImage}
                         src = {searchCardImage}
                         alt = "Nav Card Image"
-                        priority
                     />
 
                     <div className = {styles.searchCardText}>
@@ -72,7 +71,6 @@ export default function Home(){
                             className = {styles.subImage}
                             src = {leaderboardCardImage}
                             alt = "Nav Card Image"
-                            priority
                         />
                         <div className = {styles.leaderboardCardText}>
                             Leaderboards
@@ -87,7 +85,6 @@ export default function Home(){
                             className = {styles.subImage}
                             src = {championCardImage}
                             alt = "Nav Card Image"
-                            priority
                         />
 
                         <div className = {styles.championCardText}>
@@ -110,7 +107,7 @@ export default function Home(){
             <div className = {styles.aboutContainer}>
 
                 <div className={styles.aboutIntro}>
-                    <h2>What is Summoner.gg?</h2>
+                    <h1>What is Summoner.gg?</h1>
                     <p>
                         Summoner.gg is a League of Legends analytics platform inspired by
                         existing tools like U.GG and OP.GG. I wanted to build my own take
@@ -120,7 +117,7 @@ export default function Home(){
                 </div>
 
                 <div className={styles.howItWorks}>
-                    <h2>How does it work?</h2>
+                    <h1>How does it work?</h1>
                     <p>
                         Summoner.gg uses the Riot Games API to retrieve League of Legends data and turn it into useful insights.
                         Search for a summoner to view their profile, recent matches, and performance statistics,
@@ -130,8 +127,7 @@ export default function Home(){
                 </div>
 
                 <div className={styles.apiSection}>
-                    <h2>Riot Games API</h2>
-
+                    <h1>Riot Games API</h1>
                     <p>
                         Summoner.gg uses Riot Games APIs to retrieve and organize player,
                         ranked, and match data.
