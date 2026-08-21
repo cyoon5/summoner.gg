@@ -26,7 +26,7 @@ export default function Navbar(){
             </div>
 
             <div className = {styles.github}> 
-               <Link className = {styles.link} href = 'https://github.com/cyoon5/summoner.gg' target ='_blank'>Github</Link>
+               <Link className = {styles.link} href = 'https://github.com/cyoon5/summoner.gg' target ='_blank'>GitHub</Link>
             </div>
        </div> 
 

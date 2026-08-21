@@ -9,6 +9,7 @@ import LeaderboardCard from "@/components/leaderboard/LeaderboardCard";
 import { LEADERBOARD_QUEUE_MAP, regions } from "../constants"
 import parseSummoner from "@/lib/parseSummoner";
 import { getProfileIconUrl } from "../services/dragonService";
+import Navbar from "@/components/navigation/Navbar";
 
 export default function Leaderboard(){
 
@@ -104,6 +105,10 @@ export default function Leaderboard(){
     return(
         
         <div className = {styles.container} onClick = {() => {setRegionOpen(false); setQueueOpen(false)}}>
+
+            <Navbar/>
+            <div className ={styles.leftbar}></div>
+            <div className ={styles.rightbar}></div>
 
             <h1> Leaderboards </h1>
 

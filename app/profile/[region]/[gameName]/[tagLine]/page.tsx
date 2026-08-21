@@ -8,6 +8,7 @@ import RankedCard from "@/components/profile/RankedCard/RankedCard";
 import { RankedData } from "@/app/types/ranked";
 import  MatchHistory  from "@/components/profile/MatchHistory/MatchHistory";
 import { MATCH_REGION_MAPPING } from "@/app/constants";
+import Navbar from "@/components/navigation/Navbar";
 
 
 export default async function Profile({ params }: {params: Promise<SummonerData>}) {
@@ -33,76 +34,84 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
 
     
     return(
-        <div className = {styles.profileContainer}>
+        <div className = {styles.container}>
+
+            <div className ={styles.leftbar}></div>
+            <div className ={styles.rightbar}></div>
+            <Navbar/>
             
-            <div className = {styles.summonerInfo}>
+            <div className = {styles.profileContainer}>
+                
 
-                    <div className = {styles.iconLvl}>
+                <div className = {styles.summonerInfo}>
 
-                        <Image
-                            src={summonerProfile.iconURL}
-                            width={500}
-                            height={500}
-                            alt="Summoner Icon"
-                            className={styles.icon}
-                            priority
-                        />
+                        <div className = {styles.iconLvl}>
 
-                        <p className = {styles.lvl}>{summonerProfile.accountLvl}</p>
+                            <Image
+                                src={summonerProfile.iconURL}
+                                width={500}
+                                height={500}
+                                alt="Summoner Icon"
+                                className={styles.icon}
+                                priority
+                            />
 
-                    </div>
+                            <p className = {styles.lvl}>{summonerProfile.accountLvl}</p>
 
-                    <div className = {styles.nameTag}>
-                        <h1 className = {styles.gameName}>
-                            {summonerProfile.gameName} 
-                        </h1>
-                        <h1 className = {styles.tag}>  
-                            #{summonerProfile.tagLine}
-                        </h1>
-                    </div>
-
-            </div>
-
-            <div className = {styles.columnContainer}>
-
-                <div className = {styles.statsCol}> 
-
-
-                    <div className = {styles.rankedBox}>
-
-                        <div className = {styles.statsBox}> 
-                               <RankedCard 
-                                     data = {soloQueue}
-                                     queueType="Ranked Solo/Duo"
-                                />                       
-                        </div>
-                     
-                        <div className = {styles.statsBox}> 
-                                <RankedCard 
-                                     data = {flexQueue}
-                                     queueType="Ranked Flex"
-                                />
                         </div>
 
-                    </div>
-                    
-                    <div className = {styles.statsBox}> 
-                        Champion Stats 
-                    </div>
+                        <div className = {styles.nameTag}>
+                            <h1 className = {styles.gameName}>
+                                {summonerProfile.gameName} 
+                            </h1>
+                            <h1 className = {styles.tag}>  
+                                #{summonerProfile.tagLine}
+                            </h1>
+                        </div>
 
                 </div>
 
+                <div className = {styles.columnContainer}>
 
-                <MatchHistory 
-                    puuid = {searchedSummonerId}
-                    routing = {summonerProfile.matchRouting} //Requires MATCH-V5
-                    platform = {summonerProfile.platform}
-                    initialParticipantsInMatches = {participantsInMatches}
-                    initialSearchedSummoner = {searchedSummoner}
-                    initialMatchInfoList = {matchInfoList}
-                />
+                    <div className = {styles.statsCol}> 
 
 
+                        <div className = {styles.rankedBox}>
+
+                            <div className = {styles.statsBox}> 
+                                <RankedCard 
+                                        data = {soloQueue}
+                                        queueType="Ranked Solo/Duo"
+                                    />                       
+                            </div>
+                        
+                            <div className = {styles.statsBox}> 
+                                    <RankedCard 
+                                        data = {flexQueue}
+                                        queueType="Ranked Flex"
+                                    />
+                            </div>
+
+                        </div>
+                        
+                        <div className = {styles.statsBox}> 
+                            Champion Stats 
+                        </div>
+
+                    </div>
+
+
+                    <MatchHistory 
+                        puuid = {searchedSummonerId}
+                        routing = {summonerProfile.matchRouting} //Requires MATCH-V5
+                        platform = {summonerProfile.platform}
+                        initialParticipantsInMatches = {participantsInMatches}
+                        initialSearchedSummoner = {searchedSummoner}
+                        initialMatchInfoList = {matchInfoList}
+                    />
+
+
+                </div>
             </div>
         </div>
     )

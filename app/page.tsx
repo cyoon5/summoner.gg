@@ -4,8 +4,8 @@ import Image from "next/image"
 import styles from "./page.module.css"
 import championCardImage from '../public/home-page-cards/championCardImage.jpg'
 import leaderboardCardImage from '../public/home-page-cards/leaderboardCardImage.jpg'
-import searchCardImage from '../public/home-page-cards/searchCardImage.jpg'
-import landingImage from '../public/home-page-cards/landingImage.webp'
+import searchCardImage from '../public/home-page-cards/searchCardImage.webp'
+import landingImage from '../public/home-page-cards/Freljord_LoR_Background.webp'
 import { useRouter } from 'next/navigation'
 import Navbar from "@/components/navigation/Navbar"
 
@@ -16,13 +16,11 @@ export default function Home(){
 
 
     return(
+        
         <div className = {styles.contentContainer}>
 
             <div className ={styles.leftbar}></div>
             <div className ={styles.rightbar}></div>
-
-
-
             <Navbar/>
 
 
@@ -41,7 +39,7 @@ export default function Home(){
                     </p>
                     <span className={styles.siteName}>SUMMONER.GG</span>
                     <p className = {styles.description}>
-                        Explore your stats, track your performance, and discover the best League of Legends players.
+                        Explore your stats, track your performance, and discover top League of Legends players.
                     </p>
              
                 </div>

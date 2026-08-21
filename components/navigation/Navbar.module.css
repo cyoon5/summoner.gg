@@ -1,6 +1,7 @@
 
 .container{
     display:flex;
+    position: relative;
     font-family: var(--font-satoshi), 'Barlow', monospace;
     font-weight: 500;
     flex-direction: column;
@@ -15,6 +16,8 @@
     gap: 5em;
     padding: 1em;
     background-color: rgb(11, 11, 11);
+    z-index: 100
+    ;
 }
 
 .github{
@@ -37,6 +40,7 @@
 .link{
     text-decoration: none;
     color: white;
+    transition: color 0.2s ease;
 }
 
 .horizontalborder {
@@ -48,3 +52,6 @@
   box-sizing: border-box;
 }
 
+.link:hover{
+    color: rgb(165, 164, 164);
+}
