@@ -18,7 +18,13 @@ export default function Home(){
     return(
         <div className = {styles.contentContainer}>
 
+            <div className ={styles.leftbar}></div>
+            <div className ={styles.rightbar}></div>
+
+
+
             <Navbar/>
+
 
             <div className={styles.landingContainer}>
 
@@ -34,12 +40,18 @@ export default function Home(){
                         League of Legends analytics
                     </p>
                     <span className={styles.siteName}>SUMMONER.GG</span>
-                    <p>
+                    <p className = {styles.description}>
                         Explore your stats, track your performance, and discover the best League of Legends players.
                     </p>
              
                 </div>
             </div>
+
+
+
+            <span className = {styles.horizontalborder}></span>
+                <div className = {styles.features}> FEATURES </div>
+            <span className = {styles.horizontalborder}></span>
 
             <div className = {styles.cardContainer}>
                 
@@ -53,7 +65,7 @@ export default function Home(){
 
                     <div className = {styles.searchCardText}>
                         Summoners
-                        <p className = {styles.subText}>Search yourself or other summoners</p>
+                        <p className = {styles.subText}>Search yourself or other players</p>
                     </div>
                 </div>
 
@@ -68,7 +80,7 @@ export default function Home(){
                         />
                         <div className = {styles.leaderboardCardText}>
                             Leaderboards
-                            <p className = {styles.subCardSubText}>View the top summoners</p>
+                            <p className = {styles.subCardSubText}>View the top players</p>
                         </div>
                     </div>
 

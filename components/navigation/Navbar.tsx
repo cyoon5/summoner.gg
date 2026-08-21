@@ -3,6 +3,7 @@
 
 import Link from "next/link"
 import styles from "./Navbar.module.css"
+import Image from "next/image";
 
 export default function Navbar(){
 
@@ -10,21 +11,27 @@ export default function Navbar(){
 
 
     return (
+
+    <div className = {styles.container}> 
         <div className = {styles.navigationContainer}>
 
-            <div> 
+            <div className = {styles.home}> 
                 <Link className = {styles.link} href = '/'>SUMMONER.GG</Link>
             </div>
         
             <div className = {styles.linkContainer}>
                 <Link className = {styles.link} href = '/leaderboards'>LEADERBOARDS</Link>
                 <Link className = {styles.link} href = '/search'>SUMMONERS</Link>
-                <Link className = {styles.link} href = '/search'>CHAMPIONS</Link>
-                <Link className = {styles.link} href = '/search'>PATCH NOTES</Link>
-                ABOUT
-
+                <Link className = {styles.link} href = '/search'>ABOUT</Link>
             </div>
-        
+
+            <div className = {styles.github}> 
+               <Link className = {styles.link} href = 'https://github.com/cyoon5/summoner.gg' target ='_blank'>Github</Link>
+            </div>
        </div> 
+
+        <div className = {styles.horizontalborder}></div>
+
+    </div>
     )
 }

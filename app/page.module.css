@@ -1,6 +1,5 @@
 body{
-        background-color: rgb(33, 34, 33);
-
+    background-color: rgb(33, 34, 33);
 }
 .contentContainer{
     display:flex;
@@ -8,20 +7,22 @@ body{
     font-family: var(--font-satoshi), 'Barlow', monospace;
     font-weight: 100;
     align-items: center;
-    gap: 1em;
     height: 100vh;
-    width: 100vw;
+    width: 100%;
 }
 
 .landingContainer{
     position: relative;
-    width: 95vw;
+    width: 100%;
     display: flex;
     flex-direction: column;
     margin: 0;
 }
 
 .landingText{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -44,14 +45,21 @@ body{
 
 .tagline {
     margin: 5px 0 0;
-    color: rgb(132, 134, 132);
+    color: rgb(180, 182, 180);
     font-size: 3vh;
+}
+
+.description{
+    font-size: 2.5vh;
+    font-weight: 400;
+    max-width: 40ch;
 }
 
 .cardContainer{
     display: flex;
     align-items: stretch;
     gap: 1em;
+    margin: 30px 0px;
 }
 
 .mainImage{
@@ -154,4 +162,50 @@ body{
 
 .championCardWrapper:hover .comingSoon{
     color: rgb(203, 51, 51);
+}
+
+.leftbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 5%;        
+  height: 100vh;     
+  background-color: rgb(11, 11, 11);
+  z-index: 1000;       
+  border-right: 1px solid rgb(71, 71, 71);
+
+}
+
+.rightbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 5%;          
+  height: 100vh;
+  background-color: rgb(11, 11, 11);
+  z-index: 1000;
+  border-left: 1px solid rgb(71, 71, 71);
+
+}
+
+.horizontalborder {
+  position: relative; 
+  z-index: 9999;      
+  border: 0.5px solid rgb(71, 71, 71);
+  width: 100%;
+  margin-bottom: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  
+}
+
+.features{
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    background-color: rgb(11, 11, 11);
+    padding: 1.5em;
+    width: 100%;
+    box-sizing: border-box;
 }

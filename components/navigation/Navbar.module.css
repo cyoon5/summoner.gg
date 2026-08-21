@@ -1,10 +1,31 @@
+
+.container{
+    display:flex;
+    font-family: var(--font-satoshi), 'Barlow', monospace;
+    font-weight: 500;
+    flex-direction: column;
+    width: 100%;
+}
+
+
 .navigationContainer{
     display: flex;
+    justify-content: space-around;
+    align-items: center;
     gap: 5em;
-    font-weight: bold;
-    padding: 30px;
-    border-bottom: 1px solid grey;
+    padding: 1em;
     background-color: rgb(11, 11, 11);
+}
+
+.github{
+    border: 0.5px white solid;
+    margin: 0px;
+    padding: 10px;
+    transition: background-color 0.3s ease
+}
+
+.github:hover{
+    background-color: rgb(38, 38, 38);
 }
 
 
@@ -16,5 +37,14 @@
 .link{
     text-decoration: none;
     color: white;
+}
+
+.horizontalborder {
+  position: relative; 
+  z-index: 9999;      
+  border: 0.5px solid rgb(71, 71, 71);
+  width: 100%;
+  margin: 0px;
+  box-sizing: border-box;
 }
 
