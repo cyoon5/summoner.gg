@@ -6,9 +6,11 @@ A League of Legends analytics platform inspired by OP.GG and U.GG, built with Ne
 
 
 <div align="center">
-  <img src="app/assets/ProfileScreenshot.webp" width="45%" alt="Summoner.gg Profile">
-  <img src="app/assets/DetailsScreenshot.webp" width="45%" alt="Summoner.gg Match Details">
+  <img src="app/assets/LandingPageScreenshot.png" width="45%" alt="Summoner.gg Landing">
+  <img src="app/assets/FeaturesScreenshot.png" width="45%" alt="Summoner.gg Features">
   <img src="app/assets/LeaderboardScreenshot.png" width="45%" alt="Summoner.gg Leaderboard">
+  <img src="app/assets/ProfileScreenshot.png" width="45%" alt="Summoner.gg Profile">
+  <img src="app/assets/DetailsScreenshot.png" width="45%" alt="Summoner.gg Match Details">
 </div>
 
 
