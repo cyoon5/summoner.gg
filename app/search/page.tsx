@@ -44,70 +44,67 @@ export default function SearchSummoner() {
 
       <div className = {styles.contentContainer} onClick={() => setOpen(false)}>
 
-        <div className = {styles.mainContainer}>
+        <h1 className = {styles.text}> Search <span>summoner</span> </h1>
 
-            <h1 className = {styles.text}> Search <span>summoner</span> </h1>
+        <form onSubmit = {handleSubmit}>
 
-            <form onSubmit = {handleSubmit}>
+          <div className = {styles.inputContainer}>
 
-              <div className = {styles.inputContainer}>
+            <input type = "search" 
+              className = {styles.searchbar} 
+              placeholder = "Search a summoner"
+              autoComplete = "off" 
+              onChange = {(e)=>setUserInput(e.target.value)}>
+            </input>
 
-                <input type = "search" 
-                  className = {styles.searchbar} 
-                  placeholder = "Search a summoner"
-                  autoComplete = "off" 
-                  onChange = {(e)=>setUserInput(e.target.value)}>
-                </input>
+            <div className={styles.dropdownButton} onClick={(e)=> {setOpen(o => !o); e.stopPropagation()}}>
 
-                <div className={styles.dropdownButton} onClick={(e)=> {setOpen(o => !o); e.stopPropagation()}}>
-
-                  <div className = {styles.regionText}>
-                    {regions.find(r => r.value === region)?.label}
-                  </div>  
-                  
-                  {
-                    open && (<div className = {styles.options}>
-                      {
-                        regions.map(r => (
-                          <div 
-                            key = {r.value} 
-                            className = {styles.option}
-                            onClick={(e) => { setOpen(false); setRegion(r.value); e.stopPropagation();}}
-                          > 
-                            {r.label}
-                          </div>
-                        ))
-                      }
-                    </div>)
-                  }
-                  
-                </div>
-
-                <button className = {styles.searchButton}>
-                  <Image
-                    className = {styles.searchIcon}
-                    src = "/searchIcon.png"
-                    width = {100}
-                    height = {100}
-                    alt = "Search Icon"
-                    onClick={()=>handleSubmit}
-                  />
-                </button>
+              <div className = {styles.regionText}>
+                {regions.find(r => r.value === region)?.label}
+              </div>  
               
-              </div>
+              {
+                open && (<div className = {styles.options}>
+                  {
+                    regions.map(r => (
+                      <div 
+                        key = {r.value} 
+                        className = {styles.option}
+                        onClick={(e) => { setOpen(false); setRegion(r.value); e.stopPropagation();}}
+                      > 
+                        {r.label}
+                      </div>
+                    ))
+                  }
+                </div>)
+              }
+              
+            </div>
+
+            <button className = {styles.searchButton}>
+              <Image
+                className = {styles.searchIcon}
+                src = "/searchIcon.png"
+                width = {100}
+                height = {100}
+                alt = "Search Icon"
+                onClick={()=>handleSubmit}
+              />
+            </button>
+          
+          </div>
 
 
-            </form>
+        </form>
 
-            <p className={styles.hint}>
-              Enter Riot ID: <span>GameName#TagLine (e.g. dun#na1)</span>
-            </p>
+        <p className={styles.hint}>
+          Enter Riot ID: <span>GameName#TagLine (e.g. dun#na1)</span>
+        </p>
 
-  
+      </div>                  
 
-        </div>
-
-      </div>
+      <span className = {styles.endinghorizontalborder}></span>
+      
     </div>
   )
 }

@@ -1,13 +1,10 @@
 'use client'
 
-
 import Link from "next/link"
 import styles from "./Navbar.module.css"
-import Image from "next/image";
 
 export default function Navbar(){
 
-    const patchNotes = `https://www.leagueoflegends.com/en-us/news/game-updates/league-of-legends-patch-26-16-notes/`
 
 
     return (
