@@ -131,7 +131,7 @@ input::placeholder {
     left: 0;
     width: 5%;        
     height: 100vh;     
-    background-color: rgb(11, 11, 11);
+    background-color: black;
     z-index: 1000;       
     border-right: 1px solid rgb(71, 71, 71);
 }
@@ -142,7 +142,7 @@ input::placeholder {
     right: 0;
     width: 5%;          
     height: 100vh;
-    background-color: rgb(11, 11, 11);
+    background-color: black;
     z-index: 1000;
     border-left: 1px solid rgb(71, 71, 71);
 }
