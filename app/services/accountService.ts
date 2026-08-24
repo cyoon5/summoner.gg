@@ -3,12 +3,12 @@ import { AccountInfo } from "../types/leaderboard";
 
 const api_key = process.env.RIOT_API_KEY;
 
-export async function getAccountInfo(puuid: string, region: string): Promise<AccountInfo>{
+export async function getAccountInfo(puuid: string, platform: string): Promise<AccountInfo>{
 
     if(!api_key)
         throw new Error("Missing api key");
 
-    const accountURL = `https://${ACCOUNT_REGION_MAPPING.get(region)}.api.riotgames.com/riot/account/v1/accounts/by-puuid/${puuid}`;
+    const accountURL = `https://${ACCOUNT_REGION_MAPPING.get(platform)}.api.riotgames.com/riot/account/v1/accounts/by-puuid/${puuid}`;
     const res = await fetch(accountURL, {headers: {"X-Riot-Token": api_key}});
 
     if (!res.ok)
@@ -17,12 +17,12 @@ export async function getAccountInfo(puuid: string, region: string): Promise<Acc
     return res.json();
 }
 
-export async function getAccountPuuid(region: string, gameName: string, tagLine: string) : Promise<string>{
+export async function getAccountPuuid(platform: string, gameName: string, tagLine: string) : Promise<string>{
 
     if(!api_key)
         throw new Error("Missing api key");
 
-    const puuidURL = `https://${ACCOUNT_REGION_MAPPING.get(region)}.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${gameName}/${tagLine}`;
+    const puuidURL = `https://${ACCOUNT_REGION_MAPPING.get(platform)}.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${gameName}/${tagLine}`;
     const res = await fetch(puuidURL, {headers: {"X-Riot-Token": api_key}});
 
     if (!res.ok)

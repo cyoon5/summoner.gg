@@ -1,3 +1,5 @@
+ //platform, routing
+
 export const MATCH_REGION_MAPPING = new Map<string, string>([
 
   //match-v5 endpoint
@@ -19,11 +21,10 @@ export const MATCH_REGION_MAPPING = new Map<string, string>([
 
 ])
 
-
 export const ACCOUNT_REGION_MAPPING  = new Map<string, string>([
 
   //account-v1 endpoint
-
+  
   ["na1", "americas"],
   ["euw1", "europe"],
   ["kr", "asia"],
