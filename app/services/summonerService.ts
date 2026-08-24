@@ -3,6 +3,7 @@ import {getProfileIconUrl} from "../services/dragonService";
 import { ACCOUNT_REGION_MAPPING, MATCH_REGION_MAPPING } from "../constants";
 import { SummonerInfo } from "../types/leaderboard";
 import { getAccountPuuid } from "./accountService";
+import { SummonerNotFoundError } from "../errors/SummonerNotFoundError";
 
 const api_key = process.env.RIOT_API_KEY;
 
@@ -34,14 +35,17 @@ export async function getSummoner(account: SummonerData): Promise<SummonerProfil
 }
 
 
-export async function getSummonerInfo(puuid: string, region: string): Promise<SummonerInfo>{
+export async function getSummonerInfo(puuid: string, platform: string): Promise<SummonerInfo>{
     
     if(!api_key)
         throw new Error("Missing api key");
 
-    const summonerURL = `https://${region}.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/${puuid}`;
+    const summonerURL = `https://${platform}.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/${puuid}`;
     const res = await fetch(summonerURL, {headers: {"X-Riot-Token": api_key}});
 
+
+    if(res.status === 404) 
+        throw new SummonerNotFoundError();
     if (!res.ok)
         throw new Error("Failed to get summoner info");
 

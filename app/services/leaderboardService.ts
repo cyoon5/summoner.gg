@@ -1,3 +1,4 @@
+import { SummonerNotFoundError } from "../errors/SummonerNotFoundError";
 import { AccountInfo, ApexLeague, ApexLeagueEntry, leaderboardEntry, leaderboardResponse, SummonerInfo } from "../types/leaderboard";
 import { getAccountInfo, getAccountPuuid } from "./accountService";
 import { getSummonerInfo } from "./summonerService";
@@ -125,8 +126,8 @@ async function findSummonerOnLeaderboard(region: string, queue: string, count: n
     const puuid = await getAccountPuuid(region, gameName, tagLine);
     const ladderRank = apexLeagues.findIndex((s: ApexLeagueEntry) => s.puuid === puuid) + 1;
 
-    if(ladderRank === 0)
-        throw new Error("Summoner not found");
+    if(ladderRank === 0) //findIndex returns -1 on fail
+        throw new SummonerNotFoundError();
 
     const pageNumber = Math.ceil(ladderRank/count);
 

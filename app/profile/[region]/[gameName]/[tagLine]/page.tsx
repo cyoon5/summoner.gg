@@ -8,7 +8,8 @@ import RankedCard from "@/components/profile/RankedCard/RankedCard";
 import { RankedData } from "@/app/types/ranked";
 import  MatchHistory  from "@/components/profile/MatchHistory/MatchHistory";
 import Navbar from "@/components/navigation/Navbar";
-
+import { notFound } from "next/navigation";
+import { SummonerNotFoundError } from "@/app/errors/SummonerNotFoundError";
 
 export default async function Profile({ params }: {params: Promise<SummonerData>}) {
 
@@ -20,7 +21,16 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
         tagLine: tagLine
     }
 
-    const summonerProfile = await getSummoner(query);
+    let summonerProfile;
+    
+    try{
+        summonerProfile = await getSummoner(query);
+    }
+    catch(error){
+        if (error instanceof SummonerNotFoundError) 
+            notFound();
+        throw error;
+    }
     const rawMatches = await getRawMatches(summonerProfile.puuid, summonerProfile.matchRouting, 0, 10);
     const participantsInMatches = getMatchParticipantsInfo(rawMatches); 
     const searchedSummonerId = summonerProfile.puuid;  
