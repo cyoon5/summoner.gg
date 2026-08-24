@@ -7,7 +7,6 @@ import { getSummonerRankedInfo } from "@/app/services/rankedService";
 import RankedCard from "@/components/profile/RankedCard/RankedCard";
 import { RankedData } from "@/app/types/ranked";
 import  MatchHistory  from "@/components/profile/MatchHistory/MatchHistory";
-import { MATCH_REGION_MAPPING } from "@/app/constants";
 import Navbar from "@/components/navigation/Navbar";
 
 

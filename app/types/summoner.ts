@@ -5,11 +5,6 @@ export type SummonerData = {
     tagLine: string;
 };
 
-export type SearchInput = {
-  gameName: string;
-  tagLine: string;
-};
-
 export type SummonerProfile = {
   puuid: string;
   gameName: string;
@@ -19,4 +14,9 @@ export type SummonerProfile = {
   matchRouting: string;
   accountLvl: number;
   iconURL: string;
-}
+};
+
+export type SearchInput = {
+  gameName: string;
+  tagLine: string;
+};

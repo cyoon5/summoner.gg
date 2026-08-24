@@ -1,6 +1,5 @@
 export const MATCH_REGION_MAPPING = new Map<string, string>([
 
-
   //match-v5 endpoint
 
   ["na1", "americas"],

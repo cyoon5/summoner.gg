@@ -1,5 +1,7 @@
 import { AccountInfo, ApexLeague, ApexLeagueEntry, leaderboardEntry, leaderboardResponse, SummonerInfo } from "../types/leaderboard";
-import { ACCOUNT_REGION_MAPPING } from "../constants";
+import { getAccountInfo, getAccountPuuid } from "./accountService";
+import { getSummonerInfo } from "./summonerService";
+
 const api_key = process.env.RIOT_API_KEY;
 
 async function getChallengerLeagues(region: string, queue: string): Promise<ApexLeague>{
@@ -13,7 +15,7 @@ async function getChallengerLeagues(region: string, queue: string): Promise<Apex
     if(!response.ok)
         throw new Error("Failed to get challenger queues");
 
-    return await response.json();    
+    return response.json();    
 }
 
 async function getGrandmasterLeagues(region: string, queue: string): Promise<ApexLeague>{
@@ -27,7 +29,7 @@ async function getGrandmasterLeagues(region: string, queue: string): Promise<Ape
     if(!response.ok)
         throw new Error("Failed to get grandmaster queues");
 
-    return await response.json();    
+    return response.json();    
 }
 
 async function getMasterLeagues(region: string, queue: string): Promise<ApexLeague>{
@@ -41,7 +43,7 @@ async function getMasterLeagues(region: string, queue: string): Promise<ApexLeag
     if(!response.ok)
         throw new Error("Failed to get master queues");
 
-    return await response.json();    
+    return response.json();    
 }
 
 async function getApexLeagues(region: string, queue: string) {
@@ -133,55 +135,6 @@ async function findSummonerOnLeaderboard(region: string, queue: string, count: n
         puuid
     }
     
-}
-
-
-async function getAccountInfo(puuid: string, region: string): Promise<AccountInfo>{
-
-    if(!api_key)
-        throw new Error("Missing api key");
-
-    const accountURL = `https://${ACCOUNT_REGION_MAPPING.get(region)}.api.riotgames.com/riot/account/v1/accounts/by-puuid/${puuid}`;
-    const res = await fetch(accountURL, {headers: {"X-Riot-Token": api_key}});
-
-    if (!res.ok)
-        throw new Error("Failed to get account information");
-
-    return await res.json();
-}
-
-async function getAccountPuuid(region: string, gameName: string, tagLine: string) : Promise<string>{
-    if(!api_key)
-        throw new Error("Missing api key");
-
-    const puuidURL = `https://${ACCOUNT_REGION_MAPPING.get(region)}.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${gameName}/${tagLine}`;
-    const res = await fetch(puuidURL, {headers: {"X-Riot-Token": api_key}});
-
-    if (!res.ok)
-        throw new Error("Failed to get puuid");
-
-    const data = await res.json();
-
-    return data.puuid;
-}
-
-async function getSummonerInfo(puuid: string, region: string): Promise<SummonerInfo>{
-    if(!api_key)
-        throw new Error("Missing api key");
-
-    const summonerURL = `https://${region}.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/${puuid}`;
-    const res = await fetch(summonerURL, {headers: {"X-Riot-Token": api_key}});
-
-    if (!res.ok)
-        throw new Error("Failed to get summoner info");
-
-    const data = await res.json();
-
-    return {
-        puuid: data.puuid,
-        profileIconId: data.profileIconId,
-        summonerLevel: data.summonerLevel
-    }
 }
 
 

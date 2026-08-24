@@ -11,6 +11,7 @@ import Navbar from "@/components/navigation/Navbar";
 
 
 export default function SearchSummoner() {
+  
   const router = useRouter()
   const [userInput, setUserInput] = useState("");
   const [region, setRegion] = useState("na1");
