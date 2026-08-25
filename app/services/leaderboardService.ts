@@ -1,5 +1,5 @@
 import { SummonerNotFoundError } from "../errors/SummonerNotFoundError";
-import { AccountInfo, ApexLeague, ApexLeagueEntry, leaderboardEntry, leaderboardResponse, SummonerInfo } from "../types/leaderboard";
+import { AccountInfo, ApexLeague, ApexLeagueEntry, leaderboardEntry, leaderboardResponse } from "../types/leaderboard";
 import { getAccountInfo, getAccountPuuid } from "./accountService";
 import { getSummonerInfo } from "./summonerService";
 

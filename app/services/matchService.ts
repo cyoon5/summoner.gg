@@ -20,15 +20,13 @@ async function getRawMatches(puuid: string, routing: string ,start: number, coun
     if(!api_key) 
         throw new Error("Missing api key");
 
-    const matchIds = await getMatchList(puuid, routing, start, count);
-
-    const promises = matchIds.map((matchId:string) => {
+    const matchIdList = await getMatchList(puuid, routing, start, count);
+    const promises = matchIdList.map((matchId:string) => {
         return fetch(
             `https://${routing}.api.riotgames.com/lol/match/v5/matches/${matchId}`,  //MatchDTO
             {headers: {"X-Riot-Token": api_key}}
         );  
     })
-
     const responses = await Promise.all(promises); //returns an array of Response Objects
     const data = await Promise.all(responses.map(r => {return r.json()}));
     return data; 
@@ -43,7 +41,7 @@ async function getRawMatches(puuid: string, routing: string ,start: number, coun
         let currentMatch = rawMatchData[i];
         const participantListRiot = currentMatch.info.participants;
 
-        const participantInfoList = participantListRiot.map((p: any) => ({
+        const participantInfoList = participantListRiot.map((p: any): ParticipantInfo =>  ({
             matchId: currentMatch.metadata.matchId,
             puuid: p.puuid,
             gameName: p.riotIdGameName,
@@ -51,42 +49,30 @@ async function getRawMatches(puuid: string, routing: string ,start: number, coun
             role: p.teamPosition,
             championId: p.championId,
             championName: p.championName,
-            championUrl: getChampionIconUrl(p.championName),
             creepScore: p.neutralMinionsKilled + p.totalMinionsKilled,
             damageDealt: p.totalDamageDealtToChampions,
-            summonerSpell1Url: getSummonerSpellIconUrl(p.summoner1Id),
-            summonerSpell2Url: getSummonerSpellIconUrl(p.summoner2Id),
+            summonerSpell1Id: p.summoner1Id,
+            summonerSpell2Id: p.summoner2Id,
+            
             primaryRuneTree: p.perks.styles[0].style,
-            keystoneUrl: getRuneIconUrl(p.perks.styles[0].selections[0].perk),
-            primaryRunes: p.perks.styles[0].selections,
-            secondaryRuneTreeUrl: getRuneIconUrl(p.perks.styles[1].style),
-            secondaryRunes: p.perks.styles[0].selections,
+            primaryRuneSelections: p.perks.styles[0].selections.map((r:any)=> r.perk),
+            secondaryRuneTree: p.perks.styles[1].style,
+            secondaryRuneSelections: p.perks.styles[1].selections.map((r:any)=> r.perk),
+
             kills: p.kills,
             deaths: p.deaths,
             assists: p.assists,
-            kda: p.deaths == 0? "Perfect" :((p.kills + p.assists)/(p.deaths || 1)).toFixed(2) + " KDA",
             championLevel: p.champLevel,
             totalGoldEarned: p.goldEarned,
-            items: 
-                [
-                    p.item0,
-                    p.item1,
-                    p.item2, 
-                    p.item3,   
-                    p.item4,
-                    p.item5,
-                    p.item6,
-                ],
-            itemUrls: 
-                [
-                    getItemIconUrl(p.item0),
-                    getItemIconUrl(p.item1),
-                    getItemIconUrl(p.item2),
-                    getItemIconUrl(p.item6), //Trinket
-                    getItemIconUrl(p.item3),
-                    getItemIconUrl(p.item4),
-                    getItemIconUrl(p.item5),
-                ],
+            items: [
+                p.item0,
+                p.item1,
+                p.item2, 
+                p.item6, //Trinket
+                p.item3,   
+                p.item4,
+                p.item5,
+            ],
             visionScore: p.visionScore,
             team: p.teamId == 100? 'blue' : 'red',
             win: p.win
@@ -98,10 +84,7 @@ async function getRawMatches(puuid: string, routing: string ,start: number, coun
     return participantArray;
 }
 
-
-
-
-function getMatchInfo(rawMatchData: any): MatchInfo{
+function getMatchInfo(rawMatchData: any): MatchInfo {
 
     const matchInfo: MatchInfo = {
         gameMode: QUEUE_MAP.get(rawMatchData.info.queueId),

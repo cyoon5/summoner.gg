@@ -8,6 +8,7 @@ import { formatGold } from "@/lib/formatGold"
 import { useEffect, useState} from "react"
 import { RankedDataMini } from "@/app/types/ranked"
 import formatRank from "@/lib/formatRankPreview"
+import { getChampionIconUrl, getItemIconUrl, getRuneIconUrl, getSummonerSpellIconUrl } from "@/app/services/dragonService"
 
 
 export default function SummonerRow(prop: SummonerRowProp){
@@ -28,7 +29,16 @@ export default function SummonerRow(prop: SummonerRowProp){
         fetchRankPreview();
     }, [])
 
+    const championUrl = getChampionIconUrl(prop.participant.championName);
+    const spell1Url = getSummonerSpellIconUrl(prop.participant.summonerSpell1Id);
+    const spell2Url = getSummonerSpellIconUrl(prop.participant.summonerSpell2Id);
+    const keyStoneUrl = getRuneIconUrl(prop.participant.primaryRuneSelections[0]);
+    const secondaryTreeUrl = getRuneIconUrl(prop.participant.secondaryRuneTree);
 
+    const kda = prop.participant.deaths === 0
+        ? "Perfect"
+        : ((prop.participant.kills + prop.participant.assists) /
+        prop.participant.deaths).toFixed(2) + " KDA";
 
     return(
         
@@ -43,7 +53,7 @@ export default function SummonerRow(prop: SummonerRowProp){
                     </span>
                 
                     <Image
-                        src = {prop.participant.championUrl}
+                        src = {championUrl}
                         width = {500}
                         height = {500}
                         className = {styles.championIcon}
@@ -52,14 +62,14 @@ export default function SummonerRow(prop: SummonerRowProp){
 
                     <div className = {styles.spellContainer}>
                         <Image
-                            src = {prop.participant.summonerSpell1Url}
+                            src = {spell1Url}
                             className = {styles.summonerSpell}
                             width={500}
                             height={500}
                             alt= "Spell Image"
                         />
                         <Image
-                            src = {prop.participant.summonerSpell2Url}
+                            src = {spell2Url}
                             className = {styles.summonerSpell}
                             width={500}
                             height={500}
@@ -70,9 +80,9 @@ export default function SummonerRow(prop: SummonerRowProp){
                     <div className = {styles.runeContainer}>
 
                         {
-                           prop.participant.keystoneUrl && <div className = {styles.runeSlot}>
+                           keyStoneUrl && <div className = {styles.runeSlot}>
                                 <Image
-                                    src = {prop.participant.keystoneUrl}
+                                    src = {keyStoneUrl}
                                     className = {styles.rune}
                                     width={500}
                                     height={500}
@@ -82,9 +92,9 @@ export default function SummonerRow(prop: SummonerRowProp){
                         }
                         
                         {                                    
-                            prop.participant.secondaryRuneTreeUrl && <div className = {styles.runeSlot}>
+                            secondaryTreeUrl && <div className = {styles.runeSlot}>
                                 <Image
-                                    src = {prop.participant.secondaryRuneTreeUrl}
+                                    src = {secondaryTreeUrl}
                                     className = {styles.secondaryRuneTree}
                                     width={500}
                                     height={500}
@@ -124,7 +134,7 @@ export default function SummonerRow(prop: SummonerRowProp){
 
                 <div className = {styles.kda}>
                     <span className = {styles.kdaTotal}> {prop.participant.kills}/{prop.participant.deaths}/{prop.participant.assists} </span>
-                    <span> {prop.participant.kda + ""} </span>
+                    <span> {kda + ""} </span>
                 </div>
 
                 <div className = {styles.damage}>
@@ -149,23 +159,26 @@ export default function SummonerRow(prop: SummonerRowProp){
 
                 <div className = {styles.itemContainer}>
                     {
-                        prop.participant.itemUrls.map((item:string, i) => (
+                        prop.participant.items.map((itemId, i) => {
+                            const itemUrl = getItemIconUrl(itemId);
                             
-                            <div className = {styles.itemSlot} key = {i}>
+                            return (
+                                <div className = {styles.itemSlot} key = {i}>
 
-                                {
-                                    item && <Image
-                                    className = {styles.item}
-                                    src = {item}
-                                    width={500}
-                                    height={500}
-                                    alt= "Item Image"
-                                    />
-                                }
+                                    {
+                                        itemUrl && <Image
+                                        className = {styles.item}
+                                        src = {itemUrl}
+                                        width={500}
+                                        height={500}
+                                        alt= "Item Image"
+                                        />
+                                    }
 
-                            </div>
-
-                        ))
+                                </div>
+                            )
+            
+                        })
                     }
                 </div>
             

@@ -31,6 +31,7 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
             notFound();
         throw error;
     }
+
     const rawMatches = await getRawMatches(summonerProfile.puuid, summonerProfile.matchRouting, 0, 10);
     const participantsInMatches = getMatchParticipantsInfo(rawMatches); 
     const searchedSummonerId = summonerProfile.puuid;  
@@ -83,7 +84,6 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
                 <div className = {styles.columnContainer}>
 
                     <div className = {styles.statsCol}> 
-
 
                         <div className = {styles.rankedBox}>
 

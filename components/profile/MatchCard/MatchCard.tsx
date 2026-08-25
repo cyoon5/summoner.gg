@@ -6,12 +6,16 @@ import { MatchCardProp, ParticipantInfo} from '@/app/types/match'
 import { useState } from 'react'
 import Link from 'next/link'
 import MatchCardDetail from '../MatchCardDetail/MatchCardDetail'
+import { getChampionIconUrl, getItemIconUrl, getRuneIconUrl, getSummonerSpellIconUrl } from '@/app/services/dragonService'
 
 
 export default function MatchCard(props: MatchCardProp){
 
     const [isDetailsOpen, setDetailsOpen] = useState(false);
     const maxDamage = Math.max(...props.participants.map((p:ParticipantInfo) => p.damageDealt));
+
+    const keyStoneUrl = getRuneIconUrl(props.participant.primaryRuneSelections[0]);
+    const secondaryTreeUrl = getRuneIconUrl(props.participant.secondaryRuneTree);
 
 
     return(
@@ -35,7 +39,7 @@ export default function MatchCard(props: MatchCardProp){
                             
                             <div className = {styles.champion}>
                                 <Image
-                                    src = {props.participant.championUrl}
+                                    src = {getChampionIconUrl(props.participant.championName)}
                                     className={styles.championIcon}
                                     width={500}
                                     height={500}
@@ -46,7 +50,7 @@ export default function MatchCard(props: MatchCardProp){
 
                             <div className = {styles.summonerBox}>
                                 <Image
-                                    src = {props.participant.summonerSpell1Url}
+                                    src = {getSummonerSpellIconUrl(props.participant.summonerSpell1Id)}
                                     className = {styles.summonerSpell}
                                     width={500}
                                     height={500}
@@ -54,7 +58,7 @@ export default function MatchCard(props: MatchCardProp){
                                     loading= "eager"
                                 />
                                 <Image
-                                    src = {props.participant.summonerSpell2Url}
+                                    src = {getSummonerSpellIconUrl(props.participant.summonerSpell2Id)}
                                     className = {styles.summonerSpell}
                                     width={500}
                                     height={500}
@@ -65,10 +69,10 @@ export default function MatchCard(props: MatchCardProp){
 
                             <div className  = {styles.runeBox}>
                                 {
-                                    props.participant.keystoneUrl && (<div className = {styles.runeSlot}>
+                                   keyStoneUrl && (<div className = {styles.runeSlot}>
                                             {
                                                 <Image
-                                                    src = {props.participant.keystoneUrl}
+                                                    src = {keyStoneUrl}
                                                     className = {styles.rune}
                                                     width={500}
                                                     height={500}
@@ -79,9 +83,9 @@ export default function MatchCard(props: MatchCardProp){
                                         </div>)
                                 }
                                 {
-                                        props.participant.secondaryRuneTreeUrl && (<div className = {styles.runeSlot}>
+                                        secondaryTreeUrl && (<div className = {styles.runeSlot}>
                                         <Image
-                                            src = {props.participant.secondaryRuneTreeUrl}
+                                            src = {secondaryTreeUrl}
                                             className = {styles.secondaryRuneTree}
                                             width={500}
                                             height={500}
@@ -96,19 +100,22 @@ export default function MatchCard(props: MatchCardProp){
 
                         <div className = {styles.box3}> 
                             <p className = {styles.kdaTotal}> {props.participant.kills}/{props.participant.deaths}/{props.participant.assists} </p>
-                            <p className = {styles.kdaRatio}>{props.participant.kda} </p>
+                            <p className = {styles.kdaRatio}>{props.participant.deaths == 0? "Perfect" :((props.participant.kills + props.participant.assists)/(props.participant.deaths || 1)).toFixed(2) + " KDA"} </p>
                             <p className = {styles.cs}>{props.participant.creepScore} CS</p>
                             <p className = {styles.vision}>{props.participant.visionScore} Vision</p>
                         </div>
 
                         <div className = {styles.box4}> 
-                                {
-                                    props.participant.itemUrls.map((p,i) => (
+                            {
+                                props.participant.items.map((itemId,i) => {
+                                    const itemUrl = getItemIconUrl(itemId);
+
+                                    return (
                                         <div className = {styles.itemSlot} key = {i}>
                                             {
-                                                p && <Image
+                                                itemUrl && <Image
                                                 className = {styles.item}
-                                                src = {p}
+                                                src = {itemUrl}
                                                 width={500}
                                                 height={500}
                                                 alt= "Item Image"
@@ -116,8 +123,8 @@ export default function MatchCard(props: MatchCardProp){
                                                 />
                                             }
                                         </div>
-                                    ))
-                                }
+                                    )})
+                            }
                         </div>
 
                         <div className = {styles.box5}>
@@ -136,7 +143,7 @@ export default function MatchCard(props: MatchCardProp){
                                                         height = "500"
                                                         alt = "champIcon"
                                                         className = {styles.champIconMini} 
-                                                        src = {p.championUrl}
+                                                        src = {getChampionIconUrl(p.championName)}
                                                         loading = "eager"
                                                     />
 
@@ -169,7 +176,7 @@ export default function MatchCard(props: MatchCardProp){
                                                         height = "500"
                                                         alt = "champIcon"
                                                         className = {styles.champIconMini} 
-                                                        src = {p.championUrl}
+                                                        src = {getChampionIconUrl(p.championName)}
                                                         loading = "eager"
                                                     />
 

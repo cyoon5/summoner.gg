@@ -1,9 +1,7 @@
 import { SUMMONER_SPELL_MAP } from "../constants";
 
-//Module level call, s.t. it does not run on every function call.
 const patch = await getCurrentPatch();
 const runeMap = await getRuneMap(); 
-
 
 async function getCurrentPatch(){
     const patch = await fetch('https://ddragon.leagueoflegends.com/api/versions.json');
@@ -34,10 +32,8 @@ function getItemIconUrl(iconId: number){
     return `https://ddragon.leagueoflegends.com/cdn/${patch}/img/spell/${SUMMONER_SPELL_MAP.get(iconId)}.png`
 }
 
-//Can construct a map, should cache for reduced API calls, only fetch on new patch
-//Use map to construct URL s.t. its non-async
-function getRuneIconUrl(runeId: number){
-    
+function getRuneIconUrl(runeId: number): string | undefined {
+
     if(!runeId)
         return;
     
@@ -50,13 +46,13 @@ async function getRuneMap(): Promise<Map<number, string>>{ //Key value pair of i
     const response = await fetch(`https://ddragon.leagueoflegends.com/cdn/${patch}/data/en_US/runesReforged.json`);
     const data = await response.json();
 
-    data.forEach((path:any) => 
-        {
+    data.forEach((path:any) => {
             runeMap.set(path.id, path.icon);
             path.slots.forEach((r:any) => r.runes
             .forEach((rune:any) => runeMap.set(rune.id, rune.icon)));
         }
     )
+    
     return runeMap;
 }
 

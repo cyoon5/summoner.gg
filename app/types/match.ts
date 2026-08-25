@@ -1,5 +1,4 @@
 export type ParticipantInfo = {
-
     matchId: string;
     puuid: string;
     gameName: string;
@@ -7,24 +6,20 @@ export type ParticipantInfo = {
     role: 'TOP' | 'JUNGLE' | 'MID' | 'ADC' | 'UTILITY';
     championId: number;
     championName: string;
-    championUrl: string;
     creepScore: number;
     damageDealt : number;
-    summonerSpell1Url: string;
-    summonerSpell2Url: string;
+    summonerSpell1Id: number;
+    summonerSpell2Id: number;
     primaryRuneTree: number;
-    keystoneUrl: string;
-    primaryRunes: [number, number, number, number];
-    secondaryRuneTreeUrl: string;
-    secondaryRunes: [number, number];
+    primaryRuneSelections: number[];
+    secondaryRuneTree: number;
+    secondaryRuneSelections: number[];
     kills: number;
     deaths: number;
     assists: number;
-    kda: string;
     championLevel: number;
     totalGoldEarned: number;
-    items: [number, number, number, number, number, number, number];
-    itemUrls: [string, string, string, string, string, string, string];
+    items: number[];
     visionScore: number;
     team: 'red' | 'blue';
     win: boolean;
