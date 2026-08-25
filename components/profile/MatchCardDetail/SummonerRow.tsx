@@ -34,11 +34,7 @@ export default function SummonerRow(prop: SummonerRowProp){
     const spell2Url = getSummonerSpellIconUrl(prop.participant.summonerSpell2Id);
     const keyStoneUrl = getRuneIconUrl(prop.participant.primaryRuneSelections[0]);
     const secondaryTreeUrl = getRuneIconUrl(prop.participant.secondaryRuneTree);
-
-    const kda = prop.participant.deaths === 0
-        ? "Perfect"
-        : ((prop.participant.kills + prop.participant.assists) /
-        prop.participant.deaths).toFixed(2) + " KDA";
+    const kda = prop.participant.deaths === 0 ? "Perfect" : ((prop.participant.kills + prop.participant.assists) / prop.participant.deaths).toFixed(2) + " KDA";
 
     return(
         
@@ -115,6 +111,7 @@ export default function SummonerRow(prop: SummonerRowProp){
                         </Link>
 
                         <div className = {styles.rank}>
+                            
                             <Image
                                 src = {`/mini-emblems/${summonerRank? summonerRank.tier.toLowerCase() : "unranked"}.svg`}
                                 className = {styles.miniRankedEmblem}

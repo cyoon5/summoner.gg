@@ -1,5 +1,4 @@
 import { ParticipantInfo, MatchInfo} from "../types/match";
-import { getChampionIconUrl, getItemIconUrl, getSummonerSpellIconUrl, getRuneIconUrl } from "./dragonService";
 import { getRelativeTime } from "../../lib/unixConverter";
 import { QUEUE_MAP } from "../constants";
 
@@ -41,7 +40,7 @@ async function getRawMatches(puuid: string, routing: string ,start: number, coun
         let currentMatch = rawMatchData[i];
         const participantListRiot = currentMatch.info.participants;
 
-        const participantInfoList = participantListRiot.map((p: any): ParticipantInfo =>  ({
+        const participantInfoList = participantListRiot.map((p: any): ParticipantInfo => ({
             matchId: currentMatch.metadata.matchId,
             puuid: p.puuid,
             gameName: p.riotIdGameName,
@@ -58,7 +57,8 @@ async function getRawMatches(puuid: string, routing: string ,start: number, coun
             primaryRuneSelections: p.perks.styles[0].selections.map((r:any)=> r.perk),
             secondaryRuneTree: p.perks.styles[1].style,
             secondaryRuneSelections: p.perks.styles[1].selections.map((r:any)=> r.perk),
-
+            statPerks: p.perks.statPerks,
+            
             kills: p.kills,
             deaths: p.deaths,
             assists: p.assists,
@@ -76,6 +76,7 @@ async function getRawMatches(puuid: string, routing: string ,start: number, coun
             visionScore: p.visionScore,
             team: p.teamId == 100? 'blue' : 'red',
             win: p.win
+            
         }));
 
         participantArray.push(participantInfoList);

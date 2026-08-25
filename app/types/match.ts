@@ -14,6 +14,7 @@ export type ParticipantInfo = {
     primaryRuneSelections: number[];
     secondaryRuneTree: number;
     secondaryRuneSelections: number[];
+    statPerks: StatPerks;
     kills: number;
     deaths: number;
     assists: number;
@@ -24,6 +25,12 @@ export type ParticipantInfo = {
     team: 'red' | 'blue';
     win: boolean;
 }
+
+export type StatPerks = {
+    defense: number;
+    flex: number;
+    offense: number;
+};
 
 export type MatchInfo = {
     gameMode: string | undefined;
