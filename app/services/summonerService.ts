@@ -2,7 +2,7 @@ import { SummonerData, SummonerProfile } from "../types/summoner";
 import {getProfileIconUrl} from "../services/dragonService";
 import { ACCOUNT_REGION_MAPPING, MATCH_REGION_MAPPING } from "../constants";
 import { SummonerInfo } from "../types/leaderboard";
-import { getAccountPuuid } from "./accountService";
+import { getAccountInfoByNameTag } from "./accountService";
 import { SummonerNotFoundError } from "../errors/SummonerNotFoundError";
 
 const api_key = process.env.RIOT_API_KEY;
@@ -18,13 +18,14 @@ export async function getSummoner(account: SummonerData): Promise<SummonerProfil
     if (!accountRouting || !matchRouting) 
         throw new Error(`Invalid platform: ${platform}`);
 
-    const puuid = await getAccountPuuid(platform, gameName, tagLine);
+    const accountDetails  = await getAccountInfoByNameTag(platform, gameName, tagLine);
+    const puuid = accountDetails.puuid;
     const summonerAccount = await getSummonerInfo(puuid, platform);
 
     return {
         puuid: puuid,
-        gameName: gameName,
-        tagLine: tagLine,
+        gameName: accountDetails.gameName,
+        tagLine: accountDetails.tagLine,
         platform: platform,
         accountRouting: accountRouting,
         matchRouting: matchRouting,

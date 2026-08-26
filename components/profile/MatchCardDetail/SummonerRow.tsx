@@ -106,7 +106,7 @@ export default function SummonerRow(prop: SummonerRowProp){
 
                         <Link  
                             title = {prop.participant.gameName + "#" + prop.participant.tagLine} 
-                            href = {`/profile/na1/${prop.participant.gameName}/${prop.participant.tagLine}`} 
+                            href = {`/profile/${prop.platform}/${prop.participant.gameName}/${prop.participant.tagLine}`} 
                             className = {prop.participant.puuid == prop.searchedParticipant.puuid ? styles.searchedParticipant : styles.participant}>{prop.participant.gameName}
                         </Link>
 

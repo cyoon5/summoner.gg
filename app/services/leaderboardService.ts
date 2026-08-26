@@ -1,6 +1,6 @@
 import { SummonerNotFoundError } from "../errors/SummonerNotFoundError";
 import { AccountInfo, ApexLeague, ApexLeagueEntry, leaderboardEntry, leaderboardResponse } from "../types/leaderboard";
-import { getAccountInfo, getAccountPuuid } from "./accountService";
+import { getAccountInfoByNameTag, getAccountInfoByPuuid } from "./accountService";
 import { getSummonerInfo } from "./summonerService";
 
 const api_key = process.env.RIOT_API_KEY;
@@ -75,7 +75,7 @@ async function getLeaderboard(region: string, queue: string, start: number, coun
 
 
     const promises = apexLeagues.slice(start,start + count).map(async(entry: ApexLeagueEntry) => {
-        return await getAccountInfo(entry.puuid, region);
+        return await getAccountInfoByPuuid(entry.puuid, region);
     })
 
     const leaderboardAccounts: AccountInfo[] = await Promise.all(promises);
@@ -123,7 +123,8 @@ async function findSummonerOnLeaderboard(region: string, queue: string, count: n
     const apexLeagues = await getApexLeagues(region, queue);
 
     const [gameName, tagLine] = searchedRiotId.split("-");
-    const puuid = await getAccountPuuid(region, gameName, tagLine);
+    const accountDetails = await getAccountInfoByNameTag(region, gameName, tagLine);
+    const puuid = accountDetails.puuid;
     const ladderRank = apexLeagues.findIndex((s: ApexLeagueEntry) => s.puuid === puuid) + 1;
 
     if(ladderRank === 0) //findIndex returns -1 on fail

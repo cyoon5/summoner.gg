@@ -4,7 +4,7 @@ import { AccountInfo } from "../types/leaderboard";
 
 const api_key = process.env.RIOT_API_KEY;
 
-export async function getAccountInfo(puuid: string, platform: string): Promise<AccountInfo>{
+export async function getAccountInfoByPuuid(puuid: string, platform: string): Promise<AccountInfo>{
 
     if(!api_key)
         throw new Error("Missing api key");
@@ -20,7 +20,7 @@ export async function getAccountInfo(puuid: string, platform: string): Promise<A
     return res.json();
 }
 
-export async function getAccountPuuid(platform: string, gameName: string, tagLine: string) : Promise<string>{
+export async function getAccountInfoByNameTag(platform: string, gameName: string, tagLine: string): Promise<AccountInfo>{
 
     if(!api_key)
         throw new Error("Missing api key");
@@ -31,8 +31,13 @@ export async function getAccountPuuid(platform: string, gameName: string, tagLin
     if (res.status === 404) 
         throw new SummonerNotFoundError();
     if (!res.ok)
-        throw new Error("Failed to get puuid");
+        throw new Error("Failed to get account information");
 
     const data = await res.json();
-    return data.puuid;
+
+    return {
+        puuid: data.puuid,
+        gameName: data.gameName,
+        tagLine: data.tagLine
+    };
 }
