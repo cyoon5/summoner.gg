@@ -1,3 +1,5 @@
+import { RankedDataMini } from "./ranked";
+
 export type ParticipantInfo = {
     matchId: string;
     puuid: string;
@@ -51,6 +53,7 @@ export type SummonerRowProp = {
     participant: ParticipantInfo;
     maxDamage: number;
     platform: string;
+    rank?: RankedDataMini;
 }
 
 export type MatchCardDetailProp = {
@@ -67,4 +70,9 @@ export type MatchHistoryProp = {
     initialParticipantsInMatches: ParticipantInfo[][]
     initialSearchedSummoner: (ParticipantInfo | undefined)[]
     initialMatchInfoList: MatchInfo[]
+}
+
+export type RankPreviewResponse = {
+    puuid: string;
+    rankInfoPreview: RankedDataMini;
 }

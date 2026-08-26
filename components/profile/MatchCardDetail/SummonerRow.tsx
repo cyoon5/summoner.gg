@@ -5,47 +5,30 @@ import styles from "./SummonerRow.module.css"
 import Image from "next/image"
 import Link from "next/link"
 import { formatGold } from "@/lib/formatGold"
-import { useEffect, useState} from "react"
-import { RankedDataMini } from "@/app/types/ranked"
 import formatRank from "@/lib/formatRankPreview"
 import { getChampionIconUrl, getItemIconUrl, getRuneIconUrl, getSummonerSpellIconUrl } from "@/app/services/dragonService"
 
 
-export default function SummonerRow(prop: SummonerRowProp){
+export default function SummonerRow(props: SummonerRowProp){
 
-    const damageWidth = (prop.participant.damageDealt / prop.maxDamage) * 100;
-    const [summonerRank, setSummonerRank] = useState<RankedDataMini | undefined>(undefined);
-
-
-
-    useEffect(() => {
-
-        const fetchRankPreview = async() => {
-            const res = await fetch(`/api/ranked/?puuid=${prop.participant.puuid}&platform=${prop.platform}`);
-            const data =  await res.json();
-            setSummonerRank(data.rankInfoPreview);
-        }
-
-        fetchRankPreview();
-    }, [])
-
-    const championUrl = getChampionIconUrl(prop.participant.championName);
-    const spell1Url = getSummonerSpellIconUrl(prop.participant.summonerSpell1Id);
-    const spell2Url = getSummonerSpellIconUrl(prop.participant.summonerSpell2Id);
-    const keyStoneUrl = getRuneIconUrl(prop.participant.primaryRuneSelections[0]);
-    const secondaryTreeUrl = getRuneIconUrl(prop.participant.secondaryRuneTree);
-    const kda = prop.participant.deaths === 0 ? "Perfect" : ((prop.participant.kills + prop.participant.assists) / prop.participant.deaths).toFixed(2) + " KDA";
+    const damageWidth = (props.participant.damageDealt / props.maxDamage) * 100;
+    const championUrl = getChampionIconUrl(props.participant.championName);
+    const spell1Url = getSummonerSpellIconUrl(props.participant.summonerSpell1Id);
+    const spell2Url = getSummonerSpellIconUrl(props.participant.summonerSpell2Id);
+    const keyStoneUrl = getRuneIconUrl(props.participant.primaryRuneSelections[0]);
+    const secondaryTreeUrl = getRuneIconUrl(props.participant.secondaryRuneTree);
+    const kda = props.participant.deaths === 0 ? "Perfect" : ((props.participant.kills + props.participant.assists) / props.participant.deaths).toFixed(2) + " KDA";
 
     return(
         
-        <div className = {prop.searchedParticipant.puuid == prop.participant.puuid? styles.searchedSummonerContainer : ""}>
+        <div className = {props.searchedParticipant.puuid === props.participant.puuid? styles.searchedSummonerContainer : ""}>
 
             <div className = {styles.summonerContainer}>
                 
                 <div className = {styles.summoner}>
 
                     <span className = {styles.champLvlContainer}>
-                        <span className = {styles.champLvl}>{prop.participant.championLevel}</span>
+                        <span className = {styles.champLvl}>{props.participant.championLevel}</span>
                     </span>
                 
                     <Image
@@ -105,22 +88,22 @@ export default function SummonerRow(prop: SummonerRowProp){
                     <div className = {styles.nameAndRank}>
 
                         <Link  
-                            title = {prop.participant.gameName + "#" + prop.participant.tagLine} 
-                            href = {`/profile/${prop.platform}/${prop.participant.gameName}/${prop.participant.tagLine}`} 
-                            className = {prop.participant.puuid == prop.searchedParticipant.puuid ? styles.searchedParticipant : styles.participant}>{prop.participant.gameName}
+                            title = {props.participant.gameName + "#" + props.participant.tagLine} 
+                            href = {`/profile/${props.platform}/${props.participant.gameName}/${props.participant.tagLine}`} 
+                            className = {props.participant.puuid === props.searchedParticipant.puuid ? styles.searchedParticipant : styles.participant}>{props.participant.gameName}
                         </Link>
 
                         <div className = {styles.rank}>
                             
                             <Image
-                                src = {`/mini-emblems/${summonerRank? summonerRank.tier.toLowerCase() : "unranked"}.svg`}
+                                src = {`/mini-emblems/${props.rank? props.rank.tier.toLowerCase() : "unranked"}.svg`}
                                 className = {styles.miniRankedEmblem}
                                 width={500}
                                 height={500}
                                 alt= "Rank Mini Crest"
                             />
 
-                            <span>{summonerRank ? `${formatRank(summonerRank.tier, summonerRank.division, summonerRank.leaguePoints)}` : '-'}</span>
+                            <span>{props.rank ? `${formatRank(props.rank.tier, props.rank.division, props.rank.leaguePoints)}` : '-'}</span>
 
                         </div>
 
@@ -130,12 +113,12 @@ export default function SummonerRow(prop: SummonerRowProp){
                 </div>
 
                 <div className = {styles.kda}>
-                    <span className = {styles.kdaTotal}> {prop.participant.kills}/{prop.participant.deaths}/{prop.participant.assists} </span>
+                    <span className = {styles.kdaTotal}> {props.participant.kills}/{props.participant.deaths}/{props.participant.assists} </span>
                     <span> {kda + ""} </span>
                 </div>
 
                 <div className = {styles.damage}>
-                    <span>{prop.participant.damageDealt.toLocaleString()}</span>
+                    <span>{props.participant.damageDealt.toLocaleString()}</span>
 
                     <div className = {styles.damageBarContainer}>
                         <div className = {styles.damageBar} style={{ width: `${damageWidth}%` }}></div>
@@ -143,20 +126,20 @@ export default function SummonerRow(prop: SummonerRowProp){
                 </div>
 
                 <div className = {styles.gold}>
-                    {formatGold(prop.participant.totalGoldEarned)}
+                    {formatGold(props.participant.totalGoldEarned)}
                 </div>
 
                 <div className = {styles.creepScore}> 
-                    {prop.participant.creepScore}
+                    {props.participant.creepScore}
                 </div>  
             
                 <div className = {styles.wards}>
-                    {prop.participant.visionScore}
+                    {props.participant.visionScore}
                 </div>
 
                 <div className = {styles.itemContainer}>
                     {
-                        prop.participant.items.map((itemId, i) => {
+                        props.participant.items.map((itemId, i) => {
                             const itemUrl = getItemIconUrl(itemId);
                             
                             return (

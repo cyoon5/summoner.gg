@@ -24,6 +24,8 @@ function getItemIconUrl(iconId: number){
 
     if(!iconId)
         return
+    if(iconId === 3097) //Stormrazer
+        iconId = 3095;
     
     return `https://ddragon.leagueoflegends.com/cdn/${patch}/img/item/${iconId}.png`
 }

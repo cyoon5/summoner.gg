@@ -1,14 +1,32 @@
 'use client';
 
-import { MatchCardDetailProp, ParticipantInfo } from "@/app/types/match";
+import { MatchCardDetailProp, ParticipantInfo, RankPreviewResponse } from "@/app/types/match";
 import styles from "./MatchCardDetail.module.css"
 import SummonerRow from "./SummonerRow";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 
-export default function MatchCardDetail(prop: MatchCardDetailProp){
+export default function MatchCardDetail(props: MatchCardDetailProp){
 
     const [detailsTab, setDetailsTab] = useState("postGame")
+    const [rankPreviewData, setRankPreviewData] = useState<RankPreviewResponse[]>([]);
+
+
+
+    useEffect(() => {
+
+        const fetchRankPreview = async() => {
+            const promises = props.participants.map((p:ParticipantInfo) => {
+                return fetch(`/api/ranked/?puuid=${p.puuid}&platform=${props.platform}`);
+            });
+            const responses = await Promise.all(promises);
+            const data = await Promise.all(responses.map(r => {return r.json()}));  
+            setRankPreviewData(data);
+        }
+
+        fetchRankPreview();
+    }, [])
+    
 
     return(
         
@@ -39,8 +57,8 @@ export default function MatchCardDetail(prop: MatchCardDetailProp){
                 <div className = {styles.postGameContainer}>
 
                     <div className = {styles.summonerTeamDetails}>
-                        <div className = {prop.participant.win? styles.detailsHeaderVictory : styles.detailsHeaderDefeat}>
-                            <p className = {styles.gameOutcome}> {prop.participant.win? "Victory": "Defeat"} ({prop.participant.team == "red"? "Red" : "Blue"} Side) </p>
+                        <div className = {props.participant.win? styles.detailsHeaderVictory : styles.detailsHeaderDefeat}>
+                            <p className = {styles.gameOutcome}> {props.participant.win? "Victory": "Defeat"} ({props.participant.team == "red"? "Red" : "Blue"} Side) </p>
                             <p> KDA </p>
                             <p> Damage </p>
                             <p> Gold </p>
@@ -50,16 +68,23 @@ export default function MatchCardDetail(prop: MatchCardDetailProp){
                         </div>
 
                         {
-                            prop.participants.filter((p:ParticipantInfo) => p.team == prop.participant.team).map((p:ParticipantInfo) => (
-                                    <SummonerRow participant = {p} searchedParticipant = {prop.participant} maxDamage = {prop.maxDamage} platform = {prop.platform} key = {p.puuid}/>
+                            props.participants.filter((p:ParticipantInfo) => p.team == props.participant.team).map((p:ParticipantInfo) => (
+                                <SummonerRow 
+                                    participant = {p} 
+                                    searchedParticipant = {props.participant} 
+                                    maxDamage = {props.maxDamage} 
+                                    platform = {props.platform} 
+                                    rank = {rankPreviewData.find(r => r.puuid == p.puuid)?.rankInfoPreview}
+                                    key = {p.puuid}
+                                />
                             ))
                         }
                     </div>
 
 
                     <div className = {styles.enemyTeamDetails}>
-                        <div className = {prop.participant.win? styles.detailsHeaderDefeat : styles.detailsHeaderVictory}>
-                            <p className = {styles.gameOutcome}> {prop.participant.win? "Defeat" : "Victory"}  ({prop.participant.team == "red"? "Blue" : "Red"} Side) </p>
+                        <div className = {props.participant.win? styles.detailsHeaderDefeat : styles.detailsHeaderVictory}>
+                            <p className = {styles.gameOutcome}> {props.participant.win? "Defeat" : "Victory"}  ({props.participant.team == "red"? "Blue" : "Red"} Side) </p>
                             <p> KDA </p>
                             <p> Damage </p>
                             <p> Gold </p>
@@ -69,8 +94,15 @@ export default function MatchCardDetail(prop: MatchCardDetailProp){
                         </div>
 
                         {
-                            prop.participants.filter((p:ParticipantInfo) => p.team != prop.participant.team).map((p:ParticipantInfo) => (
-                                <SummonerRow participant = {p} searchedParticipant = {prop.participant} maxDamage = {prop.maxDamage} key = {p.puuid} platform = {prop.platform}/>
+                            props.participants.filter((p:ParticipantInfo) => p.team != props.participant.team).map((p:ParticipantInfo) => (
+                                <SummonerRow 
+                                    participant = {p} 
+                                    searchedParticipant = {props.participant} 
+                                    maxDamage = {props.maxDamage} 
+                                    platform = {props.platform}
+                                    rank = {rankPreviewData.find(r => r.puuid == p.puuid)?.rankInfoPreview}
+                                    key = {p.puuid} 
+                                />
                             ))
                         }
 
