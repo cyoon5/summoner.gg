@@ -3,34 +3,6 @@
     flex-direction: column;
 }
 
-
-.summonerTeamDetails, .enemyTeamDetails{
-    display: flex;
-    flex-direction: column;
-}
-
-.detailsHeaderDefeat {
-    display: grid;
-    grid-template-columns: 36% 11% 12% 11% 8.5% 12.5% 10%;    
-    background-color: #5c2a1c;
-    padding: 0px 10px;
-    border-top: 1px solid #e14040;
-    border-bottom: 1px solid #e14040;    
-}
-
-.detailsHeaderVictory{
-    display: grid;
-    grid-template-columns: 36% 11% 12% 11% 8.5% 12.5% 10%;    
-    background-color: #1e3a5f;
-    padding: 0px 10px;
-    border-top: 1px solid #3b6ea5;
-    border-bottom: 1px solid #3b6ea5;
-}
-
-.gameOutcome{
-    font-weight: bold;
-}
-
 .detailTabContainer{
     display: flex;
     flex-direction: row;
@@ -62,10 +34,7 @@
     background-color: rgb(44, 44, 44);
 }
 
-.postGameContainer{
-    display: flex;
-    flex-direction: column;
-}
+
 
 .performanceContainer{
 

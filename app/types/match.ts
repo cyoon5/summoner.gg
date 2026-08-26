@@ -76,3 +76,11 @@ export type RankPreviewResponse = {
     puuid: string;
     rankInfoPreview: RankedDataMini;
 }
+
+export type PostGameProp = {
+    participants: ParticipantInfo[];
+    participant: ParticipantInfo;
+    maxDamage: number;
+    platform: string;
+    rankPreviewData: RankPreviewResponse[];
+};

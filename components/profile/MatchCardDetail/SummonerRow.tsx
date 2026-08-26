@@ -147,11 +147,11 @@ export default function SummonerRow(props: SummonerRowProp){
 
                                     {
                                         itemUrl && <Image
-                                        className = {styles.item}
-                                        src = {itemUrl}
-                                        width={500}
-                                        height={500}
-                                        alt= "Item Image"
+                                            className = {styles.item}
+                                            src = {itemUrl}
+                                            width={500}
+                                            height={500}
+                                            alt= "Item Image"
                                         />
                                     }
 

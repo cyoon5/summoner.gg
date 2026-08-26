@@ -4,13 +4,15 @@ import { MatchCardDetailProp, ParticipantInfo, RankPreviewResponse } from "@/app
 import styles from "./MatchCardDetail.module.css"
 import SummonerRow from "./SummonerRow";
 import { useState, useEffect } from "react";
+import PostGame from "./PostGame";
 
 
 export default function MatchCardDetail(props: MatchCardDetailProp){
 
-    const [detailsTab, setDetailsTab] = useState("postGame")
-    const [rankPreviewData, setRankPreviewData] = useState<RankPreviewResponse[]>([]);
 
+    type DetailsTab = "postGame" | "performance" | "build" | "metrics";
+    const [detailsTab, setDetailsTab] = useState<DetailsTab>("postGame")
+    const [rankPreviewData, setRankPreviewData] = useState<RankPreviewResponse[]>([]);
 
 
     useEffect(() => {
@@ -52,63 +54,15 @@ export default function MatchCardDetail(props: MatchCardDetailProp){
 
             </div>
 
-            { detailsTab === "postGame" && (
-
-                <div className = {styles.postGameContainer}>
-
-                    <div className = {styles.summonerTeamDetails}>
-                        <div className = {props.participant.win? styles.detailsHeaderVictory : styles.detailsHeaderDefeat}>
-                            <p className = {styles.gameOutcome}> {props.participant.win? "Victory": "Defeat"} ({props.participant.team == "red"? "Red" : "Blue"} Side) </p>
-                            <p> KDA </p>
-                            <p> Damage </p>
-                            <p> Gold </p>
-                            <p> CS </p>
-                            <p> Wards </p>
-                            <p> Items </p>
-                        </div>
-
-                        {
-                            props.participants.filter((p:ParticipantInfo) => p.team == props.participant.team).map((p:ParticipantInfo) => (
-                                <SummonerRow 
-                                    participant = {p} 
-                                    searchedParticipant = {props.participant} 
-                                    maxDamage = {props.maxDamage} 
-                                    platform = {props.platform} 
-                                    rank = {rankPreviewData.find(r => r.puuid == p.puuid)?.rankInfoPreview}
-                                    key = {p.puuid}
-                                />
-                            ))
-                        }
-                    </div>
-
-
-                    <div className = {styles.enemyTeamDetails}>
-                        <div className = {props.participant.win? styles.detailsHeaderDefeat : styles.detailsHeaderVictory}>
-                            <p className = {styles.gameOutcome}> {props.participant.win? "Defeat" : "Victory"}  ({props.participant.team == "red"? "Blue" : "Red"} Side) </p>
-                            <p> KDA </p>
-                            <p> Damage </p>
-                            <p> Gold </p>
-                            <p> CS </p>
-                            <p> Wards </p>
-                            <p> Items </p>
-                        </div>
-
-                        {
-                            props.participants.filter((p:ParticipantInfo) => p.team != props.participant.team).map((p:ParticipantInfo) => (
-                                <SummonerRow 
-                                    participant = {p} 
-                                    searchedParticipant = {props.participant} 
-                                    maxDamage = {props.maxDamage} 
-                                    platform = {props.platform}
-                                    rank = {rankPreviewData.find(r => r.puuid == p.puuid)?.rankInfoPreview}
-                                    key = {p.puuid} 
-                                />
-                            ))
-                        }
-
-                    </div>
-                </div>
-            )}
+            { 
+                detailsTab === "postGame" && <PostGame
+                    participants={props.participants}
+                    participant={props.participant}
+                    maxDamage={props.maxDamage}
+                    platform={props.platform}
+                    rankPreviewData={rankPreviewData}
+                />
+            }
             
             { detailsTab === "performance" && (
                 <div className = {styles.performanceContainer}>
