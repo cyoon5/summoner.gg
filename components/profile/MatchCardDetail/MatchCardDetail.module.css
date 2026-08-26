@@ -3,23 +3,7 @@
     flex-direction: column;
 }
 
-.detailsNavBar{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    margin: 0em 0em;
-    border-top: 1px dashed rgb(143, 141, 141);
-    padding: 12px 0px;
-}
 
-.navBarTab{
-    display: flex;
-    background-color: rgb(37, 36, 36);
-    padding: 10px;
-    border-radius: 5px;
-    justify-content: center;
-    width: 100px;
-}
 .summonerTeamDetails, .enemyTeamDetails{
     display: flex;
     flex-direction: column;
@@ -45,4 +29,35 @@
 
 .gameOutcome{
     font-weight: bold;
+}
+
+.detailTabContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 0em 0em;
+    border-top: 1px dashed rgb(143, 141, 141);
+    padding: 12px 0px;
+}
+
+.detailsTab{
+    display: flex;
+    font-family: monospace, Arial, Helvetica, sans-serif;
+    padding: 10px;
+    border-radius: 5px;
+    justify-content: center;
+    width: 100px;
+    cursor: pointer;
+    border: none;
+    background-color: inherit;
+    color: white;
+    transition: background-color ease 0.3s;
+}
+
+.selectedDetailsTab{
+    background-color: rgb(44, 44, 44);
+}
+
+.detailsTab:hover{
+    background-color: rgb(44, 44, 44);
 }

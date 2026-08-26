@@ -1,4 +1,5 @@
 'use client';
+
 import { MatchCardDetailProp, ParticipantInfo } from "@/app/types/match";
 import styles from "./MatchCardDetail.module.css"
 import SummonerRow from "./SummonerRow";
@@ -7,27 +8,30 @@ import { useState } from "react";
 
 export default function MatchCardDetail(prop: MatchCardDetailProp){
 
-    return(
+    const [detailsTab, setDetailsTab] = useState("postGame")
 
+    return(
         
         <div className = {styles.detailsContainer}>
 
-            <div className = {styles.detailsNavBar}>
-                <div className = {styles.navBarTab}>
+            <div className = {styles.detailTabContainer}>
+
+                <button className={`${styles.detailsTab} ${detailsTab === "postGame" ? styles.selectedDetailsTab : ""}`} onClick = {() => setDetailsTab("postGame")}>
                     Post Game
-                </div>
+                </button>
 
-                <div className = {styles.navBarTab}>
+                <button className={`${styles.detailsTab} ${detailsTab === "performance" ? styles.selectedDetailsTab : ""}`} onClick = {() => setDetailsTab("performance")}>
                     Performance
-                </div>
+                </button>
 
-                <div className = {styles.navBarTab}>
-                    Item Build
-                </div>
+                <button className={`${styles.detailsTab} ${detailsTab === "build" ? styles.selectedDetailsTab : ""}`} onClick = {() => setDetailsTab("build")}>
+                    Build
+                </button>
 
-                <div className = {styles.navBarTab}>
+                <button className={`${styles.detailsTab} ${detailsTab === "metrics" ? styles.selectedDetailsTab : ""}`} onClick = {() => setDetailsTab("metrics")}>
                     Metrics 
-                </div>
+                </button>
+
             </div>
 
             <div className = {styles.summonerTeamDetails}>
