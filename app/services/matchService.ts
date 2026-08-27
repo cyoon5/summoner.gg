@@ -72,6 +72,7 @@ async function getRawMatches(puuid: string, routing: string ,start: number, coun
                 p.item3,   
                 p.item4,
                 p.item5,
+                p.roleBoundItem
             ],
             visionScore: p.visionScore,
             team: p.teamId == 100? 'blue' : 'red',

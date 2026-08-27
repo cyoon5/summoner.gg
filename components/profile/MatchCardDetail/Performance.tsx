@@ -7,10 +7,13 @@ import PerformanceRow from "./PerformanceRow";
 
 
 export default function Performance(props: PerformanceProp){
+    
+    //Future feature: sort via rank
 
     type FilterTab = "kills" | "kda" | "damage" | "gold" | "cs" | "wards" ;
     const [filterTab, setFilterTab] = useState<FilterTab>("kills");
     const sortedParticipants = [...props.participants].sort((a,b) => {
+        
         if(filterTab === "kills")
             return b.kills - a.kills;
         else if(filterTab === "kda")
