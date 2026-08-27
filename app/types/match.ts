@@ -97,5 +97,17 @@ export type PerformanceRowProp = {
     maxDamage: number;
     platform: string;
     rank?: RankedDataMini;
+}
 
+export type BuildProp = {
+    participant: ParticipantInfo;
+    participants: ParticipantInfo[];
+}
+
+export type RunesProp = {
+    primaryRuneTree: number;
+    primaryRuneSelections: number[];
+    secondaryRuneTree: number;
+    secondaryRuneSelections: number[];
+    statPerks: StatPerks;
 }

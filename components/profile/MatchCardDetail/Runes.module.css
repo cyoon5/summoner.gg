@@ -1,0 +1,14 @@
+.runeContainer{
+    display: flex;
+
+}
+
+.primaryTreeContainer{
+    display:flex;
+    flex-direction: column;
+}
+
+.secondaryTreeContainer{
+    display:flex;
+    flex-direction: column;
+}

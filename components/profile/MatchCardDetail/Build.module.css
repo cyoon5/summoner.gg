@@ -1,0 +1,4 @@
+.buildContainer{
+    display: flex;
+    flex-direction: column;
+}

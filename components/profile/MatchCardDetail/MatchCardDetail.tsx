@@ -5,6 +5,7 @@ import styles from "./MatchCardDetail.module.css"
 import { useState, useEffect } from "react";
 import PostGame from "./PostGame";
 import Performance from "./Performance";
+import Build from "./Build";
 
 
 export default function MatchCardDetail(props: MatchCardDetailProp){
@@ -74,11 +75,12 @@ export default function MatchCardDetail(props: MatchCardDetailProp){
             }
                 
             
-            { detailsTab === "build" && (
-                <div className = {styles.buildContainer}>
-                    Build
-                </div>
-            )}
+            { 
+                detailsTab === "build" && <Build
+                    participant={props.participant}
+                    participants={props.participants}
+                />
+            }
 
             
             { detailsTab === "metrics" && (

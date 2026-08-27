@@ -36,7 +36,7 @@ export default function Performance(props: PerformanceProp){
             <div className = {styles.filterContainer}>
 
                 <div className = {styles.playerColumn}>
-                    Player
+                    Summoner
                 </div>
 
                 <button className={`${styles.filterTab} ${filterTab === "kills" ? styles.selectedFilterTab : ""}`} onClick = {() => setFilterTab("kills")}>

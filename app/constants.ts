@@ -105,6 +105,7 @@ export const QUEUE_MAP = new Map<number, string>([
   [400, "Normal Draft"],
   [430, "Normal Blind"],
   [490, "Quickplay"],
+  [480, "Swiftplay"],
 
   [420, "Ranked Solo/Duo"],
   [440, "Ranked Flex"],
