@@ -84,3 +84,18 @@ export type PostGameProp = {
     platform: string;
     rankPreviewData: RankPreviewResponse[];
 };
+
+export type PerformanceProp = {
+    participants: ParticipantInfo[];
+    maxDamage: number;
+    platform: string;
+    rankPreviewData: RankPreviewResponse[];
+}
+
+export type PerformanceRowProp = {
+    participant: ParticipantInfo;
+    maxDamage: number;
+    platform: string;
+    rank?: RankedDataMini;
+
+}

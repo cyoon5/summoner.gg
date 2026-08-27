@@ -7,18 +7,18 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    margin: 0em 0em;
-    border-top: 1px dashed rgb(143, 141, 141);
-    padding: 12px 0px;
+    border-top: 1px solid rgb(63, 63, 63);
+    padding: 10px 0px;
 }
 
 .detailsTab{
     display: flex;
     font-family: monospace, Arial, Helvetica, sans-serif;
+    font-weight: bold;
     padding: 10px;
     border-radius: 5px;
     justify-content: center;
-    width: 100px;
+    width: 125px;
     cursor: pointer;
     border: none;
     background-color: inherit;
@@ -32,18 +32,4 @@
 
 .detailsTab:hover{
     background-color: rgb(44, 44, 44);
-}
-
-
-
-.performanceContainer{
-
-}
-
-.buildContainer{
-
-}
-
-.metricsContainer{
-
 }

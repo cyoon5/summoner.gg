@@ -1,0 +1,45 @@
+.performanceContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+.filterContainer{
+    display: grid;
+    grid-template-columns: 40% 10% 10% 10% 10% 10% 10%;
+    padding: 10px 0px;
+    border-top: 1px solid rgb(63, 63, 63);
+}
+
+.rowContainer{
+    display:flex;
+    flex-direction: column;
+}
+
+.playerColumn{
+    display: flex;
+    align-items: center;
+    padding-left: 5em;
+}
+
+
+.filterTab{
+    display: flex;
+    font-family: monospace;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    cursor: pointer;
+    border: none;
+    background-color: inherit;
+    color: white;
+    transition: color ease 0.25s;
+}
+
+.selectedFilterTab{
+    border-bottom: 2px solid white;
+}
+
+.filterTab:hover{
+    color: gray;
+}
+

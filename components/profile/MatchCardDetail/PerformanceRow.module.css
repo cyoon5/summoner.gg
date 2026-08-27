@@ -1,0 +1,76 @@
+.container{
+    display: grid;
+    grid-template-columns: 38% 10.5% 10.5% 10% 10% 10% 10%;
+    align-items: center;
+    padding: 8px 0px;
+    border-radius: 2px;
+    margin: 0em 0.5em 0.5em 0.5em;
+}
+
+.statColumn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.playerContainer{
+    display: flex;
+    padding-left: 1em;
+}
+
+.nameAndRank{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 3px;
+}
+
+.miniRankedEmblem{
+    width: 15px;
+    height: 15px;
+    margin-right: 3px;
+}
+
+.rank{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.damage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2em;
+}
+
+.damageBarContainer{
+    border-radius: 5px;
+    width: 50px;
+    height: 3px;
+    background-color: rgb(84, 79, 79);
+}
+
+.damageBar{
+    border-radius: 5px;
+    width: 100%;
+    height: 3px;
+    background-color: rgb(223, 220, 220);
+}
+
+.championIcon{
+    border-radius: 5px;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #2a2a2a;
+}
+
+
+.blueTeam{
+    background-color: rgb(40, 40, 63);
+    border: .1px solid rgb(121, 121, 234);
+}
+
+.redTeam{
+    background-color: rgb(64, 36, 36);
+    border: .1px solid rgb(234, 121, 121);
+}

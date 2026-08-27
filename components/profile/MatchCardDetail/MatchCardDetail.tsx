@@ -2,9 +2,9 @@
 
 import { MatchCardDetailProp, ParticipantInfo, RankPreviewResponse } from "@/app/types/match";
 import styles from "./MatchCardDetail.module.css"
-import SummonerRow from "./SummonerRow";
 import { useState, useEffect } from "react";
 import PostGame from "./PostGame";
+import Performance from "./Performance";
 
 
 export default function MatchCardDetail(props: MatchCardDetailProp){
@@ -64,13 +64,15 @@ export default function MatchCardDetail(props: MatchCardDetailProp){
                 />
             }
             
-            { detailsTab === "performance" && (
-                <div className = {styles.performanceContainer}>
-                    Performance
-                </div>
-            )}
-               
-
+            { 
+                detailsTab === "performance" &&  <Performance
+                    participants={props.participants}
+                    maxDamage={props.maxDamage}
+                    platform={props.platform}
+                    rankPreviewData={rankPreviewData}
+                />
+            }
+                
             
             { detailsTab === "build" && (
                 <div className = {styles.buildContainer}>
