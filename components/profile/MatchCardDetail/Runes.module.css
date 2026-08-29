@@ -1,6 +1,9 @@
+.container{
+
+}
+
 .runeContainer{
     display: flex;
-
 }
 
 .primaryTreeContainer{
@@ -11,4 +14,9 @@
 .secondaryTreeContainer{
     display:flex;
     flex-direction: column;
+}
+
+.primaryTreeIcon{
+    width: 35px;
+    height: 35px;
 }

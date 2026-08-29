@@ -1,7 +1,9 @@
 import { SUMMONER_SPELL_MAP } from "../constants";
+import { Rune, RuneSlot, RuneTree, RuneTrees } from "../types/runes";
 
 const patch = await getCurrentPatch();
-const runeMap = await getRuneMap(); 
+const runeData = await getRuneData();
+const runeMap = getRuneMap(); 
 
 async function getCurrentPatch(){
     const patch = await fetch('https://ddragon.leagueoflegends.com/api/versions.json');
@@ -40,24 +42,40 @@ function getRuneIconUrl(runeId: number): string | undefined {
         return;
     
     let path = runeMap.get(runeId);
+
+    if(!path)
+        return;
+
     return `https://ddragon.leagueoflegends.com/cdn/img/${path}`;
 }
 
-async function getRuneMap(): Promise<Map<number, string>>{ //Key value pair of id: iconPath
-    const runeMap = new Map<number, string>();
+async function getRuneData(): Promise<RuneTree[]>{
     const response = await fetch(`https://ddragon.leagueoflegends.com/cdn/${patch}/data/en_US/runesReforged.json`);
-    const data = await response.json();
+    return await response.json();
+}
 
-    data.forEach((path:any) => {
+function getRuneMap(): Map<number, string> { 
+    const runeMap = new Map<number, string>();
+
+    runeData.forEach((path:RuneTree) => {
             runeMap.set(path.id, path.icon);
-            path.slots.forEach((r:any) => r.runes
-            .forEach((rune:any) => runeMap.set(rune.id, rune.icon)));
+            path.slots.forEach((r:RuneSlot) => r.runes
+            .forEach((rune:Rune) => runeMap.set(rune.id, rune.icon)));
         }
     )
-    
     return runeMap;
 }
 
+function getRuneTrees(primaryRuneTreeId: number, secondaryRuneTreeId: number) : RuneTrees {
+
+    const primaryTree = runeData.find((r:RuneTree) => r.id === primaryRuneTreeId);
+    const secondaryTree = runeData.find((r:RuneTree) => r.id === secondaryRuneTreeId);
+
+    return {
+        primaryTree,
+        secondaryTree
+    }
+}
 
 
-export { getCurrentPatch, getProfileIconUrl, getChampionIconUrl, getItemIconUrl, getSummonerSpellIconUrl, getRuneIconUrl};
+export { getCurrentPatch, getProfileIconUrl, getChampionIconUrl, getItemIconUrl, getSummonerSpellIconUrl, getRuneIconUrl, getRuneTrees};
