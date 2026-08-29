@@ -19,7 +19,3 @@ export type RuneSlot = {
     runes: Rune[];
 }
 
-export type RuneTrees = {
-    primaryTree: RuneTree | undefined;
-    secondaryTree: RuneTree | undefined;
-}

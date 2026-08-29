@@ -1,4 +1,12 @@
 .buildContainer{
     display: flex;
     flex-direction: column;
+    align-items: center;
+
+}
+
+.runeContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

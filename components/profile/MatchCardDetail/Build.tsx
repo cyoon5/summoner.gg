@@ -7,14 +7,18 @@ export default function Build(props: BuildProp){
 
     return(
         <div className = {styles.buildContainer}>
-            Runes
-            <Runes 
-                primaryRuneTree={props.participant.primaryRuneTree}
-                primaryRuneSelections={props.participant.primaryRuneSelections}
-                secondaryRuneTree={props.participant.secondaryRuneTree}
-                secondaryRuneSelections={props.participant.secondaryRuneSelections}
-                statPerks={props.participant.statPerks}
-            />
+
+            <div className = {styles.runeContainer}>
+                Runes
+                <Runes 
+                    primaryRuneTree={props.participant.primaryRuneTree}
+                    primaryRuneSelections={props.participant.primaryRuneSelections}
+                    secondaryRuneTree={props.participant.secondaryRuneTree}
+                    secondaryRuneSelections={props.participant.secondaryRuneSelections}
+                    statPerks={props.participant.statPerks}
+                />
+            </div>
+
         </div>
     )
 }

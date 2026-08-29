@@ -1,5 +1,5 @@
 import { SUMMONER_SPELL_MAP } from "../constants";
-import { Rune, RuneSlot, RuneTree, RuneTrees } from "../types/runes";
+import { Rune, RuneSlot, RuneTree } from "../types/runes";
 
 const patch = await getCurrentPatch();
 const runeData = await getRuneData();
@@ -66,16 +66,11 @@ function getRuneMap(): Map<number, string> {
     return runeMap;
 }
 
-function getRuneTrees(primaryRuneTreeId: number, secondaryRuneTreeId: number) : RuneTrees {
+function getRuneTree(runeTreeId: number) : RuneTree | undefined{
 
-    const primaryTree = runeData.find((r:RuneTree) => r.id === primaryRuneTreeId);
-    const secondaryTree = runeData.find((r:RuneTree) => r.id === secondaryRuneTreeId);
-
-    return {
-        primaryTree,
-        secondaryTree
-    }
+    const runeTree = runeData.find((r:RuneTree) => r.id === runeTreeId);
+    return runeTree;
 }
 
 
-export { getCurrentPatch, getProfileIconUrl, getChampionIconUrl, getItemIconUrl, getSummonerSpellIconUrl, getRuneIconUrl, getRuneTrees};
+export { getCurrentPatch, getProfileIconUrl, getChampionIconUrl, getItemIconUrl, getSummonerSpellIconUrl, getRuneIconUrl, getRuneTree};
