@@ -49,9 +49,9 @@ export default function MatchCardDetail(props: MatchCardDetailProp){
                     Build
                 </button>
 
-                <button className={`${styles.detailsTab} ${detailsTab === "metrics" ? styles.selectedDetailsTab : ""}`} onClick = {() => setDetailsTab("metrics")}>
+                {/* <button className={`${styles.detailsTab} ${detailsTab === "metrics" ? styles.selectedDetailsTab : ""}`} onClick = {() => setDetailsTab("metrics")}>
                     Metrics 
-                </button>
+                </button> */}
 
             </div>
 
@@ -83,11 +83,11 @@ export default function MatchCardDetail(props: MatchCardDetailProp){
             }
 
             
-            { detailsTab === "metrics" && (
+            {/* { detailsTab === "metrics" && (
                 <div className = {styles.metricsContainer}>
                     Metrics
                 </div>
-            )}
+            )} */}
    
         </div>
         

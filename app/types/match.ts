@@ -29,9 +29,9 @@ export type ParticipantInfo = {
 }
 
 export type StatPerks = {
-    defense: number;
-    flex: number;
     offense: number;
+    flex: number;
+    defense: number;
 };
 
 export type MatchInfo = {

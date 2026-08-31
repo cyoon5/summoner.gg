@@ -8,8 +8,10 @@ export default function Build(props: BuildProp){
     return(
         <div className = {styles.buildContainer}>
 
+            <h2 className = {styles.buildHeader}>Runes</h2>
             <div className = {styles.runeContainer}>
-                Runes
+
+                
                 <Runes 
                     primaryRuneTree={props.participant.primaryRuneTree}
                     primaryRuneSelections={props.participant.primaryRuneSelections}
@@ -17,6 +19,11 @@ export default function Build(props: BuildProp){
                     secondaryRuneSelections={props.participant.secondaryRuneSelections}
                     statPerks={props.participant.statPerks}
                 />
+            </div>
+
+            <div className = {styles.levelOrderContainer}>
+                {/* <h2 className = {styles.buildHeader}>Runes</h2> */}
+
             </div>
 
         </div>

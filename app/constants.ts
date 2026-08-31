@@ -156,4 +156,15 @@ export const LEADERBOARD_QUEUE_MAP = new Map<string, string>([
 
 ]);
 
+export const STAT_SHARD_MAP = new Map<number, string>([
+
+    [5008, "AdaptiveForce"],
+    [5005, "AttackSpeed"],
+    [5007, "AbilityHaste"],
+    [5014, "MovementSpeed"],
+    [5001, "Health"],
+    [5011, "HealthScaling"],
+    [5013, "Tenacity"],
+    
+])
 

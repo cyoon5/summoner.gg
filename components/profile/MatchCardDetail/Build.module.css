@@ -1,12 +1,17 @@
 .buildContainer{
     display: flex;
     flex-direction: column;
-    align-items: center;
-
+    font-family: 'Barlow', monospace;
 }
 
 .runeContainer{
     display: flex;
     flex-direction: column;
     align-items: center;
+
+}
+
+.buildHeader{
+    margin-left: 5em;
+    padding: 10px;
 }

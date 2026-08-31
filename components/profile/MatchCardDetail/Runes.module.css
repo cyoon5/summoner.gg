@@ -7,21 +7,43 @@
     gap: 5em;
 }
 
-.primaryTreeContainer{
+.primaryRuneContainer{
     display:flex;
     flex-direction: column;
-    gap: 1em;
+    gap: 2.5em;
 }
 
-.secondaryTreeContainer{
+.secondaryRuneContainer{
     display:flex;
     flex-direction: column;
+    gap: 2.5em;
+}
+
+.statShardContainer{
+    display: flex;
+    justify-content: space-between;
     gap: 1em;
+    border-top: 1px solid rgb(56, 55, 55);
+    padding: 20px;
+}
+
+.treeContainer{
+    display:flex;
+    align-items: center;
+    gap: 1em;
+    background-color: rgb(41, 40, 40);
+    border-radius: 3px;
+    padding: 5px;
+    font-weight: bold;
+    font-family: 'Barlow';
 }
 
 .treeIcon{
-    width: 35px;
-    height: 35px;
+    width: 20px;
+    height: 20px;
+    background-color: rgb(56, 56, 56);
+    padding: 10px;
+    border-radius: 3px;
 }
 
 .keystoneIcon{
@@ -36,6 +58,13 @@
     filter: grayscale(100%) opacity(50%);
 }
 
+.statShardIcon{
+    width: 20px;
+    height: 20px;
+    border-radius: 100px;
+    border: 1px solid gold;
+}
+
 .selectedRune{
     filter: none;
     border: 1px solid gold;
@@ -48,10 +77,11 @@
 
 .keystoneRow{
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
 }
 .runeRow{
     display: flex;
     justify-content: center;
-    gap: 4em;
+    gap: 3em;
+  
 }
