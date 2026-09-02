@@ -8,10 +8,8 @@ export default function Build(props: BuildProp){
     return(
         <div className = {styles.buildContainer}>
 
-            <h2 className = {styles.buildHeader}>Runes</h2>
             <div className = {styles.runeContainer}>
 
-                
                 <Runes 
                     primaryRuneTree={props.participant.primaryRuneTree}
                     primaryRuneSelections={props.participant.primaryRuneSelections}

@@ -80,8 +80,7 @@ export default function Leaderboard(){
         const formattedSummoner = `${parsedSummoner.gameName}-${parsedSummoner.tagLine}`;
         const res = await fetch(`api/leaderboard/?region=${region}&queue=${queue}&riotId=${formattedSummoner}`);
 
-        if(!res.ok) 
-        {
+        if(!res.ok) {
             setLoading(false);
             setSearchError(true);
             setSearchedPuuid("");
