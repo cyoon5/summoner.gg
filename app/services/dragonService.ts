@@ -5,6 +5,13 @@ const patch = await getCurrentPatch();
 const runeData = await getRuneData();
 const runeMap = getRuneMap(); 
 
+
+//https://ddragon.leagueoflegends.com/cdn/16.15.1/data/en_US/summoner.json
+//https://ddragon.leagueoflegends.com/cdn/16.15.1/data/en_US/item.json
+//https://ddragon.leagueoflegends.com/cdn/16.17.1/data/en_US/champion.json
+//https://ddragon.leagueoflegends.com/cdn/16.15.1/data/en_US/runesReforged.json
+
+
 async function getCurrentPatch(){
     const patch = await fetch('https://ddragon.leagueoflegends.com/api/versions.json');
     const patchList = await patch.json();

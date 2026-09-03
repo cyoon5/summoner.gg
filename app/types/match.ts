@@ -6,7 +6,6 @@ export type ParticipantInfo = {
     gameName: string;
     tagLine: string;
     role: 'TOP' | 'JUNGLE' | 'MID' | 'ADC' | 'UTILITY';
-    championId: number;
     championName: string;
     creepScore: number;
     damageDealt : number;

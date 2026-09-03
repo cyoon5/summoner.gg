@@ -45,7 +45,6 @@ async function getRawMatches(puuid: string, routing: string ,start: number, coun
             gameName: p.riotIdGameName,
             tagLine: p.riotIdTagline,
             role: p.teamPosition,
-            championId: p.championId,
             championName: p.championName,
             creepScore: p.neutralMinionsKilled + p.totalMinionsKilled,
             damageDealt: p.totalDamageDealtToChampions,
