@@ -36,8 +36,8 @@ export type StatPerks = {
 
 export type MatchInfo = {
     gameMode: string | undefined;
-    gameDuration: string;
-    date: string;
+    gameDuration: number;
+    date: number;
     matchId: string;
 }
 

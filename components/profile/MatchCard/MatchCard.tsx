@@ -7,6 +7,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import MatchCardDetail from '../MatchCardDetail/MatchCardDetail'
 import { getChampionIconUrl, getItemIconUrl, getRuneIconUrl, getSummonerSpellIconUrl } from '@/app/services/dragonService'
+import { formatGameDuration, getRelativeTime } from '@/lib/timeConverter'
 
 
 export default function MatchCard(props: MatchCardProp){
@@ -22,13 +23,12 @@ export default function MatchCard(props: MatchCardProp){
         
         <div className = {styles.container}>
 
-
                 <div className = {styles.contentBox} onClick = {() => setDetailsOpen(previous => !previous)}>
 
                         <div className = {styles.box1}> 
                             <b className = {styles.box1Text}> {props.matchInfo.gameMode} </b>
-                            <p > {props.matchInfo.date} </p>
-                            <p className = {`${props.participant.win ? styles.gameWin : styles.gameLoss}`}>{props.participant.win? 'WIN ' + props.matchInfo.gameDuration : 'LOSS ' + props.matchInfo.gameDuration}</p>
+                            <p > {getRelativeTime(props.matchInfo.date)} </p>
+                            <p className = {`${props.participant.win ? styles.gameWin : styles.gameLoss}`}>{props.participant.win? 'WIN ' + formatGameDuration(props.matchInfo.gameDuration) : 'LOSS ' + formatGameDuration(props.matchInfo.gameDuration)}</p>
                         </div>
 
                         <div className = {styles.box2}>

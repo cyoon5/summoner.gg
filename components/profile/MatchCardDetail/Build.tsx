@@ -20,7 +20,7 @@ export default function Build(props: BuildProp){
             </div>
 
             <div className = {styles.levelOrderContainer}>
-                {/* <h2 className = {styles.buildHeader}>Runes</h2> */}
+                {/* <h2 className = {styles.buildHeader}> Skill </h2> */}
 
             </div>
 

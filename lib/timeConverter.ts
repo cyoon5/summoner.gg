@@ -21,3 +21,9 @@ export function getRelativeTime(unixTime: number): string {
 
   return "just now";
 }
+
+export function formatGameDuration(gameDuration: number): string{
+  const mins = Math.floor(gameDuration / 60);
+  const secs = gameDuration % 60;
+  return `${mins}:${secs.toString().padStart(2,'0')}`;
+}

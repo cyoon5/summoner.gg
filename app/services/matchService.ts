@@ -1,5 +1,4 @@
 import { ParticipantInfo, MatchInfo} from "../types/match";
-import { getRelativeTime } from "../../lib/unixConverter";
 import { QUEUE_MAP } from "../constants";
 
 const api_key = process.env.RIOT_API_KEY;
@@ -90,12 +89,8 @@ function getMatchInfo(rawMatchData: any): MatchInfo {
 
     const matchInfo: MatchInfo = {
         gameMode: QUEUE_MAP.get(rawMatchData.info.queueId),
-        gameDuration: (() => {
-            const mins = Math.floor(rawMatchData.info.gameDuration / 60);
-            const secs = rawMatchData.info.gameDuration % 60;
-            return `${mins}:${secs.toString().padStart(2,'0')}`;
-        })(),
-        date: getRelativeTime(rawMatchData.info.gameEndTimestamp),
+        gameDuration: rawMatchData.info.gameDuration,
+        date: rawMatchData.info.gameEndTimestamp,
         matchId: rawMatchData.metadata.matchId
     }
 
