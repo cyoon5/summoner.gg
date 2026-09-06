@@ -1,9 +1,9 @@
-import { SUMMONER_SPELL_MAP } from "../constants";
 import { Rune, RuneSlot, RuneTree } from "../types/runes";
 
 const patch = await getCurrentPatch();
 const runeData = await getRuneData();
 const runeMap = getRuneMap(); 
+const spellMap = await getSpellMap();
 
 
 //https://ddragon.leagueoflegends.com/cdn/16.15.1/data/en_US/summoner.json
@@ -39,8 +39,8 @@ function getItemIconUrl(iconId: number){
     return `https://ddragon.leagueoflegends.com/cdn/${patch}/img/item/${iconId}.png`
 }
 
- function getSummonerSpellIconUrl(iconId: number){
-    return `https://ddragon.leagueoflegends.com/cdn/${patch}/img/spell/${SUMMONER_SPELL_MAP.get(iconId)}.png`
+ function getSummonerSpellIconUrl(spellKey: number){
+    return `https://ddragon.leagueoflegends.com/cdn/${patch}/img/spell/${spellMap.get(spellKey)}.png`
 }
 
 function getRuneIconUrl(runeId: number): string | undefined {
@@ -79,5 +79,17 @@ function getRuneTree(runeTreeId: number) : RuneTree | undefined{
     return runeTree;
 }
 
+async function getSpellMap(){
+    const spellMap = new Map<number, string>();
+    const response = await fetch(`https://ddragon.leagueoflegends.com/cdn/${patch}/data/en_US/summoner.json`);
+    const spellData = await response.json();
+
+    Object.entries(spellData.data).map(([_, value] : [any, any]) =>
+        spellMap.set(Number(value.key), value.id)
+    );
+
+
+    return spellMap;
+}
 
 export { getCurrentPatch, getProfileIconUrl, getChampionIconUrl, getItemIconUrl, getSummonerSpellIconUrl, getRuneIconUrl, getRuneTree};
