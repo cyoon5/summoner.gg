@@ -1,4 +1,4 @@
-import { Account, Match, Participant, ParticipantItem, ParticipantRune, ParticipantSpell, RankSnapshot } from "@/app/types/repository";
+import { Account, ChampionBan, Match, Participant, ParticipantItem, ParticipantRune, ParticipantSpell, RankSnapshot } from "@/app/types/repository";
 import { Client } from "pg";
 
 //platform i.e. na1
@@ -40,7 +40,6 @@ export async function insertParticipant(client: Client, participant: Participant
     const params = [
         participant.puuid,
         participant.match_id,
-        participant.champion_id,
         participant.kills,
         participant.deaths,
         participant.assists,
@@ -51,11 +50,12 @@ export async function insertParticipant(client: Client, participant: Participant
         participant.champion_level,
         participant.vision_score,
         participant.team,
-        participant.win
+        participant.win,
+        participant.champion_key
     ];
 
     const statement = `
-        INSERT INTO participant(puuid, match_id, champion_id, kills, deaths, assists, role, creep_score, damage_dealt, gold, champion_level, vision_score, team, win)
+        INSERT INTO participant(puuid, match_id, kills, deaths, assists, role, creep_score, damage_dealt, gold, champion_level, vision_score, team, win, champion_key)
         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
         ON CONFLICT DO NOTHING
     `;
@@ -105,6 +105,21 @@ export async function insertParticipantSpell(client: Client , participantSpell: 
 
     const statement = `
         INSERT INTO participantspell(puuid, match_id, spell_id)
+        VALUES ($1, $2, $3)
+        ON CONFLICT DO NOTHING
+    `;
+
+    await client.query(statement, params);
+}
+export async function insertChampionBan(client: Client, championBan: ChampionBan){
+    const params = [
+        championBan.match_id,
+        championBan.champion_key,
+        championBan.team
+    ];
+
+    const statement = `
+        INSERT INTO ban(match_id, champion_key, team) 
         VALUES ($1, $2, $3)
         ON CONFLICT DO NOTHING
     `;

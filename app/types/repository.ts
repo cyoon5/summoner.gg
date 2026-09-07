@@ -16,7 +16,7 @@ export type Match = {
 export type Participant = {
     puuid: string,
     match_id: string,
-    champion_id: string,
+    champion_key: number,
     kills: number,
     deaths: number,
     assists: number,
@@ -47,6 +47,12 @@ export type ParticipantSpell = {
     puuid: string,
     match_id: string,
     spell_id: number
+}
+
+export type ChampionBan = {
+    match_id: string,
+    champion_key: number,
+    team: string
 }
 
 export type RankSnapshot = {
