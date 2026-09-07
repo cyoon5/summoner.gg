@@ -13,7 +13,7 @@ async function seedChampions(){
 
 
     const champions = Object.entries(champData.data).map(([_, value]: [any, any]) =>
-        [value.id, value.name]
+        [value.id, value.name, value.key]
     );
 
     const pool = new Pool({
@@ -24,7 +24,7 @@ async function seedChampions(){
         port: Number(process.env.POSTGRES_PORT)
     });
 
-    const statement = "INSERT INTO champion(champion_id, champion_name) VALUES ($1, $2)";
+    const statement = "INSERT INTO champion(champion_id, champion_name, champion_key) VALUES ($1, $2, $3)";
     
     for(const champ of champions){
         await pool.query(statement, champ);

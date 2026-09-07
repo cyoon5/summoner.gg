@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
-import { getMatchInfo, getMatchParticipantsInfo, getRawMatches } from '@/app/services/matchService';
+import { getRawMatches } from '@/app/services/matchService';
+import { getMatchInfo, getMatchParticipantsInfo } from '@/app/services/matchApplicationTransformer';
 
 export async function GET(request: Request){
     const { searchParams } = new URL(request.url);

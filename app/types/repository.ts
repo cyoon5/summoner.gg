@@ -7,9 +7,10 @@ export type Account = {
 
 export type Match = {
     match_id: string
-    game_mode: string;
-    game_duration: number;
-    match_date: number;
+    queue_id: number,
+    match_duration: number,
+    match_date: Date,
+    game_version: string
 }
 
 export type Participant = {

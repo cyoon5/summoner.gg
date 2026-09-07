@@ -66,8 +66,8 @@ export const regions = [
 
 export const QUEUE_MAP = new Map<number, string>([
 
-  // https://static.developer.riotgames.com/docs/lol/queues.json
- 
+  //https://static.developer.riotgames.com/docs/lol/queues.json
+
   [0, "Custom"],
   
   [400, "Normal Draft"],

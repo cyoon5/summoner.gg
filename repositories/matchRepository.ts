@@ -22,13 +22,14 @@ export async function insertAccount(client: Client, account: Account){
 export async function insertMatch(client: Client, match: Match){
     const params = [
         match.match_id,
-        match.game_mode,
-        match.game_duration,
-        match.match_date
+        match.queue_id,
+        match.match_duration,
+        match.match_date,
+        match.game_version
     ];
     const statement = `
-        INSERT INTO match(match_id, game_mode, game_duration, match_date)
-        VALUES ($1,$2,$3,$4)
+        INSERT INTO match(match_id, queue_id, match_duration, match_date, game_version)
+        VALUES ($1,$2,$3,$4,$5)
         ON CONFLICT DO NOTHING
     `;
 
@@ -87,7 +88,7 @@ export async function insertParticipantItem(client: Client, participantItem: Par
     ];
 
     const statement = `
-        INSERT INTO participantitem (puuid, match_id, item_id)
+        INSERT INTO participantitem(puuid, match_id, item_id)
         VALUES ($1, $2, $3)
         ON CONFLICT DO NOTHING
     `;
@@ -103,7 +104,7 @@ export async function insertParticipantSpell(client: Client , participantSpell: 
     ];
 
     const statement = `
-        INSERT INTO participantspell (puuid, match_id, spell_id)
+        INSERT INTO participantspell(puuid, match_id, spell_id)
         VALUES ($1, $2, $3)
         ON CONFLICT DO NOTHING
     `;
@@ -121,7 +122,7 @@ export async function insertRankSnapshot(client: Client, rankSnapshot: RankSnaps
     ];
 
     const statement = `
-        INSERT INTO ranksnapshot (puuid, tier, division, league_points, snapshot_date)
+        INSERT INTO ranksnapshot(puuid, tier, division, league_points, snapshot_date)
         VALUES ($1, $2, $3, $4, $5)
     `;
 

@@ -5,6 +5,8 @@ export type ParticipantInfo = {
     puuid: string;
     gameName: string;
     tagLine: string;
+    platform: string;
+    gameVersion: string;
     role: 'TOP' | 'JUNGLE' | 'MID' | 'ADC' | 'UTILITY';
     championName: string;
     creepScore: number;

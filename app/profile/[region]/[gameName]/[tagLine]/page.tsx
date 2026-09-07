@@ -2,7 +2,6 @@ import styles from "./page.module.css";
 import Image from 'next/image'
 import { SummonerData } from "@/app/types/summoner";
 import { getSummoner } from "@/app/services/summonerService";
-import { getMatchInfo, getMatchParticipantsInfo, getRawMatches } from "@/app/services/matchService";
 import { getSummonerRankedInfo } from "@/app/services/rankedService";
 import RankedCard from "@/components/profile/RankedCard/RankedCard";
 import { RankedData } from "@/app/types/ranked";
@@ -10,6 +9,8 @@ import  MatchHistory  from "@/components/profile/MatchHistory/MatchHistory";
 import Navbar from "@/components/navigation/Navbar";
 import { notFound } from "next/navigation";
 import { SummonerNotFoundError } from "@/app/errors/SummonerNotFoundError";
+import { getRawMatches } from "@/app/services/matchService";
+import { getMatchInfo, getMatchParticipantsInfo } from "@/app/services/matchApplicationTransformer";
 
 export default async function Profile({ params }: {params: Promise<SummonerData>}) {
 
@@ -36,6 +37,7 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
     const participantsInMatches = getMatchParticipantsInfo(rawMatches); 
     const searchedSummonerId = summonerProfile.puuid;  
     const searchedSummoner = participantsInMatches.map(m => m.find(p => p.puuid === searchedSummonerId));
+
     const matchInfoList = rawMatches.map(m => (getMatchInfo(m)));
 
     const rankedInfo = await getSummonerRankedInfo(summonerProfile);
