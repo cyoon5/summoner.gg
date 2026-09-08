@@ -1,3 +1,7 @@
+import { MatchDto } from "../types/riotMatch";
+import getParticipantRunes, { getAccounts, getBans, getMatch, getParticipantItems, getParticipants, getParticipantSpells } from "@/app/services/matchDatabaseTransformer";
+import { storeMatchData } from "@/repositories/matchTransaction";
+
 const api_key = process.env.RIOT_API_KEY;
 
 export async function getMatchList(puuid: string, routing: string ,start: number, count: number): Promise<string[]>{
@@ -25,4 +29,19 @@ export async function getRawMatches(puuid: string, routing: string ,start: numbe
     const responses = await Promise.all(promises); //returns an array of Response Objects
     const data = await Promise.all(responses.map(r => {return r.json()}));
     return data; 
+}
+
+export async function processMatches(rawMatches: MatchDto[]){
+
+    for(const rawMatch of rawMatches){
+        const match = getMatch(rawMatch);
+        const accounts = getAccounts(rawMatch);
+        const participants = getParticipants(rawMatch);
+        const items = getParticipantItems(rawMatch);
+        const runes = getParticipantRunes(rawMatch);
+        const spells = getParticipantSpells(rawMatch);
+        const bans = getBans(rawMatch);
+        
+        await storeMatchData(match, accounts, participants, items, runes, spells, bans);
+    }
 }

@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getRawMatches } from '@/app/services/matchService';
+import { getRawMatches, processMatches } from '@/app/services/matchService';
 import { getMatchInfo, getMatchParticipantsInfo } from '@/app/services/matchApplicationTransformer';
 
 export async function GET(request: Request){
@@ -23,6 +23,7 @@ export async function GET(request: Request){
     const searchedSummoner = participantsInMatches.map(m => m.find(p => p.puuid === puuid));
     const matchInfoList = rawMatches.map(m => (getMatchInfo(m)));
 
+    await processMatches(rawMatches);
 
     return NextResponse.json({
         searchedSummoner,

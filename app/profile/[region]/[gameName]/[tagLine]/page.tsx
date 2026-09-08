@@ -9,8 +9,10 @@ import  MatchHistory  from "@/components/profile/MatchHistory/MatchHistory";
 import Navbar from "@/components/navigation/Navbar";
 import { notFound } from "next/navigation";
 import { SummonerNotFoundError } from "@/app/errors/SummonerNotFoundError";
-import { getRawMatches } from "@/app/services/matchService";
+import { getRawMatches, processMatches } from "@/app/services/matchService";
 import { getMatchInfo, getMatchParticipantsInfo } from "@/app/services/matchApplicationTransformer";
+import { MatchInfo, ParticipantInfo } from "@/app/types/match";
+import { MatchDto } from "@/app/types/riotMatch";
 
 export default async function Profile({ params }: {params: Promise<SummonerData>}) {
 
@@ -33,17 +35,18 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
         throw error;
     }
 
-    const rawMatches = await getRawMatches(summonerProfile.puuid, summonerProfile.matchRouting, 0, 10);
-    const participantsInMatches = getMatchParticipantsInfo(rawMatches); 
-    const searchedSummonerId = summonerProfile.puuid;  
-    const searchedSummoner = participantsInMatches.map(m => m.find(p => p.puuid === searchedSummonerId));
+    const rawMatches: MatchDto[] = await getRawMatches(summonerProfile.puuid, summonerProfile.matchRouting, 0, 10);
+    const participantsInMatches: ParticipantInfo[][] = getMatchParticipantsInfo(rawMatches); 
+    const searchedSummonerId: string = summonerProfile.puuid;  
+    const searchedSummoner:(ParticipantInfo | undefined)[] = participantsInMatches.map(m => m.find(p => p.puuid === searchedSummonerId));
 
-    const matchInfoList = rawMatches.map(m => (getMatchInfo(m)));
+    const matchInfoList: MatchInfo[] = rawMatches.map(m => (getMatchInfo(m)));
 
-    const rankedInfo = await getSummonerRankedInfo(summonerProfile);
-    const soloQueue = rankedInfo.find((r:RankedData) => r.queueType=="RANKED_SOLO_5x5");
-    const flexQueue = rankedInfo.find((r:RankedData) => r.queueType=="RANKED_FLEX_SR");
+    const rankedInfo: RankedData[] = await getSummonerRankedInfo(summonerProfile);
+    const soloQueue: (RankedData | undefined) = rankedInfo.find((r:RankedData) => r.queueType=="RANKED_SOLO_5x5");
+    const flexQueue: (RankedData | undefined)  = rankedInfo.find((r:RankedData) => r.queueType=="RANKED_FLEX_SR");
 
+    await processMatches(rawMatches);
     
     return(
         <div className = {styles.container}>

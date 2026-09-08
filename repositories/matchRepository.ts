@@ -71,6 +71,7 @@ export async function insertParticipantRune(client: Client, participantRune: Par
         participantRune.rune_id
     ];
 
+
     const statement = `
         INSERT INTO participantrune(puuid, match_id, slot_type, rune_id)
         VALUES ($1, $2, $3, $4)
@@ -117,7 +118,6 @@ export async function insertChampionBan(client: Client, championBan: ChampionBan
         championBan.champion_key,
         championBan.team
     ];
-
     const statement = `
         INSERT INTO ban(match_id, champion_key, team) 
         VALUES ($1, $2, $3)

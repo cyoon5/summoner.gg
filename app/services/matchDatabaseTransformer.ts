@@ -36,14 +36,14 @@ export function getMatch(rawMatchData: MatchDto): Match{
         match_id: rawMatchData.metadata.matchId,
         queue_id: rawMatchData.info.queueId,
         match_duration: rawMatchData.info.gameDuration,
-        match_date: new Date(rawMatchData.info.gameEndTimestamp * 1000),
+        match_date: new Date(rawMatchData.info.gameEndTimestamp),
         game_version: rawMatchData.info.gameVersion
     }
 }
 
 export function getBans(rawMatchData: MatchDto): ChampionBan[]{
     return rawMatchData.info.teams.flatMap((team) =>
-        team.bans.map((ban): ChampionBan => ({
+        team.bans.filter(ban => ban.championId !== -1).map((ban): ChampionBan => ({
                 match_id: rawMatchData.metadata.matchId,
                 champion_key: ban.championId,
                 team: team.teamId === 100? 'blue' : 'red'

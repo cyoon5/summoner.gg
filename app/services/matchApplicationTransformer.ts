@@ -17,7 +17,6 @@ export function getMatchParticipantsInfo(rawMatchData: MatchDto[]): ParticipantI
             gameName: p.riotIdGameName,
             tagLine: p.riotIdTagline,
             platform: currentMatch.info.platformId,
-            gameVersion: currentMatch.info.gameVersion,
 
             role: p.teamPosition,
             championName: p.championName,
@@ -50,7 +49,6 @@ export function getMatchParticipantsInfo(rawMatchData: MatchDto[]): ParticipantI
             visionScore: p.visionScore,
             team: p.teamId == 100? 'blue' : 'red',
             win: p.win
-            
         }));
 
         participantArray.push(participantInfoList);

@@ -1,20 +1,20 @@
 import { Account, ChampionBan, Match, Participant, ParticipantItem, ParticipantRune, ParticipantSpell } from "@/app/types/repository";
-import { PoolClient } from "pg";
 import { insertAccount, insertChampionBan, insertMatch, insertParticipant, insertParticipantItem, insertParticipantRune, insertParticipantSpell } from "./matchRepository";
+import { getClient } from "@/lib/db";
 
 export async function storeMatchData(
-    client: PoolClient,
+    match: Match, 
     accounts: Account[], 
     participants: Participant[], 
-    match: Match, 
-    bans: ChampionBan[], 
     items: ParticipantItem[],
     runes: ParticipantRune[],
-    spells: ParticipantSpell[]
+    spells: ParticipantSpell[],
+    bans: ChampionBan[]
 ){
+    const client = await getClient();
 
     try{
-        
+
         await client.query('BEGIN');
 
             await insertMatch(client, match);

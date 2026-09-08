@@ -6,7 +6,6 @@ export type ParticipantInfo = {
     gameName: string;
     tagLine: string;
     platform: string;
-    gameVersion: string;
     role: string;
     championName: string;
     creepScore: number;

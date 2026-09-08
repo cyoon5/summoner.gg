@@ -8,9 +8,9 @@ import { useEffect, useRef, useState, useCallback } from "react";
 
 export default function MatchHistory(props: MatchHistoryProp){
 
-    const [searchedSummoner, setSearchedSummoner] = useState(props.initialSearchedSummoner)
-    const [participantsInMatches, setParticipantsInMatches] = useState(props.initialParticipantsInMatches)
-    const [matchInfoList, setMatchInfoList] = useState(props.initialMatchInfoList)
+    const [searchedSummoner, setSearchedSummoner] = useState(props.initialSearchedSummoner);
+    const [participantsInMatches, setParticipantsInMatches] = useState(props.initialParticipantsInMatches);
+    const [matchInfoList, setMatchInfoList] = useState(props.initialMatchInfoList);
     const [offset, setOffset] = useState(10);
     const [loading, setLoading] = useState(false); //This does not change state immediately, does it after render, hence we need useRef.current
     const [hasMore, setHasMore] = useState(true);

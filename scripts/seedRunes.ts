@@ -19,7 +19,6 @@ async function seedRunes(){
                 [rune.id, rune.name]
             )
         )
-    
     )
 
     const pool = new Pool({
@@ -31,11 +30,29 @@ async function seedRunes(){
     });
 
 
-    const statement = 'INSERT INTO rune(rune_id, rune_name) VALUES ($1, $2)';
+    const statShards = [
+        [5001, "AbilityHaste"],
+        [5002, "AdaptiveForce"],
+        [5003, "HealthScaling"],
+        [5005, "AttackSpeed"],
+        [5007, "AbilityHaste"],
+        [5008, "AdaptiveForce"],
+        [5010, "Tenacity"],
+        [5011, "HealthScaling"],
+        [5013, "Tenacity"],
+        [5014, "MovementSpeed"],
+    ];
+
+    const statement = 'INSERT INTO rune(rune_id, rune_name) VALUES ($1, $2) ON CONFLICT DO NOTHING';
 
     for(const rune of runes){
         await pool.query(statement, rune);
     }
+
+    for(const shard of statShards){
+        await pool.query(statement, shard);
+    }
+
     await pool.end();
 
 }   
