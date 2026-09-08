@@ -1,4 +1,4 @@
-import { Account, ChampionBan, Match, Participant, ParticipantItem } from "../types/repository";
+import { Account, ChampionBan, Match, Participant, ParticipantItem, ParticipantRune, ParticipantSpell } from "../types/repository";
 import { MatchDto, ParticipantDto } from "../types/riotMatch";
 
 export function getAccounts(rawMatchData: MatchDto): Account[]{
@@ -106,4 +106,80 @@ export function getParticipantItems(rawMatchData: MatchDto): ParticipantItem[]{
     }
 
     return items;
+}
+
+export default function getParticipantRunes(rawMatchData: MatchDto): ParticipantRune[]{
+    const runes: ParticipantRune[] = [];
+
+    const primaryTreeSlots = new Map<number, string>([
+        [0, "PRIMARY_SLOT_1"],
+        [1, "PRIMARY_SLOT_2"],
+        [2, "PRIMARY_SLOT_3"],
+        [3, "PRIMARY_SLOT_4"],
+    ]);
+
+    const secondaryTreeSlots = new Map<number, string>([
+        [0, "SECONDARY_SLOT_1"],
+        [1, "SECONDARY_SLOT_2"],
+    ]);
+
+
+    const statPerkSlots = new Map<string, string>([
+        ["offense", "OFFENSE"],
+        ["flex", "FLEX"],
+        ["defense", "DEFENSE"],
+    ]);
+    
+    for(const participant of rawMatchData.info.participants){
+        participant.perks.styles.forEach(style =>
+            style.selections.forEach((selection, index) => {
+                    if(style.description === "primaryStyle"){
+                        runes.push({
+                            puuid: participant.puuid,
+                            match_id: rawMatchData.metadata.matchId,
+                            slot_type: primaryTreeSlots.get(index)!,
+                            rune_id: selection.perk
+                        });
+                    }
+                    else{
+                        runes.push({
+                            puuid: participant.puuid,
+                            match_id: rawMatchData.metadata.matchId,
+                            slot_type: secondaryTreeSlots.get(index)!,
+                            rune_id: selection.perk
+                        });
+                    } 
+                }
+            )
+        );
+
+        Object.entries(participant.perks.statPerks).forEach(([key, value]) =>{
+                    runes.push({
+                        puuid: participant.puuid,
+                        match_id: rawMatchData.metadata.matchId,
+                        slot_type: statPerkSlots.get(key)!,
+                        rune_id: value
+                    });
+            }
+        )   
+    }
+    return runes;
+}
+
+export function getParticipantSpells(rawMatchData: MatchDto): ParticipantSpell[]{
+    const spells: ParticipantSpell[] = [];
+
+    for(const participant of rawMatchData.info.participants){
+        spells.push({
+                puuid: participant.puuid,
+                match_id: rawMatchData.metadata.matchId,
+                spell_id: participant.summoner1Id
+        });
+        spells.push({
+                puuid: participant.puuid,
+                match_id: rawMatchData.metadata.matchId,
+                spell_id: participant.summoner2Id
+        });
+    }
+    return spells;
 }

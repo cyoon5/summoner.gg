@@ -33,7 +33,7 @@ export type Participant = {
 export type ParticipantRune = {
     puuid: string,
     match_id: string,
-    slot_type: 'PRIMARY_KEYSTONE' | 'PRIMARY_SLOT_1' | 'PRIMARY_SLOT_2' | 'PRIMARY_SLOT_3' | 'SECONDARY_SLOT_1' | 'SECONDARY_SLOT_2' | 'OFFENSE' | 'FLEX' | 'DEFENSE',
+    slot_type:  string,
     rune_id: number
 }
 
