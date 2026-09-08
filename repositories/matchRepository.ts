@@ -1,6 +1,7 @@
 import { Account, ChampionBan, Match, Participant, ParticipantItem, ParticipantRune, ParticipantSpell, RankSnapshot } from "@/app/types/repository";
 import { Client } from "pg";
 
+//https://github.com/RiotGames/developer-relations/issues/759
 //platform i.e. na1
 
 export async function insertAccount(client: Client, account: Account){
@@ -10,6 +11,7 @@ export async function insertAccount(client: Client, account: Account){
         account.tag_line, 
         account.platform
     ];
+
     const statement = `
         INSERT INTO account(puuid, game_name, tag_line, platform)   
         VALUES ($1,$2,$3,$4)

@@ -45,7 +45,7 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
     const rankedInfo: RankedData[] = await getSummonerRankedInfo(summonerProfile);
     const soloQueue: (RankedData | undefined) = rankedInfo.find((r:RankedData) => r.queueType=="RANKED_SOLO_5x5");
     const flexQueue: (RankedData | undefined)  = rankedInfo.find((r:RankedData) => r.queueType=="RANKED_FLEX_SR");
-
+    
     await processMatches(rawMatches);
     
     return(
