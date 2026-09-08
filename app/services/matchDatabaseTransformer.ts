@@ -2,7 +2,7 @@ import { Account, ChampionBan, Match, Participant, ParticipantItem, ParticipantR
 import { MatchDto, ParticipantDto } from "../types/riotMatch";
 
 export function getAccounts(rawMatchData: MatchDto): Account[]{
-    return rawMatchData.info.participants.map((p: ParticipantDto): Account => ({
+    return rawMatchData.info.participants.map((p:ParticipantDto): Account => ({
             puuid: p.puuid,
             game_name: p.riotIdGameName,
             tag_line: p.riotIdTagline,
@@ -52,32 +52,17 @@ export function getBans(rawMatchData: MatchDto): ChampionBan[]{
     );
 }
 
-
 //~70 items/match
 export function getParticipantItems(rawMatchData: MatchDto): ParticipantItem[]{ 
     const items: ParticipantItem[] = [];
     const ignoredItems = new Set([
-        0, 
-        1090,
-        1091,
-        1092,
-        1093,
-        1094,
-        1200,
-        1201,
-        1202,
-        1203,
-        1204,
-        1205,
-        1206,
-        1207,
-        1208,
-        1209,
-        1210,
-        1211,
-        1220,
-        1221,
-        1222
+        0, 1090, 1091,
+        1092, 1093, 1094,
+        1200, 1201, 1202,
+        1203, 1204, 1205,
+        1206, 1207, 1208,
+        1209, 1210, 1211,
+        1220, 1221, 1222
     ]);
 
     for(const participant of rawMatchData.info.participants){
@@ -104,13 +89,15 @@ export function getParticipantItems(rawMatchData: MatchDto): ParticipantItem[]{
             });
         }
     }
-
     return items;
 }
 
 export default function getParticipantRunes(rawMatchData: MatchDto): ParticipantRune[]{
     const runes: ParticipantRune[] = [];
 
+    if(rawMatchData.info.participants[0]?.perks?.styles === undefined) {
+        return [];
+    }
     const primaryTreeSlots = new Map<number, string>([
         [0, "PRIMARY_SLOT_1"],
         [1, "PRIMARY_SLOT_2"],
@@ -122,7 +109,6 @@ export default function getParticipantRunes(rawMatchData: MatchDto): Participant
         [0, "SECONDARY_SLOT_1"],
         [1, "SECONDARY_SLOT_2"],
     ]);
-
 
     const statPerkSlots = new Map<string, string>([
         ["offense", "OFFENSE"],
@@ -170,16 +156,21 @@ export function getParticipantSpells(rawMatchData: MatchDto): ParticipantSpell[]
     const spells: ParticipantSpell[] = [];
 
     for(const participant of rawMatchData.info.participants){
-        spells.push({
-                puuid: participant.puuid,
-                match_id: rawMatchData.metadata.matchId,
-                spell_id: participant.summoner1Id
-        });
-        spells.push({
-                puuid: participant.puuid,
-                match_id: rawMatchData.metadata.matchId,
-                spell_id: participant.summoner2Id
-        });
+        if(participant.summoner1Id !== 0){
+            spells.push({
+                    puuid: participant.puuid,
+                    match_id: rawMatchData.metadata.matchId,
+                    spell_id: participant.summoner1Id
+            });
+        }
+
+        if(participant.summoner2Id !== 0){
+            spells.push({
+                    puuid: participant.puuid,
+                    match_id: rawMatchData.metadata.matchId,
+                    spell_id: participant.summoner2Id
+            });
+        }
     }
     return spells;
 }
