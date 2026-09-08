@@ -1,7 +1,8 @@
 import { QUEUE_MAP } from "../constants";
 import { MatchInfo, ParticipantInfo } from "../types/match";
+import { MatchDto } from "../types/riotMatch";
 
-export function getMatchParticipantsInfo(rawMatchData: any[]): ParticipantInfo[][]{
+export function getMatchParticipantsInfo(rawMatchData: MatchDto[]): ParticipantInfo[][]{
 
     const participantArray: ParticipantInfo[][] = [];
 
@@ -10,7 +11,7 @@ export function getMatchParticipantsInfo(rawMatchData: any[]): ParticipantInfo[]
         let currentMatch = rawMatchData[i];
         const participantListRiot = currentMatch.info.participants;
         
-        const participantInfoList = participantListRiot.map((p: any): ParticipantInfo => ({
+        const participantInfoList = participantListRiot.map((p): ParticipantInfo => ({
             matchId: currentMatch.metadata.matchId,
             puuid: p.puuid,
             gameName: p.riotIdGameName,
@@ -26,9 +27,9 @@ export function getMatchParticipantsInfo(rawMatchData: any[]): ParticipantInfo[]
             summonerSpell2Id: p.summoner2Id,
             
             primaryRuneTree: p.perks.styles[0].style,
-            primaryRuneSelections: p.perks.styles[0].selections.map((r:any)=> r.perk),
+            primaryRuneSelections: p.perks.styles[0].selections.map((r)=> r.perk),
             secondaryRuneTree: p.perks.styles[1].style,
-            secondaryRuneSelections: p.perks.styles[1].selections.map((r:any)=> r.perk),
+            secondaryRuneSelections: p.perks.styles[1].selections.map((r)=> r.perk),
             statPerks: p.perks.statPerks,
             
             kills: p.kills,
@@ -58,7 +59,7 @@ export function getMatchParticipantsInfo(rawMatchData: any[]): ParticipantInfo[]
     return participantArray;
 }
 
-export function getMatchInfo(rawMatchData: any): MatchInfo {
+export function getMatchInfo(rawMatchData: MatchDto): MatchInfo {
 
     const matchInfo: MatchInfo = {
         gameMode: QUEUE_MAP.get(rawMatchData.info.queueId),

@@ -7,7 +7,7 @@ export type ParticipantInfo = {
     tagLine: string;
     platform: string;
     gameVersion: string;
-    role: 'TOP' | 'JUNGLE' | 'MID' | 'ADC' | 'UTILITY';
+    role: string;
     championName: string;
     creepScore: number;
     damageDealt : number;

@@ -16,7 +16,6 @@ export type Match = {
 export type Participant = {
     puuid: string,
     match_id: string,
-    champion_key: number,
     kills: number,
     deaths: number,
     assists: number,
@@ -28,6 +27,7 @@ export type Participant = {
     vision_score: number,
     team: string,
     win: boolean
+    champion_key: number,
 }
 
 export type ParticipantRune = {
