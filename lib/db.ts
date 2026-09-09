@@ -8,7 +8,6 @@ export async function query(text: string, params: any[]){
 
     try{
         if(!pool){
-
             pool = new Pool({
                 database: process.env.POSTGRES_DB,
                 user: process.env.POSTGRES_USER,
@@ -16,7 +15,6 @@ export async function query(text: string, params: any[]){
                 host: process.env.POSTGRES_HOST,
                 port: Number(process.env.POSTGRES_PORT)
             });
-
         }
         
         const start = Date.now();
@@ -36,7 +34,6 @@ export async function getClient(){
 
     try{
         if(!pool){
-
             pool = new Pool({
                 database: process.env.POSTGRES_DB,
                 user: process.env.POSTGRES_USER,

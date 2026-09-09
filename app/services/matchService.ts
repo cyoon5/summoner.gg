@@ -14,13 +14,12 @@ export async function getMatchList(puuid: string, routing: string ,start: number
     return response.json(); //List[string] of Match Ids, currently 10
 }
 
-export async function getRawMatches(puuid: string, routing: string ,start: number, count: number){  
+export async function getRawMatches(matchList: string[], puuid: string, routing: string ,start: number, count: number){  
 
     if(!api_key) 
         throw new Error("Missing api key");
 
-    const matchIdList = await getMatchList(puuid, routing, start, count);
-    const promises = matchIdList.map((matchId:string) => {
+    const promises = matchList.map((matchId:string) => {
         return fetch(
             `https://${routing}.api.riotgames.com/lol/match/v5/matches/${matchId}`,
             {headers: {"X-Riot-Token": api_key}}

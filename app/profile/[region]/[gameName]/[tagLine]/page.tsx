@@ -9,7 +9,7 @@ import  MatchHistory  from "@/components/profile/MatchHistory/MatchHistory";
 import Navbar from "@/components/navigation/Navbar";
 import { notFound } from "next/navigation";
 import { SummonerNotFoundError } from "@/app/errors/SummonerNotFoundError";
-import { getRawMatches, processMatches } from "@/app/services/matchService";
+import { getMatchList, getRawMatches, processMatches } from "@/app/services/matchService";
 import { getMatchInfo, getMatchParticipantsInfo } from "@/app/services/matchApplicationTransformer";
 import { MatchInfo, ParticipantInfo } from "@/app/types/match";
 import { MatchDto } from "@/app/types/riotMatch";
@@ -35,7 +35,8 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
         throw error;
     }
 
-    const rawMatches: MatchDto[] = await getRawMatches(summonerProfile.puuid, summonerProfile.matchRouting, 0, 10);
+    const matchList = await getMatchList(summonerProfile.puuid, summonerProfile.matchRouting, 0, 10);
+    const rawMatches: MatchDto[] = await getRawMatches(matchList, summonerProfile.puuid, summonerProfile.matchRouting, 0, 10);
     const participantsInMatches: ParticipantInfo[][] = getMatchParticipantsInfo(rawMatches); 
     const searchedSummonerId: string = summonerProfile.puuid;  
     const searchedSummoner:(ParticipantInfo | undefined)[] = participantsInMatches.map(m => m.find(p => p.puuid === searchedSummonerId));
@@ -56,7 +57,6 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
             <Navbar/>
             
             <div className = {styles.profileContainer}>
-                
 
                 <div className = {styles.summonerInfo}>
 

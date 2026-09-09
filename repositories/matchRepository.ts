@@ -1,5 +1,5 @@
 import { Account, ChampionBan, Match, Participant, ParticipantItem, ParticipantRune, ParticipantSpell, RankSnapshot } from "@/app/types/repository";
-import { Client } from "pg";
+import { Client, Result } from "pg";
 
 //https://github.com/RiotGames/developer-relations/issues/759
 //platform i.e. na1
@@ -145,3 +145,23 @@ export async function insertRankSnapshot(client: Client, rankSnapshot: RankSnaps
 
     await client.query(statement, params);
 }
+
+//RETRIVE FROM POSTGRES METHODS
+
+export async function getMatch(client: Client, match_id: string): Promise<Match>{
+    const statement =  `
+        SELECT * FROM match 
+        WHERE match_id = $1
+    `;
+    const result =  await client.query<Match>(statement, [match_id]);
+    return result.rows[0];
+}
+
+export async function getAccounts(){
+    const statement = `
+        SELECT * FROM account 
+        JOIN 
+        WHERE 
+    `;
+}
+
