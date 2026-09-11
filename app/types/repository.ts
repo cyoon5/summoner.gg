@@ -40,13 +40,15 @@ export type ParticipantRune = {
 export type ParticipantItem = {
     puuid: string,
     match_id: string,
-    item_id: number
+    item_id: number,
+    slot: number
 }
 
 export type ParticipantSpell = {
     puuid: string,
     match_id: string,
     spell_id: number
+    slot: number
 }
 
 export type ChampionBan = {

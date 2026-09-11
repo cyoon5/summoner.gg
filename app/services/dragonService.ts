@@ -4,7 +4,7 @@ const patch = await getCurrentPatch();
 const runeData = await getRuneData();
 const runeMap = getRuneMap(); 
 const spellMap = await getSpellMap();
-
+const championMap = await getChampionMap();
 
 //https://ddragon.leagueoflegends.com/cdn/16.15.1/data/en_US/summoner.json
 //https://ddragon.leagueoflegends.com/cdn/16.15.1/data/en_US/item.json
@@ -22,12 +22,8 @@ function getProfileIconUrl(iconId: number){
     return `https://ddragon.leagueoflegends.com/cdn/${patch}/img/profileicon/${iconId}.png`;
 }
 
-function getChampionIconUrl(champion: string){
-
-    if(champion == 'FiddleSticks')
-        champion = 'Fiddlesticks';
-
-    return `https://ddragon.leagueoflegends.com/cdn/${patch}/img/champion/${champion}.png`;
+function getChampionIconUrl(championKey: number){
+    return `https://ddragon.leagueoflegends.com/cdn/${patch}/img/champion/${championMap.get(championKey)}.png`;
 }
 function getItemIconUrl(iconId: number){
 
@@ -74,7 +70,6 @@ function getRuneMap(): Map<number, string> {
 }
 
 function getRuneTree(runeTreeId: number) : RuneTree | undefined{
-
     const runeTree = runeData.find((r:RuneTree) => r.id === runeTreeId);
     return runeTree;
 }
@@ -84,12 +79,22 @@ async function getSpellMap(){
     const response = await fetch(`https://ddragon.leagueoflegends.com/cdn/${patch}/data/en_US/summoner.json`);
     const spellData = await response.json();
 
-    Object.entries(spellData.data).map(([_, value] : [any, any]) =>
+    Object.entries(spellData.data).forEach(([_, value] : [any, any]) =>
         spellMap.set(Number(value.key), value.id)
     );
 
-
     return spellMap;
+}
+
+async function getChampionMap(){
+    const championMap = new Map<number, string>();
+    const response = await fetch(`https://ddragon.leagueoflegends.com/cdn/${patch}/data/en_US/champion.json`);
+    const championData = await response.json();
+
+    Object.entries(championData.data).forEach(([_, value]: [any, any]) => 
+        championMap.set(Number(value.key), value.id)
+    );
+    return championMap;
 }
 
 export { getCurrentPatch, getProfileIconUrl, getChampionIconUrl, getItemIconUrl, getSummonerSpellIconUrl, getRuneIconUrl, getRuneTree};

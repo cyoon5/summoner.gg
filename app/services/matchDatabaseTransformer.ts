@@ -73,11 +73,11 @@ export function getParticipantItems(rawMatchData: MatchDto): ParticipantItem[]{
             participant.item3,
             participant.item4,
             participant.item5,
-            // participant.item6, ignore trinket 
+            participant.item6,
             participant.roleBoundItem
         ];
 
-        for(const itemId of participantItems){
+        for(const [index, itemId] of participantItems.entries()){
 
             if(ignoredItems.has(itemId))
                 continue;
@@ -85,7 +85,8 @@ export function getParticipantItems(rawMatchData: MatchDto): ParticipantItem[]{
             items.push({
                 puuid: participant.puuid,
                 match_id: rawMatchData.metadata.matchId,
-                item_id: itemId
+                item_id: itemId,
+                slot: index
             });
         }
     }
@@ -160,7 +161,8 @@ export function getParticipantSpells(rawMatchData: MatchDto): ParticipantSpell[]
             spells.push({
                     puuid: participant.puuid,
                     match_id: rawMatchData.metadata.matchId,
-                    spell_id: participant.summoner1Id
+                    spell_id: participant.summoner1Id,
+                    slot: 0
             });
         }
 
@@ -168,7 +170,8 @@ export function getParticipantSpells(rawMatchData: MatchDto): ParticipantSpell[]
             spells.push({
                     puuid: participant.puuid,
                     match_id: rawMatchData.metadata.matchId,
-                    spell_id: participant.summoner2Id
+                    spell_id: participant.summoner2Id,
+                    slot: 1
             });
         }
     }

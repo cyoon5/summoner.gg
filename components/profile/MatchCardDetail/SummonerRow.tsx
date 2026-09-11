@@ -12,7 +12,7 @@ import { getChampionIconUrl, getItemIconUrl, getRuneIconUrl, getSummonerSpellIco
 export default function SummonerRow(props: SummonerRowProp){
 
     const damageWidth = (props.participant.damageDealt / props.maxDamage) * 100;
-    const championUrl = getChampionIconUrl(props.participant.championName);
+    const championUrl = getChampionIconUrl(props.participant.championKey);
     const spell1Url = getSummonerSpellIconUrl(props.participant.summonerSpell1Id);
     const spell2Url = getSummonerSpellIconUrl(props.participant.summonerSpell2Id);
     const keyStoneUrl = getRuneIconUrl(props.participant.primaryRuneSelections[0]);

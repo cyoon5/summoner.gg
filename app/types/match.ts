@@ -7,16 +7,16 @@ export type ParticipantInfo = {
     tagLine: string;
     platform: string;
     role: string;
-    championName: string;
+    championKey: number;
     creepScore: number;
     damageDealt : number;
-    summonerSpell1Id: number;
-    summonerSpell2Id: number;
-    primaryRuneTree: number;
-    primaryRuneSelections: number[];
-    secondaryRuneTree: number;
-    secondaryRuneSelections: number[];
-    statPerks: StatPerks;
+    summonerSpell1Id?: number;
+    summonerSpell2Id?: number;
+    primaryRuneTree?: number;
+    primaryRuneSelections?: number[];
+    secondaryRuneTree?: number;
+    secondaryRuneSelections?: number[];
+    statPerks?: StatPerks;
     kills: number;
     deaths: number;
     assists: number;
@@ -24,7 +24,7 @@ export type ParticipantInfo = {
     totalGoldEarned: number;
     items: number[];
     visionScore: number;
-    team: 'red' | 'blue';
+    team: string;
     win: boolean;
 }
 

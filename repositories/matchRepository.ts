@@ -83,12 +83,13 @@ export async function insertParticipantItem(client: Client, participantItem: Par
     const params = [
         participantItem.puuid,
         participantItem.match_id,
-        participantItem.item_id
+        participantItem.item_id,
+        participantItem.slot
     ];
 
     const statement = `
-        INSERT INTO participantitem(puuid, match_id, item_id)
-        VALUES ($1, $2, $3)
+        INSERT INTO participantitem(puuid, match_id, item_id, slot)
+        VALUES ($1, $2, $3, $4)
         ON CONFLICT DO NOTHING
     `;
     await client.query(statement, params);
@@ -98,12 +99,13 @@ export async function insertParticipantSpell(client: Client , participantSpell: 
     const params = [
         participantSpell.puuid,
         participantSpell.match_id,
-        participantSpell.spell_id
+        participantSpell.spell_id,
+        participantSpell.slot
     ];
 
     const statement = `
-        INSERT INTO participantspell(puuid, match_id, spell_id)
-        VALUES ($1, $2, $3)
+        INSERT INTO participantspell(puuid, match_id, spell_id, slot)
+        VALUES ($1, $2, $3, $4)
         ON CONFLICT DO NOTHING
     `;
     await client.query(statement, params);

@@ -39,7 +39,7 @@ export default function MatchCard(props: MatchCardProp){
                             
                             <div className = {styles.champion}>
                                 <Image
-                                    src = {getChampionIconUrl(props.participant.championName)}
+                                    src = {getChampionIconUrl(props.participant.championKey)}
                                     className={styles.championIcon}
                                     width={500}
                                     height={500}
@@ -143,7 +143,7 @@ export default function MatchCard(props: MatchCardProp){
                                                         height = "500"
                                                         alt = "champIcon"
                                                         className = {styles.champIconMini} 
-                                                        src = {getChampionIconUrl(p.championName)}
+                                                        src = {getChampionIconUrl(p.championKey)}
                                                         loading = "eager"
                                                     />
 
@@ -176,7 +176,7 @@ export default function MatchCard(props: MatchCardProp){
                                                         height = "500"
                                                         alt = "champIcon"
                                                         className = {styles.champIconMini} 
-                                                        src = {getChampionIconUrl(p.championName)}
+                                                        src = {getChampionIconUrl(p.championKey)}
                                                         loading = "eager"
                                                     />
 

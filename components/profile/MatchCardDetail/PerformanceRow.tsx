@@ -17,7 +17,7 @@ export default function PerformanceRow(props: PerformanceRowProp){
 
             <div className = {styles.playerContainer}>
                 <Image
-                    src = {getChampionIconUrl(props.participant.championName)}
+                    src = {getChampionIconUrl(props.participant.championKey)}
                     width = {50}
                     height = {50}
                     className = {styles.championIcon}
