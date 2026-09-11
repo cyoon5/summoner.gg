@@ -1,11 +1,11 @@
 import { QUEUE_MAP } from "../constants";
 import { MatchInfo, ParticipantInfo } from "../types/match";
+import { Account, Match, Participant, ParticipantItem, ParticipantRune, ParticipantSpell } from "../types/repository";
 import { MatchDto } from "../types/riotMatch";
 
 export function getMatchParticipantsInfo(rawMatchData: MatchDto[]): ParticipantInfo[][]{
 
     const participantArray: ParticipantInfo[][] = [];
-
     for(let i = 0; i < rawMatchData.length; i++){
 
         let currentMatch = rawMatchData[i];
@@ -53,18 +53,34 @@ export function getMatchParticipantsInfo(rawMatchData: MatchDto[]): ParticipantI
 
         participantArray.push(participantInfoList);
     }
-    
     return participantArray;
 }
 
 export function getMatchInfo(rawMatchData: MatchDto): MatchInfo {
-
     const matchInfo: MatchInfo = {
         gameMode: QUEUE_MAP.get(rawMatchData.info.queueId),
         gameDuration: rawMatchData.info.gameDuration,
         date: rawMatchData.info.gameEndTimestamp,
         matchId: rawMatchData.metadata.matchId
     }
-
     return matchInfo;
+}
+
+export function getApplicationMatchInfo(match: Match): MatchInfo{
+    return {
+        gameMode: QUEUE_MAP.get(match.queue_id),
+        gameDuration: match.match_duration,
+        date: Math.floor(new Date(match.match_date).getTime() / 1000),
+        matchId: match.match_id
+    }
+}
+
+export function getApplicaitonParticipantInfo(
+    accounts: Account[], 
+    participants: Participant[],
+    participantRunes: ParticipantRune[],
+    participantItems: ParticipantItem[],
+    participantSpells: ParticipantSpell[]
+){
+
 }

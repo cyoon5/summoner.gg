@@ -17,7 +17,6 @@ export async function insertAccount(client: Client, account: Account){
         VALUES ($1,$2,$3,$4)
         ON CONFLICT DO NOTHING
     `;
-    
     await client.query(statement, params);
 }
 
@@ -34,7 +33,6 @@ export async function insertMatch(client: Client, match: Match){
         VALUES ($1,$2,$3,$4,$5)
         ON CONFLICT DO NOTHING
     `;
-
     await client.query(statement, params);
 }
 
@@ -61,7 +59,6 @@ export async function insertParticipant(client: Client, participant: Participant
         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
         ON CONFLICT DO NOTHING
     `;
-
     await client.query(statement, params);
 }
 
@@ -79,7 +76,6 @@ export async function insertParticipantRune(client: Client, participantRune: Par
         VALUES ($1, $2, $3, $4)
         ON CONFLICT DO NOTHING
     `;
-
     await client.query(statement, params);
 }
 
@@ -95,7 +91,6 @@ export async function insertParticipantItem(client: Client, participantItem: Par
         VALUES ($1, $2, $3)
         ON CONFLICT DO NOTHING
     `;
-
     await client.query(statement, params);
 }
 
@@ -111,7 +106,6 @@ export async function insertParticipantSpell(client: Client , participantSpell: 
         VALUES ($1, $2, $3)
         ON CONFLICT DO NOTHING
     `;
-
     await client.query(statement, params);
 }
 export async function insertChampionBan(client: Client, championBan: ChampionBan){
@@ -125,7 +119,6 @@ export async function insertChampionBan(client: Client, championBan: ChampionBan
         VALUES ($1, $2, $3)
         ON CONFLICT DO NOTHING
     `;
-
     await client.query(statement, params);
 }
 
@@ -142,11 +135,9 @@ export async function insertRankSnapshot(client: Client, rankSnapshot: RankSnaps
         INSERT INTO ranksnapshot(puuid, tier, division, league_points, snapshot_date)
         VALUES ($1, $2, $3, $4, $5)
     `;
-
     await client.query(statement, params);
 }
 
-//RETRIVE FROM POSTGRES METHODS
 
 export async function getMatch(client: Client, match_id: string): Promise<Match>{
     const statement =  `
@@ -157,11 +148,50 @@ export async function getMatch(client: Client, match_id: string): Promise<Match>
     return result.rows[0];
 }
 
-export async function getAccounts(){
+export async function getAccounts(client: Client, match_id: string): Promise<Account[]>{
     const statement = `
-        SELECT * FROM account 
-        JOIN 
-        WHERE 
+        SELECT account.* FROM account 
+        JOIN participant ON account.puuid = participant.puuid 
+        WHERE participant.match_id = $1
     `;
+    const result = await client.query<Account>(statement, [match_id]);
+    return result.rows;
 }
+
+export async function getParticipants(client: Client, match_id: string): Promise<Participant[]>{
+    const statement = `
+        SELECT * FROM participant
+        WHERE match_id = $1
+    `;
+    const result = await client.query<Participant>(statement, [match_id]);
+    return result.rows;
+}
+
+export async function getParticipantItems(client: Client, match_id: string): Promise<ParticipantItem[]>{
+    const statement = `
+        SELECT * FROM participantitem
+        WHERE match_id = $1
+    `;
+    const result = await client.query<ParticipantItem>(statement, [match_id]);
+    return result.rows;
+}
+
+export async function getParticipantRunes(client: Client, match_id: string): Promise<ParticipantRune[]>{
+    const statement = `
+        SELECT * FROM participantrune
+        WHERE match_id = $1
+    `;
+    const result = await client.query<ParticipantRune>(statement, [match_id]);
+    return result.rows;
+}
+
+export async function getParticipantSpells(client: Client, match_id: string): Promise<ParticipantSpell[]>{
+    const statement = `
+        SELECT * FROM participantspell
+        WHERE match_id = $1
+    `;
+    const result = await client.query<ParticipantSpell>(statement, [match_id]);
+    return result.rows;
+}
+
 
