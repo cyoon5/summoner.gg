@@ -74,6 +74,19 @@ function getRuneTree(runeTreeId: number) : RuneTree | undefined{
     return runeTree;
 }
 
+async function getRuneTreeMap(){
+    const runeTreeMap = new Map<number, number>();
+
+    runeData.forEach((t:RuneTree) => 
+        t.slots.forEach((s: RuneSlot) => 
+            s.runes.forEach((r:Rune) =>
+                runeTreeMap.set(r.id, t.id)
+            )
+        )
+    );
+    return runeTreeMap;
+}
+
 async function getSpellMap(){
     const spellMap = new Map<number, string>();
     const response = await fetch(`https://ddragon.leagueoflegends.com/cdn/${patch}/data/en_US/summoner.json`);
@@ -97,4 +110,4 @@ async function getChampionMap(){
     return championMap;
 }
 
-export { getCurrentPatch, getProfileIconUrl, getChampionIconUrl, getItemIconUrl, getSummonerSpellIconUrl, getRuneIconUrl, getRuneTree};
+export { getCurrentPatch, getProfileIconUrl, getChampionIconUrl, getItemIconUrl, getSummonerSpellIconUrl, getRuneIconUrl, getRuneTree, getRuneTreeMap};

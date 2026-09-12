@@ -1,7 +1,10 @@
-import { QUEUE_MAP, RUNE_TREE_MAP } from "../constants";
+import { QUEUE_MAP } from "../constants";
 import { MatchInfo, ParticipantInfo } from "../types/match";
 import { Account, Match, Participant, ParticipantItem, ParticipantRune, ParticipantSpell } from "../types/repository";
 import { MatchDto } from "../types/riotMatch";
+import { getRuneTreeMap } from "./dragonService";
+
+const runeTreeMap = await getRuneTreeMap();
 
 export function getMatchParticipantsInfo(rawMatchData: MatchDto[]): ParticipantInfo[][]{
 
@@ -88,9 +91,9 @@ export function getApplicationParticipantInfo(
 
     for(const account of accounts){
         const currentParticipant = participants.find(p => p.puuid === account.puuid)!;
-        const currentParticipantSpells = participantSpells.filter(s => s.puuid == account.puuid)!;
-        const currentParticipantRunes = participantRunes.filter(r => r.puuid == account.puuid)!;
-        const currentParticipantItems = participantItems.filter(i => i.puuid == account.puuid)!;
+        const currentParticipantSpells = participantSpells.filter(s => s.puuid == account.puuid);
+        const currentParticipantRunes = participantRunes.filter(r => r.puuid == account.puuid);
+        const currentParticipantItems = participantItems.filter(i => i.puuid == account.puuid);
 
         let participant: ParticipantInfo={
             matchId: currentParticipant.match_id,
@@ -105,15 +108,14 @@ export function getApplicationParticipantInfo(
             summonerSpell1Id: currentParticipantSpells.find(s => s.slot == 0)?.spell_id,
             summonerSpell2Id: currentParticipantSpells.find(s => s.slot == 1)?.spell_id,
 
-            //Construct map via runes.json
-            primaryRuneTree: RUNE_TREE_MAP.get(currentParticipantRunes.find(s => s.slot_type === 'PRIMARY_SLOT_1')?.rune_id!),
+            primaryRuneTree: runeTreeMap.get(currentParticipantRunes.find(s => s.slot_type === 'PRIMARY_SLOT_1')?.rune_id!),
             primaryRuneSelections: [ 
                 currentParticipantRunes.find(r => r.slot_type === 'PRIMARY_SLOT_1')?.rune_id!,
                 currentParticipantRunes.find(r => r.slot_type === 'PRIMARY_SLOT_2')?.rune_id!,
                 currentParticipantRunes.find(r => r.slot_type === 'PRIMARY_SLOT_3')?.rune_id!,
                 currentParticipantRunes.find(r => r.slot_type === 'PRIMARY_SLOT_4')?.rune_id!,
             ],
-            secondaryRuneTree: RUNE_TREE_MAP.get(currentParticipantRunes.find(s => s.slot_type === 'SECONDARY_SLOT_1')?.rune_id!),
+            secondaryRuneTree: runeTreeMap.get(currentParticipantRunes.find(s => s.slot_type === 'SECONDARY_SLOT_1')?.rune_id!),
             secondaryRuneSelections: [
                 currentParticipantRunes.find(r => r.slot_type === 'SECONDARY_SLOT_1')?.rune_id!,
                 currentParticipantRunes.find(r => r.slot_type === 'SECONDARY_SLOT_2')?.rune_id!,
