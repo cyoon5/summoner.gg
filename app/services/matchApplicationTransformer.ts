@@ -69,6 +69,8 @@ export function getMatchInfo(rawMatchData: MatchDto): MatchInfo {
     return matchInfo;
 }
 
+//POSTGRES -> APPLICATION TRANSFORMATIONS
+
 export function getApplicationMatchInfo(match: Match): MatchInfo{
     return {
         gameMode: QUEUE_MAP.get(match.queue_id),
@@ -77,7 +79,6 @@ export function getApplicationMatchInfo(match: Match): MatchInfo{
         matchId: match.match_id
     }
 }
-
 
 export function getApplicationParticipantInfo(
     accounts: Account[], 
@@ -138,7 +139,5 @@ export function getApplicationParticipantInfo(
 
         participantList.push(participant);
     }
-
-
     return participantList;
 }

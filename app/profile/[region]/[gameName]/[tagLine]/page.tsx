@@ -14,7 +14,7 @@ import { getMatchInfo, getMatchParticipantsInfo } from "@/app/services/matchAppl
 import { MatchInfo, ParticipantInfo } from "@/app/types/match";
 import { MatchDto } from "@/app/types/riotMatch";
 
-export default async function Profile({ params }: {params: Promise<SummonerData>}) {
+export default async function Profile({ params }: {params: Promise<SummonerData>}){
 
     const { region, gameName, tagLine } = await params;
 
@@ -38,9 +38,7 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
     const matchList = await getMatchList(summonerProfile.puuid, summonerProfile.matchRouting, 0, 10);
     const rawMatches: MatchDto[] = await getRawMatches(matchList, summonerProfile.puuid, summonerProfile.matchRouting, 0, 10);
     const participantsInMatches: ParticipantInfo[][] = getMatchParticipantsInfo(rawMatches); 
-    const searchedSummonerId: string = summonerProfile.puuid;  
-    const searchedSummoner:(ParticipantInfo | undefined)[] = participantsInMatches.map(m => m.find(p => p.puuid === searchedSummonerId));
-
+    const searchedSummoner:(ParticipantInfo | undefined)[] = participantsInMatches.map(m => m.find(p => p.puuid === summonerProfile.puuid));
     const matchInfoList: MatchInfo[] = rawMatches.map(m => (getMatchInfo(m)));
 
     const rankedInfo: RankedData[] = await getSummonerRankedInfo(summonerProfile);
@@ -116,14 +114,13 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
 
 
                     <MatchHistory 
-                        puuid = {searchedSummonerId}
+                        puuid = {summonerProfile.puuid}
                         routing = {summonerProfile.matchRouting} //Requires MATCH-V5
                         platform = {summonerProfile.platform}
                         initialParticipantsInMatches = {participantsInMatches}
                         initialSearchedSummoner = {searchedSummoner}
                         initialMatchInfoList = {matchInfoList}
                     />
-
 
                 </div>
             </div>

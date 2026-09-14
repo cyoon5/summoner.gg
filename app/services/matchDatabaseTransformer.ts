@@ -1,7 +1,7 @@
 import { Account, ChampionBan, Match, Participant, ParticipantItem, ParticipantRune, ParticipantSpell } from "../types/repository";
 import { MatchDto, ParticipantDto } from "../types/riotMatch";
 
-export function getAccounts(rawMatchData: MatchDto): Account[]{
+export function transformAccounts(rawMatchData: MatchDto): Account[]{
     return rawMatchData.info.participants.map((p:ParticipantDto): Account => ({
             puuid: p.puuid,
             game_name: p.riotIdGameName,
@@ -11,7 +11,7 @@ export function getAccounts(rawMatchData: MatchDto): Account[]{
     );
 }
 
-export function getParticipants(rawMatchData: MatchDto): Participant[]{
+export function transformParticipants(rawMatchData: MatchDto): Participant[]{
     return rawMatchData.info.participants.map((p:ParticipantDto): Participant => ({
             puuid: p.puuid,
             match_id: rawMatchData.metadata.matchId,
@@ -31,7 +31,7 @@ export function getParticipants(rawMatchData: MatchDto): Participant[]{
     );
 }
 
-export function getMatch(rawMatchData: MatchDto): Match{
+export function transformMatch(rawMatchData: MatchDto): Match{
     return{
         match_id: rawMatchData.metadata.matchId,
         queue_id: rawMatchData.info.queueId,
@@ -41,7 +41,7 @@ export function getMatch(rawMatchData: MatchDto): Match{
     }
 }
 
-export function getBans(rawMatchData: MatchDto): ChampionBan[]{
+export function transformBans(rawMatchData: MatchDto): ChampionBan[]{
     return rawMatchData.info.teams.flatMap((team) =>
         team.bans.filter(ban => ban.championId !== -1).map((ban): ChampionBan => ({
                 match_id: rawMatchData.metadata.matchId,
@@ -53,7 +53,7 @@ export function getBans(rawMatchData: MatchDto): ChampionBan[]{
 }
 
 //~70 items/match
-export function getParticipantItems(rawMatchData: MatchDto): ParticipantItem[]{ 
+export function transformParticipantItems(rawMatchData: MatchDto): ParticipantItem[]{ 
     const items: ParticipantItem[] = [];
     const ignoredItems = new Set([
         0, 1090, 1091,
@@ -93,7 +93,7 @@ export function getParticipantItems(rawMatchData: MatchDto): ParticipantItem[]{
     return items;
 }
 
-export default function getParticipantRunes(rawMatchData: MatchDto): ParticipantRune[]{
+export function transformParticipantRunes(rawMatchData: MatchDto): ParticipantRune[]{
     const runes: ParticipantRune[] = [];
 
     if(rawMatchData.info.participants[0]?.perks?.styles === undefined) {
@@ -153,7 +153,7 @@ export default function getParticipantRunes(rawMatchData: MatchDto): Participant
     return runes;
 }
 
-export function getParticipantSpells(rawMatchData: MatchDto): ParticipantSpell[]{
+export function transformParticipantSpells(rawMatchData: MatchDto): ParticipantSpell[]{
     const spells: ParticipantSpell[] = [];
 
     for(const participant of rawMatchData.info.participants){

@@ -1,4 +1,5 @@
 import { Account, ChampionBan, Match, Participant, ParticipantItem, ParticipantRune, ParticipantSpell, RankSnapshot } from "@/app/types/repository";
+import { getClient } from "@/lib/db";
 import { Client, Result } from "pg";
 
 //https://github.com/RiotGames/developer-relations/issues/759
@@ -140,6 +141,15 @@ export async function insertRankSnapshot(client: Client, rankSnapshot: RankSnaps
     await client.query(statement, params);
 }
 
+export async function findMatchesInDb(client: Client, matchList: string[]): Promise<string[]>{
+        const statement = `
+            SELECT match_id 
+            FROM match
+            WHERE match_id = ANY($1)
+        `;
+        const result = await client.query(statement, [matchList]);
+        return result.rows.map(m => m.match_id);
+}
 
 export async function getMatch(client: Client, match_id: string): Promise<Match>{
     const statement =  `
