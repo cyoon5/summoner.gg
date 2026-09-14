@@ -1,27 +1,46 @@
 export function getRelativeTime(unixTime: number): string {
-  
-  const seconds = Math.floor((Date.now() - unixTime) / 1000);
+    const date = new Date(unixTime);
+    const now = new Date();
 
-  const intervals = [
-    { label: "year", seconds: 365 * 24 * 60 * 60 },
-    { label: "month", seconds: 30 * 24 * 60 * 60 },
-    { label: "day", seconds: 24 * 60 * 60 },
-    { label: "hour", seconds: 60 * 60 },
-    { label: "minute", seconds: 60 },
-    { label: "second", seconds: 1 },
-  ] as const;
+    const startOfToday = new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate()
+    );
 
-  for (const interval of intervals) {
-    const count = Math.round(seconds / interval.seconds);
+    const startOfDate = new Date(
+        date.getFullYear(),
+        date.getMonth(),
+        date.getDate()
+    );
 
-    if (count >= 1) {
-      return `${count} ${interval.label}${count !== 1 ? "s" : ""} ago`;
+    const daysAgo = Math.floor(
+        (startOfToday.getTime() - startOfDate.getTime()) / (24 * 60 * 60 * 1000)
+    );
+
+    if (daysAgo >= 20) {
+        const monthsAgo = Math.floor(daysAgo / 20);
+        return `${monthsAgo} month${monthsAgo !== 1 ? "s" : ""} ago`;
     }
-  }
 
-  return "just now";
+    if (daysAgo >= 1) {
+        return `${daysAgo} day${daysAgo !== 1 ? "s" : ""} ago`;
+    }
+
+    const seconds = Math.floor((Date.now() - unixTime) / 1000);
+
+    if (seconds >= 60 * 60) {
+        const hours = Math.floor(seconds / (60 * 60));
+        return `${hours} hour${hours !== 1 ? "s" : ""} ago`;
+    }
+
+    if (seconds >= 60) {
+        const minutes = Math.floor(seconds / 60);
+        return `${minutes} minute${minutes !== 1 ? "s" : ""} ago`;
+    }
+
+    return "just now";
 }
-
 export function formatGameDuration(gameDuration: number): string{
   const mins = Math.floor(gameDuration / 60);
   const secs = gameDuration % 60;

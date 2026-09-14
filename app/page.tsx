@@ -162,7 +162,7 @@ export default function Home(){
 
                     <h2>Built With</h2>
                     <p>
-                        Next.js · React · TypeScript · CSS · Riot Games API
+                        Next.js · React · TypeScript · CSS · PostgreSQL · Riot Games API
                     </p>
 
                 </div>
@@ -171,6 +171,7 @@ export default function Home(){
             </div>
             
             <span className = {styles.endinghorizontalborder}></span>
+            <div className = {styles.dark}></div>
 
         </div>
     )

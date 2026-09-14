@@ -10,7 +10,7 @@ import Navbar from "@/components/navigation/Navbar";
 import { notFound } from "next/navigation";
 import { SummonerNotFoundError } from "@/app/errors/SummonerNotFoundError";
 import { getMatchData } from "@/app/services/matchService";
-import { ParticipantInfo } from "@/app/types/match";
+import { MatchInfo, ParticipantInfo } from "@/app/types/match";
 
 export default async function Profile({ params }: {params: Promise<SummonerData>}){
 
@@ -33,11 +33,10 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
         throw error;
     }
 
-
     const matches = await getMatchData(summonerProfile.puuid, summonerProfile.matchRouting, 0, 10);
-    const matchList = matches.map(m => m.match);
-    const participantsInMatches  = matches.map(p => p.participants);
-    const searchedSummoner:(ParticipantInfo | undefined)[] = participantsInMatches.map(participants => participants.find(p => p.puuid === summonerProfile.puuid));
+    const matchList: MatchInfo[] = matches.map(m => m.match);
+    const participantsInMatches: ParticipantInfo[][] = matches.map(p => p.participants);
+    const searchedSummoner:(ParticipantInfo | undefined)[] = participantsInMatches.map(m => m.find(p => p.puuid === summonerProfile.puuid));
 
     const rankedInfo: RankedData[] = await getSummonerRankedInfo(summonerProfile);
     const soloQueue: (RankedData | undefined) = rankedInfo.find((r:RankedData) => r.queueType=="RANKED_SOLO_5x5");

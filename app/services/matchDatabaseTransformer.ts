@@ -56,13 +56,7 @@ export function transformBans(rawMatchData: MatchDto): ChampionBan[]{
 export function transformParticipantItems(rawMatchData: MatchDto): ParticipantItem[]{ 
     const items: ParticipantItem[] = [];
     const ignoredItems = new Set([
-        0, 1090, 1091,
-        1092, 1093, 1094,
-        1200, 1201, 1202,
-        1203, 1204, 1205,
-        1206, 1207, 1208,
-        1209, 1210, 1211,
-        1220, 1221, 1222
+        0, 1090, 1091, 1092, 1093, 1094,
     ]);
 
     for(const participant of rawMatchData.info.participants){

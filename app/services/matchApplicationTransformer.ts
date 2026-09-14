@@ -92,9 +92,9 @@ export function getApplicationParticipantInfo(
 
     for(const account of accounts){
         const currentParticipant = participants.find(p => p.puuid === account.puuid)!;
-        const currentParticipantSpells = participantSpells.filter(s => s.puuid == account.puuid);
-        const currentParticipantRunes = participantRunes.filter(r => r.puuid == account.puuid);
-        const currentParticipantItems = participantItems.filter(i => i.puuid == account.puuid);
+        const currentParticipantSpells = participantSpells.filter(s => s.puuid === account.puuid);
+        const currentParticipantRunes = participantRunes.filter(r => r.puuid === account.puuid);
+        const currentParticipantItems = participantItems.filter(i => i.puuid === account.puuid);
 
         let participant: ParticipantInfo={
             matchId: currentParticipant.match_id,
@@ -131,7 +131,16 @@ export function getApplicationParticipantInfo(
             assists: currentParticipant.assists,
             championLevel: currentParticipant.champion_level,
             totalGoldEarned: currentParticipant.gold,
-            items: currentParticipantItems.sort((a,b) => a.slot - b.slot).map(i => i.item_id),
+            items: [
+                currentParticipantItems.find(i => i.slot === 0)?.item_id ?? 0,
+                currentParticipantItems.find(i => i.slot === 1)?.item_id ?? 0,
+                currentParticipantItems.find(i => i.slot === 2)?.item_id ?? 0,
+                currentParticipantItems.find(i => i.slot === 6)?.item_id ?? 0, //Trinket
+                currentParticipantItems.find(i => i.slot === 3)?.item_id ?? 0,
+                currentParticipantItems.find(i => i.slot === 4)?.item_id ?? 0,
+                currentParticipantItems.find(i => i.slot === 5)?.item_id ?? 0,
+                currentParticipantItems.find(i => i.slot === 7)?.item_id ?? 0,
+            ],
             visionScore: currentParticipant.vision_score,
             team: currentParticipant.team,
             win: currentParticipant.win
@@ -139,5 +148,6 @@ export function getApplicationParticipantInfo(
 
         participantList.push(participant);
     }
+    
     return participantList;
 }
