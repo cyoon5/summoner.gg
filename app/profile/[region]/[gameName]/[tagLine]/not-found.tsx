@@ -15,7 +15,7 @@ export default function NotFound() {
             <div className = {styles.errorContainer}>
                 <h1 className = {styles.notFoundText}>Summoner Not Found</h1>
                 <p>Check the summoner name, tag, and region, then try again.</p>
-                <Link href = "/search" className  = {styles.search}>Back to search</Link>
+                <Link href = "/search" className = {styles.search}>Back to search</Link>
             </div>
             
             <span className = {styles.endinghorizontalborder}></span>

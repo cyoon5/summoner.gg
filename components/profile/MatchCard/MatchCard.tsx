@@ -15,12 +15,10 @@ export default function MatchCard(props: MatchCardProp){
     const [isDetailsOpen, setDetailsOpen] = useState(false);
     const maxDamage = Math.max(...props.participants.map((p:ParticipantInfo) => p.damageDealt));
 
-    const keyStoneUrl = getRuneIconUrl(props.participant.primaryRuneSelections[0]);
+    const keyStoneUrl = getRuneIconUrl(props.participant.primaryRuneSelections?.[0]);
     const secondaryTreeUrl = getRuneIconUrl(props.participant.secondaryRuneTree);
 
-
     return(
-        
         <div className = {styles.container}>
 
                 <div className = {styles.contentBox} onClick = {() => setDetailsOpen(previous => !previous)}>
@@ -49,41 +47,47 @@ export default function MatchCard(props: MatchCardProp){
                             </div>
 
                             <div className = {styles.summonerBox}>
-                                <Image
-                                    src = {getSummonerSpellIconUrl(props.participant.summonerSpell1Id)}
-                                    className = {styles.summonerSpell}
-                                    width={500}
-                                    height={500}
-                                    alt= "Spell Image"
-                                    loading= "eager"
-                                />
-                                <Image
-                                    src = {getSummonerSpellIconUrl(props.participant.summonerSpell2Id)}
-                                    className = {styles.summonerSpell}
-                                    width={500}
-                                    height={500}
-                                    alt= "Spell Image"
-                                    loading= "eager"
-                                />
+
+                                {
+                                    props.participant.summonerSpell1Id && <Image
+                                        src = {getSummonerSpellIconUrl(props.participant.summonerSpell1Id)}
+                                        className = {styles.summonerSpell}
+                                        width={500}
+                                        height={500}
+                                        alt= "Spell Image"
+                                        loading= "eager"
+                                    />
+
+                                }
+
+                                {
+                                    props.participant.summonerSpell2Id && <Image
+                                        src = {getSummonerSpellIconUrl(props.participant.summonerSpell2Id)}
+                                        className = {styles.summonerSpell}
+                                        width={500}
+                                        height={500}
+                                        alt= "Spell Image"
+                                        loading= "eager"
+                                    />
+                                }
+                   
                             </div>
 
                             <div className  = {styles.runeBox}>
                                 {
-                                   keyStoneUrl && (<div className = {styles.runeSlot}>
-                                            {
-                                                <Image
-                                                    src = {keyStoneUrl}
-                                                    className = {styles.rune}
-                                                    width={500}
-                                                    height={500}
-                                                    alt= "Rune Image"
-                                                    loading= "eager"
-                                                />
-                                            }                                   
-                                        </div>)
+                                    keyStoneUrl && (<div className = {styles.runeSlot}>
+                                        <Image
+                                            src = {keyStoneUrl}
+                                            className = {styles.rune}
+                                            width={500}
+                                            height={500}
+                                            alt= "Rune Image"
+                                            loading= "eager"
+                                        />                                 
+                                    </div>)
                                 }
                                 {
-                                        secondaryTreeUrl && (<div className = {styles.runeSlot}>
+                                    secondaryTreeUrl && (<div className = {styles.runeSlot}>
                                         <Image
                                             src = {secondaryTreeUrl}
                                             className = {styles.secondaryRuneTree}

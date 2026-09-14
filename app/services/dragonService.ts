@@ -39,7 +39,7 @@ function getItemIconUrl(iconId: number){
     return `https://ddragon.leagueoflegends.com/cdn/${patch}/img/spell/${spellMap.get(spellKey)}.png`
 }
 
-function getRuneIconUrl(runeId: number): string | undefined {
+function getRuneIconUrl(runeId: number | undefined): string | undefined {
 
     if(!runeId)
         return;
