@@ -19,7 +19,7 @@ export async function getMatchList(puuid: string, routing: string ,start: number
     return response.json(); //List[string] of Match Ids, currently 10
 }
 
-export async function getRawMatches(matchList: string[], puuid: string, routing: string ,start: number, count: number){  
+export async function getRawMatches(matchList: string[], routing: string){  
 
     if(!api_key) 
         throw new Error("Missing api key");
@@ -50,8 +50,6 @@ export async function processMatches(rawMatches: MatchDto[]){
     }
 }
 
-
-//ordering
 export async function getMatchData(puuid: string, routing: string, start: number, count: number){
     const client = await getClient();
 
@@ -80,7 +78,7 @@ export async function getMatchData(puuid: string, routing: string, start: number
         }
 
         if(newMatches.length > 0){
-            const rawMatches = await getRawMatches(newMatches, puuid, routing, start, count);
+            const rawMatches = await getRawMatches(newMatches, routing);
             rawMatches.forEach(m => applicationMatchList.push(getMatchInfo(m)));
             for(const participants of getMatchParticipantsInfo(rawMatches)){
                 applicationParticipantList.push(participants);
@@ -88,10 +86,13 @@ export async function getMatchData(puuid: string, routing: string, start: number
             await processMatches(rawMatches);
         }
 
-        return{
-            matchInfoList: applicationMatchList,
-            participantsInMatches: applicationParticipantList
-        }        
+        const matches = applicationMatchList.map((match, index) => ({
+            match: match,
+            participants: applicationParticipantList[index]
+        }));
+        matches.sort((a,b) => b.match.date - a.match.date);
+
+        return matches;
     }
     catch (err){
         console.error("Error in retrieving matches", err);

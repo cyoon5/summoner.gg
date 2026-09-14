@@ -32,7 +32,6 @@ export default function MatchCardDetail(props: MatchCardDetailProp){
     
 
     return(
-        
         <div className = {styles.detailsContainer}>
 
             <div className = {styles.detailTabContainer}>
@@ -46,7 +45,7 @@ export default function MatchCardDetail(props: MatchCardDetailProp){
                 </button>
 
                 <button className={`${styles.detailsTab} ${detailsTab === "build" ? styles.selectedDetailsTab : ""}`} onClick = {() => setDetailsTab("build")}>
-                    Build
+                    Runes
                 </button>
 
                 {/* <button className={`${styles.detailsTab} ${detailsTab === "metrics" ? styles.selectedDetailsTab : ""}`} onClick = {() => setDetailsTab("metrics")}>

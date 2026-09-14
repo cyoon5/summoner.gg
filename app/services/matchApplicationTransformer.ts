@@ -75,7 +75,7 @@ export function getApplicationMatchInfo(match: Match): MatchInfo{
     return {
         gameMode: QUEUE_MAP.get(match.queue_id),
         gameDuration: match.match_duration,
-        date: Math.floor(new Date(match.match_date).getTime() / 1000),
+        date: Math.floor(new Date(match.match_date).getTime()),
         matchId: match.match_id
     }
 }
