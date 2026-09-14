@@ -17,6 +17,7 @@ export default function Build(props: BuildProp){
                     secondaryRuneSelections={props.participant.secondaryRuneSelections}
                     statPerks={props.participant.statPerks}
                 />
+                
             </div>
 
             <div className = {styles.levelOrderContainer}>

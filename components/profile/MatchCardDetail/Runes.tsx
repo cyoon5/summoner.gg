@@ -6,6 +6,21 @@ import { STAT_SHARD_MAP } from "@/app/constants";
 
 export default function Runes(props: RunesProp){
 
+
+    if (
+        !props.primaryRuneTree ||
+        !props.secondaryRuneTree ||
+        !props.primaryRuneSelections ||
+        !props.secondaryRuneSelections ||
+        !props.statPerks
+    ) {
+        return (
+            <div className={styles.container}>
+                <span>Runes not available</span>
+            </div>
+        );
+    }
+
     const primaryTree = getRuneTree(props.primaryRuneTree);
     const secondaryTree = getRuneTree(props.secondaryRuneTree);
 
@@ -13,13 +28,14 @@ export default function Runes(props: RunesProp){
     const secondaryTreeIcon = getRuneIconUrl(props.secondaryRuneTree);
 
 
-    if (!primaryTree || !secondaryTree) {
+      if (!primaryTree || !secondaryTree) {
         return (
             <div className={styles.container}>
                 <span>Runes not available</span>
             </div>
         );
     }
+  
 
     return(
 
@@ -53,8 +69,8 @@ export default function Runes(props: RunesProp){
                                             runeIcon && <Image
                                                 className = {`
                                                     ${index === 0? styles.keystoneIcon : styles.runeIcon} 
-                                                    ${props.primaryRuneSelections.includes(rune.id) && index === 0 ? styles.selectedKeystone : ""}
-                                                    ${props.primaryRuneSelections.includes(rune.id) && index !== 0 ? styles.selectedRune : ""}
+                                                    ${props.primaryRuneSelections!.includes(rune.id) && index === 0 ? styles.selectedKeystone : ""}
+                                                    ${props.primaryRuneSelections!.includes(rune.id) && index !== 0 ? styles.selectedRune : ""}
                                                 `}
                                                 key = {rune.id}
                                                 src = {runeIcon}
@@ -100,7 +116,7 @@ export default function Runes(props: RunesProp){
                                             runeIcon && <Image
                                                 className = {`
                                                     ${styles.runeIcon} 
-                                                    ${props.secondaryRuneSelections.includes(rune.id) ? styles.selectedRune : ""}
+                                                    ${props.secondaryRuneSelections!.includes(rune.id) ? styles.selectedRune : ""}
                                                 `}                                                
                                                 key = {rune.id}
                                                 src = {runeIcon}

@@ -15,7 +15,7 @@ export default function SummonerRow(props: SummonerRowProp){
     const championUrl = getChampionIconUrl(props.participant.championKey);
     const spell1Url = getSummonerSpellIconUrl(props.participant.summonerSpell1Id);
     const spell2Url = getSummonerSpellIconUrl(props.participant.summonerSpell2Id);
-    const keyStoneUrl = getRuneIconUrl(props.participant.primaryRuneSelections[0]);
+    const keyStoneUrl = getRuneIconUrl(props.participant.primaryRuneSelections?.[0]);
     const secondaryTreeUrl = getRuneIconUrl(props.participant.secondaryRuneTree);
     const kda = props.participant.deaths === 0 ? "Perfect" : ((props.participant.kills + props.participant.assists) / props.participant.deaths).toFixed(2) + " KDA";
 
@@ -40,20 +40,25 @@ export default function SummonerRow(props: SummonerRowProp){
                     />
 
                     <div className = {styles.spellContainer}>
-                        <Image
-                            src = {spell1Url}
-                            className = {styles.summonerSpell}
-                            width={500}
-                            height={500}
-                            alt= "Spell Image"
-                        />
-                        <Image
-                            src = {spell2Url}
-                            className = {styles.summonerSpell}
-                            width={500}
-                            height={500}
-                            alt= "Spell Image"
-                        />
+                        {
+                            spell1Url && <Image
+                                src = {spell1Url}
+                                className = {styles.summonerSpell}
+                                width={500}
+                                height={500}
+                                alt= "Spell Image"
+                            />
+                        }
+      
+                        {
+                            spell2Url && <Image
+                                src = {spell2Url}
+                                className = {styles.summonerSpell}
+                                width={500}
+                                height={500}
+                                alt= "Spell Image"
+                            />
+                        }
                     </div>
 
                     <div className = {styles.runeContainer}>

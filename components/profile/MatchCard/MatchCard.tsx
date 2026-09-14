@@ -17,6 +17,8 @@ export default function MatchCard(props: MatchCardProp){
 
     const keyStoneUrl = getRuneIconUrl(props.participant.primaryRuneSelections?.[0]);
     const secondaryTreeUrl = getRuneIconUrl(props.participant.secondaryRuneTree);
+    const spell1Url = getSummonerSpellIconUrl(props.participant.summonerSpell1Id);
+    const spell2Url = getSummonerSpellIconUrl(props.participant.summonerSpell2Id);
 
     return(
         <div className = {styles.container}>
@@ -49,20 +51,19 @@ export default function MatchCard(props: MatchCardProp){
                             <div className = {styles.summonerBox}>
 
                                 {
-                                    props.participant.summonerSpell1Id && <Image
-                                        src = {getSummonerSpellIconUrl(props.participant.summonerSpell1Id)}
+                                    spell1Url && <Image
+                                        src = {spell1Url}
                                         className = {styles.summonerSpell}
                                         width={500}
                                         height={500}
                                         alt= "Spell Image"
                                         loading= "eager"
                                     />
-
                                 }
 
                                 {
-                                    props.participant.summonerSpell2Id && <Image
-                                        src = {getSummonerSpellIconUrl(props.participant.summonerSpell2Id)}
+                                    spell2Url && <Image
+                                        src = {spell2Url}
                                         className = {styles.summonerSpell}
                                         width={500}
                                         height={500}

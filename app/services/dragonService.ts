@@ -35,7 +35,9 @@ function getItemIconUrl(iconId: number){
     return `https://ddragon.leagueoflegends.com/cdn/${patch}/img/item/${iconId}.png`
 }
 
- function getSummonerSpellIconUrl(spellKey: number){
+ function getSummonerSpellIconUrl(spellKey: number | undefined){
+    if(!spellKey)
+        return;
     return `https://ddragon.leagueoflegends.com/cdn/${patch}/img/spell/${spellMap.get(spellKey)}.png`
 }
 

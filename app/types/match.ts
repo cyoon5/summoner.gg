@@ -105,9 +105,9 @@ export type BuildProp = {
 }
 
 export type RunesProp = {
-    primaryRuneTree: number;
-    primaryRuneSelections: number[];
-    secondaryRuneTree: number;
-    secondaryRuneSelections: number[];
-    statPerks: StatPerks;
+    primaryRuneTree: number | undefined;
+    primaryRuneSelections: number[] | undefined;
+    secondaryRuneTree: number | undefined;
+    secondaryRuneSelections: number[] | undefined;
+    statPerks: StatPerks | undefined;
 }
