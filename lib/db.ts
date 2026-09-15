@@ -9,11 +9,7 @@ export async function query(text: string, params: any[]){
     try{
         if(!pool){
             pool = new Pool({
-                database: process.env.POSTGRES_DB,
-                user: process.env.POSTGRES_USER,
-                password: process.env.POSTGRES_PASSWORD,
-                host: process.env.POSTGRES_HOST,
-                port: Number(process.env.POSTGRES_PORT)
+                connectionString: process.env.DATABASE_URL
             });
         }
         
@@ -35,11 +31,7 @@ export async function getClient(){
     try{
         if(!pool){
             pool = new Pool({
-                database: process.env.POSTGRES_DB,
-                user: process.env.POSTGRES_USER,
-                password: process.env.POSTGRES_PASSWORD,
-                host: process.env.POSTGRES_HOST,
-                port: Number(process.env.POSTGRES_PORT)
+                connectionString: process.env.DATABASE_URL
             });
         }
 

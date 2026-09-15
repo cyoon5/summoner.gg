@@ -17,11 +17,7 @@ async function seedChampions(){
     );
 
     const pool = new Pool({
-        user: process.env.POSTGRES_USER,
-        host: process.env.POSTGRES_HOST,
-        database: process.env.POSTGRES_DB,
-        password: process.env.POSTGRES_PASSWORD,
-        port: Number(process.env.POSTGRES_PORT)
+        connectionString: process.env.DATABASE_URL
     });
 
     const statement = "INSERT INTO champion(champion_id, champion_name, champion_key) VALUES ($1, $2, $3)";
