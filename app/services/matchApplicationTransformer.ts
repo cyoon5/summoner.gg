@@ -90,22 +90,22 @@ export function getApplicationParticipantInfo(
 
     const participantList: ParticipantInfo[] = [];
 
-    for(const account of accounts){
-        const currentParticipant = participants.find(p => p.puuid === account.puuid)!;
-        const currentParticipantSpells = participantSpells.filter(s => s.puuid === account.puuid);
-        const currentParticipantRunes = participantRunes.filter(r => r.puuid === account.puuid);
-        const currentParticipantItems = participantItems.filter(i => i.puuid === account.puuid);
+    for(const participant of participants){
+        const currentAccount = accounts.find(a => a.puuid === participant.puuid)!;
+        const currentParticipantSpells = participantSpells.filter(s => s.puuid === participant.puuid);
+        const currentParticipantRunes = participantRunes.filter(r => r.puuid === participant.puuid);
+        const currentParticipantItems = participantItems.filter(i => i.puuid === participant.puuid);
 
-        let participant: ParticipantInfo={
-            matchId: currentParticipant.match_id,
-            puuid: account.puuid,
-            gameName: account.game_name,
-            tagLine: account.tag_line,
-            platform: account.platform,
-            role: currentParticipant.role,
-            championKey: currentParticipant.champion_key,
-            creepScore: currentParticipant.creep_score,
-            damageDealt: currentParticipant.damage_dealt,
+        let currentParticipant: ParticipantInfo={
+            matchId: participant.match_id,
+            puuid: participant.puuid,
+            gameName: currentAccount.game_name,
+            tagLine: currentAccount.tag_line,
+            platform: currentAccount.platform,
+            role: participant.role,
+            championKey: participant.champion_key,
+            creepScore: participant.creep_score,
+            damageDealt: participant.damage_dealt,
             summonerSpell1Id: currentParticipantSpells.find(s => s.slot == 0)?.spell_id,
             summonerSpell2Id: currentParticipantSpells.find(s => s.slot == 1)?.spell_id,
 
@@ -126,11 +126,11 @@ export function getApplicationParticipantInfo(
                 flex: currentParticipantRunes.find(r => r.slot_type === 'FLEX')?.rune_id!,
                 defense: currentParticipantRunes.find(r => r.slot_type === 'DEFENSE')?.rune_id!
             },
-            kills: currentParticipant.kills,
-            deaths: currentParticipant.deaths,
-            assists: currentParticipant.assists,
-            championLevel: currentParticipant.champion_level,
-            totalGoldEarned: currentParticipant.gold,
+            kills: participant.kills,
+            deaths: participant.deaths,
+            assists: participant.assists,
+            championLevel: participant.champion_level,
+            totalGoldEarned: participant.gold,
             items: [
                 currentParticipantItems.find(i => i.slot === 0)?.item_id ?? 0,
                 currentParticipantItems.find(i => i.slot === 1)?.item_id ?? 0,
@@ -141,12 +141,12 @@ export function getApplicationParticipantInfo(
                 currentParticipantItems.find(i => i.slot === 5)?.item_id ?? 0,
                 currentParticipantItems.find(i => i.slot === 7)?.item_id ?? 0,
             ],
-            visionScore: currentParticipant.vision_score,
-            team: currentParticipant.team,
-            win: currentParticipant.win
+            visionScore: participant.vision_score,
+            team: participant.team,
+            win: participant.win
         }
 
-        participantList.push(participant);
+        participantList.push(currentParticipant);
     }
     
     return participantList;

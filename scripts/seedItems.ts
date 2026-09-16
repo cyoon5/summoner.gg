@@ -5,6 +5,8 @@ dotenv.config();
 
 async function seedItems() {
 
+    //3097 IS BUGGED NEED TO MANUALLY ADD
+
     const patchResponse = await fetch('https://ddragon.leagueoflegends.com/api/versions.json');
     const patchList = await patchResponse.json();
     const patch = patchList[0];
@@ -25,7 +27,7 @@ async function seedItems() {
         connectionString: process.env.DATABASE_URL
     });
 
-    const statement = "INSERT INTO Item(item_id, item_name) VALUES($1, $2)";
+    const statement = "INSERT INTO Item(item_id, item_name) VALUES($1, $2) ON CONFLICT DO NOTHING";
 
     try{
         const client = await pool.connect();

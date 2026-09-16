@@ -20,7 +20,7 @@ async function seedChampions(){
         connectionString: process.env.DATABASE_URL
     });
 
-    const statement = "INSERT INTO champion(champion_id, champion_name, champion_key) VALUES ($1, $2, $3)";
+    const statement = "INSERT INTO champion(champion_id, champion_name, champion_key) VALUES ($1, $2, $3) ON CONFLICT DO NOTHING";
     
     for(const champ of champions){
         await pool.query(statement, champ);

@@ -22,7 +22,7 @@ async function seedSpells(){
 
     console.log(spells.length);
 
-    const statement = 'INSERT INTO spell(spell_id, spell_name) VALUES ($1, $2)';
+    const statement = 'INSERT INTO spell(spell_id, spell_name) VALUES ($1, $2) ON CONFLICT DO NOTHING';
 
     for(const spell of spells){
         await pool.query(statement, spell);
