@@ -1,9 +1,14 @@
 # Summoner.gg
 
-A League of Legends analytics platform inspired by OP.GG and U.GG, built with Next.js, React, and TypeScript.
+### League of Legends Analytics Platform
 
 🌐 **Live Demo:** https://summoner-gg.vercel.app/
 
+Summoner.gg is a full-stack League of Legends analytics platform that integrates the Riot Games API to provide player profiles, match history, ranked statistics, leaderboards, and detailed match performance data.
+
+The project combines a custom ETL pipeline, database-backed caching, and a relational data model to support efficient data retrieval and future gameplay analytics.
+
+## Screenshots
 
 <div align="center">
   <img src="app/assets/LandingPageScreenshot.png" width="45%" alt="Summoner.gg Landing">
@@ -13,118 +18,82 @@ A League of Legends analytics platform inspired by OP.GG and U.GG, built with Ne
   <img src="app/assets/DetailsScreenshot.png" width="45%" alt="Summoner.gg Match Details">
 </div>
 
-
-## Overview
-
-Summoner.gg is a web application that allows users to search League of Legends players and explore detailed profiles, ranked information, match history, and individual game statistics.
-
-The application integrates with the Riot Games API to fetch real-time player and match data, while focusing on scalable architecture, efficient data fetching, and clean separation between data processing and UI components.
-
-
-## How to Use
-
-1. Enter a player's Riot ID in the search bar.
-
-      Use the format: GameName#TagLine
-
-      Example: lorem#vvv
-
-2. Select the player's region.
-
-3. View their profile, ranked information, and recent match history.
-
-> The Riot ID must belong to an existing League of Legends account in the selected region.
-
-
 ## Features
 
-### Player Profiles
-- Search players by Riot ID, tag line, and region
-- Display summoner icon, level, ranked information, and account details
-- Support multiple regions through region mapping
-
-### Match History
-- Retrieve and display recent matches using Riot Games API data
-- Show detailed match statistics:
-  - KDA
-  - CS and CS/min
-  - Gold earned
-  - Vision score
-  - Items
-  - Runes
-  - Summoner spells
-  - Champion performance
-
-### Match Details
-- Display all 10 participants with:
-  - Champion selections
-  - Team compositions
-  - Individual statistics
-  - Item builds
-
-### Data Integration
-- Dynamic champion, item, rune, and summoner spell assets using Riot Data Dragon CDN
-- Automatic timestamp formatting for match dates
-
-
-## Architecture
-
-### Data Fetching
-- Uses Next.js App Router server components to fetch Riot API data directly without unnecessary client-side requests
-- Client components are isolated to interactive UI elements only
-- Parallelized API requests with `Promise.all` to reduce match loading time
-- Lazy loads detailed match information only when requested, reducing unnecessary API calls and improving initial page performance
-- Implemented infinite scrolling for match history, loading additional matches incrementally as users browse
-
-### Service Layer
-- Dedicated service modules handle:
-  - Riot API communication
-  - Data transformation
-  - Data Dragon asset management
-- Riot API responses are mapped into internal TypeScript types, preventing API-specific structures from leaking into UI components
-
-### Performance
-- Module-level caching for Data Dragon patch information and static game assets
-- Reusable typed components for displaying player and match information
-
+* Player search and detailed summoner profiles.
+* Ranked statistics for Solo/Duo and Flex queues.
+* Match history with champion, result, KDA, role, and game statistics.
+* Detailed match breakdowns, including builds, runes, and summoner spells.
+* Leaderboards for supported regions and ranked tiers.
+* Persistent match data storage and database-backed caching.
+* Responsive user interface for exploring player and match data.
 
 ## Tech Stack
 
-### Frontend
-- Next.js 15 (App Router)
-- React
-- TypeScript
-- CSS Modules
+**Frontend**
 
-### APIs & Data
-- Riot Games API
-- Riot Data Dragon CDN
+* Next.js
+* React
+* TypeScript
+* CSS Modules
+* CSS3
 
-### Deployment
-- Vercel
+**Backend & Data**
 
+* PostgreSQL
+* Neon
+* Riot Games API
+* Data Dragon
+
+**Infrastructure & Tools**
+
+* Docker
+* Vercel
+* Git
+* GitHub
+* pnpm
+
+## Technical Highlights
+
+### ETL Pipeline & Database-Backed Caching
+
+* Engineered an ETL pipeline that extracts match data from multiple Riot Games API endpoints, transforms raw responses into application-specific structures, and loads structured records into PostgreSQL.
+* Implemented a database-backed caching strategy that reduced repeat profile load times by **75%**, from 4.0 seconds to 1.0 second, while reducing redundant Riot Games API requests.
+* Designed a repository-based persistence layer to separate database operations from application services.
+* Established a relational data foundation for future champion, item, rune, and summoner spell analytics.
+
+### Full-Stack Application Architecture
+
+* Built and deployed a full-stack application using Next.js App Router, React, and TypeScript.
+* Designed a relational database schema for accounts, matches, participants, champions, items, runes, spells, and ranked snapshots.
+* Integrated multiple Riot Games API endpoints to retrieve and process player, ranked, and match data.
+
+### Frontend Development
+
+* Developed reusable React components for player profiles, match history, leaderboards, and detailed match analytics.
+* Implemented incremental match history loading using `IntersectionObserver`.
+* Built responsive interfaces using custom CSS and CSS Modules.
+
+### Deployment & Development Infrastructure
+
+* Deployed the PostgreSQL database using Neon for persistent data storage.
+* Used Docker to support local PostgreSQL development and testing.
+* Deployed the web application through Vercel.
 
 ## Future Improvements
 
-### Data Storage
-- PostgreSQL database for storing match history and player data
-- Reduce repeated Riot API requests by persisting previously retrieved information
+* Champion win-rate and performance analytics.
+* Item, rune, and summoner spell statistics.
+* Patch-specific gameplay insights.
+* Match timeline visualizations.
+* Expanded regional and game-mode support.
 
-### Caching
-- Planning to use Redis for frequently requested player profiles and match data
+## Disclaimer
 
+Summoner.gg is an independent, fan-made project and is not endorsed by Riot Games.
 
-### Analytics
-- Champion performance analytics:
-  - Win rates
-  - KDA trends
-  - Item and rune effectiveness
-- Ranked progression tracking
-- LP history and win/loss streaks
+League of Legends and Riot Games are trademarks of Riot Games, Inc.
 
-### Additional Features
-- Live game tracking
-- More detailed player statistics
-- Historical performance analysis
+## License
 
-
+See the repository for licensing details.
