@@ -3,15 +3,17 @@
     flex-direction: column;
     align-items: center;
     font-family: var(--font-satoshi), 'Barlow', monospace;
+    max-width: 70%;
+    margin: 2em auto;
+    background-color: #111111;
+    border-radius: 5px;
+    gap: 1em;
 }
 
 .championContainer{
     display: flex;
     margin-top: 1em;
     align-items: center;
-    padding: 1rem 3rem;
-    background-color: #111111;
-    border-radius: 5px;
     gap: 1em;
 }
 
@@ -32,7 +34,7 @@
 .rate{
     padding: 20px;
     background-color: rgb(32, 32, 32);
-    border-radius: 3px;
+    border-radius: 5px;
 }
 
 .championIcon{
@@ -40,4 +42,16 @@
     height: 120px;
     border-radius: 10px;
     border: 2px solid gold;
+}
+
+.runeContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+.runeHeader{
+    background-color: rgb(32, 32, 32);
+    padding: 20px;
+    border-radius: 5px;
+    margin: 0;
 }

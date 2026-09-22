@@ -39,6 +39,10 @@ export default function Champion(){
                             3.16% Banrate
                         </div>
 
+                        <div className = {styles.rate}>
+                            30 matches
+                        </div>
+
                         <div className = {styles.roleContainer}>
 
                         </div>
@@ -51,7 +55,7 @@ export default function Champion(){
             </div>
 
             <div className = {styles.runeContainer}>
-
+                    <h3 className = {styles.runeHeader}>Aatrox Runes</h3>
             </div>
 
             <div className = {styles.counterContainer}>

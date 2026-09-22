@@ -58,7 +58,6 @@ export default function Runes(props: RunesProp){
                         <span> {primaryTree.name} </span>
                     </div> 
                 
-                
                     {
                         primaryTree.slots.map((slot, index) => 
                             <div className = {index === 0? styles.keystoneRow : styles.runeRow} key = {index}>
