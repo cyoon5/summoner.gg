@@ -1,12 +1,12 @@
-'use client'
-
 import Image from "next/image"
 import styles from "./page.module.css"
 import { getChampionIconUrl } from "@/app/services/dragonService"
-export default function Champion(){
+import { getChampionAnalytics } from "@/app/services/matchService"
 
-
-
+export default async function Champion(){
+    
+    const championAnalytics = await getChampionAnalytics('Aatrox');
+    
 
     return(
         <div className = {styles.container}>
@@ -18,7 +18,8 @@ export default function Champion(){
                     src = {getChampionIconUrl(4)}
                     width = {50}
                     height = {50}
-                    alt = "Champion Icon"
+                    alt = "Champion Icon"   
+                    loading = "eager"
                 />
 
                 <div className = {styles.championInfo}>
@@ -28,19 +29,19 @@ export default function Champion(){
                     <div className = {styles.rateContainer}>
 
                         <div className = {styles.rate}>
-                            51.15% Winrate
+                            {championAnalytics.win_rate}%
                         </div>
 
                         <div className = {styles.rate}>
-                            7.15% Pickrate
+                            {championAnalytics.pick_rate}
                         </div>
 
                         <div className = {styles.rate}>
-                            3.16% Banrate
+                            {championAnalytics.ban_rate}
                         </div>
 
                         <div className = {styles.rate}>
-                            30 matches
+                            {championAnalytics.matches_played}
                         </div>
 
                         <div className = {styles.roleContainer}>
@@ -55,7 +56,7 @@ export default function Champion(){
             </div>
 
             <div className = {styles.runeContainer}>
-                    <h3 className = {styles.runeHeader}>Aatrox Runes</h3>
+
             </div>
 
             <div className = {styles.counterContainer}>

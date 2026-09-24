@@ -6,6 +6,8 @@ import { storeMatchData } from "@/repositories/matchTransaction";
 import { Account, Match, Participant, ParticipantItem, ParticipantRune, ParticipantSpell } from "../types/repository";
 import { getApplicationMatchInfo, getApplicationParticipantInfo, getMatchInfo, getMatchParticipantsInfo } from "./matchApplicationTransformer";
 import { MatchInfo, ParticipantInfo } from "../types/match";
+import { getChampionBanRate, getChampionKey, getChampionMatchesPlayed, getChampionPickRate, getChampionWinRate } from "@/repositories/championRepository";
+import { ChampionData } from "../types/champion";
 
 const api_key = process.env.RIOT_API_KEY;
 
@@ -101,5 +103,39 @@ export async function getMatchData(puuid: string, routing: string, start: number
     finally{
         client.release();
     }
+}
+
+
+export async function getChampionAnalytics(champion_name: string): Promise<ChampionData>{
+    const client = await getClient();
+
+    try{
+        const champion_key = await getChampionKey(client, champion_name);
+
+        if(!champion_key)
+            throw new Error(`Champion not found: ${champion_name}`);
+
+        const matches_played = await getChampionMatchesPlayed(client, champion_key);
+        const pick_rate = await getChampionPickRate(client, champion_key);
+        const win_rate = await getChampionWinRate(client, champion_key);
+        const ban_rate = await getChampionBanRate(client, champion_key);
+
+        return{
+            matches_played,
+            pick_rate,
+            win_rate,
+            ban_rate
+        }
+    }
+    catch(err){
+        console.error("Error in finding champion analytics", err);
+        throw err;
+    }
+    finally{
+        client.release();
+    }
+
+
+
 }
 

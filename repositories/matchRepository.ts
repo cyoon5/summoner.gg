@@ -1,6 +1,5 @@
 import { Account, ChampionBan, Match, Participant, ParticipantItem, ParticipantRune, ParticipantSpell, RankSnapshot } from "@/app/types/repository";
-import { getClient } from "@/lib/db";
-import { Client, Result } from "pg";
+import { Client } from "pg";
 
 //https://github.com/RiotGames/developer-relations/issues/759
 //platform i.e. na1

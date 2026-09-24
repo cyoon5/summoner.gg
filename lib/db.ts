@@ -1,4 +1,4 @@
-import { Pool } from 'pg';
+import { Pool, PoolClient } from 'pg';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -26,7 +26,7 @@ export async function query(text: string, params: any[]){
 }
 
 
-export async function getClient(){
+export async function getClient(): Promise<PoolClient>{
 
     try{
         if(!pool){

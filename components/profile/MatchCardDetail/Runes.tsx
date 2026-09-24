@@ -56,7 +56,7 @@ export default function Runes(props: RunesProp){
                             />
                         }
                         <span> {primaryTree.name} </span>
-                    </div> 
+                    </div> c
                 
                     {
                         primaryTree.slots.map((slot, index) => 
