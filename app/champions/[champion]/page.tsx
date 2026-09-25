@@ -5,7 +5,7 @@ import { getChampionAnalytics } from "@/app/services/matchService"
 
 export default async function Champion(){
     
-    const championAnalytics = await getChampionAnalytics('Aatrox');
+    const championAnalytics = await getChampionAnalytics('Twisted Fate');
     
 
     return(
@@ -29,19 +29,19 @@ export default async function Champion(){
                     <div className = {styles.rateContainer}>
 
                         <div className = {styles.rate}>
-                            {championAnalytics.win_rate}%
+                            {championAnalytics.win_rate}% Win Rate
                         </div>
 
                         <div className = {styles.rate}>
-                            {championAnalytics.pick_rate}
+                            {championAnalytics.pick_rate}% Pick Rate
                         </div>
 
                         <div className = {styles.rate}>
-                            {championAnalytics.ban_rate}
+                            {championAnalytics.ban_rate}% Ban Rate
                         </div>
 
                         <div className = {styles.rate}>
-                            {championAnalytics.matches_played}
+                            {championAnalytics.matches_played} Matches
                         </div>
 
                         <div className = {styles.roleContainer}>
