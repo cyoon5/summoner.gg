@@ -37,7 +37,7 @@ export async function getRawMatches(matchList: string[], routing: string){
     return data; 
 }
 
-export async function processMatches(rawMatches: MatchDto[]){
+export async function storeMatches(rawMatches: MatchDto[]){
 
     for(const rawMatch of rawMatches){
         const match = transformMatch(rawMatch);
@@ -47,7 +47,6 @@ export async function processMatches(rawMatches: MatchDto[]){
         const runes = transformParticipantRunes(rawMatch);
         const spells = transformParticipantSpells(rawMatch);
         const bans = transformBans(rawMatch);
-        
         await storeMatchData(match, accounts, participants, items, runes, spells, bans);
     }
 }
@@ -85,7 +84,7 @@ export async function getMatchData(puuid: string, routing: string, start: number
             for(const participants of getMatchParticipantsInfo(rawMatches)){
                 applicationParticipantList.push(participants);
             }
-            await processMatches(rawMatches);
+            await storeMatches(rawMatches);
         }
 
         const matches = applicationMatchList.map((match, index) => ({

@@ -36,6 +36,8 @@ export async function storeMatchData(
             }
 
             for(const rune of runes){
+                if(!rune)
+                    continue;
                 await insertParticipantRune(client, rune);
             }
 

@@ -36,7 +36,6 @@ export default function Runes(props: RunesProp){
         );
     }
   
-
     return(
 
         <div className = {styles.container}>
@@ -56,7 +55,7 @@ export default function Runes(props: RunesProp){
                             />
                         }
                         <span> {primaryTree.name} </span>
-                    </div> c
+                    </div> 
                 
                     {
                         primaryTree.slots.map((slot, index) => 

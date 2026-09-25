@@ -5,7 +5,7 @@ import { getChampionAnalytics } from "@/app/services/matchService"
 
 export default async function Champion(){
     
-    const championAnalytics = await getChampionAnalytics('Twisted Fate');
+    const championAnalytics = await getChampionAnalytics('Zed');
     
 
     return(
@@ -13,18 +13,18 @@ export default async function Champion(){
 
             <div className = {styles.championContainer}>
 
-                <Image
+                {/* <Image
                     className = {styles.championIcon}
                     src = {getChampionIconUrl(4)}
                     width = {50}
                     height = {50}
                     alt = "Champion Icon"   
                     loading = "eager"
-                />
+                /> */}
 
                 <div className = {styles.championInfo}>
 
-                    <h1 className = {styles.championName}> Aatrox </h1>
+                    <h1 className = {styles.championName}> Test </h1>
 
                     <div className = {styles.rateContainer}>
 

@@ -71,7 +71,7 @@ function getRuneMap(): Map<number, string> {
     return runeMap;
 }
 
-function getRuneTree(runeTreeId: number) : RuneTree | undefined{
+function getRuneTree(runeTreeId: number) : RuneTree | undefined {
     const runeTree = runeData.find((r:RuneTree) => r.id === runeTreeId);
     return runeTree;
 }

@@ -62,6 +62,8 @@ export async function insertParticipant(client: Client, participant: Participant
     await client.query(statement, params);
 }
 
+
+
 export async function insertParticipantRune(client: Client, participantRune: ParticipantRune){
     const params = [
         participantRune.puuid,
@@ -69,8 +71,7 @@ export async function insertParticipantRune(client: Client, participantRune: Par
         participantRune.slot_type,
         participantRune.rune_id
     ];
-
-
+    
     const statement = `
         INSERT INTO participantrune(puuid, match_id, slot_type, rune_id)
         VALUES ($1, $2, $3, $4)

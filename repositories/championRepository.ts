@@ -37,7 +37,7 @@ export async function getChampionWinRate(client: Client, champion_key: number): 
 
 export async function getChampionBanRate(client: Client, champion_key: number): Promise<number>{
     const statement = `
-        SELECT ROUND(COUNT(*) FILTER(WHERE champion_key = $1) * 100.0 / COUNT(DISTINCT match_id), 2)
+        SELECT ROUND(COUNT(DISTINCT match_id) FILTER(WHERE champion_key = $1) * 100.0 / COUNT(DISTINCT match_id), 2)
         AS ban_rate
         FROM ban; 
     `;
@@ -59,7 +59,7 @@ export async function getChampionKey(client: Client, champion_name: string):Prom
     return result.rows[0].champion_key;
 }
 
-export async function getChampionItems(){
+export async function getBestChampionRunes(){
     const statement = `
         SELECT 
     `;
