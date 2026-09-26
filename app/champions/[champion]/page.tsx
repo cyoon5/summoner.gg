@@ -5,7 +5,7 @@ import { getChampionAnalytics } from "@/app/services/matchService"
 
 export default async function Champion(){
     
-    const championAnalytics = await getChampionAnalytics('Zed');
+    const championAnalytics = await getChampionAnalytics('Qiyana');
     
 
     return(

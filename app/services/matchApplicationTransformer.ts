@@ -5,6 +5,7 @@ import { MatchDto } from "../types/riotMatch";
 import { getRuneTreeMap } from "./dragonService";
 
 const runeTreeMap = await getRuneTreeMap();
+const REMAKE_DURATION_THRESHOLD = 180;
 
 export function getMatchParticipantsInfo(rawMatchData: MatchDto[]): ParticipantInfo[][]{
 
@@ -64,7 +65,8 @@ export function getMatchInfo(rawMatchData: MatchDto): MatchInfo {
         gameMode: QUEUE_MAP.get(rawMatchData.info.queueId),
         gameDuration: rawMatchData.info.gameDuration,
         date: rawMatchData.info.gameEndTimestamp,
-        matchId: rawMatchData.metadata.matchId
+        matchId: rawMatchData.metadata.matchId,
+        isRemake: rawMatchData.info.participants[0].gameEndedInEarlySurrender
     }
     return matchInfo;
 }
@@ -76,7 +78,8 @@ export function getApplicationMatchInfo(match: Match): MatchInfo{
         gameMode: QUEUE_MAP.get(match.queue_id),
         gameDuration: match.match_duration,
         date: Math.floor(new Date(match.match_date).getTime()),
-        matchId: match.match_id
+        matchId: match.match_id,
+        isRemake: match.match_duration < REMAKE_DURATION_THRESHOLD
     }
 }
 

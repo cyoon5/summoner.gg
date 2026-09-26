@@ -39,6 +39,7 @@ export type MatchInfo = {
     gameDuration: number;
     date: number;
     matchId: string;
+    isRemake: boolean;
 }
 
 export type MatchCardProp = {

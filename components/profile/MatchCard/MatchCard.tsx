@@ -28,7 +28,7 @@ export default function MatchCard(props: MatchCardProp){
                         <div className = {styles.box1}> 
                             <b className = {styles.box1Text}> {props.matchInfo.gameMode} </b>
                             <p > {getRelativeTime(props.matchInfo.date)} </p>
-                            <p className = {`${props.participant.win ? styles.gameWin : styles.gameLoss}`}>{props.participant.win? 'WIN ' + formatGameDuration(props.matchInfo.gameDuration) : 'LOSS ' + formatGameDuration(props.matchInfo.gameDuration)}</p>
+                            <p className = {`${props.matchInfo.isRemake? styles.gameRemake : props.participant.win ? styles.gameWin : styles.gameLoss}`}>{props.matchInfo.isRemake? 'REMAKE ' : props.participant.win? 'WIN ' :  'LOSS '}{formatGameDuration(props.matchInfo.gameDuration)}</p>
                         </div>
 
                         <div className = {styles.box2}>
