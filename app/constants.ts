@@ -126,6 +126,7 @@ export const STAT_SHARD_MAP = new Map<number, string>([
   [5001, "Health"],
   [5011, "HealthScaling"],
   [5013, "Tenacity"],
+  [5010, "MovementSpeed"]
     
 ]);
 

@@ -131,7 +131,6 @@ export default function Runes(props: RunesProp){
                     }
                     
                     <div className = {styles.statShardContainer}>
-                        
 
                             <Image
                                 className = {styles.statShardIcon}
@@ -140,8 +139,6 @@ export default function Runes(props: RunesProp){
                                 height = {50}
                                 alt = "Stat shard icon"
                             />
-                    
-
              
                             <Image
                                 className = {styles.statShardIcon}
@@ -150,7 +147,6 @@ export default function Runes(props: RunesProp){
                                 height = {50}
                                 alt = "Stat shard icon"
                             />
-
     
                             <Image
                                 className = {styles.statShardIcon}
