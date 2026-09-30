@@ -62,9 +62,55 @@ export async function getChampionBanRate(client: Client, champion_key: number): 
     return Number(result.rows[0].ban_rate);
 }
 
-export async function getBestChampionRunes(){
+export async function getHighestWrChampionRunes(client: Client, champion_key: number){
     const statement = `
+        WITH rune_pages AS (
+            SELECT 
+                participant.puuid, 
+                participant.match_id, 
+                MAX(CASE WHEN slot_type = 'PRIMARY_SLOT_1' THEN rune_id END) AS p1,
+                MAX(CASE WHEN slot_type = 'PRIMARY_SLOT_2' THEN rune_id END) AS p2,
+                MAX(CASE WHEN slot_type = 'PRIMARY_SLOT_3' THEN rune_id END) AS p3,
+                MAX(CASE WHEN slot_type = 'PRIMARY_SLOT_4' THEN rune_id END) AS p4,
+                MAX(CASE WHEN slot_type = 'SECONDARY_SLOT_1' THEN rune_id END) AS s1,
+                MAX(CASE WHEN slot_type = 'SECONDARY_SLOT_2' THEN rune_id END) AS s2
+            FROM 
+                participant JOIN participantrune 
+                ON participant.puuid = participantrune.puuid 
+                AND participant.match_id = participantrune.match_id
+            WHERE 
+                champion_key = 266
+            GROUP BY 
+                (participant.puuid, participant.match_id)
+        )
+                
         SELECT 
+            p1,
+            p2,
+            p3,
+            p4,
+            s1,
+            s2,
+            ROUND(COUNT(*) FILTER(WHERE win = TRUE) * 100.0 / COUNT(*), 2) AS win_rate
+        FROM rune_pages 
+        JOIN participant
+        ON participant.puuid = rune_pages.puuid
+        AND participant.match_id = rune_pages.match_id
+        GROUP BY(
+            p1,
+            p2,
+            p3,
+            p4,
+            s1,
+            s2
+        )
+        ORDER BY win_rate DESC;
     `;
+
+    
+
+}
+
+export async function getHighestWrChampionStatShards(){
 
 }
