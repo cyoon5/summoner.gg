@@ -5,7 +5,7 @@ import { getChampionAnalytics } from "@/app/services/matchService"
 
 export default async function Champion(){
     
-    const championAnalytics = await getChampionAnalytics('Qiyana');
+    const championAnalytics = await getChampionAnalytics('Aatrox');
     
 
     return(
@@ -56,7 +56,7 @@ export default async function Champion(){
             </div>
 
             <div className = {styles.runeContainer}>
-
+                {}
             </div>
 
             <div className = {styles.counterContainer}>
