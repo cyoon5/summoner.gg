@@ -21,13 +21,15 @@ export async function getChampionAnalytics(champion_name: string): Promise<Champ
         const rune_trees = getChampionRuneTrees(highest_wr_runes.primary_slot_1, highest_wr_runes.secondary_slot_1);
 
         return{
+            champion_key,
             matches_played,
             pick_rate,
             win_rate,
             ban_rate,
             highest_wr_runes,
             highest_wr_stat_shards,
-            rune_trees
+            primary_rune_tree: rune_trees[0],
+            secondary_rune_tree: rune_trees[1]
         }
     }
     catch(err){

@@ -3,13 +3,15 @@ export type ChampionProp = {
 }
 
 export type ChampionData = {
+    champion_key: number;
     matches_played: number;
     pick_rate: number;
     win_rate: number;
     ban_rate: number;
     highest_wr_runes: HighestWinRateRunes;
     highest_wr_stat_shards: HighestWinRateStatShards;
-    rune_trees: (number | undefined)[]
+    primary_rune_tree: number | undefined;
+    secondary_rune_tree: number | undefined;
 }
 
 export type HighestWinRateRunes = {
