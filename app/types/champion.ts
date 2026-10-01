@@ -9,6 +9,7 @@ export type ChampionData = {
     ban_rate: number;
     highest_wr_runes: HighestWinRateRunes;
     highest_wr_stat_shards: HighestWinRateStatShards;
+    rune_trees: (number | undefined)[]
 }
 
 export type HighestWinRateRunes = {

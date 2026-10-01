@@ -1,11 +1,12 @@
 import Image from "next/image"
 import styles from "./page.module.css"
 import { getChampionIconUrl } from "@/app/services/dragonService"
-import { getChampionAnalytics } from "@/app/services/matchService"
+import { getChampionAnalytics } from "@/app/services/championService";
+import Runes from "@/components/profile/MatchCardDetail/Runes";
 
 export default async function Champion(){
     
-    const championAnalytics = await getChampionAnalytics('Aatrox');
+    const championAnalytics = await getChampionAnalytics('Teemo');
     
 
     return(
@@ -56,7 +57,26 @@ export default async function Champion(){
             </div>
 
             <div className = {styles.runeContainer}>
-                {}
+                <div className = {styles.runeText}>
+                    <h3>
+                        Recommended Runes: {championAnalytics.highest_wr_runes.win_rate}% WR ({championAnalytics.highest_wr_runes.matches_used} Matches)
+                    </h3>
+                </div>
+                <Runes
+                    primaryRuneTree={championAnalytics.rune_trees[0]}
+                    secondaryRuneTree={championAnalytics.rune_trees[1]}
+                    primaryRuneSelections={[
+                        championAnalytics.highest_wr_runes.primary_slot_1,
+                        championAnalytics.highest_wr_runes.primary_slot_2,
+                        championAnalytics.highest_wr_runes.primary_slot_3,
+                        championAnalytics.highest_wr_runes.primary_slot_4,                    
+                    ]}
+                    secondaryRuneSelections={[
+                        championAnalytics.highest_wr_runes.secondary_slot_1,
+                        championAnalytics.highest_wr_runes.secondary_slot_2
+                    ]}
+                    statPerks={championAnalytics.highest_wr_stat_shards}
+                />
             </div>
 
             <div className = {styles.counterContainer}>

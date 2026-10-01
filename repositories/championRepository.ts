@@ -106,7 +106,7 @@ export async function getHighestWrChampionRunes(client: Client, champion_key: nu
             PRIMARY_SLOT_4,
             SECONDARY_SLOT_1,
             SECONDARY_SLOT_2
-        HAVING COUNT(*) >= 2
+        HAVING COUNT(*) >= 1
         ORDER BY win_rate DESC;
     `;
     const result = await client.query(statement, [champion_key]);
@@ -123,7 +123,7 @@ export async function getHighestWrChampionStatShards(client: Client, champion_ke
                 participant.match_id, 
                 MAX(CASE WHEN slot_type = 'DEFENSE' THEN rune_id END) AS DEFENSE,
                 MAX(CASE WHEN slot_type = 'FLEX' THEN rune_id END) AS FLEX,
-                MAX(CASE WHEN slot_type = 'OFFENSE' THEN rune_id END) AS OFFENSE,
+                MAX(CASE WHEN slot_type = 'OFFENSE' THEN rune_id END) AS OFFENSE
             FROM 
                 participant JOIN participantrune 
                 ON participant.puuid = participantrune.puuid 
@@ -138,13 +138,13 @@ export async function getHighestWrChampionStatShards(client: Client, champion_ke
         SELECT 
             DEFENSE,
             FLEX,
-            OFFENSE
+            OFFENSE,
             ROUND(COUNT(*) FILTER(WHERE win = TRUE) * 100.0 / COUNT(*), 2) AS win_rate,
             COUNT(*) AS matches_used
-        FROM rune_pages 
-        JOIN participant
-        ON participant.puuid = rune_pages.puuid
-        AND participant.match_id = rune_pages.match_id
+        FROM 
+            rune_pages JOIN participant
+            ON participant.puuid = rune_pages.puuid
+            AND participant.match_id = rune_pages.match_id
         GROUP BY
             DEFENSE,
             FLEX,

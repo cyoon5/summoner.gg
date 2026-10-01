@@ -47,6 +47,9 @@
 .runeContainer{
     display: flex;
     flex-direction: column;
+    background-color: rgb(26, 26, 26);
+    padding: 20px 5em;
+    border-radius: 5px;
 }
 
 .runeHeader{

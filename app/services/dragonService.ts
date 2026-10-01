@@ -112,4 +112,11 @@ async function getChampionMap(){
     return championMap;
 }
 
-export { getCurrentPatch, getProfileIconUrl, getChampionIconUrl, getItemIconUrl, getSummonerSpellIconUrl, getRuneIconUrl, getRuneTree, getRuneTreeMap};
+function findRuneTree(runeId: number): number | undefined {
+    const tree = runeData.find(tree => 
+        tree.slots.some(runeSlot => runeSlot.runes.some(rune => rune.id === runeId))    
+    )
+    return tree?.id;
+}
+
+export { getCurrentPatch, getProfileIconUrl, getChampionIconUrl, getItemIconUrl, getSummonerSpellIconUrl, getRuneIconUrl, getRuneTree, getRuneTreeMap, findRuneTree};
