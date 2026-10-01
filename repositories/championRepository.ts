@@ -1,4 +1,4 @@
-import { HighestWinRateRunes } from "@/app/types/champion";
+import { HighestWinRateRunes, HighestWinRateStatShards } from "@/app/types/champion";
 import { Client } from "pg";
 
 
@@ -115,6 +115,44 @@ export async function getHighestWrChampionRunes(client: Client, champion_key: nu
     //TODO: handle low sample bias
 }
 
-export async function getHighestWrChampionStatShards(){
+export async function getHighestWrChampionStatShards(client: Client, champion_key: number): Promise<HighestWinRateStatShards>{
+    const statement = `
+        WITH rune_pages AS (
+            SELECT 
+                participant.puuid, 
+                participant.match_id, 
+                MAX(CASE WHEN slot_type = 'DEFENSE' THEN rune_id END) AS DEFENSE,
+                MAX(CASE WHEN slot_type = 'FLEX' THEN rune_id END) AS FLEX,
+                MAX(CASE WHEN slot_type = 'OFFENSE' THEN rune_id END) AS OFFENSE,
+            FROM 
+                participant JOIN participantrune 
+                ON participant.puuid = participantrune.puuid 
+                AND participant.match_id = participantrune.match_id
+            WHERE 
+                champion_key = $1
+            GROUP BY 
+                participant.puuid, 
+                participant.match_id
+        )
+                
+        SELECT 
+            DEFENSE,
+            FLEX,
+            OFFENSE
+            ROUND(COUNT(*) FILTER(WHERE win = TRUE) * 100.0 / COUNT(*), 2) AS win_rate,
+            COUNT(*) AS matches_used
+        FROM rune_pages 
+        JOIN participant
+        ON participant.puuid = rune_pages.puuid
+        AND participant.match_id = rune_pages.match_id
+        GROUP BY
+            DEFENSE,
+            FLEX,
+            OFFENSE
+        HAVING COUNT(*) >= 2
+        ORDER BY win_rate DESC;
+    `;
 
+    const result = await client.query(statement, [champion_key]);
+    return result.rows[0];
 }

@@ -6,7 +6,7 @@ import { storeMatchData } from "@/repositories/matchTransaction";
 import { Account, Match, Participant, ParticipantItem, ParticipantRune, ParticipantSpell } from "../types/repository";
 import { getApplicationMatchInfo, getApplicationParticipantInfo, getMatchInfo, getMatchParticipantsInfo } from "./matchApplicationTransformer";
 import { MatchInfo, ParticipantInfo } from "../types/match";
-import { getChampionBanRate, getChampionKey, getChampionMatchesPlayed, getChampionPickRate, getChampionWinRate, getHighestWrChampionRunes } from "@/repositories/championRepository";
+import { getChampionBanRate, getChampionKey, getChampionMatchesPlayed, getChampionPickRate, getChampionWinRate, getHighestWrChampionRunes, getHighestWrChampionStatShards } from "@/repositories/championRepository";
 import { ChampionData } from "../types/champion";
 
 const api_key = process.env.RIOT_API_KEY;
@@ -119,14 +119,15 @@ export async function getChampionAnalytics(champion_name: string): Promise<Champ
         const win_rate = await getChampionWinRate(client, champion_key);
         const ban_rate = await getChampionBanRate(client, champion_key);
         const highest_wr_runes = await getHighestWrChampionRunes(client, champion_key);
-        console.log(highest_wr_runes);
+        const highest_wr_stat_shards = await getHighestWrChampionStatShards(client, champion_key);
 
         return{
             matches_played,
             pick_rate,
             win_rate,
             ban_rate,
-            highest_wr_runes
+            highest_wr_runes,
+            highest_wr_stat_shards
         }
     }
     catch(err){
