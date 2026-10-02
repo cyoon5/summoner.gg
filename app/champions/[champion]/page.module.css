@@ -58,3 +58,13 @@
     border-radius: 5px;
     margin: 0;
 }
+
+.runePageInformation{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.recommendedRunes{
+    margin: 0;
+}

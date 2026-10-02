@@ -57,10 +57,9 @@ export default async function Champion({ params }: {params: Promise<{champion: s
             </div>
 
             <div className = {styles.runeContainer}>
-                <div className = {styles.runeText}>
-                    <h3>
-                        Recommended Runes: {championAnalytics.highest_wr_runes.win_rate}% WR ({championAnalytics.highest_wr_runes.matches_used} Matches)
-                    </h3>
+                <div className = {styles.runePageInformation}>
+                    <h3 className = {styles.recommendedRunes}> Recommended Runes </h3>
+                    <span>{championAnalytics.highest_wr_runes.win_rate}% WR ({championAnalytics.highest_wr_runes.matches_used} Matches)</span>
                 </div>
                 <Runes
                     primaryRuneTree={championAnalytics.primary_rune_tree}
