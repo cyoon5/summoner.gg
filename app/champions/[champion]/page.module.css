@@ -32,6 +32,7 @@
 }
 
 .rate{
+    display: flex;
     padding: 20px;
     background-color: rgb(32, 32, 32);
     border-radius: 5px;
@@ -41,7 +42,7 @@
     width: 110px;
     height: 110px;
     border-radius: 10px;
-    border: 2px solid gold;
+    border: 1.5px solid gold;
 }
 
 .runeContainer{
@@ -61,10 +62,10 @@
 
 .runePageInformation{
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: 4.5em
 }
 
-.recommendedRunes{
+.rateText{
     margin: 0;
 }

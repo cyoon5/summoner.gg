@@ -63,7 +63,7 @@ export async function getChampionBanRate(client: Client, champion_key: number): 
     return Number(result.rows[0].ban_rate);
 }
 
-export async function getHighestWrChampionRunes(client: Client, champion_key: number): Promise<HighestWinRateRunes>{
+export async function getRecommendedRunes(client: Client, champion_key: number): Promise<HighestWinRateRunes>{
     const statement = `
         WITH rune_pages AS (
             SELECT 
@@ -94,7 +94,25 @@ export async function getHighestWrChampionRunes(client: Client, champion_key: nu
             SECONDARY_SLOT_1,
             SECONDARY_SLOT_2,
             ROUND(COUNT(*) FILTER(WHERE win = TRUE) * 100.0 / COUNT(*), 2) AS win_rate,
-            COUNT(*) AS matches_used
+            COUNT(*) AS matches_used,
+            (
+                (COUNT(*) FILTER (WHERE win = TRUE) * 1.0 / COUNT(*))
+                + (3.8416 / (2 * COUNT(*)))
+                - (
+                    1.96 * SQRT(
+                        (
+                            (COUNT(*) FILTER (WHERE win = TRUE) * 1.0 / COUNT(*))
+                            * (1 - (COUNT(*) FILTER (WHERE win = TRUE) * 1.0 / COUNT(*)))
+                            / COUNT(*)
+                        )
+                        + (3.8416 / (4 * POWER(COUNT(*), 2)))
+                    )
+                )
+            )
+            /
+            (
+                1 + (3.8416 / COUNT(*))
+            ) AS wilson_score
         FROM rune_pages 
         JOIN participant
         ON participant.puuid = rune_pages.puuid
@@ -106,13 +124,10 @@ export async function getHighestWrChampionRunes(client: Client, champion_key: nu
             PRIMARY_SLOT_4,
             SECONDARY_SLOT_1,
             SECONDARY_SLOT_2
-        HAVING COUNT(*) >= 1
-        ORDER BY win_rate DESC;
+        ORDER BY wilson_score DESC;
     `;
     const result = await client.query(statement, [champion_key]);
     return result.rows[0];
-
-    //TODO: handle low sample bias
 }
 
 export async function getHighestWrChampionStatShards(client: Client, champion_key: number): Promise<HighestWinRateStatShards>{
@@ -149,7 +164,6 @@ export async function getHighestWrChampionStatShards(client: Client, champion_ke
             DEFENSE,
             FLEX,
             OFFENSE
-        HAVING COUNT(*) >= 2
         ORDER BY win_rate DESC;
     `;
 
