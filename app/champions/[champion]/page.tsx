@@ -59,20 +59,20 @@ export default async function Champion({ params }: {params: Promise<{champion: s
             <div className = {styles.runeContainer}>
                 <div className = {styles.runePageInformation}>
                     <h3> Recommended Runes</h3>
-                    <span className = {styles.rate}><h4 className = {styles.rateText}>{championAnalytics.highest_wr_runes.win_rate}% WR</h4> &nbsp;({championAnalytics.highest_wr_runes.matches_used} Matches)</span>
+                    <span className = {styles.rate}><h4 className = {styles.rateText}>{championAnalytics.recommended_runes.win_rate}% WR</h4> &nbsp;({championAnalytics.recommended_runes.matches_used} Matches)</span>
                 </div>
                 <Runes
                     primaryRuneTree={championAnalytics.primary_rune_tree}
                     secondaryRuneTree={championAnalytics.secondary_rune_tree}
                     primaryRuneSelections={[
-                        championAnalytics.highest_wr_runes.primary_slot_1,
-                        championAnalytics.highest_wr_runes.primary_slot_2,
-                        championAnalytics.highest_wr_runes.primary_slot_3,
-                        championAnalytics.highest_wr_runes.primary_slot_4              
+                        championAnalytics.recommended_runes.primary_slot_1,
+                        championAnalytics.recommended_runes.primary_slot_2,
+                        championAnalytics.recommended_runes.primary_slot_3,
+                        championAnalytics.recommended_runes.primary_slot_4              
                     ]}
                     secondaryRuneSelections={[
-                        championAnalytics.highest_wr_runes.secondary_slot_1,
-                        championAnalytics.highest_wr_runes.secondary_slot_2
+                        championAnalytics.recommended_runes.secondary_slot_1,
+                        championAnalytics.recommended_runes.secondary_slot_2
                     ]}
                     statPerks={championAnalytics.highest_wr_stat_shards}
                 />

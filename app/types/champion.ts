@@ -8,13 +8,13 @@ export type ChampionData = {
     pick_rate: number;
     win_rate: number;
     ban_rate: number;
-    highest_wr_runes: HighestWinRateRunes;
+    recommended_runes: RecommendedRunePage;
     highest_wr_stat_shards: HighestWinRateStatShards;
     primary_rune_tree: number | undefined;
     secondary_rune_tree: number | undefined;
 }
 
-export type HighestWinRateRunes = {
+export type RecommendedRunePage = {
     primary_slot_1: number;
     primary_slot_2: number;
     primary_slot_3: number;
@@ -23,6 +23,7 @@ export type HighestWinRateRunes = {
     secondary_slot_2: number;
     win_rate: number;
     matches_used: number;
+    wilson_score: number;
 }
 
 export type HighestWinRateStatShards = {

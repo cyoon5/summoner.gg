@@ -1,4 +1,4 @@
-import { HighestWinRateRunes, HighestWinRateStatShards } from "@/app/types/champion";
+import { RecommendedRunePage, HighestWinRateStatShards } from "@/app/types/champion";
 import { Client } from "pg";
 
 
@@ -63,7 +63,7 @@ export async function getChampionBanRate(client: Client, champion_key: number): 
     return Number(result.rows[0].ban_rate);
 }
 
-export async function getRecommendedRunes(client: Client, champion_key: number): Promise<HighestWinRateRunes>{
+export async function getRecommendedRunes(client: Client, champion_key: number): Promise<RecommendedRunePage>{
     const statement = `
         WITH rune_pages AS (
             SELECT 
@@ -95,7 +95,7 @@ export async function getRecommendedRunes(client: Client, champion_key: number):
             SECONDARY_SLOT_2,
             ROUND(COUNT(*) FILTER(WHERE win = TRUE) * 100.0 / COUNT(*), 2) AS win_rate,
             COUNT(*) AS matches_used,
-            (
+            ((
                 (COUNT(*) FILTER (WHERE win = TRUE) * 1.0 / COUNT(*))
                 + (3.8416 / (2 * COUNT(*)))
                 - (
@@ -112,7 +112,7 @@ export async function getRecommendedRunes(client: Client, champion_key: number):
             /
             (
                 1 + (3.8416 / COUNT(*))
-            ) AS wilson_score
+            )) AS wilson_score
         FROM rune_pages 
         JOIN participant
         ON participant.puuid = rune_pages.puuid
@@ -127,6 +127,7 @@ export async function getRecommendedRunes(client: Client, champion_key: number):
         ORDER BY wilson_score DESC;
     `;
     const result = await client.query(statement, [champion_key]);
+    console.log(result.rows);
     return result.rows[0];
 }
 

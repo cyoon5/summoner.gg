@@ -16,9 +16,10 @@ export async function getChampionAnalytics(champion_name: string): Promise<Champ
         const pick_rate = await getChampionPickRate(client, champion_key);
         const win_rate = await getChampionWinRate(client, champion_key);
         const ban_rate = await getChampionBanRate(client, champion_key);
-        const highest_wr_runes = await getRecommendedRunes(client, champion_key);
+        const recommended_runes = await getRecommendedRunes(client, champion_key);
         const highest_wr_stat_shards = await getHighestWrChampionStatShards(client, champion_key);
-        const rune_trees = getChampionRuneTrees(highest_wr_runes.primary_slot_1, highest_wr_runes.secondary_slot_1);
+        const rune_trees = getChampionRuneTrees(recommended_runes.primary_slot_1, recommended_runes.secondary_slot_1);
+
 
         return{
             champion_key,
@@ -26,7 +27,7 @@ export async function getChampionAnalytics(champion_name: string): Promise<Champ
             pick_rate,
             win_rate,
             ban_rate,
-            highest_wr_runes,
+            recommended_runes,
             highest_wr_stat_shards,
             primary_rune_tree: rune_trees[0],
             secondary_rune_tree: rune_trees[1]
