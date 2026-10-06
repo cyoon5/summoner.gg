@@ -31,10 +31,10 @@ export async function getClient(): Promise<PoolClient>{
     try{
         if(!pool){
             pool = new Pool({
-                connectionString: process.env.DATABASE_URL
+                connectionString: process.env.DATABASE_URL,
+                pipeline: true
             });
         }
-
         const client = await pool.connect();
         return client;
     }

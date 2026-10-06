@@ -36,7 +36,7 @@ export async function storeMatchData(
             }
 
             for(const rune of runes){
-                if(!rune)
+                if(!rune.rune_id)
                     continue;
                 await insertParticipantRune(client, rune);
             }

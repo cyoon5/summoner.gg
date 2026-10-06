@@ -92,6 +92,8 @@ export async function getMatchData(puuid: string, routing: string, start: number
             for(const participants of getMatchParticipantsInfo(rawMatches)){
                 applicationParticipantList.push(participants);
             }
+            await storeMatches(rawMatches);
+            
         }
 
         const matches = applicationMatchList.map((match, index) => ({
