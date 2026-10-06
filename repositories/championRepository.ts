@@ -127,7 +127,6 @@ export async function getRecommendedRunes(client: Client, champion_key: number):
         ORDER BY wilson_score DESC;
     `;
     const result = await client.query(statement, [champion_key]);
-    console.log(result.rows);
     return result.rows[0];
 }
 

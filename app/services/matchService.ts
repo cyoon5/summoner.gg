@@ -3,7 +3,6 @@ import {transformParticipantRunes, transformAccounts, transformBans, transformMa
 import { getClient } from "@/lib/db";
 import { findMatchesInDb, getAccounts, getMatch, getParticipantItems, getParticipantRunes, getParticipants, getParticipantSpells } from "@/repositories/matchRepository";
 import { storeMatchData } from "@/repositories/matchTransaction";
-import { Account, Match, Participant, ParticipantItem, ParticipantRune, ParticipantSpell } from "../types/repository";
 import { getApplicationMatchInfo, getApplicationParticipantInfo, getMatchInfo, getMatchParticipantsInfo } from "./matchApplicationTransformer";
 import { MatchInfo, ParticipantInfo } from "../types/match";
 
@@ -63,12 +62,22 @@ export async function getMatchData(puuid: string, routing: string, start: number
 
         if(existingMatches.length > 0){
             for(const match of existingMatches){
-                const matchData: Match = await getMatch(client, match);
-                const accounts: Account[] = await getAccounts(client, match);
-                const participants: Participant[] = await getParticipants(client, match);
-                const participantRunes: ParticipantRune[] = await getParticipantRunes(client, match);
-                const participantItems: ParticipantItem[] = await getParticipantItems(client, match);
-                const participantSpells: ParticipantSpell[] = await getParticipantSpells(client, match);
+
+                const [
+                        matchData, 
+                        accounts,
+                        participants,
+                        participantRunes,
+                        participantItems,
+                        participantSpells
+                    ] = await Promise.all([
+                        getMatch(client, match),
+                        getAccounts(client, match),
+                        getParticipants(client, match),
+                        getParticipantRunes(client, match),
+                        getParticipantItems(client, match),
+                        getParticipantSpells(client, match)
+                    ])
 
                 const matchInfo: MatchInfo = getApplicationMatchInfo(matchData);
                 const participantsInfo: ParticipantInfo[] = getApplicationParticipantInfo(accounts, participants, participantRunes, participantItems, participantSpells);
@@ -83,7 +92,6 @@ export async function getMatchData(puuid: string, routing: string, start: number
             for(const participants of getMatchParticipantsInfo(rawMatches)){
                 applicationParticipantList.push(participants);
             }
-            await storeMatches(rawMatches);
         }
 
         const matches = applicationMatchList.map((match, index) => ({
