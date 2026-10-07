@@ -14,7 +14,7 @@ export async function storeMatchData(
     const client = await getClient();
 
     try{
-
+        
         await client.query('BEGIN');
 
             await insertMatch(client, match);

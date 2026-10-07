@@ -1,6 +1,6 @@
 'use client'
 
-import { MatchHistoryProp } from "@/app/types/match";
+import { MatchHistoryProp, MatchInfo, ParticipantInfo } from "@/app/types/match";
 import styles from "./MatchHistory.module.css";
 import MatchCard from "../MatchCard/MatchCard";
 import { useEffect, useRef, useState, useCallback } from "react";
@@ -8,10 +8,10 @@ import { useEffect, useRef, useState, useCallback } from "react";
 
 export default function MatchHistory(props: MatchHistoryProp){
 
-    const [searchedSummoner, setSearchedSummoner] = useState(props.initialSearchedSummoner);
-    const [participantsInMatches, setParticipantsInMatches] = useState(props.initialParticipantsInMatches);
-    const [matchInfoList, setMatchInfoList] = useState(props.initialMatchInfoList);
-    const [offset, setOffset] = useState(10);
+    const [searchedSummoner, setSearchedSummoner] = useState<ParticipantInfo[]>([]);
+    const [participantsInMatches, setParticipantsInMatches] = useState<ParticipantInfo[][]>([]);
+    const [matchInfoList, setMatchInfoList] = useState<MatchInfo[]>([]);
+    const [offset, setOffset] = useState(0);
     const [loading, setLoading] = useState(false); //This does not change state immediately, does it after render, hence we need useRef.current
     const [hasMore, setHasMore] = useState(true);
     const bottomRef = useRef(null);
@@ -40,33 +40,26 @@ export default function MatchHistory(props: MatchHistoryProp){
 
 
     useEffect(() => {
-
         const observer = new IntersectionObserver((entries) => {
-
             if(entries[0].isIntersecting) {
                 loadMoreMatches();
             }
         });
-
+        
         if(bottomRef.current) {
             observer.observe(bottomRef.current);
         }
-
         return () => observer.disconnect(); 
-
     },[loadMoreMatches]);
 
 
     return(
-
         <div className = {styles.matchCol}>
 
-            <p className = {styles.matchHeader}> Match History</p>
+            <p className = {styles.matchHeader}> Match History </p>
 
             <div className = {styles.matchHolder}> 
             {
-
-
                 searchedSummoner.map((m, i) => 
                     m && <MatchCard
                         key = {m.matchId}
@@ -76,17 +69,12 @@ export default function MatchHistory(props: MatchHistoryProp){
                         platform = {props.platform}
                     />
                 )
-            
             }
+                {loading && <div className={styles.loadingSpinner}></div>}
 
             </div>
 
-
-            {loading && <div className={styles.loadingSpinner}></div>}
-            
             <div ref={bottomRef}></div>
-
         </div>
-
     )
 }

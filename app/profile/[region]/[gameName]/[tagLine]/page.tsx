@@ -9,8 +9,6 @@ import  MatchHistory  from "@/components/profile/MatchHistory/MatchHistory";
 import Navbar from "@/components/navigation/Navbar";
 import { notFound } from "next/navigation";
 import { SummonerNotFoundError } from "@/app/errors/SummonerNotFoundError";
-import { getMatchData } from "@/app/services/matchService";
-import { MatchInfo, ParticipantInfo } from "@/app/types/match";
 
 export default async function Profile({ params }: {params: Promise<SummonerData>}){
 
@@ -20,7 +18,7 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
         region: region,
         gameName: gameName,
         tagLine: tagLine
-    }
+    };
 
     let summonerProfile;
     
@@ -32,11 +30,6 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
             notFound();
         throw error;
     }
-
-    const matches = await getMatchData(summonerProfile.puuid, summonerProfile.matchRouting, 0, 10);
-    const matchList: MatchInfo[] = matches.map(m => m.match);
-    const participantsInMatches: ParticipantInfo[][] = matches.map(p => p.participants);
-    const searchedSummoner:(ParticipantInfo | undefined)[] = participantsInMatches.map(m => m.find(p => p.puuid === summonerProfile.puuid));
 
     const rankedInfo: RankedData[] = await getSummonerRankedInfo(summonerProfile);
     const soloQueue: (RankedData | undefined) = rankedInfo.find((r:RankedData) => r.queueType=="RANKED_SOLO_5x5");
@@ -113,9 +106,6 @@ export default async function Profile({ params }: {params: Promise<SummonerData>
                         puuid = {summonerProfile.puuid}
                         routing = {summonerProfile.matchRouting} //Requires MATCH-V5
                         platform = {summonerProfile.platform}
-                        initialParticipantsInMatches = {participantsInMatches}
-                        initialSearchedSummoner = {searchedSummoner}
-                        initialMatchInfoList = {matchList}
                     />
 
                 </div>

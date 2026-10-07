@@ -68,9 +68,6 @@ export type MatchHistoryProp = {
     puuid: string
     routing: string
     platform: string
-    initialParticipantsInMatches: ParticipantInfo[][]
-    initialSearchedSummoner: (ParticipantInfo | undefined)[]
-    initialMatchInfoList: MatchInfo[]
 }
 
 export type RankPreviewResponse = {

@@ -16,7 +16,7 @@ export async function getMatchList(puuid: string, routing: string ,start: number
     const matchListURL = `https://${routing}.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?start=${start}&count=${count}`
     const response = await fetch(matchListURL, {headers: {"X-Riot-Token": api_key}});
 
-    return response.json(); //List[string] of Match Ids, currently 10
+    return response.json();
 }
 
 export async function getRawMatches(matchList: string[], routing: string){  
@@ -93,7 +93,6 @@ export async function getMatchData(puuid: string, routing: string, start: number
                 applicationParticipantList.push(participants);
             }
             await storeMatches(rawMatches);
-            
         }
 
         const matches = applicationMatchList.map((match, index) => ({
