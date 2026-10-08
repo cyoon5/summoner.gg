@@ -2,17 +2,16 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
-};
-
-export default nextConfig;
-
-module.exports = {
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",
         hostname: "ddragon.leagueoflegends.com",
-      },
-    ],
-  },
+      }
+    ]
+  }
 };
+
+export default nextConfig;
+
