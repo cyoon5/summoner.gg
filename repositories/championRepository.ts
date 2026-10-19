@@ -1,4 +1,4 @@
-import { RecommendedRunePage, HighestWinRateStatShards } from "@/app/types/champion";
+import { RecommendedRunePage, RecommendedStatShards, RecommendedSummonerSpells } from "@/app/types/champion";
 import { Client } from "pg";
 
 //TODO: Add error check if no rows returned
@@ -136,7 +136,7 @@ export async function getRecommendedRunes(client: Client, champion_key: number):
     return result.rows[0];
 }
 
-export async function getHighestWrChampionStatShards(client: Client, champion_key: number): Promise<HighestWinRateStatShards>{
+export async function getHighestWrChampionStatShards(client: Client, champion_key: number): Promise<RecommendedStatShards>{
     const statement = `
         WITH rune_pages AS (
             SELECT 
@@ -152,7 +152,7 @@ export async function getHighestWrChampionStatShards(client: Client, champion_ke
                 JOIN match ON participant.match_id = match.match_id
             WHERE 
                 champion_key = $1
-                AND queue_id IN(400,420,440)
+                AND queue_id IN (400, 420, 440)
             GROUP BY 
                 participant.puuid, 
                 participant.match_id
@@ -191,6 +191,65 @@ export async function getHighestWrChampionStatShards(client: Client, champion_ke
             FLEX,
             OFFENSE
         ORDER BY wilson_score DESC;
+    `;
+
+    const result = await client.query(statement, [champion_key]);
+    return result.rows[0];
+}
+
+
+export async function getRecommendedSummonerSpells(client: Client, champion_key: number): Promise<RecommendedSummonerSpells>{
+    const statement = `
+        WITH summoner_spells AS (
+            SELECT 
+                participant.match_id,
+                participant.puuid,
+                MAX(CASE WHEN slot = 0 THEN spell_id END) AS spell_1,
+                MAX(CASE WHEN slot = 1 THEN spell_id END) AS spell_2
+            FROM 
+                participant JOIN participantspell
+                ON participant.puuid = participantspell.puuid
+                AND participant.match_id = participantspell.match_id
+                JOIN match ON match.match_id = participant.match_id
+            WHERE 
+                participant.champion_key = $1
+                AND match.queue_id IN (400, 420, 440)
+            GROUP BY
+                participant.match_id, 
+                participant.puuid
+        )
+        
+        SELECT 
+            LEAST(spell_1, spell_2) AS summoner_spell_1, 
+            GREATEST(spell_1, spell_2) AS summoner_spell_2,
+            ROUND(COUNT(*) FILTER(WHERE participant.win = TRUE) * 100.0 / COUNT(*), 2) AS win_rate,
+            COUNT(*) AS matches_used,
+            ((
+                (COUNT(*) FILTER (WHERE participant.win = TRUE) * 1.0 / COUNT(*))
+                + (3.8416 / (2 * COUNT(*)))
+                - (
+                    1.96 * SQRT(
+                        (
+                            (COUNT(*) FILTER (WHERE win = TRUE) * 1.0 / COUNT(*))
+                            * (1 - (COUNT(*) FILTER (WHERE win = TRUE) * 1.0 / COUNT(*)))
+                            / COUNT(*)
+                        )
+                        + (3.8416 / (4 * POWER(COUNT(*), 2)))
+                    )
+                )
+            )
+            /
+            (
+                1 + (3.8416 / COUNT(*))
+            )) AS wilson_score
+        FROM 
+            summoner_spells JOIN participant
+            ON summoner_spells.match_id = participant.match_id
+            AND summoner_spells.puuid = participant.puuid
+        GROUP BY 
+            summoner_spell_1,
+            summoner_spell_2
+        ORDER BY wilson_score DESC
     `;
 
     const result = await client.query(statement, [champion_key]);

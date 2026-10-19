@@ -1,4 +1,4 @@
-import { getChampionBanRate, getChampionKey, getChampionMatchesPlayed, getChampionPickRate, getChampionWinRate, getRecommendedRunes, getHighestWrChampionStatShards } from "@/repositories/championRepository";
+import { getChampionBanRate, getChampionKey, getChampionMatchesPlayed, getChampionPickRate, getChampionWinRate, getRecommendedRunes, getHighestWrChampionStatShards, getRecommendedSummonerSpells } from "@/repositories/championRepository";
 import { ChampionData } from "../types/champion";
 import { getClient } from "@/lib/db";
 import { findRuneTree } from "./dragonService";
@@ -19,6 +19,7 @@ export async function getChampionAnalytics(champion_name: string): Promise<Champ
         const recommended_runes = await getRecommendedRunes(client, champion_key);
         const highest_wr_stat_shards = await getHighestWrChampionStatShards(client, champion_key);
         const rune_trees = getChampionRuneTrees(recommended_runes.primary_slot_1, recommended_runes.secondary_slot_1);
+        const recommended_spells = await getRecommendedSummonerSpells(client, champion_key);
 
 
         return{
@@ -30,7 +31,8 @@ export async function getChampionAnalytics(champion_name: string): Promise<Champ
             recommended_runes,
             highest_wr_stat_shards,
             primary_rune_tree: rune_trees[0],
-            secondary_rune_tree: rune_trees[1]
+            secondary_rune_tree: rune_trees[1],
+            recommended_spells
         }
     }
     catch(err){

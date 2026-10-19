@@ -9,9 +9,10 @@ export type ChampionData = {
     win_rate: number;
     ban_rate: number;
     recommended_runes: RecommendedRunePage;
-    highest_wr_stat_shards: HighestWinRateStatShards;
+    highest_wr_stat_shards: RecommendedStatShards;
     primary_rune_tree: number | undefined;
     secondary_rune_tree: number | undefined;
+    recommended_spells: RecommendedSummonerSpells;
 }
 
 export type RecommendedRunePage = {
@@ -26,10 +27,19 @@ export type RecommendedRunePage = {
     wilson_score: number;
 }
 
-export type HighestWinRateStatShards = {
+export type RecommendedStatShards = {
     defense: number;
     flex: number;
     offense: number;
     win_rate: number;
     matches_used: number;
+    wilson_score: number;
+}
+
+export type RecommendedSummonerSpells = {
+    summoner_spell_1: number;
+    summoner_spell_2: number;
+    win_rate: number;
+    matches_used: number;
+    wilson_score: number;
 }

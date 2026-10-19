@@ -35,10 +35,10 @@ function getItemIconUrl(iconId: number){
     return `https://ddragon.leagueoflegends.com/cdn/${patch}/img/item/${iconId}.png`
 }
 
- function getSummonerSpellIconUrl(spellKey: number | undefined){
-    if(!spellKey)
+ function getSummonerSpellIconUrl(spellId: number | undefined){
+    if(!spellId)
         return;
-    return `https://ddragon.leagueoflegends.com/cdn/${patch}/img/spell/${spellMap.get(spellKey)}.png`
+    return `https://ddragon.leagueoflegends.com/cdn/${patch}/img/spell/${spellMap.get(spellId)}.png`
 }
 
 function getRuneIconUrl(runeId: number | undefined): string | undefined {
