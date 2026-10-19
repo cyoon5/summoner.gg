@@ -1,8 +1,6 @@
 import { RecommendedRunePage, HighestWinRateStatShards } from "@/app/types/champion";
 import { Client } from "pg";
 
-
-
 //TODO: Add error check if no rows returned
 
 export async function getChampionKey(client: Client, champion_name: string):Promise<number | null>{
@@ -27,7 +25,7 @@ export async function getChampionMatchesPlayed(client: Client, champion_key: num
         JOIN match
         ON participant.match_id = match.match_id
         WHERE champion_key = $1 
-        AND queue_id IN (400, 420);
+        AND queue_id IN (400, 420, 440);
     `;
     const result = await client.query(statement, [champion_key]);
     return Number(result.rows[0].matches_played);
@@ -35,9 +33,11 @@ export async function getChampionMatchesPlayed(client: Client, champion_key: num
 
 export async function getChampionPickRate(client: Client, champion_key: number): Promise<number>{
     const statement = `
-        SELECT ROUND(COUNT(*) FILTER(WHERE champion_key = $1) * 100.0 / COUNT(DISTINCT match_id), 2) 
+        SELECT ROUND(COUNT(*) FILTER(WHERE champion_key = $1) * 100.0 / COUNT(DISTINCT participant.match_id), 2) 
         AS pick_rate 
-        FROM participant;
+        FROM participant JOIN match
+        ON participant.match_id = match.match_id
+        WHERE queue_id IN (400, 420, 440);
     `;
     const result = await client.query(statement, [champion_key]);
     return Number(result.rows[0].pick_rate);
@@ -47,7 +47,9 @@ export async function getChampionWinRate(client: Client, champion_key: number): 
     const statement = `
         SELECT ROUND(COUNT(*) FILTER(WHERE champion_key = $1 AND win = TRUE) * 100.0 / COUNT(*) FILTER(WHERE champion_key = $1), 2)
         AS win_rate
-        FROM participant;
+        FROM participant JOIN match
+        ON participant.match_id = match.match_id
+        WHERE queue_id IN (400, 420, 440);
     `;
     const result = await client.query(statement, [champion_key]);
     return Number(result.rows[0].win_rate);
@@ -55,9 +57,11 @@ export async function getChampionWinRate(client: Client, champion_key: number): 
 
 export async function getChampionBanRate(client: Client, champion_key: number): Promise<number>{
     const statement = `
-        SELECT ROUND(COUNT(DISTINCT match_id) FILTER(WHERE champion_key = $1) * 100.0 / COUNT(DISTINCT match_id), 2)
+        SELECT ROUND(COUNT(DISTINCT ban.match_id) FILTER(WHERE champion_key = $1) * 100.0 / COUNT(DISTINCT match.match_id), 2)
         AS ban_rate
-        FROM ban; 
+        FROM ban JOIN match
+        ON ban.match_id = match.match_id
+        WHERE queue_id IN (400, 420, 440); 
     `;
     const result = await client.query(statement, [champion_key]);
     return Number(result.rows[0].ban_rate);
@@ -79,8 +83,10 @@ export async function getRecommendedRunes(client: Client, champion_key: number):
                 participant JOIN participantrune 
                 ON participant.puuid = participantrune.puuid 
                 AND participant.match_id = participantrune.match_id
+                JOIN match ON participant.match_id = match.match_id
             WHERE 
                 champion_key = $1
+                AND queue_id IN(400,420,440)
             GROUP BY 
                 participant.puuid, 
                 participant.match_id
@@ -143,8 +149,10 @@ export async function getHighestWrChampionStatShards(client: Client, champion_ke
                 participant JOIN participantrune 
                 ON participant.puuid = participantrune.puuid 
                 AND participant.match_id = participantrune.match_id
+                JOIN match ON participant.match_id = match.match_id
             WHERE 
                 champion_key = $1
+                AND queue_id IN(400,420,440)
             GROUP BY 
                 participant.puuid, 
                 participant.match_id
@@ -155,16 +163,34 @@ export async function getHighestWrChampionStatShards(client: Client, champion_ke
             FLEX,
             OFFENSE,
             ROUND(COUNT(*) FILTER(WHERE win = TRUE) * 100.0 / COUNT(*), 2) AS win_rate,
-            COUNT(*) AS matches_used
-        FROM 
-            rune_pages JOIN participant
-            ON participant.puuid = rune_pages.puuid
-            AND participant.match_id = rune_pages.match_id
+            COUNT(*) AS matches_used,
+            ((
+                (COUNT(*) FILTER (WHERE win = TRUE) * 1.0 / COUNT(*))
+                + (3.8416 / (2 * COUNT(*)))
+                - (
+                    1.96 * SQRT(
+                        (
+                            (COUNT(*) FILTER (WHERE win = TRUE) * 1.0 / COUNT(*))
+                            * (1 - (COUNT(*) FILTER (WHERE win = TRUE) * 1.0 / COUNT(*)))
+                            / COUNT(*)
+                        )
+                        + (3.8416 / (4 * POWER(COUNT(*), 2)))
+                    )
+                )
+            )
+            /
+            (
+                1 + (3.8416 / COUNT(*))
+            )) AS wilson_score        
+        FROM rune_pages 
+        JOIN participant
+        ON participant.puuid = rune_pages.puuid
+        AND participant.match_id = rune_pages.match_id
         GROUP BY
             DEFENSE,
             FLEX,
             OFFENSE
-        ORDER BY win_rate DESC;
+        ORDER BY wilson_score DESC;
     `;
 
     const result = await client.query(statement, [champion_key]);
