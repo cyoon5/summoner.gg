@@ -11,16 +11,40 @@ The project combines an ETL pipeline, PostgreSQL database-backed caching, and SQ
 ## Screenshots
 
 <div align="center">
-  <img src="app/assets/LandingPageScreenshot.png" width="45%" alt="Summoner.gg Landing Page" />
-  <img src="app/assets/FeaturesScreenshot.png" width="45%" alt="Summoner.gg Features" />
+  <table>
+    <tr>
+      <td align="center">
+        <img src="app/assets/LandingPageScreenshot.png" width="400" alt="Landing Page" />
+        <br /><sub>Landing Page</sub>
+      </td>
+      <td align="center">
+        <img src="app/assets/FeaturesScreenshot.png" width="400" alt="Features" />
+        <br /><sub>Features</sub>
+      </td>
+      <td align="center">
+        <img src="app/assets/LeaderboardScreenshot.png" width="400" alt="Leaderboard" />
+        <br /><sub>Leaderboards</sub>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <img src="app/assets/ProfileScreenshot.png" width="400" alt="Player Profile" />
+        <br /><sub>Player Profile</sub>
+      </td>
+      <td align="center">
+        <img src="app/assets/PerformanceScreenshot.png" width="400" alt="Champion Performance" />
+        <br /><sub>Champion Performance</sub>
+      </td>
+      <td align="center">
+        <img src="app/assets/RuneScreenshot.png" width="400" alt="Rune Statistics" />
+        <br /><sub>Rune Statistics</sub>
+      </td>
+    </tr>
+  </table>
   <br />
-  <img src="app/assets/LeaderboardScreenshot.png" width="45%" alt="Summoner.gg Leaderboard" />
-  <img src="app/assets/ProfileScreenshot.png" width="45%" alt="Summoner.gg Player Profile" />
+  <img src="app/assets/DetailsScreenshot.png" width="80%" alt="Match Details" />
   <br />
-  <img src="app/assets/PerformanceScreenshot.png" width="45%" alt="Summoner.gg Champion Performance Analytics" />
-  <img src="app/assets/RuneScreenshot.png" width="45%" alt="Summoner.gg Rune Statistics" />
-  <br />
-  <img src="app/assets/DetailsScreenshot.png" width="70%" alt="Summoner.gg Match Details" />
+  <sub>Match Details</sub>
 </div>
 
 ## Features
