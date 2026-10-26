@@ -10,42 +10,17 @@ The project combines an ETL pipeline, PostgreSQL database-backed caching, and SQ
 
 ## Screenshots
 
-<div align="center">
-  <table>
-    <tr>
-      <td align="center">
-        <img src="app/assets/LandingPageScreenshot.png" width="400" alt="Landing Page" />
-        <br /><sub>Landing Page</sub>
-      </td>
-      <td align="center">
-        <img src="app/assets/FeaturesScreenshot.png" width="400" alt="Features" />
-        <br /><sub>Features</sub>
-      </td>
-      <td align="center">
-        <img src="app/assets/LeaderboardScreenshot.png" width="400" alt="Leaderboard" />
-        <br /><sub>Leaderboards</sub>
-      </td>
-    </tr>
-    <tr>
-      <td align="center">
-        <img src="app/assets/ProfileScreenshot.png" width="400" alt="Player Profile" />
-        <br /><sub>Player Profile</sub>
-      </td>
-      <td align="center">
-        <img src="app/assets/PerformanceScreenshot.png" width="400" alt="Champion Performance" />
-        <br /><sub>Champion Performance</sub>
-      </td>
-      <td align="center">
-        <img src="app/assets/RuneScreenshot.png" width="400" alt="Rune Statistics" />
-        <br /><sub>Rune Statistics</sub>
-      </td>
-    </tr>
-  </table>
-  <br />
-  <img src="app/assets/DetailsScreenshot.png" width="80%" alt="Match Details" />
-  <br />
-  <sub>Match Details</sub>
-</div>
+<table>
+  <tr>
+    <td><img src="app/assets/LandingPageScreenshot.png" width="600" alt="Landing Page" /></td>
+    <td><img src="app/assets/FeaturesScreenshot.png" width="600" alt="Features" /></td>
+    <td><img src="app/assets/LeaderboardScreenshot.png" width="600" alt="Leaderboards" /></td>
+    <td><img src="app/assets/ProfileScreenshot.png" width="600" alt="Player Profile" /></td>
+    <td><img src="app/assets/PerformanceScreenshot.png" width="600" alt="Champion Performance" /></td>
+    <td><img src="app/assets/RuneScreenshot.png" width="600" alt="Rune Statistics" /></td>
+    <td><img src="app/assets/DetailsScreenshot.png" width="600" alt="Match Details" /></td>
+  </tr>
+</table>
 
 ## Features
 
