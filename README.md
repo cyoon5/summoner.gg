@@ -8,8 +8,7 @@ Summoner.gg is a full-stack League of Legends analytics platform that integrates
 
 The project combines an ETL pipeline, PostgreSQL database-backed caching, and SQL-driven analytics to efficiently process match data and display meaningful champion statistics through an interactive interface.
 
-## Screenshots
-
+## Screenshots (Click to enlarge)
 <table>
   <tr>
     <td><img src="app/assets/LandingPageScreenshot.png" width="600" alt="Landing Page" /></td>
