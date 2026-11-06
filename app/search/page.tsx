@@ -9,7 +9,6 @@ import { regions } from "../constants";
 import Image from 'next/image'
 import Navbar from "@/components/navigation/Navbar";
 
-
 export default function SearchSummoner() {
   
   const router = useRouter()

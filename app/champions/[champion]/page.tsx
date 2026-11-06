@@ -6,7 +6,8 @@ import Runes from "@/components/profile/MatchCardDetail/Runes";
 
 export default async function Champion({ params }: {params: Promise<{champion: string}>}){
     
-    const champion = (await params).champion;
+    const encodedChampion = (await params).champion;
+    const champion = decodeURIComponent(encodedChampion);
     const championAnalytics = await getChampionAnalytics(champion);
     
     return(
