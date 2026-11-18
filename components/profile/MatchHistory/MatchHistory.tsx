@@ -24,6 +24,10 @@ export default function MatchHistory(props: MatchHistoryProp){
         loadingRef.current = true;
         setLoading(true);
         const res = await fetch(`/api/matches?puuid=${props.puuid}&routing=${props.routing}&start=${offset}&count=10`);
+        
+        if (!res.ok) 
+            throw new Error(`Request failed with status ${res.status}`);
+  
         const data = await res.json();
 
         setSearchedSummoner(s => [...s, ...data.searchedSummoner]);

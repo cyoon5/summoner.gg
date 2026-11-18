@@ -5,7 +5,7 @@ dotenv.config();
 
 async function seedItems() {
 
-    //3097 IS BUGGED NEED TO MANUALLY ADD
+    //3097(StormRazer) IS BUGGED NEED TO MANUALLY ADD
 
     const patchResponse = await fetch('https://ddragon.leagueoflegends.com/api/versions.json');
     const patchList = await patchResponse.json();
@@ -35,6 +35,8 @@ async function seedItems() {
         for (const item of items) {
             await client.query(statement, item);
         }
+
+        await client.query(statement, [3097, 'Stormrazor']);
 
         client.release();
         await pool.end();
